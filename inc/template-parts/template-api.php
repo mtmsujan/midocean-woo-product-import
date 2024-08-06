@@ -33,21 +33,6 @@ $api_key       = get_option( 'be-api-key' ) ?? '';
                         id="client-secret" value="<?php echo esc_attr( $client_secret ); ?>"
                         placeholder="<?php esc_attr_e( 'Client Secret', 'bulk-product-import' ); ?>" required>
                 </div>
-                <!-- API credentials section -->
-                <div class="col-sm-12 mt-3">
-                    <h4 class="text-center mb-3">
-                        <?php esc_html_e( ' API Credentials', 'bulk-product-import' ); ?>
-                    </h4>
-                    <div class="d-flex align-items-center mt-2">
-                        <!-- Label and input for Client ID -->
-                        <label class="form-label" for="api_key">
-                            <?php esc_html_e( 'API Key', 'bulk-product-import' ); ?>
-                        </label>
-                        <input type="text" class="form-control" style="width: 60% !important; margin-left: 4.7rem;"
-                            name="api_key" id="api_key" value="<?php echo esc_attr( $api_key ); ?>"
-                            placeholder="<?php esc_attr_e( 'API Key', 'bulk-product-import' ); ?>" required>
-                    </div>
-                </div>
                 <!-- Submit button to save credentials -->
                 <input type="submit" class="btn btn-primary mt-3" id="credential-save"
                     value="<?php esc_attr_e( 'Save', 'bulk-product-import' ); ?>">
