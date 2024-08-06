@@ -38,6 +38,12 @@ function insert_products_db() {
 
     // Fetch api response
     $api_response = fetch_products_from_api();
+
+    // file path
+    // $file = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/uploads/products.json';
+    // file_put_contents( $file, $api_response ); 
+
+    // Decode to array
     $products     = json_decode( $api_response, true );
 
     // Insert to database
