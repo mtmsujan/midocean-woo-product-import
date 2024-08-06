@@ -24,6 +24,7 @@
       // get credentials from form
       let client_id = $("#client-id").val();
       let client_secret = $("#client-secret").val();
+      let api_key = $("#be-api-key").val();
 
       // make ajax call to save credentials
       $.ajax({
@@ -34,6 +35,7 @@
           nonce: bulkProductImport.nonce,
           client_id: client_id,
           client_secret: client_secret,
+          api_key: api_key,
         },
         success: function (response) {
           if (response.success) {
@@ -138,9 +140,8 @@
     document
       .getElementById("sync-products-cp")
       .addEventListener("click", function () {
-        let syncProducts = document.getElementById(
-          "sync-products-api"
-        ).textContent;
+        let syncProducts =
+          document.getElementById("sync-products-api").textContent;
         copyToClipboard(syncProducts);
         showNotification("Copied to clipboard!");
       });
@@ -148,9 +149,8 @@
     document
       .getElementById("insert-price-cp")
       .addEventListener("click", function () {
-        let syncProducts = document.getElementById(
-          "insert-price-api"
-        ).textContent;
+        let syncProducts =
+          document.getElementById("insert-price-api").textContent;
         copyToClipboard(syncProducts);
         showNotification("Copied to clipboard!");
       });
@@ -158,9 +158,8 @@
     document
       .getElementById("insert-stock-cp")
       .addEventListener("click", function () {
-        let syncProducts = document.getElementById(
-          "insert-stock-api"
-        ).textContent;
+        let syncProducts =
+          document.getElementById("insert-stock-api").textContent;
         copyToClipboard(syncProducts);
         showNotification("Copied to clipboard!");
       });

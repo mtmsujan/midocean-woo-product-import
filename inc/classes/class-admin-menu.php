@@ -144,9 +144,11 @@ class Admin_Menu {
 
         $client_id     = sanitize_text_field( $_POST['client_id'] );
         $client_secret = sanitize_text_field( $_POST['client_secret'] );
+        $api_key       = sanitize_text_field( $_POST['api_key'] );
 
         update_option( 'be-client-id', $client_id );
         update_option( 'be-client-secret', $client_secret );
+        update_option( 'be-api-key', $api_key );
 
         wp_send_json_success( __( 'Credentials saved successfully', 'bulk-product-import' ) );
     }

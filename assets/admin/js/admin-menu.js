@@ -24,6 +24,7 @@
       // get credentials from form
       let client_id = $("#client-id").val();
       let client_secret = $("#client-secret").val();
+      let api_key = $("#be-api-key").val();
 
       // make ajax call to save credentials
       $.ajax({
@@ -34,6 +35,7 @@
           nonce: bulkProductImport.nonce,
           client_id: client_id,
           client_secret: client_secret,
+          api_key: api_key,
         },
         success: function (response) {
           if (response.success) {
