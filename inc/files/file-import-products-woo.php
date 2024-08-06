@@ -41,8 +41,8 @@ function products_import_woocommerce() {
         $consumer_key    = get_option( 'be-client-id' ) ?? '';
         $consumer_secret = get_option( 'be-client-secret' ) ?? '';
 
-        // SQL query
-        $sql = "SELECT * FROM $products_table WHERE status = 'pending' LIMIT 1";
+        // SQL query to retrieve pending products
+        $sql = "SELECT sp.id, sp.product_number, sp.product_data, ss.stock, spr.variant_id, spr.price, spr.valid_until, sp.status  FROM $products_table sp JOIN $stock_table ss ON sp.product_number = ss.product_number JOIN $price_table spr ON sp.product_number = spr.product_number WHERE sp.status = 'pending' LIMIT 1";
 
         // Retrieve pending products from the database
         $products = $wpdb->get_results( $wpdb->prepare( $sql ) );
@@ -51,24 +51,38 @@ function products_import_woocommerce() {
             foreach ( $products as $product ) {
 
                 // Retrieve product data
-                $serial_id   = $product->id;
-                $sku         = '';
-                $title       = '';
-                $description = '';
-                $quantity    = 0;
+                $serial_id = $product->id;
+                $sku       = $product->product_number;
 
-                // Retrieve product images
+                // Extract product data
+                $product_data = json_decode( $product->product_data, true );
+
+                $title       = $product_data['product_name'];
+                $short_desc  = $product_data['short_description'];
+                $description = $product_data['long_description'];
+                $quantity    = $product->stock;
+
+                // Extract variants
+                $variants = $product_data['variants'];
+
                 $images = [];
+                // Loop through variants for extract images
+                foreach ( $variants as $variant ) {
+                    $digital_assets = $variant['digital_assets'];
+                    foreach ( $digital_assets as $digital_asset ) {
+                        $images[] = $digital_asset['url'];
+                    }
+                }
 
                 // Retrieve product category
-                $category = '';
+                $category = $product_data['category_code'];
 
                 // Retrieve product tags
                 $tags = '';
 
                 // Extract prices
-                $regular_price = 0;
-                $sale_price    = 0;
+                // $regular_price = 0;
+                $sale_price = $product->price;
 
                 // Set up the API client with WooCommerce store URL and credentials
                 $client = new Client(
@@ -104,24 +118,25 @@ function products_import_woocommerce() {
                     // Get product id
                     $_product_id = get_the_ID();
 
+                    // Update the simple product if it already exists
+                    $product_data = [
+                        'name'              => $title,
+                        'sku'               => $sku,
+                        'type'              => 'simple',
+                        'description'       => $description,
+                        'short_description' => $short_desc,
+                        'attributes'        => [],
+                    ];
+
+                    // Update product
+                    $client->put( 'products/' . $_product_id, $product_data );
+
                     // Update the status of the processed product in your database
                     $wpdb->update(
                         $products_table,
                         [ 'status' => 'completed' ],
                         [ 'id' => $serial_id ]
                     );
-
-                    // Update the simple product if it already exists
-                    $product_data = [
-                        'name'        => $title,
-                        'sku'         => $sku,
-                        'type'        => 'simple',
-                        'description' => $description,
-                        'attributes'  => [],
-                    ];
-
-                    // Update product
-                    $client->put( 'products/' . $_product_id, $product_data );
 
                     // Return success response
                     return new \WP_REST_Response( [
@@ -132,11 +147,12 @@ function products_import_woocommerce() {
                 } else {
                     // Create a new simple product if it does not exist
                     $_product_data = [
-                        'name'        => $title,
-                        'sku'         => $sku,
-                        'type'        => 'simple',
-                        'description' => $description,
-                        'attributes'  => [],
+                        'name'              => $title,
+                        'sku'               => $sku,
+                        'type'              => 'simple',
+                        'description'       => $description,
+                        'short_description' => $short_desc,
+                        'attributes'        => [],
                     ];
 
                     // Create the product
@@ -151,7 +167,7 @@ function products_import_woocommerce() {
                     update_post_meta( $product_id, '_stock', $quantity );
 
                     // Update product prices
-                    update_post_meta( $product_id, '_regular_price', $regular_price );
+                    // update_post_meta( $product_id, '_regular_price', $regular_price );
                     update_post_meta( $product_id, '_price', $sale_price );
 
                     // Update product category
