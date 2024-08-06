@@ -139,19 +139,22 @@ function insert_price_db() {
 function fetch_stock_from_api() {
 
     $curl = curl_init();
-    curl_setopt_array( $curl, [
-        CURLOPT_URL            => '',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING       => '',
-        CURLOPT_MAXREDIRS      => 10,
-        CURLOPT_TIMEOUT        => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST  => 'GET',
-        CURLOPT_HTTPHEADER     => [
-            '',
-        ],
-    ] );
+    curl_setopt_array(
+        $curl,
+        array(
+            CURLOPT_URL            => 'https://api.midocean.com/gateway/stock/2.0',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING       => '',
+            CURLOPT_MAXREDIRS      => 10,
+            CURLOPT_TIMEOUT        => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST  => 'GET',
+            CURLOPT_HTTPHEADER     => array(
+                'x-Gateway-APIKey: 0f4a331a-e3d7-4730-81ba-46de635b624f',
+            ),
+        )
+    );
 
     $response = curl_exec( $curl );
 
@@ -163,10 +166,9 @@ function fetch_stock_from_api() {
 // insert stock to database
 function insert_stock_db() {
 
-    ob_start();
-
-    /* $api_response = fetch_stock_from_api();
-    $products     = json_decode( $api_response, true );
+    $api_response        = fetch_stock_from_api();
+    $decode_api_response = json_decode( $api_response, true );
+    $stocks              = $decode_api_response['stock'];
 
     // Insert to database
     global $wpdb;
@@ -174,21 +176,17 @@ function insert_stock_db() {
     $stock_table  = $wpdb->prefix . $table_prefix . 'sync_stock';
     truncate_table( $stock_table );
 
-    foreach ( $products as $product ) {
-
-        // extract stock
+    foreach ( $stocks as $stock ) {
 
         $wpdb->insert(
             $stock_table,
             [
-                'product_number' => '',
-                'stock'          => 0,
+                'product_number' => $stock['sku'],
+                'stock'          => $stock['qty'],
             ]
         );
-    } */
+    }
 
-    echo '<h4>Stocks inserted successfully DB</h4>';
-
-    return ob_get_clean();
+    return '<h4>Stocks inserted successfully DB</h4>';
 
 }
