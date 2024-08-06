@@ -79,8 +79,8 @@ function insert_products_db() {
 function fetch_price_from_api() {
 
     $curl = curl_init();
-    curl_setopt_array( $curl, [
-        CURLOPT_URL            => '',
+    curl_setopt_array( $curl, array(
+        CURLOPT_URL            => 'https://api.midocean.com/gateway/pricelist/2.0/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING       => '',
         CURLOPT_MAXREDIRS      => 10,
@@ -88,10 +88,11 @@ function fetch_price_from_api() {
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST  => 'GET',
-        CURLOPT_HTTPHEADER     => [
-            '',
-        ],
-    ] );
+        CURLOPT_HTTPHEADER     => array(
+            'x-Gateway-APIKey: 0f4a331a-e3d7-4730-81ba-46de635b624f',
+        ),
+    )
+    );
 
     $response = curl_exec( $curl );
 
@@ -103,10 +104,9 @@ function fetch_price_from_api() {
 // insert price to database
 function insert_price_db() {
 
-    ob_start();
-
-    /* $api_response = fetch_price_from_api();
-    $products     = json_decode( $api_response, true );
+    $api_response = fetch_price_from_api();
+    $decode_api_response     = json_decode( $api_response, true );
+    $prices = $decode_api_response['price'];
 
     // Insert to database
     global $wpdb;
@@ -114,7 +114,7 @@ function insert_price_db() {
     $price_table  = $wpdb->prefix . $table_prefix . 'sync_price';
     truncate_table( $price_table );
 
-    foreach ( $products as $product ) {
+    foreach ( $prices as $price ) {
 
         // extract price
 
@@ -126,11 +126,9 @@ function insert_price_db() {
                 'sale_price'     => 0,
             ]
         );
-    } */
+    }
 
-    echo '<h4>Prices inserted successfully DB</h4>';
-
-    return ob_get_clean();
+    return '<h4>Prices inserted successfully DB</h4>';
 
 }
 
