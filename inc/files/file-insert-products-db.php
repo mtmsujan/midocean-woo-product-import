@@ -10,19 +10,22 @@ function truncate_table( $table_name ) {
 function fetch_products_from_api() {
 
     $curl = curl_init();
-    curl_setopt_array( $curl, [
-        CURLOPT_URL            => '',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING       => '',
-        CURLOPT_MAXREDIRS      => 10,
-        CURLOPT_TIMEOUT        => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST  => 'GET',
-        CURLOPT_HTTPHEADER     => [
-            '',
-        ],
-    ] );
+    curl_setopt_array(
+        $curl,
+        array(
+            CURLOPT_URL            => 'https://api.midocean.com/gateway/products/2.0?language=en',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING       => '',
+            CURLOPT_MAXREDIRS      => 10,
+            CURLOPT_TIMEOUT        => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST  => 'GET',
+            CURLOPT_HTTPHEADER     => array(
+                'x-Gateway-APIKey: 0f4a331a-e3d7-4730-81ba-46de635b624f',
+            ),
+        )
+    );
 
     $response = curl_exec( $curl );
 
@@ -33,9 +36,8 @@ function fetch_products_from_api() {
 // insert products to database
 function insert_products_db() {
 
-    ob_start();
-
-    /* $api_response = fetch_products_from_api();
+    // Fetch api response
+    $api_response = fetch_products_from_api();
     $products     = json_decode( $api_response, true );
 
     // Insert to database
@@ -46,22 +48,29 @@ function insert_products_db() {
 
     foreach ( $products as $product ) {
 
+        // Extract product variants
+        $product_variants = $product['variants'];
+        $product_number   = '';
+
+        // Loop through variants to get product number/sku
+        foreach ( $product_variants as $variant ) {
+            $product_number = $variant['sku'];
+        }
+
         // extract products
         $product_data = json_encode( $product );
 
         $wpdb->insert(
             $products_table,
             [
-                'product_number' => '',
+                'product_number' => $product_number,
                 'product_data'   => $product_data,
                 'status'         => 'pending',
             ]
         );
-    } */
+    }
 
-    echo '<h4>Products inserted successfully DB</h4>';
-
-    return ob_get_clean();
+    return '<h4>Products inserted successfully DB</h4>';
 }
 
 
