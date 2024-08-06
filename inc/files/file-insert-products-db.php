@@ -79,19 +79,21 @@ function insert_products_db() {
 function fetch_price_from_api() {
 
     $curl = curl_init();
-    curl_setopt_array( $curl, array(
-        CURLOPT_URL            => 'https://api.midocean.com/gateway/pricelist/2.0/',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING       => '',
-        CURLOPT_MAXREDIRS      => 10,
-        CURLOPT_TIMEOUT        => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST  => 'GET',
-        CURLOPT_HTTPHEADER     => array(
-            'x-Gateway-APIKey: 0f4a331a-e3d7-4730-81ba-46de635b624f',
-        ),
-    )
+    curl_setopt_array(
+        $curl,
+        array(
+            CURLOPT_URL            => 'https://api.midocean.com/gateway/pricelist/2.0/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING       => '',
+            CURLOPT_MAXREDIRS      => 10,
+            CURLOPT_TIMEOUT        => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST  => 'GET',
+            CURLOPT_HTTPHEADER     => array(
+                'x-Gateway-APIKey: 0f4a331a-e3d7-4730-81ba-46de635b624f',
+            ),
+        )
     );
 
     $response = curl_exec( $curl );
@@ -104,9 +106,9 @@ function fetch_price_from_api() {
 // insert price to database
 function insert_price_db() {
 
-    $api_response = fetch_price_from_api();
-    $decode_api_response     = json_decode( $api_response, true );
-    $prices = $decode_api_response['price'];
+    $api_response        = fetch_price_from_api();
+    $decode_api_response = json_decode( $api_response, true );
+    $prices              = $decode_api_response['price'];
 
     // Insert to database
     global $wpdb;
@@ -116,14 +118,13 @@ function insert_price_db() {
 
     foreach ( $prices as $price ) {
 
-        // extract price
-
         $wpdb->insert(
             $price_table,
             [
-                'product_number' => '',
-                'regular_price'  => 0,
-                'sale_price'     => 0,
+                'product_number' => $price['sku'],
+                'variant_id'     => $price['variant_id'],
+                'price'          => $price['price'],
+                'valid_until'    => $price['valid_until'],
             ]
         );
     }

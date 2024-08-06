@@ -72,7 +72,7 @@ function sync_price() {
         id INT AUTO_INCREMENT,
         product_number VARCHAR(255) NOT NULL,
         variant_id VARCHAR(255) NULL,
-        price INT NOT NULL,
+        price VARCHAR(20) NOT NULL,
         valid_until DATE NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
