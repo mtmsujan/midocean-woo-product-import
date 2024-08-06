@@ -20,7 +20,7 @@ $api_key       = get_option( 'be-api-key' ) ?? '';
                     <label class="form-label" for="client-id">
                         <?php esc_html_e( 'Client ID', 'bulk-product-import' ); ?>
                     </label>
-                    <input type="text" class="form-control" style="width: 60% !important; margin-left: 4.7rem;"
+                    <input type="password" class="form-control" style="width: 60% !important; margin-left: 4.7rem;"
                         name="client-id" id="client-id" value="<?php echo esc_attr( $client_id ); ?>"
                         placeholder="<?php esc_attr_e( 'Client ID', 'bulk-product-import' ); ?>" required>
                 </div>
@@ -29,7 +29,7 @@ $api_key       = get_option( 'be-api-key' ) ?? '';
                     <label class="form-label" for="client-secret">
                         <?php esc_html_e( 'Client Secret', 'bulk-product-import' ); ?>
                     </label>
-                    <input type="text" class="form-control ms-5" style="width: 60% !important" name="client-secret"
+                    <input type="password" class="form-control ms-5" style="width: 60% !important" name="client-secret"
                         id="client-secret" value="<?php echo esc_attr( $client_secret ); ?>"
                         placeholder="<?php esc_attr_e( 'Client Secret', 'bulk-product-import' ); ?>" required>
                 </div>
@@ -38,7 +38,7 @@ $api_key       = get_option( 'be-api-key' ) ?? '';
                     <label class="form-label" for="be-api-key">
                         <?php esc_html_e( 'API Key', 'bulk-product-import' ); ?>
                     </label>
-                    <input type="text" class="form-control ms-5" style="width: 60% !important" name="be-api-key"
+                    <input type="password" class="form-control ms-5" style="width: 60% !important" name="be-api-key"
                         id="be-api-key" value="<?php echo esc_attr( $api_key ); ?>"
                         placeholder="<?php esc_attr_e( 'API Key', 'bulk-product-import' ); ?>">
                 </div>

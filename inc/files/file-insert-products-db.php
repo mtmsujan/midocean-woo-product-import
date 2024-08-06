@@ -9,6 +9,9 @@ function truncate_table( $table_name ) {
 // fetch products from api
 function fetch_products_from_api() {
 
+    // get api key
+    $api_key = get_option( 'be-api-key' ) ?? '';
+
     $curl = curl_init();
     curl_setopt_array(
         $curl,
@@ -22,7 +25,7 @@ function fetch_products_from_api() {
             CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST  => 'GET',
             CURLOPT_HTTPHEADER     => array(
-                'x-Gateway-APIKey: 0f4a331a-e3d7-4730-81ba-46de635b624f',
+                'x-Gateway-APIKey: ' . $api_key,
             ),
         )
     );
@@ -44,7 +47,7 @@ function insert_products_db() {
     // file_put_contents( $file, $api_response ); 
 
     // Decode to array
-    $products     = json_decode( $api_response, true );
+    $products = json_decode( $api_response, true );
 
     // Insert to database
     global $wpdb;
@@ -84,6 +87,9 @@ function insert_products_db() {
 // fetch price from api
 function fetch_price_from_api() {
 
+    // get api key
+    $api_key = get_option( 'be-api-key' ) ?? '';
+
     $curl = curl_init();
     curl_setopt_array(
         $curl,
@@ -97,7 +103,7 @@ function fetch_price_from_api() {
             CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST  => 'GET',
             CURLOPT_HTTPHEADER     => array(
-                'x-Gateway-APIKey: 0f4a331a-e3d7-4730-81ba-46de635b624f',
+                'x-Gateway-APIKey: ' . $api_key,
             ),
         )
     );
@@ -144,6 +150,9 @@ function insert_price_db() {
 // fetch price from api
 function fetch_stock_from_api() {
 
+    // get api key
+    $api_key = get_option( 'be-api-key' ) ?? '';
+
     $curl = curl_init();
     curl_setopt_array(
         $curl,
@@ -157,7 +166,7 @@ function fetch_stock_from_api() {
             CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST  => 'GET',
             CURLOPT_HTTPHEADER     => array(
-                'x-Gateway-APIKey: 0f4a331a-e3d7-4730-81ba-46de635b624f',
+                'x-Gateway-APIKey: ' . $api_key,
             ),
         )
     );
