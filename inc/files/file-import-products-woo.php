@@ -18,7 +18,6 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
  * Fetch product data from database
  * Process product data and insert into WooCommerce
  * 
- * @return string|WP_REST_Response
  */
 function products_import_woocommerce() {
     try {
