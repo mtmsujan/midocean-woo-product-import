@@ -10,7 +10,7 @@
 !.vscode/*.code-snippets
 
 # Composer
-vendor
+# vendor
 
 # Local History for Visual Studio Code
 .history/
@@ -77,9 +77,6 @@ wp-config.php
 
 # Uploads
 /wp-content/uploads/
-
-# Log files
-*.log
 
 # htaccess
 /.htaccess

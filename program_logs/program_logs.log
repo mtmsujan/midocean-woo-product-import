@@ -1,0 +1,97 @@
+
+{
+    "master_code": "AR1253",
+    "master_id": "40000012",
+    "type_of_products": "stock",
+    "commodity_code": "8470 1000",
+    "number_of_print_positions": "3",
+    "country_of_origin": "CN",
+    "brand": "midocean",
+    "product_name": "BASICS",
+    "category_code": "MOBOFF_CLCSOL",
+    "product_class": "Calculators",
+    "dimensions": "15,5X10X3 CM",
+    "length": "15.5",
+    "length_unit": "cm",
+    "width": "10",
+    "width_unit": "cm",
+    "height": "3",
+    "height_unit": "cm",
+    "volume": "0.626",
+    "volume_unit": "cdm3",
+    "gross_weight": "0.147",
+    "gross_weight_unit": "kg",
+    "net_weight": "0.109",
+    "net_weight_unit": "kg",
+    "outer_carton_quantity": "60",
+    "carton_length": "0.485",
+    "carton_length_unit": "m",
+    "carton_width": "0.221",
+    "carton_width_unit": "m",
+    "carton_height": "0.34",
+    "carton_height_unit": "m",
+    "carton_volume": "0.036",
+    "carton_volume_unit": "m3",
+    "carton_gross_weight": "8.44",
+    "carton_gross_weight_unit": "kg",
+    "timestamp": "2024-07-30T09:26:46",
+    "digital_assets": [
+        {
+            "url": "https://cdn1.midocean.com/document/declaration-of-sustainability/ar1253-green.pdf",
+            "type": "document",
+            "subtype": "declaration_of_sustainability"
+        },
+        {
+            "url": "https://cdn1.midocean.com/document/declaration-of-conformity/ar1253-doc.pdf",
+            "type": "document",
+            "subtype": "declaration_of_conformity"
+        },
+        {
+            "url": "https://cdn1.midocean.com/document/manual/ar1253-manual.pdf",
+            "type": "document",
+            "subtype": "manual"
+        },
+        {
+            "url": "https://cdn1.midocean.com/document/test-battery/ar1253-test-battery.pdf",
+            "type": "document",
+            "subtype": "test_battery"
+        }
+    ],
+    "short_description": "Basics 12-digits calculator",
+    "long_description": "12 digit solar energy calculator with plastic housing. 1 cell battery included.",
+    "material": "PS",
+    "printable": "yes",
+    "variants": [
+        {
+            "variant_id": "10134300",
+            "sku": "AR1253-16",
+            "release_date": "2015-01-01",
+            "product_proposition_category": "305",
+            "category_level1": "Office & Writing",
+            "category_level2": "Office accessories ",
+            "category_level3": "Clocks & Calculators",
+            "color_description": "Matt Silver",
+            "color_group": "Silver",
+            "plc_status": "16",
+            "plc_status_description": "COLLECTION",
+            "gtin": "8719941007888",
+            "color_code": "16",
+            "pms_color": "877C",
+            "digital_assets": [
+                {
+                    "url": "https://cdn1.midocean.com/image/700X700/ar1253-16.jpg",
+                    "url_highress": "https://cdn1.midocean.com/image/original/ar1253-16.jpg",
+                    "type": "image",
+                    "subtype": "item_picture_front"
+                },
+                {
+                    "url": "https://cdn1.midocean.com/image/700X700/ar1253-16-print.jpg",
+                    "url_highress": "https://cdn1.midocean.com/image/original/ar1253-16-print.jpg",
+                    "type": "image",
+                    "subtype": "item_picture_printed"
+                }
+            ]
+        }
+    ]
+} - 2024-08-06 09:00:52
+
