@@ -109,3 +109,37 @@ Digital Assets:
     }
 ] - 2024-08-07 09:31:02
 
+{
+    "order_header": {
+        "preferred_shipping_date": "2024-08-07",
+        "check_price": "false",
+        "currency": "EUR",
+        "contact_email": "ffshahjalal@gmail.com",
+        "shipping_address": {
+            "first_name": "Shah",
+            "last_name": "Jalal",
+            "company": "",
+            "address_1": "Bellavista 79",
+            "address_2": "",
+            "city": "Santib\u00e1\u00f1ez De Vidriales",
+            "state": "O",
+            "postcode": "49610",
+            "country": "ES",
+            "phone": "958 151 271",
+            "email": "ffshahjalal@gmail.com"
+        },
+        "po_number": 54,
+        "timestamp": "2024-08-07 12:25:16",
+        "contact_name": "Shah Jalal",
+        "order_type": "SAMPLE"
+    },
+    "order_lines": [
+        {
+            "order_line_id": 3,
+            "sku": "AR1253-16",
+            "quantity": 1,
+            "expected_price": "3.37"
+        }
+    ]
+} - 2024-08-07 12:25:16
+
