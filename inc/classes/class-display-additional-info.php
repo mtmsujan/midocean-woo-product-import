@@ -56,14 +56,37 @@ class Display_Additional_Info {
 
         // Loop through each metadata key and retrieve its value
         foreach ( $metadata_keys as $meta_key ) {
+            // Get metadata value
             $meta_value = get_post_meta( $product_id, $meta_key, true );
 
             // If metadata value exists, add it to the product attributes
             if ( !empty( $meta_value ) ) {
-                $label                                           = ucwords( str_replace( '_', ' ', substr( $meta_key, 1 ) ) );
+                $label                                         = ucwords( str_replace( '_', ' ', substr( $meta_key, 1 ) ) );
                 $product_attributes[sanitize_title( $meta_key )] = [
                     'label' => $label,
                     'value' => $meta_value,
+                ];
+            }
+        }
+
+        // Retrieve digital assets
+        $digital_assets = get_post_meta( $product_id, '_digital_assets', true );
+        $digital_assets = json_decode( $digital_assets, true );
+
+        // Format the digital assets
+        if ( !empty( $digital_assets ) ) {
+            $formatted_assets = '';
+            foreach ( $digital_assets as $asset ) {
+                if ( isset( $asset['url'] ) && isset( $asset['subtype'] ) ) {
+                    $formatted_assets .= '<a href="' . esc_url( $asset['url'] ) . '" target="_blank">' . esc_html( $asset['url'] ) . '</a> (' . esc_html( $asset['subtype'] ) . ')<br>';
+                }
+            }
+
+            // Add the formatted digital assets to the product attributes
+            if ( !empty( $formatted_assets ) ) {
+                $product_attributes['digital_assets'] = [
+                    'label' => __( 'Digital Assets', 'your-textdomain' ),
+                    'value' => $formatted_assets,
                 ];
             }
         }
