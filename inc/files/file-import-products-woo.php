@@ -65,9 +65,26 @@ function products_import_woocommerce() {
                 // Extract variants
                 $variants = $product_data['variants'];
 
+                $category_label1        = '';
+                $category_label2        = '';
+                $category_label3        = '';
+                $color_description      = '';
+                $color_group            = '';
+                $plc_status_description = '';
+
                 $images = [];
                 // Loop through variants for extract images
                 foreach ( $variants as $variant ) {
+
+                    // Extract product category label
+                    $category_label1        = $variant['category_level1'];
+                    $category_label2        = $variant['category_level2'];
+                    $category_label3        = $variant['category_level3'];
+                    $color_description      = $variant['color_description'];
+                    $color_group            = $variant['color_group'];
+                    $plc_status_description = $variant['plc_status_description'];
+
+                    // Get digital assets
                     $digital_assets = $variant['digital_assets'];
                     foreach ( $digital_assets as $digital_asset ) {
                         $images[] = $digital_asset['url'];
@@ -85,7 +102,7 @@ function products_import_woocommerce() {
                 $sale_price = $product->price;
 
                 // Define attributes names
-                $_attribute_names = [];
+                /* $_attribute_names = [];
                 // Define attributes values
                 $_attributes_values = [];
 
@@ -104,7 +121,7 @@ function products_import_woocommerce() {
                     $_attributes_values[] = $variant['category_level3'];
                     $_attributes_values[] = $variant['color_description'];
                     $_attributes_values[] = $variant['color_group'];
-                }
+                } */
 
                 // Set up the API client with WooCommerce store URL and credentials
                 $client = new Client(
@@ -144,11 +161,11 @@ function products_import_woocommerce() {
                     $product_data = [
                         'name'              => $title,
                         'sku'               => $sku,
-                        'type'              => 'variable',
+                        'type'              => 'simple',
                         'description'       => $description,
                         'short_description' => $short_desc,
                         'attributes'        => [
-                            [
+                            /* [
                                 'name'        => 'Attributes',
                                 'options'     => $_attribute_names,
                                 'position'    => 0,
@@ -163,7 +180,7 @@ function products_import_woocommerce() {
                                 'visible'     => true,
                                 'variation'   => true,
                                 'is_taxonomy' => false,
-                            ],
+                            ], */
                         ],
                     ];
 
@@ -171,7 +188,7 @@ function products_import_woocommerce() {
                     $client->put( 'products/' . $_product_id, $product_data );
 
                     // Add variation data
-                    $variation_data = [
+                    /* $variation_data = [
 
                         'attributes'     => [
                             [
@@ -189,7 +206,7 @@ function products_import_woocommerce() {
                     ];
 
                     // Add variation
-                    $client->put( 'products/' . $_product_id . '/variations', $variation_data );
+                    $client->put( 'products/' . $_product_id . '/variations', $variation_data ); */
 
                     // Update the status of the processed product in your database
                     $wpdb->update(
@@ -209,11 +226,11 @@ function products_import_woocommerce() {
                     $_product_data = [
                         'name'              => $title,
                         'sku'               => $sku,
-                        'type'              => 'variable',
+                        'type'              => 'simple',
                         'description'       => $description,
                         'short_description' => $short_desc,
                         'attributes'        => [
-                            [
+                            /* [
                                 'name'        => 'Attributes',
                                 'options'     => $_attribute_names,
                                 'position'    => 0,
@@ -228,7 +245,7 @@ function products_import_woocommerce() {
                                 'visible'     => true,
                                 'variation'   => true,
                                 'is_taxonomy' => false,
-                            ],
+                            ], */
                         ],
                     ];
 
@@ -237,7 +254,7 @@ function products_import_woocommerce() {
                     $product_id = $_products->id;
 
                     // Add variation data
-                    $variation_data = [
+                    /* $variation_data = [
 
                         'attributes'     => [
                             [
@@ -255,10 +272,10 @@ function products_import_woocommerce() {
                     ];
 
                     // Add variation
-                    $client->post( 'products/' . $product_id . '/variations', $variation_data );
+                    $client->post( 'products/' . $product_id . '/variations', $variation_data ); */
 
                     // Set product information
-                    wp_set_object_terms( $product_id, 'variable', 'product_type' );
+                    wp_set_object_terms( $product_id, 'simple', 'product_type' );
                     update_post_meta( $product_id, '_visibility', 'visible' );
 
                     // Update product stock
@@ -276,6 +293,14 @@ function products_import_woocommerce() {
 
                     // update product additional information
                     update_product_additional_information( $product_id, $product_data );
+                    
+                    // update product additional information
+                    update_post_meta( $product_id, '_category_level1', $category_label1 );
+                    update_post_meta( $product_id, '_category_level2', $category_label2 );
+                    update_post_meta( $product_id, '_category_level3', $category_label3 );
+                    update_post_meta( $product_id, '_color_description', $color_description );
+                    update_post_meta( $product_id, '_color_group', $color_group );
+                    update_post_meta( $product_id, '_pcl_status_description', $plc_status_description );
 
                     // Display out of stock message if stock is 0
                     if ( $quantity <= 0 ) {

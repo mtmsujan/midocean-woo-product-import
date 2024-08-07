@@ -52,16 +52,22 @@ class Display_Additional_Info {
             '_carton_volume',
             '_carton_gross_weight_unit',
             '_material',
+            '_category_level1',
+            '_category_level2',
+            '_category_level3',
+            '_color_description',
+            '_color_group',
+            '_pcl_status_description',
         ];
 
         // Loop through each metadata key and retrieve its value
         foreach ( $metadata_keys as $meta_key ) {
             // Get metadata value
-            $meta_value = get_post_meta( $product_id, $meta_key, true );
+            $meta_value = get_post_meta( $product_id, $meta_key, true ) ?? '';
 
             // If metadata value exists, add it to the product attributes
             if ( !empty( $meta_value ) ) {
-                $label                                         = ucwords( str_replace( '_', ' ', substr( $meta_key, 1 ) ) );
+                $label                                           = ucwords( str_replace( '_', ' ', substr( $meta_key, 1 ) ) );
                 $product_attributes[sanitize_title( $meta_key )] = [
                     'label' => $label,
                     'value' => $meta_value,
