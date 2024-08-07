@@ -18,9 +18,13 @@ class Create_Order {
     }
 
     public function create_order( $order_id ) {
+        // Get order
         $order = wc_get_order( $order_id );
 
-        $this->call_api( $order );
+        // Call API
+        $api_response = $this->call_api( $order );
+        // Put program logs
+        $this->put_program_logs( $api_response );
     }
 
     private function call_api( $order ) {
