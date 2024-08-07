@@ -95,3 +95,17 @@
     ]
 } - 2024-08-06 09:00:52
 
+Digital Assets: 
+[
+    {
+        "url": "https://cdn1.midocean.com/document/declaration-of-conformity/cx1015-doc.pdf",
+        "type": "document",
+        "subtype": "declaration_of_conformity"
+    },
+    {
+        "url": "https://cdn1.midocean.com/document/test-reach/cx1015-test-reach.pdf",
+        "type": "document",
+        "subtype": "test_reach"
+    }
+] - 2024-08-07 09:31:02
+
