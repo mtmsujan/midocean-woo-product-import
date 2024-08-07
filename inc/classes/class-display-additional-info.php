@@ -85,7 +85,7 @@ class Display_Additional_Info {
             // Add the formatted digital assets to the product attributes
             if ( !empty( $formatted_assets ) ) {
                 $product_attributes['digital_assets'] = [
-                    'label' => __( 'Digital Assets', 'your-textdomain' ),
+                    'label' => __( 'Digital Assets', 'bulk-product-import' ),
                     'value' => $formatted_assets,
                 ];
             }

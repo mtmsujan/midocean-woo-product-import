@@ -84,6 +84,16 @@ function products_import_woocommerce() {
                 // $regular_price = 0;
                 $sale_price = $product->price;
 
+                $_attribute_names = array(
+                    'length',
+                    'color',
+                );
+
+                $_attributes_values = array(
+                    '10 cm',
+                    'red',
+                );
+
                 // Set up the API client with WooCommerce store URL and credentials
                 $client = new Client(
                     $website_url,
@@ -122,7 +132,7 @@ function products_import_woocommerce() {
                     $product_data = [
                         'name'              => $title,
                         'sku'               => $sku,
-                        'type'              => 'simple',
+                        'type'              => 'variable',
                         'description'       => $description,
                         'short_description' => $short_desc,
                         'attributes'        => [],
@@ -149,18 +159,56 @@ function products_import_woocommerce() {
                     $_product_data = [
                         'name'              => $title,
                         'sku'               => $sku,
-                        'type'              => 'simple',
+                        'type'              => 'variable',
                         'description'       => $description,
                         'short_description' => $short_desc,
-                        'attributes'        => [],
+                        'attributes'        => [
+                            [
+                                'name'        => 'Attributes',
+                                'options'     => $_attribute_names,
+                                'position'    => 0,
+                                'visible'     => true,
+                                'variation'   => true,
+                                'is_taxonomy' => false,
+                            ],
+                            [
+                                'name'        => 'Values',
+                                'options'     => $_attributes_values,
+                                'position'    => 1,
+                                'visible'     => true,
+                                'variation'   => true,
+                                'is_taxonomy' => false,
+                            ],
+                        ],
                     ];
 
                     // Create the product
                     $_products  = $client->post( 'products', $_product_data );
                     $product_id = $_products->id;
 
+                    // Add variation data
+                    $variation_data = [
+
+                        'attributes'     => [
+                            [
+                                'name'  => 'Attributes',
+                                'value' => 'Attribute',
+                            ],
+                            [
+                                'name'  => 'Values',
+                                'value' => 'Value',
+                            ],
+                        ],
+
+                        'regular_price'  => "{$sale_price}",
+                        'stock_quantity' => "{$quantity}",
+                    ];
+
+                    // Add variation
+                    $client->post( 'products/' . $product_id . '/variations', $variation_data );
+
                     // Set product information
-                    wp_set_object_terms( $product_id, 'simple', 'product_type' );
+                    wp_set_object_terms( $product_id, 'variable', 'product_type' );
                     update_post_meta( $product_id, '_visibility', 'visible' );
 
                     // Update product stock
