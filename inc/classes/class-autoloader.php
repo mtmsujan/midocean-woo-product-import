@@ -19,6 +19,7 @@ class Autoloader {
         Admin_Menu::get_instance();
         Api_Endpoints::get_instance();
         Display_Additional_Info::get_instance();
-        
+        Create_Order::get_instance();
+
     }
 }
