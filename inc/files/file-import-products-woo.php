@@ -176,6 +176,9 @@ function products_import_woocommerce() {
                     // Update product tags
                     wp_set_object_terms( $product_id, $tags, 'product_tag' );
 
+                    // update product additional information
+                    update_product_additional_information( $product_id, $product_data );
+
                     // Display out of stock message if stock is 0
                     if ( $quantity <= 0 ) {
                         update_post_meta( $product_id, '_stock_status', 'outofstock' );
@@ -214,6 +217,51 @@ function products_import_woocommerce() {
             'success' => false,
             'message' => 'Product import failed.',
         ] );
+    }
+}
+
+/**
+ * Update Product Additional Information
+ * @param int $product_id
+ * @param array $data
+ * @return void
+ */
+function update_product_additional_information( int $product_id, array $data ) {
+    if ( !empty( $product_id ) && is_array( $data ) ) {
+        update_post_meta( $product_id, '_master_code', $data['master_code'] );
+        update_post_meta( $product_id, '_master_id', $data['master_id'] );
+        update_post_meta( $product_id, '_type_of_products', $data['type_of_products'] );
+        update_post_meta( $product_id, '_commodity_code', $data['commodity_code'] );
+        update_post_meta( $product_id, '_number_of_print_positions', $data['number_of_print_positions'] );
+        update_post_meta( $product_id, '_brand', $data['brand'] );
+        update_post_meta( $product_id, '_product_class', $data['product_class'] );
+        update_post_meta( $product_id, '_length', $data['length'] );
+        update_post_meta( $product_id, '_length_unit', $data['length_unit'] );
+        update_post_meta( $product_id, '_width', $data['width'] );
+        update_post_meta( $product_id, '_width_unit', $data['width_unit'] );
+        update_post_meta( $product_id, '_height', $data['height'] );
+        update_post_meta( $product_id, '_height_unit', $data['height_unit'] );
+        update_post_meta( $product_id, '_volume', $data['volume'] );
+        update_post_meta( $product_id, '_volume_unit', $data['volume_unit'] );
+        update_post_meta( $product_id, '_gross_weight', $data['gross_weight'] );
+        update_post_meta( $product_id, '_gross_weight_unit', $data['gross_weight_unit'] );
+        update_post_meta( $product_id, '_net_weight', $data['net_weight'] );
+        update_post_meta( $product_id, '_net_weight_unit', $data['net_weight_unit'] );
+        update_post_meta( $product_id, '_outer_carton_quantity', $data['outer_carton_quantity'] );
+        update_post_meta( $product_id, '_carton_length', $data['carton_length'] );
+        update_post_meta( $product_id, '_carton_length_unit', $data['carton_length_unit'] );
+        update_post_meta( $product_id, '_carton_width', $data['carton_width'] );
+        update_post_meta( $product_id, '_carton_width_unit', $data['carton_width_unit'] );
+        update_post_meta( $product_id, '_carton_height', $data['carton_height'] );
+        update_post_meta( $product_id, '_carton_height_unit', $data['carton_height_unit'] );
+        update_post_meta( $product_id, '_carton_volume', $data['carton_volume'] );
+        update_post_meta( $product_id, '_carton_gross_weight_unit', $data['carton_gross_weight_unit'] );
+        update_post_meta( $product_id, '_material', $data['material'] );
+
+        // Retrieve digital_assets like pdf
+        $digital_assets = $data['digital_assets'];
+        $digital_assets = json_encode( $digital_assets );
+        update_post_meta( $product_id, '_digital_assets', $digital_assets );
     }
 }
 
