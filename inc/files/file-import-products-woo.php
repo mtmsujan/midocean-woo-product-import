@@ -293,7 +293,7 @@ function products_import_woocommerce() {
 
                     // update product additional information
                     update_product_additional_information( $product_id, $product_data );
-                    
+
                     // update product additional information
                     update_post_meta( $product_id, '_category_level1', $category_label1 );
                     update_post_meta( $product_id, '_category_level2', $category_label2 );
@@ -353,6 +353,7 @@ function update_product_additional_information( int $product_id, array $data ) {
     if ( !empty( $product_id ) && is_array( $data ) ) {
         update_post_meta( $product_id, '_master_code', $data['master_code'] );
         update_post_meta( $product_id, '_master_id', $data['master_id'] );
+        update_post_meta( $product_id, '_country_of_origin', $data['country_of_origin'] );
         update_post_meta( $product_id, '_type_of_products', $data['type_of_products'] );
         update_post_meta( $product_id, '_commodity_code', $data['commodity_code'] );
         update_post_meta( $product_id, '_number_of_print_positions', $data['number_of_print_positions'] );
