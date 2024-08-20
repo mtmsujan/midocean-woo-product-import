@@ -13,3 +13,5 @@
     ![endpoints](assets/images//endpoints.png)
     - copy endpoints from endpoints tab and execute them.
 6. Sync Products from DB to WooCommerce.
+
+## Customize product page
