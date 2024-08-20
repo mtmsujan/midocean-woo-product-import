@@ -1,6 +1,8 @@
 (function ($) {
   $(document).ready(function () {
     // codes here
-    console.log(`Hello, World!`);
+    $("#accordion").accordion({
+      collapsible: true,
+    });
   });
 })(jQuery);
