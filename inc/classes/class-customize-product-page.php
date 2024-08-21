@@ -94,7 +94,7 @@ class Customize_Product_Page {
             $digital_assets = get_post_meta( $product_id, '_digital_assets', true );
             $digital_assets = json_decode( $digital_assets, true );
         }
-        
+
         ob_start();
         ?>
 
@@ -144,12 +144,34 @@ class Customize_Product_Page {
             <h3><?php esc_html_e( 'Documentation & certificates', 'bulk-product-import' ); ?></h3>
             <div class="additional-information-documentation">
                 <div class="documentation">
-                    <div class="doc-item">
-                        <span>👁</span>
-                        <a href="https://midoceanbrands.ma.informationstore.net/informationstore/F/F0072553_0001.pdf?expires=99990909000000&amp;secretname=InformationStore&amp;id=0&amp;ticket=50C6FBAEA661F8AEFA7B28D4ECF7DC70"
-                            target="_blank" rel="noopener noreferrer">Declaration of Conformity</a>
-                    </div>
-                    <span>⭳</span>
+                    <?php
+                    if ( !empty( $digital_assets ) && is_array( $digital_assets ) ) :
+                        foreach ( $digital_assets as $asset ) :
+                            $url           = esc_url( $asset['url'] );
+                            $subtype       = str_replace( '_', ' ', $asset['subtype'] );
+                            $subtype_label = ucwords( $subtype );
+
+                            // Check if it's a .zip file
+                            $icon = ( strpos( $url, '.zip' ) !== false ) ? '⭳' : '👁';
+
+                            // Output the link
+                            ?>
+                            <div class="doc-item">
+                                <span>
+                                    <?php echo $icon; ?>
+                                </span>
+                                <a href="<?php echo $url; ?>" target="_blank" rel="noopener noreferrer">
+                                    <?php echo $subtype_label; ?>
+                                </a>
+                            </div>
+                            <?php
+                        endforeach;
+                    else :
+                        ?>
+                        <p>
+                            <?php esc_html_e( 'No documentation or certificates available.', 'bulk-product-import' ); ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
