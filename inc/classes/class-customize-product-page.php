@@ -33,14 +33,22 @@ class Customize_Product_Page {
         ?>
 
         <div id="accordion">
-            <h3>Details</h3>
-            <div>
-                <p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus,
-                    molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra
-                    leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
-                <?php echo 'Master Code: ' . $master_code; ?>
+            <h3><?php esc_html_e( 'Details', 'bulk-product-import' ); ?></h3>
+            <div class="additional-information-details">
+                <div class="dimensions">
+                    <h3><?php esc_html_e( 'Dimensions', 'bulk-product-import' ); ?></h3>
+                    <div class="attribute-label">Dimensions: <span class="attribute-value">42 x 30 cm</span></div>
+                </div>
+                <div class="packaging">
+                    <h3><?php esc_html_e( 'Packaging', 'bulk-product-import' ); ?></h3>
+                    <div class="attribute-label">Carton Height: <span class="attribute-value">0.5 m</span></div>
+                </div>
+                <div class="general">
+                    <h3><?php esc_html_e( 'General', 'bulk-product-import' ); ?></h3>
+                    <div class="attribute-label">Main material: <span class="attribute-value">Straw</span></div>
+                </div>
             </div>
-            <h3>Documentation & certificates</h3>
+            <h3><?php esc_html_e( 'Documentation & certificates', 'bulk-product-import' ); ?></h3>
             <div>
                 <p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at
                     aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam.

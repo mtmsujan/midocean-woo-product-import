@@ -20,3 +20,15 @@ p.stock.in-stock.wd-style-default {
   font-weight: 400;
   margin: 4px 0px 0px;
 }
+
+.additional-information-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.additional-information-details > div {
+  flex: 1 1 48%;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
