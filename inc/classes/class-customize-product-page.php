@@ -18,9 +18,17 @@ class Customize_Product_Page {
     }
 
     public function custom_product_page_callback() {
-        $product_id = get_the_ID();
 
-        $master_code = get_post_meta( $product_id, '_master_code', true );
+        // get product
+        global $product;
+
+        if ( $product ) {
+            // get product id
+            $product_id = $product->get_id();
+            // get product meta
+            $master_code = get_post_meta( $product_id, '_master_code', true );
+        }
+
         ob_start();
         ?>
 
