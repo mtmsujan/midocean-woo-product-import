@@ -19,15 +19,55 @@ class Customize_Product_Page {
 
     public function custom_product_page_callback() {
 
-        // get product
         global $product;
 
         if ( $product ) {
             // get product id
             $product_id = $product->get_id();
-            // get product meta
-            $master_code = get_post_meta( $product_id, '_master_code', true );
+
+            // Retrieve all metadata
+            $master_code               = get_post_meta( $product_id, '_master_code', true );
+            $master_id                 = get_post_meta( $product_id, '_master_id', true );
+            $country_of_origin         = get_post_meta( $product_id, '_country_of_origin', true );
+            $type_of_products          = get_post_meta( $product_id, '_type_of_products', true );
+            $commodity_code            = get_post_meta( $product_id, '_commodity_code', true );
+            $number_of_print_positions = get_post_meta( $product_id, '_number_of_print_positions', true );
+            $brand                     = get_post_meta( $product_id, '_brand', true );
+            $product_class             = get_post_meta( $product_id, '_product_class', true );
+            $length                    = get_post_meta( $product_id, '_length', true );
+            $length_unit               = get_post_meta( $product_id, '_length_unit', true );
+            $width                     = get_post_meta( $product_id, '_width', true );
+            $width_unit                = get_post_meta( $product_id, '_width_unit', true );
+            $height                    = get_post_meta( $product_id, '_height', true );
+            $height_unit               = get_post_meta( $product_id, '_height_unit', true );
+            $volume                    = get_post_meta( $product_id, '_volume', true );
+            $volume_unit               = get_post_meta( $product_id, '_volume_unit', true );
+            $gross_weight              = get_post_meta( $product_id, '_gross_weight', true );
+            $gross_weight_unit         = get_post_meta( $product_id, '_gross_weight_unit', true );
+            $net_weight                = get_post_meta( $product_id, '_net_weight', true );
+            $net_weight_unit           = get_post_meta( $product_id, '_net_weight_unit', true );
+            $outer_carton_quantity     = get_post_meta( $product_id, '_outer_carton_quantity', true );
+            $carton_length             = get_post_meta( $product_id, '_carton_length', true );
+            $carton_length_unit        = get_post_meta( $product_id, '_carton_length_unit', true );
+            $carton_width              = get_post_meta( $product_id, '_carton_width', true );
+            $carton_width_unit         = get_post_meta( $product_id, '_carton_width_unit', true );
+            $carton_height             = get_post_meta( $product_id, '_carton_height', true );
+            $carton_height_unit        = get_post_meta( $product_id, '_carton_height_unit', true );
+            $carton_volume             = get_post_meta( $product_id, '_carton_volume', true );
+            $carton_gross_weight_unit  = get_post_meta( $product_id, '_carton_gross_weight_unit', true );
+            $material                  = get_post_meta( $product_id, '_material', true );
+            $category_label1           = get_post_meta( $product_id, '_category_level1', true );
+            $category_label2           = get_post_meta( $product_id, '_category_level2', true );
+            $category_label3           = get_post_meta( $product_id, '_category_level3', true );
+            $color_description         = get_post_meta( $product_id, '_color_description', true );
+            $color_group               = get_post_meta( $product_id, '_color_group', true );
+            $pcl_status_description    = get_post_meta( $product_id, '_pcl_status_description', true );
+
+            // Retrieve digital_assets and decode JSON
+            $digital_assets = get_post_meta( $product_id, '_digital_assets', true );
+            $digital_assets = json_decode( $digital_assets, true );
         }
+
 
         ob_start();
         ?>
