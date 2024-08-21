@@ -21,12 +21,12 @@ p.stock.in-stock.wd-style-default {
   margin: 4px 0px 0px;
 }
 
-.additional-information-details{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    row-gap: 24px;
-    padding: 24px;
-    padding-top: 16px;
+.additional-information-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 24px;
+  padding: 24px;
+  padding-top: 16px;
 }
 
 .ui-state-default,
@@ -56,9 +56,43 @@ html .ui-button.ui-state-disabled:active {
 }
 
 .ui-accordion .ui-icon-triangle-1-e {
-  background-position: -95px -16px;
+  background-position: -65px -16px;
 }
 
 .ui-icon-triangle-1-s {
   background-position: 0px -16px;
 }
+
+.ui-widget-content {
+  border: none !important;
+}
+
+.additional-information-details h3.details-title {
+  font-family: "Noto Sans";
+  font-size: 12px;
+  font-weight: 700;
+  color: #525252;
+  line-height: 17.14px;
+}
+
+.additional-information-details .attribute-label {
+  font-size: 12px;
+  font-family: "Noto Sans";
+  color: #161616;
+  line-height: 17.14px;
+  font-weight: 400;
+}
+
+.additional-information-documentation .documentation a {
+  font-family: "Noto Sans";
+  color: #161616;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17.14px;
+}
+
+/* .additional-information-documentation .documentation a::before {
+  content: "👁";
+  margin-right: 3px;
+  font-size: 15px;
+} */

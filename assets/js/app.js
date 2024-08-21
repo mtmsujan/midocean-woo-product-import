@@ -1,8 +1,9 @@
 (function ($) {
   $(document).ready(function () {
     // codes here
-    $("#accordion").accordion({
+    $("#additional-information-accordion").accordion({
       collapsible: true,
+      active: false
     });
   });
 })(jQuery);
