@@ -94,8 +94,7 @@ class Customize_Product_Page {
             $digital_assets = get_post_meta( $product_id, '_digital_assets', true );
             $digital_assets = json_decode( $digital_assets, true );
         }
-
-
+        
         ob_start();
         ?>
 
