@@ -70,7 +70,6 @@ function products_import_woocommerce() {
                 $category_label3        = '';
                 $color_description      = '';
                 $color_group            = '';
-                $plc_status_description = '';
                 $pms_color              = '';
                 $gtin                   = '';
 
@@ -84,7 +83,6 @@ function products_import_woocommerce() {
                     $category_label3        = $variant['category_level3'];
                     $color_description      = $variant['color_description'];
                     $color_group            = $variant['color_group'];
-                    $plc_status_description = $variant['plc_status_description'];
                     $pms_color              = $variant['pms_color'];
                     $gtin                   = $variant['gtin'];
 
@@ -206,7 +204,6 @@ function products_import_woocommerce() {
                     update_post_meta( $product_id, '_category_level3', $category_label3 );
                     update_post_meta( $product_id, '_color_description', $color_description );
                     update_post_meta( $product_id, '_color_group', $color_group );
-                    update_post_meta( $product_id, '_pcl_status_description', $plc_status_description );
                     update_post_meta( $product_id, '_pms_color', $pms_color );
                     update_post_meta( $product_id, '_ean', $gtin );
 
