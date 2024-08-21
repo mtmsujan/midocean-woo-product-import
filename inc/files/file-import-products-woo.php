@@ -71,6 +71,8 @@ function products_import_woocommerce() {
                 $color_description      = '';
                 $color_group            = '';
                 $plc_status_description = '';
+                $pms_color              = '';
+                $gtin                   = '';
 
                 $images = [];
                 // Loop through variants for extract images
@@ -83,6 +85,8 @@ function products_import_woocommerce() {
                     $color_description      = $variant['color_description'];
                     $color_group            = $variant['color_group'];
                     $plc_status_description = $variant['plc_status_description'];
+                    $pms_color              = $variant['pms_color'];
+                    $gtin                   = $variant['gtin'];
 
                     // Get digital assets
                     $digital_assets = $variant['digital_assets'];
@@ -301,6 +305,8 @@ function products_import_woocommerce() {
                     update_post_meta( $product_id, '_color_description', $color_description );
                     update_post_meta( $product_id, '_color_group', $color_group );
                     update_post_meta( $product_id, '_pcl_status_description', $plc_status_description );
+                    update_post_meta( $product_id, '_pms_color', $pms_color );
+                    update_post_meta( $product_id, '_ean', $gtin );
 
                     // Display out of stock message if stock is 0
                     if ( $quantity <= 0 ) {
@@ -494,7 +500,7 @@ function set_product_images_with_unique_image_name( $product_id, $images ) {
                 $attach_id = wp_insert_attachment( $attachment, $file_path, $product_id );
 
                 // You need to generate the attachment metadata and update the attachment
-                require_once ( ABSPATH . 'wp-admin/includes/image.php' );
+                require_once( ABSPATH . 'wp-admin/includes/image.php' );
                 $attach_data = wp_generate_attachment_metadata( $attach_id, $file_path );
                 wp_update_attachment_metadata( $attach_id, $attach_data );
 

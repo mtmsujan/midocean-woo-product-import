@@ -62,6 +62,33 @@ class Customize_Product_Page {
             $color_description         = get_post_meta( $product_id, '_color_description', true );
             $color_group               = get_post_meta( $product_id, '_color_group', true );
             $pcl_status_description    = get_post_meta( $product_id, '_pcl_status_description', true );
+            $pms_color                 = get_post_meta( $product_id, '_pms_color', true );
+            $ean                       = get_post_meta( $product_id, '_ean', true ) ?? '';
+
+            // Generate dimensions by width and height with unit
+            $dimensions = $width . ' x ' . $height . ' ' . $height_unit;
+            // Generate diameter with width and unit
+            $diameter = $width . ' ' . $width_unit;
+            // Generate width with unit
+            $width = $width . ' ' . $width_unit;
+            // Generate height with unit
+            $height = $height . ' ' . $height_unit;
+            // Generate length with unit
+            $length = $length . ' ' . $length_unit;
+            // Generate volume with unit
+            $volume = $volume . ' ' . $volume_unit;
+            // Generate gross weight with unit
+            $gross_weight = $gross_weight . ' ' . $gross_weight_unit;
+            // Generate net weight with unit
+            $net_weight = $net_weight . ' ' . $net_weight_unit;
+            // Generate carton height with unit
+            $carton_height = $carton_height . ' ' . $carton_height_unit;
+            // Generate carton width with unit
+            $carton_width = $carton_width . ' ' . $carton_width_unit;
+            // Generate carton length with unit
+            $carton_length = $carton_length . ' ' . $carton_length_unit;
+            // Generate carton volume with unit
+            $carton_volume = $carton_volume . ' ' . $volume_unit;
 
             // Retrieve digital_assets and decode JSON
             $digital_assets = get_post_meta( $product_id, '_digital_assets', true );
@@ -77,15 +104,42 @@ class Customize_Product_Page {
             <div class="additional-information-details">
                 <div class="dimensions">
                     <h3 class="details-title"><?php esc_html_e( 'Dimensions', 'bulk-product-import' ); ?></h3>
-                    <div class="attribute-label">Dimensions: <span class="attribute-value">42 x 30 cm</span></div>
+                    <div class="attribute-label">Dimensions: <span class="attribute-value"><?php echo $dimensions; ?></span>
+                    </div>
+                    <div class="attribute-label">Width: <span class="attribute-value"><?php echo $width; ?></span></div>
+                    <div class="attribute-label">Height: <span class="attribute-value"><?php echo $height; ?></span></div>
+                    <div class="attribute-label">Length: <span class="attribute-value"><?php echo $length; ?></span></div>
+                    <div class="attribute-label">Diameter: <span class="attribute-value"><?php echo $diameter; ?></span></div>
+                    <div class="attribute-label">Volume: <span class="attribute-value"><?php echo $volume; ?></span></div>
+                    <div class="attribute-label">Gross Weight: <span class="attribute-value"><?php echo $gross_weight; ?></span>
+                    </div>
+                    <div class="attribute-label">Net Weight: <span class="attribute-value"><?php echo $net_weight; ?></span>
+                    </div>
                 </div>
                 <div class="packaging">
                     <h3 class="details-title"><?php esc_html_e( 'Packaging', 'bulk-product-import' ); ?></h3>
-                    <div class="attribute-label">Carton Height: <span class="attribute-value">0.5 m</span></div>
+                    <div class="attribute-label">Carton Height: <span
+                            class="attribute-value"><?php echo $carton_height; ?></span></div>
+                    <div class="attribute-label">Carton Width: <span class="attribute-value"><?php echo $carton_width; ?></span>
+                    </div>
+                    <div class="attribute-label">Carton Length: <span
+                            class="attribute-value"><?php echo $carton_length; ?></span></div>
+                    <div class="attribute-label">Carton Volume: <span
+                            class="attribute-value"><?php echo $carton_volume; ?></span></div>
+                    <div class="attribute-label">Carton Quantity: <span
+                            class="attribute-value"><?php echo $outer_carton_quantity . ' pieces'; ?></span></div>
                 </div>
                 <div class="general">
                     <h3 class="details-title"><?php esc_html_e( 'General', 'bulk-product-import' ); ?></h3>
-                    <div class="attribute-label">Main material: <span class="attribute-value">Straw</span></div>
+                    <div class="attribute-label">Main material: <span class="attribute-value"><?php echo $material; ?></span>
+                    </div>
+                    <div class="attribute-label">Commodity Code: <span
+                            class="attribute-value"><?php echo $commodity_code; ?></span></div>
+                    <div class="attribute-label">Country of Origin: <span
+                            class="attribute-value"><?php echo $country_of_origin; ?></span></div>
+                    <div class="attribute-label">EAN: <span class="attribute-value"><?php echo $ean; ?></span></div>
+                    <div class="attribute-label">PMS Color: <span class="attribute-value"><?php echo $pms_color; ?></span>
+                    </div>
                 </div>
             </div>
             <h3><?php esc_html_e( 'Documentation & certificates', 'bulk-product-import' ); ?></h3>
