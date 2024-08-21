@@ -1,3 +1,22 @@
 .woocommerce-Price-amount span.woocommerce-Price-currencySymbol {
-    margin-left: 10px;
+  margin-left: 10px;
+}
+
+p.stock.wd-style-default.in-stock:before {
+  content: "" !important;
+  display: inline-block !important;
+  background-color: #24a148 !important;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+}
+
+p.stock.in-stock.wd-style-default {
+  font-family: "Noto Sans";
+  font-size: 14px;
+  color: #525252;
+  line-height: 20px;
+  font-weight: 400;
+  margin: 4px 0px 0px;
 }
