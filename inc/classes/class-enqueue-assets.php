@@ -25,12 +25,14 @@ class Enqueue_Assets {
         // Register CSS
         wp_register_style( "be-style", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/css/be-style.css", );
         wp_register_style( "be-bootstrap", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/css/bootstrap.min.css" );
+        wp_register_style( "be-accordion-style", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/public/css/be-accordion-style.css" );
 
         wp_enqueue_style( "jquery-ui-accordion-css", "https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css", [], time(), "all" );
 
         // enqueue CSS
         wp_enqueue_style( "be-style" );
         wp_enqueue_style( "be-bootstrap" );
+        wp_enqueue_style( "be-accordion-style" );
     }
 
     public function enqueue_js() {
