@@ -18,6 +18,9 @@ class Customize_Product_Page {
     }
 
     public function custom_product_page_callback() {
+        $product_id = get_the_ID();
+
+        $master_code = get_post_meta( $product_id, '_master_code', true );
         ob_start();
         ?>
 
@@ -27,6 +30,7 @@ class Customize_Product_Page {
                 <p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus,
                     molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra
                     leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
+                <?php echo 'Master Code: ' . $master_code; ?>
             </div>
             <h3>Documentation & certificates</h3>
             <div>
@@ -38,4 +42,5 @@ class Customize_Product_Page {
 
         <?php return ob_get_clean();
     }
+
 }
