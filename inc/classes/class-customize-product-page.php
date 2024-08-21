@@ -14,7 +14,8 @@ class Customize_Product_Page {
 
     public function setup_hooks() {
         // setup hooks
-        add_shortcode( 'customize_product_page', [ $this, 'custom_product_page_callback' ] );
+        add_shortcode( 'display_product_info', [ $this, 'custom_product_page_callback' ] );
+        add_shortcode( 'display_product_sku', [ $this, 'display_product_sku_callback' ] );
     }
 
     public function custom_product_page_callback() {
@@ -177,6 +178,18 @@ class Customize_Product_Page {
         </div>
 
         <?php return ob_get_clean();
+    }
+
+    public function display_product_sku_callback() {
+        // global product
+        global $product;
+
+        if ( $product ) {
+            // product sku
+            $sku = $product->get_sku();
+        }
+
+        printf( '<h1 class="be-product-sku">%s</h1>', $sku );
     }
 
 }
