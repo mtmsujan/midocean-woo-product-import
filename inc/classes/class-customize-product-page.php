@@ -16,6 +16,7 @@ class Customize_Product_Page {
         // setup hooks
         add_shortcode( 'display_product_info', [ $this, 'custom_product_page_callback' ] );
         add_shortcode( 'display_product_sku', [ $this, 'display_product_sku_callback' ] );
+        add_shortcode( 'custom_product_configurator', [ $this, 'custom_product_configurator_callback' ] );
     }
 
     public function custom_product_page_callback() {
@@ -190,6 +191,17 @@ class Customize_Product_Page {
         }
 
         printf( '<h1 class="be-product-sku">%s</h1>', $sku );
+    }
+
+    public function custom_product_configurator_callback(){
+        ob_start();
+        ?>
+
+        <div class="product-configurator-row">
+            
+        </div>
+
+        <?php return ob_get_clean();
     }
 
 }
