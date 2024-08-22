@@ -29,6 +29,10 @@ class Enqueue_Assets {
 
         wp_enqueue_style( "jquery-ui-accordion-css", "https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css", [], time(), "all" );
 
+        // enqueue font awesome
+        wp_enqueue_style( "font-awesome-css", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css", [], time(), "all" );
+
+
         // enqueue CSS
         wp_enqueue_style( "be-style" );
         wp_enqueue_style( "be-bootstrap" );

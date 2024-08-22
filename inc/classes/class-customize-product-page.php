@@ -193,19 +193,23 @@ class Customize_Product_Page {
         printf( '<h1 class="be-product-sku">%s</h1>', $sku );
     }
 
-    public function custom_product_configurator_callback(){
+    public function custom_product_configurator_callback() {
         ob_start();
         ?>
 
         <div class="product-configurator-row">
             <div class="product-configurator-heading">
-                <div class="row align-items-end">
+                <div class="row align-items-end pb-2">
                     <div class="col-sm-8">
-                        <div class="be-title">Product Configurator</div>
+                        <div class="be-title"><?php esc_html_e( 'Configurador artículo', 'bulk-product-import' ); ?></div>
                     </div>
                     <div class="col-sm-4">
-                        <a class="d-block product-configurator-download-button" href="#">Descarga la hoja del producto</a>
-                        <a class="d-block product-configurator-save-button" href="#">Guarda esta configuración como concepto</a>
+                        <a class="d-block product-configurator-download-button"
+                            href="#"><?php esc_html_e( 'Descarga la hoja del producto', 'bulk-product-import' ); ?> <i
+                                class="fa-solid fa-arrow-down ms-2"></i></a>
+                        <a class="d-block product-configurator-save-button"
+                            href="#"><?php esc_html_e( 'Guarda esta configuración como concepto', 'bulk-product-import' ) ?> <i
+                                class="fa-solid fa-floppy-disk ms-2"></i></a>
                     </div>
                 </div>
             </div>
