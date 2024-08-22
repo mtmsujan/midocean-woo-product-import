@@ -99,3 +99,26 @@ h1.be-product-sku {
   line-height: 44.8px;
   font-family: "Noto Sans";
 }
+
+.product-configurator-row {
+  background-color: #f4f4f4;
+}
+
+.product-configurator-row .be-title {
+  font-size: 30px;
+  font-weight: 400;
+  color: #161616;
+  font-family: "Noto Sans";
+  line-height: 42.85px;
+  margin: 37px 0px 0px;
+  padding: 0px 0px 25px 16px;
+}
+
+.product-configurator-download-button,
+.product-configurator-save-button {
+  font-family: "Noto Sans";
+  font-size: 14px;
+  line-height: 20px;
+  color: #24a148;
+  font-weight: 400;
+}

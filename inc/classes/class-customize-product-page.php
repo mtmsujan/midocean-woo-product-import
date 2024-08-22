@@ -199,13 +199,13 @@ class Customize_Product_Page {
 
         <div class="product-configurator-row">
             <div class="product-configurator-heading">
-                <div class="row">
+                <div class="row align-items-end">
                     <div class="col-sm-8">
                         <div class="be-title">Product Configurator</div>
                     </div>
                     <div class="col-sm-4">
-                        <a href="#">Descarga la hoja del producto</a>
-                        <a href="#">Descarga la hoja del producto</a>
+                        <a class="d-block product-configurator-download-button" href="#">Descarga la hoja del producto</a>
+                        <a class="d-block product-configurator-save-button" href="#">Guarda esta configuración como concepto</a>
                     </div>
                 </div>
             </div>
