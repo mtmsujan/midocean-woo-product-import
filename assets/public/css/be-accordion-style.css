@@ -174,3 +174,66 @@ h1.be-product-sku {
   font-size: 12px;
   color: #525252;
 }
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  line-height: 32px;
+  padding: 0 16px;
+}
+
+.underline {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.grand-totals {
+  padding-bottom: 4px;
+}
+
+.grand-total {
+  font-weight: bold;
+  line-height: 36px;
+  padding-left: 24px;
+}
+
+.price-per-item-subheading{
+  font-family: "Noto Sans";
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: #525252;
+  padding-left: 25px;
+}
+.product-detail-btn-group {
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.product-detail-btn-group>* {
+  display: flex;
+  flex-grow: 1;
+  height: 48px;
+}
+
+.product-detail-btn-group .login-to-order {
+  width: 100%;
+  color: #ffffff;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  background-color: #24a148 !important;
+  text-transform: capitalize;
+}
+
+.product-detail-btn-group :is(.btn,.button,button,[type="submit"],[type="button"]):hover {
+  color: #ffffff !important;
+  background-color: #24a148 !important;
+}
+
+.right-arrow-icon{
+  right: 20px;
+}

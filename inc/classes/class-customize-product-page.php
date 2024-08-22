@@ -232,8 +232,34 @@ class Customize_Product_Page {
                                     <span class="sub-text">BILGOLA+</span>
                                 </div>
                             </div>
+                            <div class="summary-row underline shipping">
+                                <div>Portes web península (oficina 20 eur)</div>
+                                <div class="value" data-default="-">-</div>
+                            </div>
+                            <div class="summary-row product-price">
+                                <div class="text" data-default="Precio artículo">Precio artículo</div>
+                                <div class="value" data-default="-">-</div>
+                            </div>
+                            <div class="grand-totals underline">
+                                <div class="summary-row grand-total">
+                                    <div>Total (incl. transporte)</div>
+                                    <div class="total" data-default="-">-</div>
+                                </div>
+                                <div class="summary-row price-per-item">
+                                    <div class="price-per-item-subheading">Precio por artículo</div>
+                                    <div class="value" data-default="-">-</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="personalize-button"></div>
+                        <div class="personalize-button">
+                            <div class="product-detail-btn-group">
+                                <div class="buttons">
+                                    <a class="button login-to-order position-relative"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?>
+                                    <i class="fa-solid fa-arrow-right position-absolute right-arrow-icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
