@@ -199,7 +199,7 @@ class Customize_Product_Page {
 
         <div class="product-configurator-row">
             <div class="product-configurator-heading">
-                <div class="row align-items-end pb-2">
+                <div class="row align-items-end justify-content-between pb-2 product-configurator-heading-portion">
                     <div class="col-sm-8">
                         <div class="be-title"><?php esc_html_e( 'Configurador artículo', 'bulk-product-import' ); ?></div>
                     </div>
