@@ -197,7 +197,7 @@ class Customize_Product_Page {
         ob_start();
         ?>
 
-        <div class="product-configurator-row">
+        <div class="product-configurator-row pb-5">
             <div class="product-configurator-heading">
                 <div class="row align-items-end justify-content-between pb-2 product-configurator-heading-portion">
                     <div class="col-sm-8">
@@ -213,7 +213,17 @@ class Customize_Product_Page {
                     </div>
                 </div>
             </div>
-            <div class="product-configurator-body"></div>
+            <div class="product-configurator-body">
+                <div class="row">
+                    <div class="col-sm-8 product-configurator-body-left-portion">
+                        <div class="product-configurator-body-subheading-div">
+                            <h3 class="product-configurator-body-subheading">
+                                <?php esc_html_e( 'Variaciones artículo', 'bulk-product-import' ) ?></h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 product-configurator-body-right-portion"></div>
+                </div>
+            </div>
         </div>
 
         <?php return ob_get_clean();
