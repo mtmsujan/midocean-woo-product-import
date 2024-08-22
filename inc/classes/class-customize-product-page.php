@@ -198,7 +198,18 @@ class Customize_Product_Page {
         ?>
 
         <div class="product-configurator-row">
-            
+            <div class="product-configurator-heading">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="be-title">Product Configurator</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="#">Descarga la hoja del producto</a>
+                        <a href="#">Descarga la hoja del producto</a>
+                    </div>
+                </div>
+            </div>
+            <div class="product-configurator-body"></div>
         </div>
 
         <?php return ob_get_clean();
