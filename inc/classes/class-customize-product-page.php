@@ -218,10 +218,23 @@ class Customize_Product_Page {
                     <div class="col-sm-8 product-configurator-body-left-portion">
                         <div class="product-configurator-body-subheading-div">
                             <h3 class="product-configurator-body-subheading">
-                                <?php esc_html_e( 'Variaciones artículo', 'bulk-product-import' ) ?></h3>
+                                <?php esc_html_e( 'Variaciones artículo', 'bulk-product-import' ) ?>
+                            </h3>
                         </div>
                     </div>
-                    <div class="col-sm-4 product-configurator-body-right-portion"></div>
+                    <div class="col-sm-4 product-configurator-body-right-portion">
+                        <div class="pricing-summery">
+                            <div class="summery-header">
+                                <img src="https://cdn1.midocean.com/image/75X75/mo2267-13.jpg" alt="MO2267-13 product photo"
+                                    height="75" width="75">
+                                <div class="name-wrapper">
+                                    <span class="main-text">MO2267</span>
+                                    <span class="sub-text">BILGOLA+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="personalize-button"></div>
+                    </div>
                 </div>
             </div>
         </div>

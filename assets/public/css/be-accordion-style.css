@@ -123,20 +123,20 @@ h1.be-product-sku {
   font-weight: 400;
 }
 
-.product-configurator-heading-portion{
+.product-configurator-heading-portion {
   border-bottom: 1px solid #e0e0e0;
   border-top: 1px solid #e0e0e0;
 }
 
-.product-configurator-body-subheading-div{
+.product-configurator-body-subheading-div {
   border-bottom: 1px solid #e0e0e0;
 }
 
-.product-configurator-body-left-portion{
+.product-configurator-body-left-portion {
   border-right: 1px solid #e0e0e0;
 }
 
-.product-configurator-body-subheading{
+.product-configurator-body-subheading {
   font-family: "Noto Sans";
   font-size: 14px;
   line-height: 20px;
@@ -144,4 +144,33 @@ h1.be-product-sku {
   font-weight: 700;
   padding: 25px 0px 20px 16px;
   margin: 0;
+}
+
+.pricing-summery {
+  font-size: 14px;
+  color: #161616;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.summery-header {
+  padding: 17px 0 24px 17px;
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.name-wrapper {
+  padding-left: 16px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-text {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.sub-text {
+  font-size: 12px;
+  color: #525252;
 }
