@@ -17,6 +17,7 @@ class Customize_Product_Page {
         add_shortcode( 'display_product_info', [ $this, 'custom_product_page_callback' ] );
         add_shortcode( 'display_product_sku', [ $this, 'display_product_sku_callback' ] );
         add_shortcode( 'custom_product_configurator', [ $this, 'custom_product_configurator_callback' ] );
+        add_shortcode( 'custom_product_configurator_mto_link', [ $this, 'custom_product_configurator_mto_link_callback' ] );
     }
 
     public function custom_product_page_callback() {
@@ -238,7 +239,8 @@ class Customize_Product_Page {
                             </div>
                             <div class="summary-row product-price">
                                 <div class="text" data-default="Precio artículo">
-                                    <?php esc_html_e( 'Precio artículo', 'bulk-product-import' ) ?></div>
+                                    <?php esc_html_e( 'Precio artículo', 'bulk-product-import' ) ?>
+                                </div>
                                 <div class="value" data-default="-">-</div>
                             </div>
                             <div class="grand-totals underline">
@@ -248,7 +250,8 @@ class Customize_Product_Page {
                                 </div>
                                 <div class="summary-row price-per-item">
                                     <div class="price-per-item-subheading">
-                                        <?php esc_html_e( 'Precio por artículo', 'bulk-product-import' ) ?></div>
+                                        <?php esc_html_e( 'Precio por artículo', 'bulk-product-import' ) ?>
+                                    </div>
                                     <div class="value" data-default="-">-</div>
                                 </div>
                             </div>
@@ -263,6 +266,33 @@ class Customize_Product_Page {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <?php return ob_get_clean();
+    }
+
+    public function custom_product_configurator_mto_link_callback() {
+        ob_start();
+        ?>
+
+        <div id="productDetailPage">
+            <div class="mto-link">
+                <div class="heading-wrapper">
+                    <h3>Opción yourChoice totalmente personalizable</h3>
+                </div>
+                <div class="detail-wrapper">
+                    <img
+                        src="https://www.midocean.com/INTERSHOP/static/WFS/midocean-IB-Site/-/midocean/es_ES/mto-yourchoice/MTO-link/MTS%20to%20MTO%20bucket%20hats%20yourChoice.jpg">
+                    <div class="details">
+                        <div class="details-text">Selecciona un modelo de stock para una entrega más rápida, o haz clic aquí para obtener gorros de
+                            cubo impresos a todo color. A partir de 25 unidades.</div>
+                            <div class="sub-details"></div>
+                            <a href="https://www.midocean.com/iberia/es/eur/content/page.yourHeadwear.BucketHats" target="_blank">Ver más detalles
+                                <span class="arrow-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                            </a>
                     </div>
                 </div>
             </div>

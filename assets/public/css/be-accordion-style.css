@@ -222,7 +222,7 @@ h1.be-product-sku {
   align-items: center;
 }
 
-.button-wrapper:hover{
+.button-wrapper:hover {
   cursor: pointer;
 }
 
@@ -234,7 +234,7 @@ h1.be-product-sku {
   font-weight: 400;
 }
 
-.button-wrapper a:hover{
+.button-wrapper a:hover {
   color: #ffffff;
 }
 
@@ -244,4 +244,70 @@ h1.be-product-sku {
 
 #related-product-footer-portion .wd-carousel-container .wd-el-title {
   display: none !important;
+}
+
+#productDetailPage .mto-link {
+  background-color: #f4f4f4;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+#productDetailPage .mto-link .heading-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+#productDetailPage .mto-link .heading-wrapper h3{
+  font-family: "Noto Sans";
+  color: #222222;
+  font-size: 14px;
+  line-height: 19.6px;
+  font-weight: 700;
+}
+
+#productDetailPage .mto-link .detail-wrapper {
+  display: flex;
+  font-size: 14px;
+}
+
+#productDetailPage .mto-link .detail-wrapper img {
+  width: 72px;
+  margin-right: 16px;
+}
+
+#productDetailPage .mto-link .detail-wrapper .details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+#productDetailPage .mto-link .detail-wrapper .details .details-text{
+  font-family: "Noto Sans";
+  color: #161616;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+
+}
+
+#productDetailPage .mto-link .detail-wrapper .details .sub-details {
+  font-size: 12px;
+  color: #525252;
+}
+
+#productDetailPage .mto-link .detail-wrapper .details a {
+  display: flex;
+  color: #24a148;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  
+}
+
+#productDetailPage .mto-link .detail-wrapper .details a .arrow-icon {
+  width: 16px;
+  margin-left: 12px;
 }
