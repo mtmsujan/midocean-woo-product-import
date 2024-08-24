@@ -222,6 +222,44 @@ class Customize_Product_Page {
                                 <?php esc_html_e( 'Variaciones artículo', 'bulk-product-import' ) ?>
                             </h3>
                         </div>
+                        <!-- Color input row configurator. repeater -->
+                        <div class="row mt-3 justify-content-between align-items-center color-input-row">
+                            <div class="col-sm-2">Color Dropdown</div>
+                            <!-- Stock input field -->
+                            <div class="col-sm-6">
+                                <div class="row flex-column">
+                                    <div class="col-sm-12">
+                                        <div class="input-quantity-wrapper">
+                                            <input type="number" class="input-quantity" id="" name="" step="1" min="1"
+                                                max="100000" placeholder="0" data-error-position="placeholder"
+                                                data-bv-notempty-message="Please enter a number."
+                                                data-bv-lessthan-message="Please enter 100.000 or less."
+                                                data-bv-greaterthan-message="Please enter 1 or more."
+                                                data-bv-message="Please enter a number."
+                                                data-bv-integer-message="Please enter a whole number." data-product-name="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 mt-1">
+                                        <div class="stock-data">
+                                            <div><span class="stock-value">100</span> En Stock</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Stock input field -->
+                            <div class="col-sm-4">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="col-sm-6"></div>
+                                    <div class="col-sm-6 text-end">x</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Color input row configurator. repeater -->
+                        <!-- Add more color button -->
+                        <div class="buttons mt-3">
+                            <button id="add-more-color-button">Add more colors</button>
+                        </div>
+                        <!-- /Add more color button -->
                     </div>
                     <div class="col-sm-4 product-configurator-body-right-portion">
                         <div class="pricing-summery">
@@ -287,12 +325,14 @@ class Customize_Product_Page {
                     <img
                         src="https://www.midocean.com/INTERSHOP/static/WFS/midocean-IB-Site/-/midocean/es_ES/mto-yourchoice/MTO-link/MTS%20to%20MTO%20bucket%20hats%20yourChoice.jpg">
                     <div class="details">
-                        <div class="details-text">Selecciona un modelo de stock para una entrega más rápida, o haz clic aquí para obtener gorros de
+                        <div class="details-text">Selecciona un modelo de stock para una entrega más rápida, o haz clic aquí
+                            para obtener gorros de
                             cubo impresos a todo color. A partir de 25 unidades.</div>
-                            <div class="sub-details"></div>
-                            <a href="https://www.midocean.com/iberia/es/eur/content/page.yourHeadwear.BucketHats" target="_blank">Ver más detalles
-                                <span class="arrow-icon"><i class="fa-solid fa-arrow-right"></i></span>
-                            </a>
+                        <div class="sub-details"></div>
+                        <a href="https://www.midocean.com/iberia/es/eur/content/page.yourHeadwear.BucketHats"
+                            target="_blank">Ver más detalles
+                            <span class="arrow-icon"><i class="fa-solid fa-arrow-right"></i></span>
+                        </a>
                     </div>
                 </div>
             </div>
