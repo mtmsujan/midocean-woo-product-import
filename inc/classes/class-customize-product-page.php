@@ -233,20 +233,22 @@ class Customize_Product_Page {
                                 </div>
                             </div>
                             <div class="summary-row underline shipping">
-                                <div>Portes web península (oficina 20 eur)</div>
+                                <div><?php esc_html_e( 'Portes web península (oficina 20 eur)', 'bulk-product-import' ) ?></div>
                                 <div class="value" data-default="-">-</div>
                             </div>
                             <div class="summary-row product-price">
-                                <div class="text" data-default="Precio artículo">Precio artículo</div>
+                                <div class="text" data-default="Precio artículo">
+                                    <?php esc_html_e( 'Precio artículo', 'bulk-product-import' ) ?></div>
                                 <div class="value" data-default="-">-</div>
                             </div>
                             <div class="grand-totals underline">
                                 <div class="summary-row grand-total">
-                                    <div>Total (incl. transporte)</div>
+                                    <div><?php esc_html_e( 'Total (incl. transporte)', 'bulk-product-import' ) ?></div>
                                     <div class="total" data-default="-">-</div>
                                 </div>
                                 <div class="summary-row price-per-item">
-                                    <div class="price-per-item-subheading">Precio por artículo</div>
+                                    <div class="price-per-item-subheading">
+                                        <?php esc_html_e( 'Precio por artículo', 'bulk-product-import' ) ?></div>
                                     <div class="value" data-default="-">-</div>
                                 </div>
                             </div>
@@ -254,7 +256,7 @@ class Customize_Product_Page {
                         <div class="personalize-button">
                             <div class="button-wrapper">
                                 <div>
-                                    <a href="#">Customize</a>
+                                    <a href="#"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?></a>
                                 </div>
                                 <div>
                                     <i class="fa-solid fa-arrow-right"></i>

@@ -241,3 +241,7 @@ h1.be-product-sku {
 .button-wrapper i {
   color: #ffffff;
 }
+
+#related-product-footer-portion .wd-carousel-container .wd-el-title {
+  display: none !important;
+}
