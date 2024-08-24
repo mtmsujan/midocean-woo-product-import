@@ -14,13 +14,13 @@ class Customize_Product_Page {
 
     public function setup_hooks() {
         // setup hooks
-        add_shortcode( 'display_product_info', [ $this, 'custom_product_page_callback' ] );
+        add_shortcode( 'display_product_info', [ $this, 'display_product_info_callback' ] );
         add_shortcode( 'display_product_sku', [ $this, 'display_product_sku_callback' ] );
         add_shortcode( 'custom_product_configurator', [ $this, 'custom_product_configurator_callback' ] );
         add_shortcode( 'custom_product_configurator_mto_link', [ $this, 'custom_product_configurator_mto_link_callback' ] );
     }
 
-    public function custom_product_page_callback() {
+    public function display_product_info_callback() {
 
         global $product;
 
