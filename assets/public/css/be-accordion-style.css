@@ -196,7 +196,7 @@ h1.be-product-sku {
   padding-left: 24px;
 }
 
-.price-per-item-subheading{
+.price-per-item-subheading {
   font-family: "Noto Sans";
   font-size: 12px;
   line-height: 14px;
@@ -212,7 +212,7 @@ h1.be-product-sku {
   margin-top: 24px;
 }
 
-.product-detail-btn-group>* {
+.product-detail-btn-group > * {
   display: flex;
   flex-grow: 1;
   height: 48px;
@@ -229,11 +229,17 @@ h1.be-product-sku {
   text-transform: capitalize;
 }
 
-.product-detail-btn-group :is(.btn,.button,button,[type="submit"],[type="button"]):hover {
+.product-detail-btn-group
+  :is(.btn, .button, button, [type="submit"], [type="button"]):hover {
   color: #ffffff !important;
   background-color: #24a148 !important;
 }
 
-.right-arrow-icon{
+.right-arrow-icon {
   right: 20px;
+}
+
+.col-sm-8.product-configurator-body-left-portion {
+  padding: 0;
+  padding-right: 20px;
 }
