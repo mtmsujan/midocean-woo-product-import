@@ -204,42 +204,40 @@ h1.be-product-sku {
   color: #525252;
   padding-left: 25px;
 }
-.product-detail-btn-group {
-  display: flex;
-  align-items: stretch;
-  align-content: stretch;
-  width: 100%;
-  margin-top: 24px;
-}
-
-.product-detail-btn-group > * {
-  display: flex;
-  flex-grow: 1;
-  height: 48px;
-}
-
-.product-detail-btn-group .login-to-order {
-  width: 100%;
-  color: #ffffff;
-  font-family: "Noto Sans";
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 400;
-  background-color: #24a148 !important;
-  text-transform: capitalize;
-}
-
-.product-detail-btn-group
-  :is(.btn, .button, button, [type="submit"], [type="button"]):hover {
-  color: #ffffff !important;
-  background-color: #24a148 !important;
-}
-
-.right-arrow-icon {
-  right: 20px;
-}
 
 .col-sm-8.product-configurator-body-left-portion {
   padding: 0;
   padding-right: 20px;
+}
+
+.personalize-button {
+  margin-top: 25px;
+}
+
+.button-wrapper {
+  background: #24a148;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-wrapper:hover{
+  cursor: pointer;
+}
+
+.button-wrapper a {
+  font-family: "Noto Sans";
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff;
+  font-weight: 400;
+}
+
+.button-wrapper a:hover{
+  color: #ffffff;
+}
+
+.button-wrapper i {
+  color: #ffffff;
 }

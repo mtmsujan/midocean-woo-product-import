@@ -252,11 +252,12 @@ class Customize_Product_Page {
                             </div>
                         </div>
                         <div class="personalize-button">
-                            <div class="product-detail-btn-group">
-                                <div class="buttons">
-                                    <a class="button login-to-order position-relative"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?>
-                                    <i class="fa-solid fa-arrow-right position-absolute right-arrow-icon"></i>
-                                    </a>
+                            <div class="button-wrapper">
+                                <div>
+                                    <a href="#">Customize</a>
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-arrow-right"></i>
                                 </div>
                             </div>
                         </div>
