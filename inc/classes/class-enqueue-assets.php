@@ -25,18 +25,17 @@ class Enqueue_Assets {
         // Register CSS
         wp_register_style( "be-style", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/css/be-style.css", );
         wp_register_style( "be-bootstrap", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/css/bootstrap.min.css" );
-        wp_register_style( "be-accordion-style", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/public/css/be-accordion-style.css" );
+        wp_register_style( "be-customize-product-page", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/public/css/be-customize-product-page.css" );
 
         wp_enqueue_style( "jquery-ui-accordion-css", "https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css", [], time(), "all" );
 
         // enqueue font awesome
         wp_enqueue_style( "font-awesome-css", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css", [], time(), "all" );
 
-
         // enqueue CSS
         wp_enqueue_style( "be-style" );
         wp_enqueue_style( "be-bootstrap" );
-        wp_enqueue_style( "be-accordion-style" );
+        wp_enqueue_style( "be-customize-product-page" );
     }
 
     public function enqueue_js() {
