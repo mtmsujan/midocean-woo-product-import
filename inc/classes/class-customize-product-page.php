@@ -112,7 +112,7 @@ class Customize_Product_Page {
         ?>
 
         <div id="additional-information-accordion">
-            <h3><?php esc_html_e( 'Details', 'bulk-product-import' ); ?></h3>
+            <h3><?php esc_html_e( 'Detalles del producto', 'bulk-product-import' ); ?></h3>
             <div class="additional-information-details">
                 <div class="dimensions">
                     <h3 class="details-title"><?php esc_html_e( 'Dimensions', 'bulk-product-import' ); ?></h3>
@@ -154,7 +154,7 @@ class Customize_Product_Page {
                     </div>
                 </div>
             </div>
-            <h3><?php esc_html_e( 'Documentation & certificates', 'bulk-product-import' ); ?></h3>
+            <h3><?php esc_html_e( 'Documentación y Certificados', 'bulk-product-import' ); ?></h3>
             <div class="additional-information-documentation">
                 <div class="documentation">
                     <?php
