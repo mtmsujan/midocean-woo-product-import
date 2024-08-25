@@ -313,3 +313,64 @@ h1.be-product-sku {
 .remove-color-row .close-button i.fa-solid.fa-xmark {
   cursor: pointer;
 }
+
+.color-input-container .input-quantity-wrapper .input-quantity {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  box-shadow: none;
+  transition: none;
+  width: 288px;
+  height: 48px;
+  font-size: 14px;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 0 32px 0 16px;
+  border: none;
+  border-bottom: 1px solid #8d8d8d;
+  outline: none;
+  font-weight: bold;
+  text-align: left;
+  color: #161616;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.color-input-container
+  .input-quantity-wrapper
+  input[type="number"]::placeholder {
+  color: #757782;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+/* Hide the spinner in Chrome, Safari, and Edge */
+.color-input-container
+  .input-quantity-wrapper
+  input[type="number"]::-webkit-outer-spin-button,
+.color-input-container
+  .input-quantity-wrapper
+  input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide the spinner in Firefox */
+.color-input-container .input-quantity-wrapper input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.color-input-container .stock-data {
+  background: #f4f4f4;
+  color: #24a148;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  font-family: "Noto Sans";
+  font-size: 12px;
+  line-height: 17.14px;
+  font-weight: 400;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}

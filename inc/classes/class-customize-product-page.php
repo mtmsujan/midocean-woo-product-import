@@ -236,8 +236,13 @@ class Customize_Product_Page {
                                             </div>
                                         </div>
                                         <div class="col-sm-12 mt-1">
-                                            <div class="stock-data">
-                                                <div><span class="stock-value">100</span> En Stock</div>
+                                            <div class="row justify-content-around align-items-center">
+                                                <div class="col-4">
+                                                    <div class="stock-data">
+                                                        <div><span class="stock-value">100</span> En Stock</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8"></div>
                                             </div>
                                         </div>
                                     </div>
