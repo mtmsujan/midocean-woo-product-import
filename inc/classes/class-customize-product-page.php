@@ -227,17 +227,51 @@ class Customize_Product_Page {
                             <div class="row mt-3 justify-content-between align-items-center color-input-row">
                                 <!-- Color dropdown -->
                                 <div class="col-sm-2">
-                                    <div class="color-dropdown-wrapper">
-                                        <button type="button" class="row justify-content-between align-items-center">
-                                            <div class="col-4 color-preview">
-                                                <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="20" cy="20" r="16" fill="red" stroke="black" stroke-width="1" />
-                                                </svg>
-
+                                    <div class="dropdown color-dropdown-wrapper">
+                                        <!-- First displayed button -->
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="colorDropdown"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            <div class="row align-items-center">
+                                                <div class="col-4 color-preview">
+                                                    <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+                                                        <circle cx="20" cy="20" r="16" fill="red" stroke="black"
+                                                            stroke-width="1" />
+                                                    </svg>
+                                                </div>
+                                                <div class="col-8 color-name">Red -</div>
                                             </div>
-                                            <div class="col-8 color-name">Red - <span class="ms-2"><i
-                                                        class="fa-solid fa-angle-down"></i></span></div>
                                         </button>
+
+                                        <!-- Dropdown items -->
+                                        <ul class="dropdown-menu" aria-labelledby="colorDropdown">
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)" data-color="blue">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-4 color-preview">
+                                                            <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+                                                                <circle cx="20" cy="20" r="16" fill="blue" stroke="black"
+                                                                    stroke-width="1" />
+                                                            </svg>
+                                                        </div>
+                                                        <div class="col-8 color-name">Blue -</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)" data-color="green">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-4 color-preview">
+                                                            <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+                                                                <circle cx="20" cy="20" r="16" fill="green" stroke="black"
+                                                                    stroke-width="1" />
+                                                            </svg>
+                                                        </div>
+                                                        <div class="col-8 color-name">Green -</div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <!-- Add more colors here -->
+                                        </ul>
                                     </div>
                                 </div>
                                 <!-- /Color dropdown -->

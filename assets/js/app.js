@@ -21,5 +21,27 @@
         $(this).closest(".color-input-row").remove(); // Remove the row only if there is more than one row
       }
     });
+
+    $(".dropdown-item").on("click", function (e) {
+      e.preventDefault();
+      var selectedColor = $(this).data("color");
+      var selectedColorName = $(this).find(".color-name").text();
+
+      // Update the button with the selected color
+      var button = $(this).closest(".dropdown").find(".dropdown-toggle");
+      button.find(".color-preview circle").attr("fill", selectedColor);
+      button.find(".color-name").text(selectedColorName);
+
+      // Make API call based on selected color (this can be done via AJAX)
+      // Example: Call your API using jQuery.ajax or fetch
+      // $.ajax({
+      //     url: 'your-api-url',
+      //     method: 'POST',
+      //     data: { color: selectedColor },
+      //     success: function(response) {
+      //         console.log(response);
+      //     }
+      // });
+    });
   });
 })(jQuery);
