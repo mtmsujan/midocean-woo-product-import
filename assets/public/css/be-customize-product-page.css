@@ -389,3 +389,17 @@ h1.be-product-sku {
   cursor: pointer;
   margin: 14px 16px;
 }
+
+.product-configurator-body
+  :is(.btn, .button, button, [type="submit"], [type="button"]) {
+  padding: 0;
+}
+
+.color-input-container .color-name {
+  font-family: "Noto Sans";
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #161616;
+  text-transform: capitalize;
+}

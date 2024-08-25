@@ -225,7 +225,22 @@ class Customize_Product_Page {
                         <!-- Color input row configurator. repeater -->
                         <div class="color-input-container">
                             <div class="row mt-3 justify-content-between align-items-center color-input-row">
-                                <div class="col-sm-2">Color Dropdown</div>
+                                <!-- Color dropdown -->
+                                <div class="col-sm-2">
+                                    <div class="color-dropdown-wrapper">
+                                        <button type="button" class="row justify-content-between align-items-center">
+                                            <div class="col-4 color-preview">
+                                                <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="20" cy="20" r="16" fill="red" stroke="black" stroke-width="1" />
+                                                </svg>
+
+                                            </div>
+                                            <div class="col-8 color-name">Red - <span class="ms-2"><i
+                                                        class="fa-solid fa-angle-down"></i></span></div>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /Color dropdown -->
                                 <!-- Stock input field -->
                                 <div class="col-sm-6">
                                     <div class="row flex-column">
@@ -267,9 +282,10 @@ class Customize_Product_Page {
                         </div>
                         <!-- Add more color button -->
                         <div class="buttons mt-3">
-                            <button id="add-more-color-button" class="row justify-content-between align-items-center">
-                                <div class="col-10 button-text ps-0">
-                                    <?php esc_html_e( 'Añadir más colores', 'bulk-product-import' ) ?></div>
+                            <button id="add-more-color-button" class="row justify-content-between align-items-center pe-2">
+                                <div class="col-10 button-text">
+                                    <?php esc_html_e( 'Añadir más colores', 'bulk-product-import' ) ?>
+                                </div>
                                 <div class="col-2 button-add-icon"><i class="fa-solid fa-plus"></i></div>
                             </button>
                         </div>
