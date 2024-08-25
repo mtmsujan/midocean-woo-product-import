@@ -8,6 +8,8 @@ class Customize_Product_Page {
 
     use Singleton;
 
+    private $product_number;
+
     public function __construct() {
         $this->setup_hooks();
     }
@@ -27,6 +29,14 @@ class Customize_Product_Page {
         if ( $product ) {
             // get product id
             $product_id = $product->get_id();
+
+            // get product number
+            $this->product_number = $product->get_sku();
+
+            // get product data
+            // $product_data = $this->fetch_product_data_from_db( $this->product_number );
+            // put product data to log
+            // $this->put_program_logs( $product_data );
 
             // Retrieve all metadata
             $master_code               = get_post_meta( $product_id, '_master_code', true );
@@ -216,107 +226,95 @@ class Customize_Product_Page {
             </div>
             <div class="product-configurator-body">
                 <div class="row">
-                    <div class="col-sm-8 product-configurator-body-left-portion">
+                    <div class="col-sm-8 product-configurator-body-left-portion" x-data="colors">
                         <div class="product-configurator-body-subheading-div">
                             <h3 class="product-configurator-body-subheading">
                                 <?php esc_html_e( 'Variaciones artículo', 'bulk-product-import' ) ?>
                             </h3>
                         </div>
-                        <!-- Color input row configurator. repeater -->
-                        <div class="color-input-container">
-                            <div class="row mt-3 justify-content-between align-items-center color-input-row">
-                                <!-- Color dropdown -->
-                                <div class="col-sm-2">
-                                    <div class="dropdown color-dropdown-wrapper">
-                                        <!-- First displayed button -->
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="colorDropdown"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <div class="row align-items-center">
-                                                <div class="col-4 color-preview">
-                                                    <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
-                                                        <circle cx="20" cy="20" r="16" fill="red" stroke="black"
-                                                            stroke-width="1" />
-                                                    </svg>
+                        <template x-for="selectedColor in selectedColors">
+                            <!-- Color input row configurator. repeater -->
+                            <div class="color-input-container">
+                                <div class="row mt-3 justify-content-between align-items-center color-input-row">
+                                    <!-- Color dropdown -->
+                                    <div class="col-sm-2">
+                                        <div class="dropdown color-dropdown-wrapper">
+                                            <!-- First displayed button -->
+                                            <button class="dropdown-toggle" type="button" id="colorDropdown"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <div class="row align-items-center">
+                                                    <div class="col-4 color-preview">
+                                                        <div :style="{background: selected(selectedColor.id).value}"
+                                                            style="height: 24px; width: 24px;" class="rounded-circle"></div>
+                                                    </div>
+                                                    <div class="col-8 color-name"
+                                                        x-text="selected(selectedColor.id).name + ' -'"></div>
                                                 </div>
-                                                <div class="col-8 color-name">Red -</div>
-                                            </div>
-                                        </button>
+                                            </button>
 
-                                        <!-- Dropdown items -->
-                                        <ul class="dropdown-menu" aria-labelledby="colorDropdown">
-                                            <li>
-                                                <a class="dropdown-item" href="javascript:void(0)" data-color="blue">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-4 color-preview">
-                                                            <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
-                                                                <circle cx="20" cy="20" r="16" fill="blue" stroke="black"
-                                                                    stroke-width="1" />
-                                                            </svg>
-                                                        </div>
-                                                        <div class="col-8 color-name">Blue -</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="javascript:void(0)" data-color="green">
-                                                    <div class="row align-items-center">
-                                                        <div class="col-4 color-preview">
-                                                            <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
-                                                                <circle cx="20" cy="20" r="16" fill="green" stroke="black"
-                                                                    stroke-width="1" />
-                                                            </svg>
-                                                        </div>
-                                                        <div class="col-8 color-name">Green -</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <!-- Add more colors here -->
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- /Color dropdown -->
-                                <!-- Stock input field -->
-                                <div class="col-sm-6">
-                                    <div class="row flex-column">
-                                        <div class="col-sm-12">
-                                            <div class="input-quantity-wrapper">
-                                                <input type="number" class="input-quantity" id="" name="" step="1" min="1"
-                                                    max="100000" placeholder="0">
-                                            </div>
+                                            <!-- Dropdown items -->
+                                            <ul class="dropdown-menu" aria-labelledby="colorDropdown">
+                                                <template x-for="color in colors">
+
+                                                    <li>
+                                                        <button class="dropdown-item"
+                                                            @click="replaceColor(color, selectedColor.id)">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-4 color-preview">
+                                                                    <div :style="{background: color.value}"
+                                                                        style="height: 24px; width: 24px;"
+                                                                        class="rounded-circle"></div>
+                                                                </div>
+                                                                <div class="col-8 color-name" x-text="color.name"></div>
+                                                            </div>
+                                                        </button>
+                                                    </li>
+                                                </template>
+
+                                                <!-- Add more colors here -->
+                                            </ul>
                                         </div>
-                                        <div class="col-sm-12 mt-1">
-                                            <div class="row justify-content-around align-items-center">
-                                                <div class="col-4">
-                                                    <div class="stock-data">
-                                                        <div><span class="stock-value">100</span> En Stock</div>
-                                                    </div>
+                                    </div>
+                                    <!-- /Color dropdown -->
+                                    <!-- Stock input field -->
+                                    <div class="col-sm-6">
+                                        <div class="row flex-column">
+                                            <div class="col-sm-12">
+                                                <div class="input-quantity-wrapper">
+                                                    <input @change="calculateTotal($el.value, selectedColor.stock)"
+                                                        type="number" class="input-quantity" id="" name="" step="1" min="1"
+                                                        max="100000" placeholder="0">
                                                 </div>
-                                                <div class="col-8"></div>
+                                            </div>
+                                            <div class="col-sm-12 mt-1">
+                                                <div class="row justify-content-around align-items-center">
+                                                    <div class="col-4">
+                                                        <div class="stock-data">
+                                                            <div><span class="stock-value" x-text="selectedColor.stock"></span>
+                                                                En Stock</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- /Stock input field -->
-                                <!-- Remove color button -->
-                                <div class="col-sm-4 remove-color-row">
-                                    <div class="row justify-content-between align-items-center">
-                                        <div class="col-sm-6"></div>
-                                        <?php
-                                        /**
-                                         * conditionally add the close button.
-                                         * check if it's not the first color input row. 
-                                         * if first doesn't need the close button
-                                         */
-                                        ?>
-                                        <div class="col-sm-6 text-end close-button"><i class="fa-solid fa-xmark"></i></div>
+                                    <!-- /Stock input field -->
+                                    <!-- Remove color row button -->
+                                    <div class="col-sm-4 remove-color-row">
+                                        <div class="row justify-content-between align-items-center">
+                                            <div class="col-sm-6"></div>
+                                            <div class="col-sm-6 text-end close-button"><i class="fa-solid fa-xmark"></i></div>
+                                        </div>
                                     </div>
+                                    <!-- /Remove color row button -->
                                 </div>
-                                <!-- /Remove color button -->
                             </div>
-                        </div>
-                        <!-- Add more color button -->
+                            <!-- Add more color button -->
+                        </template>
                         <div class="buttons mt-3">
-                            <button id="add-more-color-button" class="row justify-content-between align-items-center pe-2">
+                            <button :disabled="!isColorAvailable" @click="addColor" id="add-more-colors-button"
+                                class="row justify-content-between add-more-colors-button align-items-center pe-2">
                                 <div class="col-10 button-text">
                                     <?php esc_html_e( 'Añadir más colores', 'bulk-product-import' ) ?>
                                 </div>
@@ -404,6 +402,56 @@ class Customize_Product_Page {
         </div>
 
         <?php return ob_get_clean();
+    }
+
+    public function fetch_product_data_from_db( $product_number ) {
+        // Get global $wpdb object
+        global $wpdb;
+
+        // get table prefix
+        $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+
+        // define products table
+        $products_table = $wpdb->prefix . $table_prefix . 'sync_products';
+
+        // define price table
+        $price_table = $wpdb->prefix . $table_prefix . 'sync_price';
+
+        // define stock table
+        $stock_table = $wpdb->prefix . $table_prefix . 'sync_stock';
+
+        // SQL query to retrieve pending products
+        $sql = "SELECT sp.id, sp.product_number, sp.product_data, ss.stock, spr.variant_id, spr.price, spr.valid_until, sp.status  FROM $products_table sp JOIN $stock_table ss ON sp.product_number = ss.product_number JOIN $price_table spr ON sp.product_number = spr.product_number WHERE sp.product_number = '{$product_number}'";
+
+        // Retrieve pending products from the database
+        $products = $wpdb->get_results( $wpdb->prepare( $sql ) );
+
+        return json_encode( $products );
+    }
+
+    public function put_program_logs( $data ) {
+
+        // Ensure directory exists to store response data
+        $directory = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/program_logs/';
+        if ( !file_exists( $directory ) ) {
+            mkdir( $directory, 0777, true );
+        }
+
+        // Construct file path for response data
+        $file_name = $directory . 'program_logs.log';
+
+        // Get the current date and time
+        $current_datetime = date( 'Y-m-d H:i:s' );
+
+        // Append current date and time to the response data
+        $data = $data . ' - ' . $current_datetime;
+
+        // Append new response data to the existing file
+        if ( file_put_contents( $file_name, $data . "\n\n", FILE_APPEND | LOCK_EX ) !== false ) {
+            return "Data appended to file successfully.";
+        } else {
+            return "Failed to append data to file.";
+        }
     }
 
 }

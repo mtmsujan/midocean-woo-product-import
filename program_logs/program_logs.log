@@ -157,3 +157,17 @@ Digital Assets:
     }
 ] - 2024-08-21 10:01:58
 
+
+[
+    {
+        "id": "8",
+        "product_number": "CX1015-05",
+        "product_data": "{\"master_code\":\"CX1015\",\"master_id\":\"40000204\",\"type_of_products\":\"stock\",\"commodity_code\":\"6505 0090\",\"number_of_print_positions\":\"4\",\"country_of_origin\":\"CN\",\"brand\":\"midocean\",\"product_name\":\"BONO\",\"category_code\":\"MOBXMS_DEC\",\"product_class\":\"Christmas items\",\"dimensions\":\"42X30 CM\",\"length\":\"42\",\"length_unit\":\"cm\",\"width\":\"30\",\"width_unit\":\"cm\",\"height\":\"0\",\"height_unit\":\"cm\",\"volume\":\"0.387\",\"volume_unit\":\"cdm3\",\"gross_weight\":\"0.026\",\"gross_weight_unit\":\"kg\",\"net_weight\":\"0.023\",\"net_weight_unit\":\"kg\",\"inner_carton_quantity\":\"125\",\"outer_carton_quantity\":\"250\",\"carton_length\":\"0.48\",\"carton_length_unit\":\"m\",\"carton_width\":\"0.32\",\"carton_width_unit\":\"m\",\"carton_height\":\"0.63\",\"carton_height_unit\":\"m\",\"carton_volume\":\"0.097\",\"carton_volume_unit\":\"m3\",\"carton_gross_weight\":\"6.45\",\"carton_gross_weight_unit\":\"kg\",\"timestamp\":\"2024-07-30T09:26:46\",\"digital_assets\":[{\"url\":\"https:\\/\\/cdn1.midocean.com\\/document\\/declaration-of-conformity\\/cx1015-doc.pdf\",\"type\":\"document\",\"subtype\":\"declaration_of_conformity\"},{\"url\":\"https:\\/\\/cdn1.midocean.com\\/document\\/test-reach\\/cx1015-test-reach.pdf\",\"type\":\"document\",\"subtype\":\"test_reach\"}],\"short_description\":\"Christmas hat\",\"long_description\":\"Christmas hat.\",\"material\":\"PET\",\"printable\":\"yes\",\"variants\":[{\"variant_id\":\"10144585\",\"sku\":\"CX1015-05\",\"release_date\":\"2015-10-01\",\"product_proposition_category\":\"418\",\"category_level1\":\"Christmas & Winter\",\"category_level2\":\"Textile\",\"category_level3\":\"Accessories\",\"color_description\":\"Red\",\"color_group\":\"Red\",\"plc_status\":\"16\",\"plc_status_description\":\"COLLECTION\",\"gtin\":\"8719941012301\",\"color_code\":\"05\",\"pms_color\":\"186U\",\"digital_assets\":[{\"url\":\"https:\\/\\/cdn1.midocean.com\\/image\\/700X700\\/cx1015-05.jpg\",\"url_highress\":\"https:\\/\\/cdn1.midocean.com\\/image\\/original\\/cx1015-05.jpg\",\"type\":\"image\",\"subtype\":\"item_picture_front\"},{\"url\":\"https:\\/\\/cdn1.midocean.com\\/image\\/700X700\\/cx1015-05-side.jpg\",\"url_highress\":\"https:\\/\\/cdn1.midocean.com\\/image\\/original\\/cx1015-05-side.jpg\",\"type\":\"image\",\"subtype\":\"item_picture_side\"},{\"url\":\"https:\\/\\/cdn1.midocean.com\\/image\\/700X700\\/cx1015-05-print.jpg\",\"url_highress\":\"https:\\/\\/cdn1.midocean.com\\/image\\/original\\/cx1015-05-print.jpg\",\"type\":\"image\",\"subtype\":\"item_picture_printed\"},{\"url\":\"https:\\/\\/cdn1.midocean.com\\/image\\/700X700\\/cx1015-05-ambiant.jpg\",\"url_highress\":\"https:\\/\\/cdn1.midocean.com\\/image\\/original\\/cx1015-05-ambiant.jpg\",\"type\":\"image\",\"subtype\":\"item_ambiant_picture\"}]}]}",
+        "stock": "110108",
+        "variant_id": "10144585",
+        "price": "0,30",
+        "valid_until": "2025-01-31",
+        "status": "pending"
+    }
+] - 2024-08-25 10:10:05
+

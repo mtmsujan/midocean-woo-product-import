@@ -43,12 +43,14 @@ class Enqueue_Assets {
         // Register JS
         wp_register_script( "be-app", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/js/app.js", [ 'jquery' ], false, true );
         wp_register_script( "be-bootstrap", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/js/bootstrap.bundle.min.js", [], false, true );
+        wp_register_script( "be-alpine-js", "//unpkg.com/alpinejs", [], false, true );
 
         // enqueue JS
         wp_enqueue_script( "jquery-ui-core" );
         wp_enqueue_script( "jquery-ui-accordion" );
         wp_enqueue_script( "be-app" );
         wp_enqueue_script( "be-bootstrap" );
+        wp_enqueue_script( "be-alpine-js" );
     }
 
     public function admin_enqueue_style() {

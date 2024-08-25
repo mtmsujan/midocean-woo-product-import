@@ -375,7 +375,7 @@ h1.be-product-sku {
   padding-bottom: 2px;
 }
 
-#add-more-color-button {
+#add-more-colors-button {
   border: 1px solid #24a148;
   background: none;
   color: #24a148;
@@ -402,4 +402,10 @@ h1.be-product-sku {
   font-weight: 400;
   color: #161616;
   text-transform: capitalize;
+}
+
+.color-dropdown-wrapper
+  :is(.btn, .button, button, [type="submit"], [type="button"]):hover {
+  color: transparent;
+  background-color: transparent;
 }
