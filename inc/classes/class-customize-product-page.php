@@ -243,6 +243,7 @@ class Customize_Product_Page {
                                     </div>
                                 </div>
                                 <!-- /Stock input field -->
+                                <!-- Remove color button -->
                                 <div class="col-sm-4 remove-color-row">
                                     <div class="row justify-content-between align-items-center">
                                         <div class="col-sm-6"></div>
@@ -256,6 +257,7 @@ class Customize_Product_Page {
                                         <div class="col-sm-6 text-end close-button"><i class="fa-solid fa-xmark"></i></div>
                                     </div>
                                 </div>
+                                <!-- /Remove color button -->
                             </div>
                         </div>
                         <!-- Add more color button -->
@@ -311,26 +313,6 @@ class Customize_Product_Page {
                 </div>
             </div>
         </div>
-
-        <!-- JavaScript for dynamic row addition and removal -->
-        <script type="text/javascript">
-            jQuery(document).ready(function ($) {
-                // Function to add more color rows
-                $('#add-more-color-button').on('click', function () {
-                    var colorInputRow = $('.color-input-row:first').clone(); // Clone the first color input row
-                    colorInputRow.find('input').val(''); // Reset input fields
-                    colorInputRow.find('.stock-value').text('100'); // Reset stock value if needed
-                    colorInputRow.appendTo('.color-input-container'); // Append the cloned row inside the container
-                });
-
-                // Function to remove color row when 'x' is clicked
-                $(document).on('click', '.close-button', function () {
-                    if ($('.color-input-row').length > 1) {
-                        $(this).closest('.color-input-row').remove(); // Remove the row only if there is more than one row
-                    }
-                });
-            });
-        </script>
 
         <?php
         return ob_get_clean();
