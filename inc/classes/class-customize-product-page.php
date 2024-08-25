@@ -223,38 +223,41 @@ class Customize_Product_Page {
                             </h3>
                         </div>
                         <!-- Color input row configurator. repeater -->
-                        <div class="row mt-3 justify-content-between align-items-center color-input-row">
-                            <div class="col-sm-2">Color Dropdown</div>
-                            <!-- Stock input field -->
-                            <div class="col-sm-6">
-                                <div class="row flex-column">
-                                    <div class="col-sm-12">
-                                        <div class="input-quantity-wrapper">
-                                            <input type="number" class="input-quantity" id="" name="" step="1" min="1"
-                                                max="100000" placeholder="0" data-error-position="placeholder"
-                                                data-bv-notempty-message="Please enter a number."
-                                                data-bv-lessthan-message="Please enter 100.000 or less."
-                                                data-bv-greaterthan-message="Please enter 1 or more."
-                                                data-bv-message="Please enter a number."
-                                                data-bv-integer-message="Please enter a whole number." data-product-name="">
+                        <div class="color-input-container">
+                            <div class="row mt-3 justify-content-between align-items-center color-input-row">
+                                <div class="col-sm-2">Color Dropdown</div>
+                                <!-- Stock input field -->
+                                <div class="col-sm-6">
+                                    <div class="row flex-column">
+                                        <div class="col-sm-12">
+                                            <div class="input-quantity-wrapper">
+                                                <input type="number" class="input-quantity" id="" name="" step="1" min="1"
+                                                    max="100000" placeholder="0">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 mt-1">
-                                        <div class="stock-data">
-                                            <div><span class="stock-value">100</span> En Stock</div>
+                                        <div class="col-sm-12 mt-1">
+                                            <div class="stock-data">
+                                                <div><span class="stock-value">100</span> En Stock</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- /Stock input field -->
-                            <div class="col-sm-4">
-                                <div class="row justify-content-between align-items-center">
-                                    <div class="col-sm-6"></div>
-                                    <div class="col-sm-6 text-end">x</div>
+                                <!-- /Stock input field -->
+                                <div class="col-sm-4 remove-color-row">
+                                    <div class="row justify-content-between align-items-center">
+                                        <div class="col-sm-6"></div>
+                                        <?php
+                                        /**
+                                         * conditionally add the close button.
+                                         * check if it's not the first color input row. 
+                                         * if first doesn't need the close button
+                                         */
+                                        ?>
+                                        <div class="col-sm-6 text-end close-button"><i class="fa-solid fa-xmark"></i></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- /Color input row configurator. repeater -->
                         <!-- Add more color button -->
                         <div class="buttons mt-3">
                             <button id="add-more-color-button">Add more colors</button>
@@ -309,7 +312,28 @@ class Customize_Product_Page {
             </div>
         </div>
 
-        <?php return ob_get_clean();
+        <!-- JavaScript for dynamic row addition and removal -->
+        <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                // Function to add more color rows
+                $('#add-more-color-button').on('click', function () {
+                    var colorInputRow = $('.color-input-row:first').clone(); // Clone the first color input row
+                    colorInputRow.find('input').val(''); // Reset input fields
+                    colorInputRow.find('.stock-value').text('100'); // Reset stock value if needed
+                    colorInputRow.appendTo('.color-input-container'); // Append the cloned row inside the container
+                });
+
+                // Function to remove color row when 'x' is clicked
+                $(document).on('click', '.close-button', function () {
+                    if ($('.color-input-row').length > 1) {
+                        $(this).closest('.color-input-row').remove(); // Remove the row only if there is more than one row
+                    }
+                });
+            });
+        </script>
+
+        <?php
+        return ob_get_clean();
     }
 
     public function custom_product_configurator_mto_link_callback() {
