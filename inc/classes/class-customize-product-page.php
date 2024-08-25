@@ -9,6 +9,11 @@ class Customize_Product_Page {
     use Singleton;
 
     private $product_number;
+    private $product_name;
+    private $attachment_id;
+    private $product_small_image;
+    private $category_id;
+    private $category_url;
 
     public function __construct() {
         $this->setup_hooks();
@@ -27,11 +32,21 @@ class Customize_Product_Page {
         global $product;
 
         if ( $product ) {
+
             // get product id
             $product_id = $product->get_id();
-
-            // get product number
+            // Get product number
             $this->product_number = $product->get_sku();
+            // Get product name
+            $this->product_name = $product->get_name();
+            // Get attachment id
+            $this->attachment_id = get_post_thumbnail_id( $product_id );
+            // Get product 150x150 image url
+            $this->product_small_image = wp_get_attachment_image_src( $this->attachment_id, 'thumbnail' )[0];
+            // Get category id
+            $this->category_id = get_the_terms( $product_id, 'product_cat' )[0]->term_id;
+            // Get category url
+            $this->category_url = get_term_link( $this->category_id, 'product_cat' );
 
             // get product data
             // $product_data = $this->fetch_product_data_from_db( $this->product_number );
@@ -326,11 +341,11 @@ class Customize_Product_Page {
                     <div class="col-sm-4 product-configurator-body-right-portion">
                         <div class="pricing-summery">
                             <div class="summery-header">
-                                <img src="https://cdn1.midocean.com/image/75X75/mo2267-13.jpg" alt="MO2267-13 product photo"
-                                    height="75" width="75">
+                                <img src="<?php echo $this->product_small_image; ?>"
+                                    alt="<?php echo $this->product_name; ?> product photo" height="75" width="75">
                                 <div class="name-wrapper">
-                                    <span class="main-text">MO2267</span>
-                                    <span class="sub-text">BILGOLA+</span>
+                                    <span class="main-text"><?php echo $this->product_number; ?></span>
+                                    <span class="sub-text"><?php echo $this->product_name; ?></span>
                                 </div>
                             </div>
                             <div class="summary-row underline shipping">
@@ -385,15 +400,13 @@ class Customize_Product_Page {
                     <h3>Opción yourChoice totalmente personalizable</h3>
                 </div>
                 <div class="detail-wrapper">
-                    <img
-                        src="https://www.midocean.com/INTERSHOP/static/WFS/midocean-IB-Site/-/midocean/es_ES/mto-yourchoice/MTO-link/MTS%20to%20MTO%20bucket%20hats%20yourChoice.jpg">
+                    <img src="<?php echo $this->product_small_image; ?>" alt="<?php echo $this->product_name; ?> product photo">
                     <div class="details">
                         <div class="details-text">Selecciona un modelo de stock para una entrega más rápida, o haz clic aquí
                             para obtener gorros de
                             cubo impresos a todo color. A partir de 25 unidades.</div>
                         <div class="sub-details"></div>
-                        <a href="https://www.midocean.com/iberia/es/eur/content/page.yourHeadwear.BucketHats"
-                            target="_blank">Ver más detalles
+                        <a href="<?php echo $this->category_url; ?>" target="_blank">Ver más detalles
                             <span class="arrow-icon"><i class="fa-solid fa-arrow-right"></i></span>
                         </a>
                     </div>
