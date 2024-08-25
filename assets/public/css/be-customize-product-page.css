@@ -374,3 +374,18 @@ h1.be-product-sku {
   padding-top: 2px;
   padding-bottom: 2px;
 }
+
+#add-more-color-button {
+  border: 1px solid #24a148;
+  background: none;
+  color: #24a148;
+  min-height: 48px;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  outline: none;
+  cursor: pointer;
+  margin: 14px 16px;
+}

@@ -267,7 +267,11 @@ class Customize_Product_Page {
                         </div>
                         <!-- Add more color button -->
                         <div class="buttons mt-3">
-                            <button id="add-more-color-button">Add more colors</button>
+                            <button id="add-more-color-button" class="row justify-content-between align-items-center">
+                                <div class="col-10 button-text ps-0">
+                                    <?php esc_html_e( 'Añadir más colores', 'bulk-product-import' ) ?></div>
+                                <div class="col-2 button-add-icon"><i class="fa-solid fa-plus"></i></div>
+                            </button>
                         </div>
                         <!-- /Add more color button -->
                     </div>
