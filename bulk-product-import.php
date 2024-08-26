@@ -48,7 +48,7 @@ bulk_product_import_get_theme_instance();
 // create db tables
 register_activation_hook( __FILE__, 'create_db_tables' );
 // removes db tables
-register_deactivation_hook( __FILE__, 'remove_db_tables' );
+// register_deactivation_hook( __FILE__, 'remove_db_tables' );
 
 
 // Add settings link on the plugin page
