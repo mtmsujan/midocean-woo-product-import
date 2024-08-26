@@ -270,7 +270,7 @@ class Customize_Product_Page {
                                                 aria-expanded="false">
                                                 <div class="row align-items-center">
                                                     <div class="col-4 color-preview">
-                                                        <div style="height: 30px; width: 30px; background: <?php echo strtolower( $this->color_group ); ?>"
+                                                        <div style="height: 35px; width: 35px; background: <?php echo strtolower( $this->color_group ); ?>; border: 1px solid black;"
                                                             class="rounded-circle"></div>
                                                     </div>
                                                     <div class="col-8 color-name"><?php echo ucfirst( $this->color_group ); ?> -
@@ -295,7 +295,7 @@ class Customize_Product_Page {
                                                     <div class="col-4">
                                                         <div class="stock-data">
                                                             <div><span class="stock-value">
-                                                                    <?php echo $this->product_stock; ?></span>En Stock</div>
+                                                                    <?php echo $this->product_stock; ?></span> En Stock</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-8"></div>
