@@ -444,11 +444,6 @@ h1.be-product-sku {
   padding: 10px;
 }
 
-.technique-wrapper .colors-wrapper,
-.technique-wrapper .remove-button {
-  margin-top: 20px;
-}
-
 .add-print-position button.modal-close-button {
   color: #fff;
   background: gray;
@@ -458,13 +453,79 @@ h1.be-product-sku {
 
 .add-print-position button.modal-save-button {
   color: #fff !important;
-  background: #24A148 !important;
+  background: #24a148 !important;
   padding: 10px 20px !important;
   border-radius: 5px;
 }
 
-.add-print-position .modal-close-icon span{
+.add-print-position .modal-close-icon span {
   background: transparent !important;
   font-size: 20px;
   font-weight: 400;
+}
+
+.position-name {
+  font-family: "Noto Sans";
+  font-size: 12px;
+  line-height: 17.14px;
+  font-weight: 700;
+  color: #393939;
+}
+
+.position-infos {
+  font-family: "Noto Sans";
+  font-size: 12px;
+  line-height: 17.14px;
+  font-weight: 700;
+  color: #8d8d8d;
+}
+
+.input-title {
+  font-family: "Noto Sans";
+  color: #161616;
+  font-size: 12px;
+  line-height: 17.14px;
+  font-weight: 400;
+}
+
+.print-position-number {
+  font-family: "Noto Sans";
+  font-size: 14px !important;
+  color: #161616 !important;
+  border: none !important;
+  text-align: left !important;
+  padding-top: 25px !important;
+  padding-left: 8px !important;
+  margin-right: 1px !important;
+}
+
+.border-right {
+  border-right: 1px solid #e0e0e0;
+}
+
+/* Hide the spinner in Chrome, Safari, and Edge */
+.add-print-position-body input[type="number"]::-webkit-outer-spin-button,
+.add-print-position-body input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide the spinner in Firefox */
+.add-print-position-body input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.colors-wrapper select {
+  width: 150px;
+  height: 48px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #8d8d8d;
+  color: #161616;
+  cursor: pointer;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  background-color: #fff;
+  background-image: none;
 }

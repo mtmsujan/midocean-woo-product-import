@@ -369,7 +369,7 @@ class Customize_Product_Page {
                                         <div class="print-position pb-2 ms-3" data-name="FRONT">
                                             <div class="technique-wrapper row align-items-center justify-content-evenly"
                                                 data-technique-code="T1">
-                                                <div class="thumb-wrapper col-sm-4">
+                                                <div class="thumb-wrapper col-sm-4 border-right me-2">
                                                     <div class="row align-items-center">
                                                         <div class="thumb-image col-4">
                                                             <img class="thumb"
@@ -381,21 +381,21 @@ class Customize_Product_Page {
                                                             </div>
                                                             <div class="position-infos">
                                                                 <span>Transfer serigráfico</span>
-                                                                <span>Colores máximos : 8</span>
+                                                                <span>Colores máximos : <span class="color-count">8</span></span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="size-wrapper col">
                                                     <div class="row align-items-center justify-content-between">
-                                                        <div class="col">
+                                                        <div class="col bg-white border-right">
                                                             <span class="input-title">Ancho (mm)</span>
-                                                            <input type="number" class="width" size="7" min="0" value="60"
+                                                            <input type="number" class="print-position-number" size="7" min="0" value="60"
                                                                 data-max="60">
                                                         </div>
-                                                        <div class="col">
+                                                        <div class="col bg-white">
                                                             <span class="input-title">Ancho (mm)</span>
-                                                            <input type="number" class="width" size="7" min="0" value="60"
+                                                            <input type="number" class="print-position-number" size="7" min="0" value="60"
                                                                 data-max="60">
                                                         </div>
                                                     </div>
