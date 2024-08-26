@@ -409,3 +409,42 @@ h1.be-product-sku {
   color: transparent;
   background-color: transparent;
 }
+
+.add-print-position-heading {
+  font-family: "Noto Sans";
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  color: #161616;
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.add-print-position-header {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.add-print-position-body .print-position {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+#add-print-position-button {
+  background: none;
+  color: #24a148;
+  min-height: 48px;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid #24a148;
+  margin: 14px 16px;
+  padding: 10px;
+}
+
+.technique-wrapper .colors-wrapper,
+.technique-wrapper .remove-button {
+  margin-top: 20px;
+}

@@ -15,6 +15,8 @@ class Customize_Product_Page {
     private $category_id;
     private $category_url;
     private $master_code;
+    private $product_stock;
+    private $number_of_print_positions;
 
     public function __construct() {
         $this->setup_hooks();
@@ -48,6 +50,10 @@ class Customize_Product_Page {
             $this->category_id = get_the_terms( $product_id, 'product_cat' )[0]->term_id;
             // Get category url
             $this->category_url = get_term_link( $this->category_id, 'product_cat' );
+            // Get product stock
+            $this->product_stock = get_post_meta( $product_id, '_stock', true );
+            // Get number of print positions
+            $this->number_of_print_positions = get_post_meta( $product_id, '_number_of_print_positions', true );
 
             // get product data
             // $product_data = $this->fetch_product_data_from_db( $this->product_number );
@@ -307,7 +313,8 @@ class Customize_Product_Page {
                                                 <div class="row justify-content-around align-items-center">
                                                     <div class="col-4">
                                                         <div class="stock-data">
-                                                            <div><span class="stock-value" x-text="selectedColor.stock"></span>
+                                                            <div><span class="stock-value"> <?php echo $this->product_stock; ?>
+                                                                </span>
                                                                 En Stock</div>
                                                         </div>
                                                     </div>
@@ -339,6 +346,92 @@ class Customize_Product_Page {
                             </button>
                         </div>
                         <!-- /Add more color button -->
+
+                        <?php
+
+                        /**
+                         * Check if user logged in and number of print positions is more than 0
+                         */
+
+                        if ( is_user_logged_in() && $this->number_of_print_positions > 0 ) : ?>
+
+                            <!-- Add print position -->
+                            <div class="add-print-position">
+                                <div class="add-print-position-header">
+                                    <h3 class="add-print-position-heading">
+                                        <?php esc_html_e( 'Posiciones impresión', 'bulk-product-import' ) ?>
+                                    </h3>
+                                </div>
+                                <div class="add-print-position-body">
+                                    <!-- print positions -->
+                                    <div class="print-positions mt-2">
+                                        <!-- print position -->
+                                        <div class="print-position pb-2" data-name="FRONT">
+                                            <div class="technique-wrapper row align-items-center justify-content-evenly"
+                                                data-technique-code="T1">
+                                                <div class="thumb-wrapper col-sm-4">
+                                                    <div class="row align-items-center">
+                                                        <div class="thumb-image col-4">
+                                                            <img class="thumb"
+                                                                src="https://printtemplates-v2.cdn.midocean.com/756d7bde-5794-4f3d-7e9a-08dbe69b9e8f_13_202407261021569267-print-position-variant-thumbnail">
+                                                        </div>
+                                                        <div class="position-info col-8">
+                                                            <div class="position-name">
+                                                                <span class="position-name-serial">1. </span>FRONT
+                                                            </div>
+                                                            <div class="position-infos">
+                                                                <span>Transfer serigráfico</span>
+                                                                <span>Colores máximos : 8</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="size-wrapper col">
+                                                    <div class="row align-items-center justify-content-between">
+                                                        <div class="col">
+                                                            <span class="input-title">Ancho (mm)</span>
+                                                            <input type="number" class="width" size="7" min="0" value="60"
+                                                                data-max="60">
+                                                        </div>
+                                                        <div class="col">
+                                                            <span class="input-title">Ancho (mm)</span>
+                                                            <input type="number" class="width" size="7" min="0" value="60"
+                                                                data-max="60">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="colors-wrapper col-sm-2">
+                                                    <select name="" id="">
+                                                        <option value="1">1 Colors</option>
+                                                    </select>
+                                                </div>
+                                                <div class="remove-wrapper col-sm-2">
+                                                    <div class="remove-button">
+                                                        <i class="fa-solid fa-xmark"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /print position -->
+                                    </div>
+                                    <!-- /print positions -->
+                                </div>
+                                <div class="add-print-position-button-portion">
+                                    <div class="mt-3">
+                                        <button class="add-print-position-button" id="add-print-position-button"
+                                            class="row justify-content-between add-more-colors-button align-items-center pe-2">
+                                            <div class="col-10 button-text p-0">
+                                                <?php esc_html_e( 'Añadir posición de impresión', 'bulk-product-import' ) ?>
+                                            </div>
+                                            <div class="col-2 button-add-icon"><i class="fa-solid fa-plus"></i></div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Add print position -->
+
+                        <?php endif; ?>
+
                     </div>
                     <div class="col-sm-4 product-configurator-body-right-portion">
                         <div class="pricing-summery">
