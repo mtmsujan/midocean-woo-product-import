@@ -365,8 +365,8 @@ class Customize_Product_Page {
                                 <div class="add-print-position-body">
                                     <!-- print positions -->
                                     <div class="print-positions mt-2">
-                                        <!-- print position -->
-                                        <div class="print-position pb-2" data-name="FRONT">
+                                        <!-- print position REPEAT:-->
+                                        <div class="print-position pb-2 ms-3" data-name="FRONT">
                                             <div class="technique-wrapper row align-items-center justify-content-evenly"
                                                 data-technique-code="T1">
                                                 <div class="thumb-wrapper col-sm-4">
@@ -412,7 +412,7 @@ class Customize_Product_Page {
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- /print position -->
+                                        <!-- /print position REPEAT:-->
                                     </div>
                                     <!-- /print positions -->
                                 </div>
