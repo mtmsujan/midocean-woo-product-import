@@ -17,6 +17,7 @@ class Customize_Product_Page {
     private $master_code;
     private $product_stock;
     private $number_of_print_positions;
+    private $color_group;
 
     public function __construct() {
         $this->setup_hooks();
@@ -54,6 +55,8 @@ class Customize_Product_Page {
             $this->product_stock = get_post_meta( $product_id, '_stock', true );
             // Get number of print positions
             $this->number_of_print_positions = get_post_meta( $product_id, '_number_of_print_positions', true );
+            // Get color group
+            $this->color_group = get_post_meta( $product_id, '_color_group', true );
 
             // get product data
             // $product_data = $this->fetch_product_data_from_db( $this->product_number );
@@ -249,53 +252,31 @@ class Customize_Product_Page {
             </div>
             <div class="product-configurator-body">
                 <div class="row">
-                    <div class="col-sm-8 product-configurator-body-left-portion" x-data="colors">
+                    <div class="col-sm-8 product-configurator-body-left-portion">
                         <div class="product-configurator-body-subheading-div">
                             <h3 class="product-configurator-body-subheading">
                                 <?php esc_html_e( 'Variaciones artículo', 'bulk-product-import' ) ?>
                             </h3>
                         </div>
-                        <template x-for="selectedColor in selectedColors">
+                        <div>
                             <!-- Color input row configurator. repeater -->
                             <div class="color-input-container">
                                 <div class="row mt-3 justify-content-between align-items-center color-input-row">
                                     <!-- Color dropdown -->
                                     <div class="col-sm-2">
-                                        <div class="dropdown color-dropdown-wrapper">
+                                        <div class=" color-dropdown-wrapper">
                                             <!-- First displayed button -->
-                                            <button class="dropdown-toggle" type="button" id="colorDropdown"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button class="" type="button" id="colorDropdown" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
                                                 <div class="row align-items-center">
                                                     <div class="col-4 color-preview">
-                                                        <div :style="{background: selected(selectedColor.id).value}"
-                                                            style="height: 24px; width: 24px;" class="rounded-circle"></div>
+                                                        <div style="height: 30px; width: 30px; background: <?php echo strtolower( $this->color_group ); ?>"
+                                                            class="rounded-circle"></div>
                                                     </div>
-                                                    <div class="col-8 color-name"
-                                                        x-text="selected(selectedColor.id).name + ' -'"></div>
+                                                    <div class="col-8 color-name"><?php echo ucfirst( $this->color_group ); ?> -
+                                                    </div>
                                                 </div>
                                             </button>
-
-                                            <!-- Dropdown items -->
-                                            <ul class="dropdown-menu" aria-labelledby="colorDropdown">
-                                                <template x-for="color in colors">
-
-                                                    <li>
-                                                        <button class="dropdown-item"
-                                                            @click="replaceColor(color, selectedColor.id)">
-                                                            <div class="row align-items-center">
-                                                                <div class="col-4 color-preview">
-                                                                    <div :style="{background: color.value}"
-                                                                        style="height: 24px; width: 24px;"
-                                                                        class="rounded-circle"></div>
-                                                                </div>
-                                                                <div class="col-8 color-name" x-text="color.name"></div>
-                                                            </div>
-                                                        </button>
-                                                    </li>
-                                                </template>
-
-                                                <!-- Add more colors here -->
-                                            </ul>
                                         </div>
                                     </div>
                                     <!-- /Color dropdown -->
@@ -313,9 +294,8 @@ class Customize_Product_Page {
                                                 <div class="row justify-content-around align-items-center">
                                                     <div class="col-4">
                                                         <div class="stock-data">
-                                                            <div><span class="stock-value"> <?php echo $this->product_stock; ?>
-                                                                </span>
-                                                                En Stock</div>
+                                                            <div><span class="stock-value">
+                                                                    <?php echo $this->product_stock; ?></span>En Stock</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-8"></div>
@@ -334,17 +314,17 @@ class Customize_Product_Page {
                                     <!-- /Remove color row button -->
                                 </div>
                             </div>
-                            <!-- Add more color button -->
-                        </template>
-                        <div class="buttons mt-3">
+                        </div>
+                        <!-- Add more color button -->
+                        <!-- <div class="buttons mt-3">
                             <button :disabled="!isColorAvailable" @click="addColor" id="add-more-colors-button"
                                 class="row justify-content-between add-more-colors-button align-items-center pe-2">
                                 <div class="col-10 button-text">
-                                    <?php esc_html_e( 'Añadir más colores', 'bulk-product-import' ) ?>
+                                    <?php // esc_html_e( 'Añadir más colores', 'bulk-product-import' ) ?>
                                 </div>
                                 <div class="col-2 button-add-icon"><i class="fa-solid fa-plus"></i></div>
                             </button>
-                        </div>
+                        </div> -->
                         <!-- /Add more color button -->
 
                         <?php
@@ -353,10 +333,10 @@ class Customize_Product_Page {
                          * Check if user logged in and number of print positions is more than 0
                          */
 
-                        if ( is_user_logged_in() && $this->number_of_print_positions > 0 ) : ?>
+                        if ( $this->number_of_print_positions > 0 ) : ?>
 
                             <!-- Add print position -->
-                            <div class="add-print-position">
+                            <div class="add-print-position mt-5">
                                 <div class="add-print-position-header">
                                     <h3 class="add-print-position-heading">
                                         <?php esc_html_e( 'Posiciones impresión', 'bulk-product-import' ) ?>
@@ -390,13 +370,13 @@ class Customize_Product_Page {
                                                     <div class="row align-items-center justify-content-between">
                                                         <div class="col bg-white border-right">
                                                             <span class="input-title">Ancho (mm)</span>
-                                                            <input type="number" class="print-position-number" size="7" min="0" value="60"
-                                                                data-max="60">
+                                                            <input type="number" class="print-position-number" size="7" min="0"
+                                                                value="60" data-max="60">
                                                         </div>
                                                         <div class="col bg-white">
                                                             <span class="input-title">Ancho (mm)</span>
-                                                            <input type="number" class="print-position-number" size="7" min="0" value="60"
-                                                                data-max="60">
+                                                            <input type="number" class="print-position-number" size="7" min="0"
+                                                                value="60" data-max="60">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -459,7 +439,6 @@ class Customize_Product_Page {
                                 </div>
                             </div>
                             <!-- /Add print position -->
-
                         <?php endif; ?>
 
                     </div>
