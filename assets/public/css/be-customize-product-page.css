@@ -448,3 +448,23 @@ h1.be-product-sku {
 .technique-wrapper .remove-button {
   margin-top: 20px;
 }
+
+.add-print-position button.modal-close-button {
+  color: #fff;
+  background: gray;
+  padding: 10px 20px !important;
+  border-radius: 5px;
+}
+
+.add-print-position button.modal-save-button {
+  color: #fff !important;
+  background: #24A148 !important;
+  padding: 10px 20px !important;
+  border-radius: 5px;
+}
+
+.add-print-position .modal-close-icon span{
+  background: transparent !important;
+  font-size: 20px;
+  font-weight: 400;
+}

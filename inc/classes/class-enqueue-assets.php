@@ -27,10 +27,9 @@ class Enqueue_Assets {
         wp_register_style( "be-bootstrap", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/css/bootstrap.min.css" );
         wp_register_style( "be-customize-product-page", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/public/css/be-customize-product-page.css" );
 
-        wp_enqueue_style( "jquery-ui-accordion-css", "https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css", [], false, "all" );
-
         // enqueue font awesome
         wp_enqueue_style( "font-awesome-css", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css", [], false, "all" );
+        wp_enqueue_style( "jquery-ui-accordion-css", "https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css", [], false, "all" );
 
         // enqueue CSS
         wp_enqueue_style( "be-style" );
@@ -42,13 +41,15 @@ class Enqueue_Assets {
 
         // Register JS
         wp_register_script( "be-app", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/js/app.js", [ 'jquery' ], false, true );
-        wp_register_script( "be-bootstrap", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/js/bootstrap.bundle.min.js", [], false, true );
+        wp_register_script( "be-popperjs", "https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js", [], false, true );
+        wp_register_script( "be-bootstrap", "https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js", [ 'be-popperjs' ], false, true );
         wp_register_script( "be-alpine-js", "//unpkg.com/alpinejs", [], false, true );
 
         // enqueue JS
         wp_enqueue_script( "jquery-ui-core" );
         wp_enqueue_script( "jquery-ui-accordion" );
         wp_enqueue_script( "be-app" );
+        wp_enqueue_script( "be-popperjs" );
         wp_enqueue_script( "be-bootstrap" );
         wp_enqueue_script( "be-alpine-js" );
     }

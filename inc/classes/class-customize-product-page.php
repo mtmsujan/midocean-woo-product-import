@@ -416,15 +416,45 @@ class Customize_Product_Page {
                                     </div>
                                     <!-- /print positions -->
                                 </div>
+                                <!-- Add print position button -->
                                 <div class="add-print-position-button-portion">
                                     <div class="mt-3">
                                         <button class="add-print-position-button" id="add-print-position-button"
-                                            class="row justify-content-between add-more-colors-button align-items-center pe-2">
+                                            class="row justify-content-between add-more-colors-button align-items-center pe-2"
+                                            data-toggle="modal" data-target="#add_print_position_modal_button">
                                             <div class="col-10 button-text p-0">
                                                 <?php esc_html_e( 'Añadir posición de impresión', 'bulk-product-import' ) ?>
                                             </div>
                                             <div class="col-2 button-add-icon"><i class="fa-solid fa-plus"></i></div>
                                         </button>
+                                    </div>
+                                </div>
+                                <!-- /Add print position button -->
+                                <!-- Modal -->
+                                <div class="modal fade" id="add_print_position_modal_button" tabindex="-1" role="dialog"
+                                    aria-labelledby="add_print_position_modal_buttonTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">
+                                                    <?php esc_html_e( ' Añadir posición de impresión ', 'bulk-product-import' ) ?>
+                                                </h5>
+                                                <button type="button" class="modal-close-icon" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <!-- <span aria-hidden="true">&times;</span> -->
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ...
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="modal-close-button"
+                                                    data-dismiss="modal"><?php esc_html_e( 'Cancelar', 'bulk-product-import' ) ?></button>
+                                                <button type="button"
+                                                    class="modal-save-button"><?php esc_html_e( 'Añadir', 'bulk-product-import' ) ?></button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
