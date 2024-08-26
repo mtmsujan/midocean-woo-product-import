@@ -95,5 +95,47 @@
     ]
 } - 2024-08-06 09:00:52
 
-
-
+Product Print Data: 
+{
+  "master_code": "CX1349",
+  "master_id": "40002806",
+  "item_color_numbers": ["99"],
+  "print_manipulation": null,
+  "print_template": "https://printtemplates-v2.cdn.midocean.com/CX1349-print-template.pdf",
+  "printing_positions": [
+    {
+      "position_id": "FRONT",
+      "print_size_unit": "mm",
+      "max_print_size_height": 45,
+      "max_print_size_width": 80,
+      "rotation": 0,
+      "print_position_type": "Rectangle",
+      "printing_techniques": [
+        {
+          "default": true,
+          "id": "DL",
+          "max_colours": "0"
+        }
+      ],
+      "points": [
+        {
+          "distance_from_left": 554,
+          "distance_from_top": 22,
+          "sequence_no": 1
+        },
+        {
+          "distance_from_left": 935,
+          "distance_from_top": 236,
+          "sequence_no": 2
+        }
+      ],
+      "images": [
+        {
+          "print_position_image_blank": "https://printposition-images-api-v2.cdn.midocean.com/CX1349-99_POS1-no-area.jpg",
+          "print_position_image_with_area": "https://printposition-images-api-v2.cdn.midocean.com/CX1349-99_POS1.jpg",
+          "variant_color": "99"
+        }
+      ]
+    }
+  ]
+}

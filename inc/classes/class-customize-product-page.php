@@ -14,6 +14,7 @@ class Customize_Product_Page {
     private $product_small_image;
     private $category_id;
     private $category_url;
+    private $master_code;
 
     public function __construct() {
         $this->setup_hooks();
@@ -55,6 +56,7 @@ class Customize_Product_Page {
 
             // Retrieve all metadata
             $master_code               = get_post_meta( $product_id, '_master_code', true );
+            $this->master_code         = $master_code;
             $master_id                 = get_post_meta( $product_id, '_master_id', true );
             $country_of_origin         = get_post_meta( $product_id, '_country_of_origin', true );
             $type_of_products          = get_post_meta( $product_id, '_type_of_products', true );
@@ -440,6 +442,26 @@ class Customize_Product_Page {
         $products = $wpdb->get_results( $wpdb->prepare( $sql ) );
 
         return json_encode( $products );
+    }
+
+    public function fetch_product_print_data_from_db( $master_code ) {
+
+        // Get global $wpdb object
+        global $wpdb;
+
+        // get table prefix
+        $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+        $table_name   = $wpdb->prefix . $table_prefix . 'sync_products_print_data';
+
+        // SQL Query
+        $sql = "SELECT print_data FROM $table_name WHERE master_code = '{$master_code}'";
+        // Execute query
+        $print_data = $wpdb->get_results( $wpdb->prepare( $sql ) );
+        // Get print data
+        $print_data = $print_data[0]->print_data;
+
+        // Return print data
+        return json_encode( $print_data );
     }
 
     public function put_program_logs( $data ) {
