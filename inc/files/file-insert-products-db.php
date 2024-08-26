@@ -242,4 +242,24 @@ function insert_product_print_data_db() {
     $table_prefix              = get_option( 'be-table-prefix' ) ?? '';
     $products_print_data_table = $wpdb->prefix . $table_prefix . 'sync_products_print_data';
     truncate_table( $products_print_data_table );
+
+    if ( !empty( $products ) && is_array( $products ) ) {
+        foreach ( $products as $product ) {
+
+            // Extract data
+            $master_code = $product['master_code'];
+            $data        = json_encode( $product );
+
+            // Insert data
+            $wpdb->insert(
+                $products_print_data_table,
+                [
+                    'master_code' => $master_code,
+                    'print_data'  => $data,
+                ]
+            );
+        }
+    }
+
+    return '<h4>Product print data inserted successfully DB</h4>';
 }
