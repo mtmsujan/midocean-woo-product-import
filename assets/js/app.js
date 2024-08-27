@@ -63,3 +63,12 @@
     });
   });
 })(jQuery);
+
+document.addEventListener("alpine:init", () => {
+  Alpine.data("quantityChecker", () => ({
+    quantity: null, // Start with an empty string for the quantity
+    get hasQty() {
+      return this.quantity && this.quantity > 0;
+    }
+  }));
+});

@@ -250,7 +250,7 @@ class Customize_Product_Page {
                     </div>
                 </div>
             </div>
-            <div class="product-configurator-body">
+            <div class="product-configurator-body" x-data="quantityChecker">
                 <div class="row">
                     <div class="col-sm-8 product-configurator-body-left-portion">
                         <div class="product-configurator-body-subheading-div">
@@ -285,9 +285,7 @@ class Customize_Product_Page {
                                         <div class="row flex-column">
                                             <div class="col-sm-12">
                                                 <div class="input-quantity-wrapper">
-                                                    <input @change="calculateTotal($el.value, selectedColor.stock)"
-                                                        type="number" class="input-quantity" id="" name="" step="1" min="1"
-                                                        max="100000" placeholder="0">
+                                                    <input type="number" placeholder="0" class="input-quantity" x-model="quantity" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 mt-1">
@@ -401,9 +399,11 @@ class Customize_Product_Page {
                                 <!-- Add print position button -->
                                 <div class="add-print-position-button-portion">
                                     <div class="mt-3">
-                                        <button class="add-print-position-button" id="add-print-position-button"
-                                            class="row justify-content-between add-more-colors-button align-items-center pe-2"
-                                            data-toggle="modal" data-target="#add_print_position_modal_button">
+                                        <button
+                                            :class="hasQty ? '' : 'disabled'"
+                                            id="add-print-position-button"
+                                            data-toggle="modal" data-target="#add_print_position_modal_button"
+                                            x-ref="addPositionButton" :disabled="!hasQty">
                                             <div class="col-10 button-text p-0">
                                                 <?php esc_html_e( 'Añadir posición de impresión', 'bulk-product-import' ) ?>
                                             </div>

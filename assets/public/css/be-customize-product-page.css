@@ -575,3 +575,10 @@ h1.be-product-sku {
 .modal-item-clear-button:hover {
   background-color: #e5e5e5 !important;
 }
+
+button[disabled],
+input[disabled],
+.disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
