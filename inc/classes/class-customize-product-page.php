@@ -316,17 +316,6 @@ class Customize_Product_Page {
                             </div>
                         </div>
                         <!-- Add more color button -->
-                        <!-- <div class="buttons mt-3">
-                            <button :disabled="!isColorAvailable" @click="addColor" id="add-more-colors-button"
-                                class="row justify-content-between add-more-colors-button align-items-center pe-2">
-                                <div class="col-10 button-text">
-                                    <?php // esc_html_e( 'Añadir más colores', 'bulk-product-import' ) ?>
-                                </div>
-                                <div class="col-2 button-add-icon"><i class="fa-solid fa-plus"></i></div>
-                            </button>
-                        </div> -->
-                        <!-- /Add more color button -->
-
                         <?php
 
                         /**
@@ -445,7 +434,7 @@ class Customize_Product_Page {
                                                             // Retrieve the list of printing techniques for the current position
                                                             $techniques = $position['printing_techniques'];
                                                             ?>
-                                                            <div class="col-sm-3 border-right modal-inner-single-item position-relative">
+                                                            <div class="col-sm-3 border-right mb-3 modal-inner-single-item position-relative">
                                                                 <!-- Modal Header: Position title and dimensions -->
                                                                 <div class="modal-item-header">
                                                                     <span
