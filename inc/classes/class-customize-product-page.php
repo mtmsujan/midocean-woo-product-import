@@ -440,7 +440,7 @@ class Customize_Product_Page {
                                                                     <span
                                                                         class="modal-item-title d-block"><?php echo esc_html( $position['position_id'] ); ?></span>
                                                                     <span class="modal-item-dimensions d-block">
-                                                                        <?php echo esc_html( $position['max_print_size_width'] . 'mm x ' . $position['max_print_size_height'] . 'mm' ); ?>
+                                                                        <?php echo esc_html( $position['max_print_size_height'] . 'mm x ' . $position['max_print_size_width'] . 'mm' ); ?>
                                                                     </span>
                                                                 </div>
                                                                 <!-- Modal Image: Display the print position image -->
