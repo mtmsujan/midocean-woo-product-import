@@ -427,11 +427,33 @@ class Customize_Product_Page {
                                             <!-- Modal body -->
                                             <div class="modal-body">
                                                 <div class="row">
+
+                                                    <?php
+                                                    // Fetch product print data from db based on this product master code
+                                                    $api_response_for_print_data = $this->fetch_product_print_data_from_db( $this->master_code );
+                                                    // Decode response
+                                                    $api_response_for_print_data = json_decode( $api_response_for_print_data );
+
+                                                    /**
+                                                     * TODO:
+                                                     * Make dynamic modal single item based on api response.
+                                                     * if $this->number_of_print_positions is 2 single item will be shown tow and same as for 3 and 4
+                                                     * Dynamic based on api are:
+                                                     * max_print_size_width = max_print_size_width
+                                                     * max_print_size_height = max_print_size_height
+                                                     * modal-item-image = print_position_image_with_area
+                                                     * 
+                                                     * Single radio button generate will be based on api printing_techniques option.
+                                                     * when click modal-item-clear-button the selected radio will be cleared.
+                                                     */
+                                                    ?>
                                                     <!-- Modal single item REPEAT:-->
                                                     <div class="col-sm-3 border-right">
                                                         <div class="modal-item-header">
                                                             <span class="modal-item-title d-block">FRONT</span>
-                                                            <span class="modal-item-dimensions d-block">60mm x 60mm</span>
+                                                            <span class="modal-item-dimensions d-block"><span
+                                                                    class="max_print_size_width">60</span>mm x <span
+                                                                    class="max_print_size_height">60</span>mm</span>
                                                         </div>
                                                         <div class="modal-item-image">
                                                             <img src="https://printtemplates-v2.cdn.midocean.com/756d7bde-5794-4f3d-7e9a-08dbe69b9e8f_13_202407261021569267-print-position-variant-thumbnail"
@@ -439,7 +461,7 @@ class Customize_Product_Page {
                                                                 style="display: block; margin: 1.5rem auto;">
                                                         </div>
                                                         <div class="modal-item-radios">
-                                                            <!-- single radio -->
+                                                            <!-- single radio REPEAT:-->
                                                             <div class="modal-item-radio">
                                                                 <div class="d-flex align-items-center justify-content-between">
                                                                     <input type="radio" class="m-0" name="print-technique"
@@ -450,7 +472,7 @@ class Customize_Product_Page {
                                                                 <span class="modal-item-color-count">Colores máximos : <span
                                                                         class="color-count">8</span></span>
                                                             </div>
-                                                            <!-- /single radio -->
+                                                            <!-- /single radio REPEAT:-->
                                                         </div>
                                                         <div class="modal-item-clear">
                                                             <button type="button" class="modal-item-clear-button">Borrar
