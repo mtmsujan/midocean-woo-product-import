@@ -65,31 +65,32 @@ function products_import_woocommerce() {
                 // Extract variants
                 $variants = $product_data['variants'];
 
-                $category_label1        = '';
-                $category_label2        = '';
-                $category_label3        = '';
-                $color_description      = '';
-                $color_group            = '';
-                $pms_color              = '';
-                $gtin                   = '';
+                $category_label1   = '';
+                $category_label2   = '';
+                $category_label3   = '';
+                $color_description = '';
+                $color_group       = '';
+                $pms_color         = '';
+                $gtin              = '';
 
                 $images = [];
                 // Loop through variants for extract images
-                foreach ( $variants as $variant ) {
+                if ( !empty( $variants ) && is_array( $variants ) ) {
+                    foreach ( $variants as $variant ) {
+                        // Extract product category label
+                        $category_label1   = $variant['category_level1'];
+                        $category_label2   = $variant['category_level2'];
+                        $category_label3   = $variant['category_level3'];
+                        $color_description = $variant['color_description'];
+                        $color_group       = $variant['color_group'];
+                        $pms_color         = $variant['pms_color'];
+                        $gtin              = $variant['gtin'];
 
-                    // Extract product category label
-                    $category_label1        = $variant['category_level1'];
-                    $category_label2        = $variant['category_level2'];
-                    $category_label3        = $variant['category_level3'];
-                    $color_description      = $variant['color_description'];
-                    $color_group            = $variant['color_group'];
-                    $pms_color              = $variant['pms_color'];
-                    $gtin                   = $variant['gtin'];
-
-                    // Get digital assets
-                    $digital_assets = $variant['digital_assets'];
-                    foreach ( $digital_assets as $digital_asset ) {
-                        $images[] = $digital_asset['url'];
+                        // Get digital assets
+                        $digital_assets = $variant['digital_assets'];
+                        foreach ( $digital_assets as $digital_asset ) {
+                            $images[] = $digital_asset['url'];
+                        }
                     }
                 }
 
