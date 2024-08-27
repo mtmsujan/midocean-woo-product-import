@@ -308,7 +308,9 @@ class Customize_Product_Page {
                                     <div class="col-sm-4 remove-color-row">
                                         <div class="row justify-content-between align-items-center">
                                             <div class="col-sm-6"></div>
-                                            <div class="col-sm-6 text-end close-button"><i class="fa-solid fa-xmark"></i></div>
+                                            <div class="col-sm-6 text-end close-button">
+                                                <!-- <i class="fa-solid fa-xmark"></i> -->
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- /Remove color row button -->
@@ -464,7 +466,8 @@ class Customize_Product_Page {
                                                                         // Create unique radio IDs using the position and technique indices
                                                                         $radioId = 'print-technique-' . $positionIndex . '-' . $techniqueIndex;
                                                                         ?>
-                                                                        <div class="modal-item-radio">
+                                                                        <div class="modal-item-radio"
+                                                                            data-printing-technique-id="<?php echo esc_attr( $technique['id'] ) ?>">
                                                                             <div class="d-flex align-items-center justify-content-between">
                                                                                 <!-- Radio input for printing technique -->
                                                                                 <input type="radio" class="m-0"
