@@ -432,7 +432,7 @@ class Customize_Product_Page {
                                                     // Fetch product print data from db based on this product master code
                                                     $api_response_for_print_data = $this->fetch_product_print_data_from_db( $this->master_code );
                                                     // Decode response
-                                                    $api_response_for_print_data = json_decode( $api_response_for_print_data );
+                                                    $print_data = json_decode( $api_response_for_print_data, true );
 
                                                     /**
                                                      * TODO:
@@ -446,40 +446,62 @@ class Customize_Product_Page {
                                                      * Single radio button generate will be based on api printing_techniques option.
                                                      * when click modal-item-clear-button the selected radio will be cleared.
                                                      */
-                                                    ?>
-                                                    <!-- Modal single item REPEAT:-->
-                                                    <div class="col-sm-3 border-right">
-                                                        <div class="modal-item-header">
-                                                            <span class="modal-item-title d-block">FRONT</span>
-                                                            <span class="modal-item-dimensions d-block"><span
-                                                                    class="max_print_size_width">60</span>mm x <span
-                                                                    class="max_print_size_height">60</span>mm</span>
-                                                        </div>
-                                                        <div class="modal-item-image">
-                                                            <img src="https://printtemplates-v2.cdn.midocean.com/756d7bde-5794-4f3d-7e9a-08dbe69b9e8f_13_202407261021569267-print-position-variant-thumbnail"
-                                                                alt="example product image" width="120px"
-                                                                style="display: block; margin: 1.5rem auto;">
-                                                        </div>
-                                                        <div class="modal-item-radios">
-                                                            <!-- single radio REPEAT:-->
-                                                            <div class="modal-item-radio">
-                                                                <div class="d-flex align-items-center justify-content-between">
-                                                                    <input type="radio" class="m-0" name="print-technique"
-                                                                        id="print-technique-1">
-                                                                    <label for="print-technique-1"
-                                                                        class="m-0 cursor-pointer">Transfer serigráfico</label>
+
+                                                    // Check if printing positions exist in the API response
+                                                    if ( !empty( $print_data['printing_positions'] ) ) :
+                                                        // Loop through each printing position
+                                                        foreach ( $print_data['printing_positions'] as $position ) :
+                                                            // Retrieve the first image for the current position
+                                                            $images = $position['images'][0];
+                                                            // Retrieve the list of printing techniques for the current position
+                                                            $techniques = $position['printing_techniques'];
+                                                            ?>
+                                                            <div class="col-sm-3 border-right">
+                                                                <!-- Modal Header: Position title and dimensions -->
+                                                                <div class="modal-item-header">
+                                                                    <span
+                                                                        class="modal-item-title d-block"><?php echo esc_html( $position['position_id'] ); ?></span>
+                                                                    <span class="modal-item-dimensions d-block">
+                                                                        <?php echo esc_html( $position['max_print_size_width'] . 'mm x ' . $position['max_print_size_height'] . 'mm' ); ?>
+                                                                    </span>
                                                                 </div>
-                                                                <span class="modal-item-color-count">Colores máximos : <span
-                                                                        class="color-count">8</span></span>
+                                                                <!-- Modal Image: Display the print position image -->
+                                                                <div class="modal-item-image">
+                                                                    <img src="<?php echo esc_url( $images['print_position_image_with_area'] ); ?>"
+                                                                        alt="example product image" width="120px"
+                                                                        style="display: block; margin: 1.5rem auto;">
+                                                                </div>
+                                                                <!-- Modal Radio Buttons: Loop through each printing technique and create radio buttons -->
+                                                                <div class="modal-item-radios">
+                                                                    <?php foreach ( $techniques as $technique ) : ?>
+                                                                        <div class="modal-item-radio">
+                                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                                <!-- Radio input for printing technique -->
+                                                                                <input type="radio" class="m-0"
+                                                                                    name="print-technique-<?php echo esc_attr( $position['position_id'] ); ?>"
+                                                                                    id="print-technique-<?php echo esc_attr( $technique['id'] ); ?>">
+                                                                                <!-- Static Label for the printing technique radio input -->
+                                                                                <label
+                                                                                    for="print-technique-<?php echo esc_attr( $technique['id'] ); ?>"
+                                                                                    class="m-0 cursor-pointer">Transfer serigráfico</label>
+                                                                            </div>
+                                                                            <!-- Display the maximum number of colors for the technique -->
+                                                                            <span class="modal-item-color-count">Colores máximos : <span
+                                                                                    class="color-count"><?php echo esc_html( $technique['max_colours'] ); ?></span></span>
+                                                                        </div>
+                                                                    <?php endforeach; ?>
+                                                                </div>
+                                                                <!-- Clear Selection Button: Allow user to reset their selection -->
+                                                                <div class="modal-item-clear">
+                                                                    <button type="button"
+                                                                        class="modal-item-clear-button"><?php esc_html_e( 'Borrar selección', 'bulk-product-import' ); ?></button>
+                                                                </div>
                                                             </div>
-                                                            <!-- /single radio REPEAT:-->
-                                                        </div>
-                                                        <div class="modal-item-clear">
-                                                            <button type="button" class="modal-item-clear-button">Borrar
-                                                                selección</button>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /Modal single item REPEAT:-->
+                                                            <?php
+                                                        endforeach;
+                                                    endif;
+                                                    ?>
+
                                                 </div>
                                             </div>
                                             <!-- /Modal body -->
@@ -618,7 +640,7 @@ class Customize_Product_Page {
         $print_data = $print_data[0]->print_data;
 
         // Return print data
-        return json_encode( $print_data );
+        return $print_data;
     }
 
     public function put_program_logs( $data ) {

@@ -140,5 +140,145 @@ Product Print Data:
   ]
 }
 
+{"master_code":"CX1335","master_id":"40002408","item_color_numbers":["05"],"print_manipulation":"C","print_template":"https:\/\/printtemplates-v2.cdn.midocean.com\/CX1335-print-template.pdf","printing_positions":[{"position_id":"FRONT","print_size_unit":"mm","max_print_size_height":70,"max_print_size_width":70,"rotation":0,"print_position_type":"Rectangle","printing_techniques":[{"default":false,"id":"DL","max_colours":"0"},{"default":true,"id":"S4","max_colours":"1"}],"points":[{"distance_from_left":166,"distance_from_top":208,"sequence_no":1},{"distance_from_left":749,"distance_from_top":791,"sequence_no":2}],"images":[{"print_position_image_blank":"https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS1-no-area.jpg","print_position_image_with_area":"https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS1.jpg","variant_color":"05"}]},{"position_id":"BELL","print_size_unit":"mm","max_print_size_height":15,"max_print_size_width":15,"rotation":0,"print_position_type":"Rectangle","printing_techniques":[{"default":true,"id":"S3","max_colours":"4"},{"default":false,"id":"T1","max_colours":"8"},{"default":false,"id":"TD1","max_colours":"0"},{"default":false,"id":"TR","max_colours":"1"}],"points":[{"distance_from_left":421,"distance_from_top":381,"sequence_no":1},{"distance_from_left":482,"distance_from_top":442,"sequence_no":2}],"images":[{"print_position_image_blank":"https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS2-no-area.jpg","print_position_image_with_area":"https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS2.jpg","variant_color":"05"}]},{"position_id":"SOCK","print_size_unit":"mm","max_print_size_height":10,"max_print_size_width":20,"rotation":31,"print_position_type":"Rectangle","printing_techniques":[{"default":true,"id":"S3","max_colours":"4"},{"default":false,"id":"T1","max_colours":"8"},{"default":false,"id":"TD1","max_colours":"0"},{"default":false,"id":"TR","max_colours":"1"}],"points":[{"distance_from_left":607,"distance_from_top":467,"sequence_no":1},{"distance_from_left":688,"distance_from_top":508,"sequence_no":2}],"images":[{"print_position_image_blank":"https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS3-no-area.jpg","print_position_image_with_area":"https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS3.jpg","variant_color":"05"}]}]} - 2024-08-27 05:25:04
 
+[
+    {
+        "position_id": "FRONT",
+        "print_size_unit": "mm",
+        "max_print_size_height": 70,
+        "max_print_size_width": 70,
+        "rotation": 0,
+        "print_position_type": "Rectangle",
+        "printing_techniques": [
+            {
+                "default": false,
+                "id": "DL",
+                "max_colours": "0"
+            },
+            {
+                "default": true,
+                "id": "S4",
+                "max_colours": "1"
+            }
+        ],
+        "points": [
+            {
+                "distance_from_left": 166,
+                "distance_from_top": 208,
+                "sequence_no": 1
+            },
+            {
+                "distance_from_left": 749,
+                "distance_from_top": 791,
+                "sequence_no": 2
+            }
+        ],
+        "images": [
+            {
+                "print_position_image_blank": "https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS1-no-area.jpg",
+                "print_position_image_with_area": "https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS1.jpg",
+                "variant_color": "05"
+            }
+        ]
+    },
+    {
+        "position_id": "BELL",
+        "print_size_unit": "mm",
+        "max_print_size_height": 15,
+        "max_print_size_width": 15,
+        "rotation": 0,
+        "print_position_type": "Rectangle",
+        "printing_techniques": [
+            {
+                "default": true,
+                "id": "S3",
+                "max_colours": "4"
+            },
+            {
+                "default": false,
+                "id": "T1",
+                "max_colours": "8"
+            },
+            {
+                "default": false,
+                "id": "TD1",
+                "max_colours": "0"
+            },
+            {
+                "default": false,
+                "id": "TR",
+                "max_colours": "1"
+            }
+        ],
+        "points": [
+            {
+                "distance_from_left": 421,
+                "distance_from_top": 381,
+                "sequence_no": 1
+            },
+            {
+                "distance_from_left": 482,
+                "distance_from_top": 442,
+                "sequence_no": 2
+            }
+        ],
+        "images": [
+            {
+                "print_position_image_blank": "https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS2-no-area.jpg",
+                "print_position_image_with_area": "https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS2.jpg",
+                "variant_color": "05"
+            }
+        ]
+    },
+    {
+        "position_id": "SOCK",
+        "print_size_unit": "mm",
+        "max_print_size_height": 10,
+        "max_print_size_width": 20,
+        "rotation": 31,
+        "print_position_type": "Rectangle",
+        "printing_techniques": [
+            {
+                "default": true,
+                "id": "S3",
+                "max_colours": "4"
+            },
+            {
+                "default": false,
+                "id": "T1",
+                "max_colours": "8"
+            },
+            {
+                "default": false,
+                "id": "TD1",
+                "max_colours": "0"
+            },
+            {
+                "default": false,
+                "id": "TR",
+                "max_colours": "1"
+            }
+        ],
+        "points": [
+            {
+                "distance_from_left": 607,
+                "distance_from_top": 467,
+                "sequence_no": 1
+            },
+            {
+                "distance_from_left": 688,
+                "distance_from_top": 508,
+                "sequence_no": 2
+            }
+        ],
+        "images": [
+            {
+                "print_position_image_blank": "https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS3-no-area.jpg",
+                "print_position_image_with_area": "https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS3.jpg",
+                "variant_color": "05"
+            }
+        ]
+    }
+] - 2024-08-27 05:27:05
 
