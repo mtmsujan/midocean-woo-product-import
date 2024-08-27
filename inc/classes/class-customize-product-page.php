@@ -421,13 +421,46 @@ class Customize_Product_Page {
                                                 </h5>
                                                 <button type="button" class="modal-close-icon" data-dismiss="modal"
                                                     aria-label="Close">
-                                                    <!-- <span aria-hidden="true">&times;</span> -->
                                                     <i class="fa-solid fa-xmark"></i>
                                                 </button>
                                             </div>
+                                            <!-- Modal body -->
                                             <div class="modal-body">
-                                                ...
+                                                <div class="row">
+                                                    <!-- Modal single item REPEAT:-->
+                                                    <div class="col-sm-3 border-right">
+                                                        <div class="modal-item-header">
+                                                            <span class="modal-item-title d-block">FRONT</span>
+                                                            <span class="modal-item-dimensions d-block">60mm x 60mm</span>
+                                                        </div>
+                                                        <div class="modal-item-image">
+                                                            <img src="https://printtemplates-v2.cdn.midocean.com/756d7bde-5794-4f3d-7e9a-08dbe69b9e8f_13_202407261021569267-print-position-variant-thumbnail"
+                                                                alt="example product image" width="120px"
+                                                                style="display: block; margin: 1.5rem auto;">
+                                                        </div>
+                                                        <div class="modal-item-radios">
+                                                            <!-- single radio -->
+                                                            <div class="modal-item-radio">
+                                                                <div class="d-flex align-items-center justify-content-between">
+                                                                    <input type="radio" class="m-0" name="print-technique"
+                                                                        id="print-technique-1">
+                                                                    <label for="print-technique-1"
+                                                                        class="m-0 cursor-pointer">Transfer serigráfico</label>
+                                                                </div>
+                                                                <span class="modal-item-color-count">Colores máximos : <span
+                                                                        class="color-count">8</span></span>
+                                                            </div>
+                                                            <!-- /single radio -->
+                                                        </div>
+                                                        <div class="modal-item-clear">
+                                                            <button type="button" class="modal-item-clear-button">Borrar
+                                                                selección</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /Modal single item REPEAT:-->
+                                                </div>
                                             </div>
+                                            <!-- /Modal body -->
                                             <div class="modal-footer">
                                                 <button type="button" class="modal-close-button"
                                                     data-dismiss="modal"><?php esc_html_e( 'Cancelar', 'bulk-product-import' ) ?></button>

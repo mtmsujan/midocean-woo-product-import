@@ -529,3 +529,49 @@ h1.be-product-sku {
   background-color: #fff;
   background-image: none;
 }
+
+.product-configurator-body .modal-dialog {
+  max-width: 732px !important;
+  margin: 1.75rem auto;
+}
+
+.modal-item-title {
+  font-family: "Noto Sans";
+  font-size: 14px;
+  font-weight: 700;
+  color: #161616;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.modal-item-dimensions {
+  font-family: "Noto Sans";
+  font-size: 12px;
+  color: #6f6f6f;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.modal-item-color-count {
+  display: block;
+  margin-top: -5px;
+  margin-bottom: 1rem;
+  margin-left: 1.8rem;
+  font-size: 12px;
+  color: #6f6f6f;
+}
+
+.modal-item-clear-button {
+  display: block;
+  color: #198038 !important;
+  background-color: transparent !important;
+  font-family: "Noto Sans";
+  font-weight: 400;
+  text-transform: capitalize !important;
+}
+
+.modal-item-clear-button:hover {
+  background-color: #e5e5e5 !important;
+}
