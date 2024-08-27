@@ -231,9 +231,42 @@ class Customize_Product_Page {
     }
 
     public function custom_product_configurator_callback() {
+
+        // Fetch product print data from db based on this product master code
+        $api_response_for_print_data = $this->fetch_product_print_data_from_db( $this->master_code );
         ob_start();
         ?>
+        <script>
+            const data = '<?= $api_response_for_print_data ?>';
+            const printResponse = JSON.parse(data);
+            document.addEventListener("alpine:init", () => {
 
+                Alpine.data("printData", () => ({
+                    printData: printResponse,
+                    cachedSelectedPrintData: [],
+                    selectedPrintData: [],
+                    addData(item, maxColors) {
+                        this.cachedSelectedPrintData.push({
+                            ...item,
+                            maxColors: maxColors
+                        });
+                    },
+                    addCachedData() {
+                        this.selectedPrintData = [...this.cachedSelectedPrintData];
+                    },
+                    removeData(item) {
+                        let index = this.selectedPrintData.indexOf(item);
+                        this.selectedPrintData.splice(index, 1);
+                    },
+                    coverImage(item) {
+                        return item.images[0].print_position_image_with_area
+                    },
+                    techniques(item) {
+                        return item.printing_techniques;
+                    },
+                }));
+            });
+        </script>
         <div class="product-configurator-row pb-5">
             <div class="product-configurator-heading">
                 <div class="row align-items-end justify-content-between pb-2 product-configurator-heading-portion">
@@ -250,8 +283,9 @@ class Customize_Product_Page {
                     </div>
                 </div>
             </div>
+
             <div class="product-configurator-body" x-data="quantityChecker">
-                <div class="row">
+                <div class="row" x-data="printData">
                     <div class="col-sm-8 product-configurator-body-left-portion">
                         <div class="product-configurator-body-subheading-div">
                             <h3 class="product-configurator-body-subheading">
@@ -285,7 +319,8 @@ class Customize_Product_Page {
                                         <div class="row flex-column">
                                             <div class="col-sm-12">
                                                 <div class="input-quantity-wrapper">
-                                                    <input type="number" placeholder="0" class="input-quantity" x-model="quantity" />
+                                                    <input type="number" placeholder="0" class="input-quantity"
+                                                        x-model="quantity" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 mt-1">
@@ -335,52 +370,55 @@ class Customize_Product_Page {
                                     <!-- print positions -->
                                     <div class="print-positions mt-2">
                                         <!-- print position REPEAT:-->
-                                        <div class="print-position pb-2 ms-3" data-name="FRONT">
-                                            <div class="technique-wrapper row align-items-center justify-content-evenly"
-                                                data-technique-code="T1">
-                                                <div class="thumb-wrapper col-sm-4 border-right me-2">
-                                                    <div class="row align-items-center">
-                                                        <div class="thumb-image col-4">
-                                                            <img class="thumb"
-                                                                src="https://printtemplates-v2.cdn.midocean.com/756d7bde-5794-4f3d-7e9a-08dbe69b9e8f_13_202407261021569267-print-position-variant-thumbnail">
-                                                        </div>
-                                                        <div class="position-info col-8">
-                                                            <div class="position-name">
-                                                                <span class="position-name-serial">1. </span>FRONT
+                                        <template x-for="(item, index) in selectedPrintData">
+                                            <div class="print-position pb-2 ms-3" data-name="FRONT">
+                                                <div class="technique-wrapper row align-items-center justify-content-evenly"
+                                                    data-technique-code="T1">
+                                                    <div class="thumb-wrapper col-sm-4 border-right me-2">
+                                                        <div class="row align-items-center">
+                                                            <div class="thumb-image col-4">
+                                                                <img class="thumb" :src="coverImage(item)">
                                                             </div>
-                                                            <div class="position-infos">
-                                                                <span>Transfer serigráfico</span>
-                                                                <span>Colores máximos : <span class="color-count">8</span></span>
+                                                            <div class="position-info col-8">
+                                                                <div class="position-name">
+                                                                    <span class="position-name-serial"
+                                                                        x-text="++index + '. ' + item.position_id"></span>
+                                                                </div>
+                                                                <div class="position-infos">
+                                                                    <span>Transfer serigráfico</span>
+                                                                    <span>Colores máximos : <span class="color-count"
+                                                                            x-text="item.maxColors"></span></span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="size-wrapper col">
-                                                    <div class="row align-items-center justify-content-between">
-                                                        <div class="col bg-white border-right">
-                                                            <span class="input-title">Ancho (mm)</span>
-                                                            <input type="number" class="print-position-number" size="7" min="0"
-                                                                value="60" data-max="60">
-                                                        </div>
-                                                        <div class="col bg-white">
-                                                            <span class="input-title">Ancho (mm)</span>
-                                                            <input type="number" class="print-position-number" size="7" min="0"
-                                                                value="60" data-max="60">
+                                                    <div class="size-wrapper col">
+                                                        <div class="row align-items-center justify-content-between">
+                                                            <div class="col bg-white border-right">
+                                                                <span class="input-title">Ancho (mm)</span>
+                                                                <input type="number" class="print-position-number" size="7" min="0"
+                                                                    :value="item.max_print_size_height">
+                                                            </div>
+                                                            <div class="col bg-white">
+                                                                <span class="input-title">Ancho (mm)</span>
+                                                                <input type="number" class="print-position-number" size="7" min="0"
+                                                                    :value="item.max_print_size_width">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="colors-wrapper col-sm-2">
-                                                    <select name="" id="">
-                                                        <option value="1">1 Colors</option>
-                                                    </select>
-                                                </div>
-                                                <div class="remove-wrapper col-sm-2">
-                                                    <div class="remove-button">
-                                                        <i class="fa-solid fa-xmark"></i>
+                                                    <div class="colors-wrapper col-sm-2">
+                                                        <select name="" id="">
+                                                            <option value="1">1 Colors</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="remove-wrapper col-sm-2">
+                                                        <div class="remove-button cursor-pointer" @click="removeData(item)">
+                                                            <i class="fa-solid fa-xmark"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </template>
                                         <!-- /print position REPEAT:-->
                                     </div>
                                     <!-- /print positions -->
@@ -388,11 +426,9 @@ class Customize_Product_Page {
                                 <!-- Add print position button -->
                                 <div class="add-print-position-button-portion">
                                     <div class="mt-3">
-                                        <button
-                                            :class="hasQty ? '' : 'disabled'"
-                                            id="add-print-position-button"
-                                            data-toggle="modal" data-target="#add_print_position_modal_button"
-                                            x-ref="addPositionButton" :disabled="!hasQty">
+                                        <button :class="hasQty ? '' : 'disabled'" id="add-print-position-button" data-toggle="modal"
+                                            data-target="#add_print_position_modal_button" x-ref="addPositionButton"
+                                            :disabled="!hasQty">
                                             <div class="col-10 button-text p-0">
                                                 <?php esc_html_e( 'Añadir posición de impresión', 'bulk-product-import' ) ?>
                                             </div>
@@ -418,80 +454,63 @@ class Customize_Product_Page {
                                             <!-- Modal body -->
                                             <div class="modal-body">
                                                 <div class="row">
-
-                                                    <?php
-                                                    // Fetch product print data from db based on this product master code
-                                                    $api_response_for_print_data = $this->fetch_product_print_data_from_db( $this->master_code );
-                                                    // Decode response
-                                                    $print_data = json_decode( $api_response_for_print_data, true );
-
-                                                    // Check if printing positions exist in the API response
-                                                    if ( !empty( $print_data['printing_positions'] ) && is_array( $print_data['printing_positions'] ) ) :
-                                                        // Loop through each printing position
-                                                        foreach ( $print_data['printing_positions'] as $positionIndex => $position ) :
-                                                            // Retrieve the first image for the current position
-                                                            $images = $position['images'][0];
-                                                            // Retrieve the list of printing techniques for the current position
-                                                            $techniques = $position['printing_techniques'];
-                                                            ?>
-                                                            <div class="col-sm-3 border-right mb-3 modal-inner-single-item position-relative">
-                                                                <!-- Modal Header: Position title and dimensions -->
-                                                                <div class="modal-item-header">
-                                                                    <span
-                                                                        class="modal-item-title d-block"><?php echo esc_html( $position['position_id'] ); ?></span>
-                                                                    <span class="modal-item-dimensions d-block">
-                                                                        <?php echo esc_html( $position['max_print_size_height'] . 'mm x ' . $position['max_print_size_width'] . 'mm' ); ?>
-                                                                    </span>
-                                                                </div>
-                                                                <!-- Modal Image: Display the print position image -->
-                                                                <div class="modal-item-image">
-                                                                    <img src="<?php echo esc_url( $images['print_position_image_with_area'] ); ?>"
-                                                                        alt="example product image" width="120px"
-                                                                        style="display: block; margin: 1.5rem auto;">
-                                                                </div>
-                                                                <!-- Modal Radio Buttons: -->
-                                                                <div class="modal-item-radios">
-                                                                    <?php foreach ( $techniques as $techniqueIndex => $technique ) :
-                                                                        // Create unique radio IDs using the position and technique indices
-                                                                        $radioId = 'print-technique-' . $positionIndex . '-' . $techniqueIndex;
-                                                                        ?>
-                                                                        <div class="modal-item-radio"
-                                                                            data-printing-technique-id="<?php echo esc_attr( $technique['id'] ) ?>">
-                                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                                <!-- Radio input for printing technique -->
-                                                                                <input type="radio" class="m-0"
-                                                                                    name="print-technique-<?php echo esc_attr( $position['position_id'] ); ?>"
-                                                                                    id="<?php echo esc_attr( $radioId ); ?>"
-                                                                                    value="<?php echo esc_html( $technique['max_colours'] ); ?>">
-                                                                                <!-- Static Label for the printing technique radio input -->
-                                                                                <label for="<?php echo esc_attr( $radioId ); ?>"
-                                                                                    class="m-0 cursor-pointer">Transfer serigráfico</label>
-                                                                            </div>
-                                                                            <!-- Display the maximum number of colors for the technique -->
-                                                                            <span class="modal-item-color-count">Colores máximos : <span
-                                                                                    class="color-count"><?php echo esc_html( $technique['max_colours'] ); ?></span></span>
-                                                                        </div>
-                                                                    <?php endforeach; ?>
-                                                                </div>
-                                                                <!-- Clear Selection Button: -->
-                                                                <div class="modal-item-clear">
-                                                                    <button type="button"
-                                                                        class="modal-item-clear-button w-100"><?php esc_html_e( 'Borrar selección', 'bulk-product-import' ); ?></button>
-                                                                </div>
+                                                    <template x-for="(item, index) in printData.printing_positions">
+                                                        <div
+                                                            class="col-sm-3 border-right mb-3 modal-inner-single-item position-relative">
+                                                            <!-- Modal Header: Position title and dimensions -->
+                                                            <div class="modal-item-header">
+                                                                <span class="modal-item-title d-block" x-text="item.position_id">
+                                                                </span>
+                                                                <span class="modal-item-dimensions d-block"
+                                                                    x-text="`${item['max_print_size_height']} mm x  ${item['max_print_size_width']} mm`">
+                                                                </span>
                                                             </div>
-                                                            <?php
-                                                        endforeach;
-                                                    endif;
-                                                    ?>
+                                                            <!-- Modal Image: Display the print position image -->
+                                                            <div class="modal-item-image">
+                                                                <img :src="coverImage(item)" alt="example product image"
+                                                                    width="120px" style="display: block; margin: 1.5rem auto;">
+                                                            </div>
+                                                            <!-- Modal Radio Buttons: -->
+                                                            <div class="modal-item-radios">
+                                                                <template x-for="(technique, tindex) in techniques(item)">
+                                                                    <div class="modal-item-radio"
+                                                                        :data-printing-technique-id="technique.id">
+                                                                        <div
+                                                                            class="d-flex align-items-center justify-content-between">
+                                                                            <label class="m-0 cursor-pointer">
+                                                                                <!-- Radio input for printing technique -->
+                                                                                <input
+                                                                                    @change="$el.value && addData(item, technique.max_colours)"
+                                                                                    type="radio" class="m-0"
+                                                                                    :name="`print_data_${index}_technique`"
+                                                                                    :value="technique.max_colours">
+                                                                                <!-- Static Label for the printing technique radio input -->
+                                                                                Transfer
+                                                                                serigráfico</label>
+                                                                        </div>
+                                                                        <!-- Display the maximum number of colors for the technique -->
+                                                                        <span class="modal-item-color-count">Colores máximos : <span
+                                                                                class="color-count"
+                                                                                x-text="technique.max_colours"></span></span>
+                                                                    </div>
+                                                                </template>
+                                                            </div>
 
+                                                            <!-- Clear Selection Button: -->
+                                                            <div class="modal-item-clear">
+                                                                <button type="button"
+                                                                    class="modal-item-clear-button w-100"><?php esc_html_e( 'Borrar selección', 'bulk-product-import' ); ?></button>
+                                                            </div>
+                                                        </div>
+                                                    </template>
                                                 </div>
                                             </div>
                                             <!-- /Modal body -->
                                             <div class="modal-footer">
                                                 <button type="button" class="modal-close-button"
                                                     data-dismiss="modal"><?php esc_html_e( 'Cancelar', 'bulk-product-import' ) ?></button>
-                                                <button type="button"
-                                                    class="modal-save-button"><?php esc_html_e( 'Añadir', 'bulk-product-import' ) ?></button>
+                                                <button type="button" class="modal-save-button"
+                                                    @click="addCachedData"><?php esc_html_e( 'Añadir', 'bulk-product-import' ) ?></button>
                                             </div>
                                         </div>
                                     </div>

@@ -582,3 +582,7 @@ input[disabled],
   opacity: 0.6 !important;
   cursor: not-allowed !important;
 }
+
+.modal-item-radio{
+  margin-bottom: -10px;
+}
