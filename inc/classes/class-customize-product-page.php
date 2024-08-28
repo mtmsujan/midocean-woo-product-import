@@ -18,6 +18,8 @@ class Customize_Product_Page {
     private $product_stock;
     private $number_of_print_positions;
     private $color_group;
+    private $product_price;
+    private $currency_symbol;
 
     public function __construct() {
         $this->setup_hooks();
@@ -57,6 +59,11 @@ class Customize_Product_Page {
             $this->number_of_print_positions = get_post_meta( $product_id, '_number_of_print_positions', true );
             // Get color group
             $this->color_group = get_post_meta( $product_id, '_color_group', true );
+            // Get product price
+            $this->product_price = get_post_meta( $product_id, '_price', true );
+            $this->product_price = str_replace( ',', '', $this->product_price );
+            // Get currency symbol
+            $this->currency_symbol = get_woocommerce_currency_symbol();
 
             // get product data
             // $product_data = $this->fetch_product_data_from_db( $this->product_number );
@@ -253,6 +260,8 @@ class Customize_Product_Page {
                     printData: printResponse,
                     cachedSelectedPrintData: [],
                     selectedPrintData: [],
+                    productPrice: null,
+                    quantityFieldValue: null,
 
                     // Function to add data only if it doesn't already exist in selectedPrintData
                     addData(item, maxColors) {
@@ -313,6 +322,12 @@ class Customize_Product_Page {
                     isItemSelected(item) {
                         // Check if item with the same position_id already exists in selectedPrintData
                         return this.findSelectedData(item);
+                    },
+
+                    priceCalculation(quantity, price) {
+                        this.quantityFieldValue = quantity;
+                        let calculation = (quantity * price);
+                        this.productPrice = calculation;
                     }
                 }));
 
@@ -370,8 +385,9 @@ class Customize_Product_Page {
                                         <div class="row flex-column">
                                             <div class="col-sm-12">
                                                 <div class="input-quantity-wrapper">
-                                                    <input type="number" placeholder="0" class="input-quantity"
-                                                        x-model="quantity" />
+                                                    <input type="number"
+                                                        @keyup="priceCalculation($el.value, <?php echo $this->product_price; ?>)"
+                                                        placeholder="0" class="input-quantity" x-model="quantity" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 mt-1">
@@ -446,12 +462,14 @@ class Customize_Product_Page {
                                                     <div class="size-wrapper col">
                                                         <div class="row align-items-center justify-content-between">
                                                             <div class="col bg-white border-right">
-                                                                <span class="input-title">Ancho (mm)</span>
+                                                                <span class="input-title"
+                                                                    x-text="`Ancho (${item.print_size_unit})`"></span>
                                                                 <input type="number" class="print-position-number" size="7" min="0"
                                                                     :value="item.max_print_size_height">
                                                             </div>
                                                             <div class="col bg-white">
-                                                                <span class="input-title">Ancho (mm)</span>
+                                                                <span class="input-title"
+                                                                    x-text="`Alto (${item.print_size_unit})`"></span>
                                                                 <input type="number" class="print-position-number" size="7" min="0"
                                                                     :value="item.max_print_size_width">
                                                             </div>
@@ -459,7 +477,8 @@ class Customize_Product_Page {
                                                     </div>
                                                     <div class="colors-wrapper col-sm-2">
                                                         <select name="" id="">
-                                                            <option value="1">1 Colors</option>
+                                                            <option :value="item.maxColors" x-text="`${item.maxColors} Colors`">
+                                                            </option>
                                                         </select>
                                                     </div>
                                                     <div class="remove-wrapper col-sm-2">
@@ -588,24 +607,26 @@ class Customize_Product_Page {
                             </div>
                             <div class="summary-row underline shipping">
                                 <div><?php esc_html_e( 'Portes web península (oficina 20 eur)', 'bulk-product-import' ) ?></div>
-                                <div class="value" data-default="-">-</div>
+                                <div class="value"></div>
                             </div>
                             <div class="summary-row product-price">
                                 <div class="text" data-default="Precio artículo">
                                     <?php esc_html_e( 'Precio artículo', 'bulk-product-import' ) ?>
+                                    <!-- <span>(cantidad: <span x-text="quantityFieldValue"></span> )</span> -->
+                                    <span x-text="quantityFieldValue ? `(cantidad: ${quantityFieldValue})` : ''"></span>
                                 </div>
-                                <div class="value" data-default="-">-</div>
+                                <div class="value" x-text="productPrice ? `${productPrice} <?php echo $this->currency_symbol;?>` : '-'"></div>
                             </div>
                             <div class="grand-totals underline">
                                 <div class="summary-row grand-total">
                                     <div><?php esc_html_e( 'Total (incl. transporte)', 'bulk-product-import' ) ?></div>
-                                    <div class="total" data-default="-">-</div>
+                                    <div class="total" x-text="productPrice ? `${productPrice} <?php echo $this->currency_symbol;?>` : '-'"></div>
                                 </div>
                                 <div class="summary-row price-per-item">
                                     <div class="price-per-item-subheading">
                                         <?php esc_html_e( 'Precio por artículo', 'bulk-product-import' ) ?>
                                     </div>
-                                    <div class="value" data-default="-">-</div>
+                                    <div class="value" >-</div>
                                 </div>
                             </div>
                         </div>
