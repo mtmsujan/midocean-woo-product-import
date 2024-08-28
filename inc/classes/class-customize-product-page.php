@@ -249,33 +249,35 @@ class Customize_Product_Page {
                 }));
 
                 Alpine.data("printData", () => ({
-                    
+
                     printData: printResponse,
                     cachedSelectedPrintData: [],
                     selectedPrintData: [],
 
                     // Function to add data only if it doesn't already exist in selectedPrintData
                     addData(item, maxColors) {
-
-                        // Check if item with the same position_id already exists
-                        let isDuplicate = this.selectedPrintData.some(selectedItem => selectedItem.position_id === item.position_id);
-
-                        let newItem = {
-                            ...item,
-                            maxColors: maxColors
-                        };
-
-                        // Check if item already exists in cachedSelectedPrintData return
-                        if (this.cachedSelectedPrintData.indexOf(newItem) > -1) {
+                        // Check item already exists
+                        let itemExists = this.findCachedData(item);
+                        // If item exists change it's maxColors and replace it. If not, add it
+                        if (itemExists) {
+                            let index = this.cachedSelectedPrintData.indexOf(itemExists);
+                            itemExists.maxColors = maxColors;
+                            this.cachedSelectedPrintData.splice(index, 1, itemExists);
                             return;
                         }
+                        this.cachedSelectedPrintData.push({
+                            ...item,
+                            maxColors: maxColors
+                        });
+                    },
 
-                        if (!isDuplicate) {
-                            this.cachedSelectedPrintData.push(newItem);
-                        } else {
-                            // If duplicate, display a message or perform an action (optional)
-                            console.log(`Item with position_id ${item.position_id} already added.`);
-                        }
+                    findCachedData(item) {
+                        // Check item already exists
+                        return this.cachedSelectedPrintData.filter(selectedItem => selectedItem.position_id === item.position_id).pop();
+                    },
+                    findSelectedData(item) {
+                        // Check item already exists
+                        return this.selectedPrintData.filter(selectedItem => selectedItem.position_id === item.position_id).pop();
                     },
 
                     addCachedData() {
@@ -284,6 +286,16 @@ class Customize_Product_Page {
                     },
 
                     removeData(item) {
+                        this.removeCachedData(this.findCachedData(item));
+                        this.removeSelectedData(this.findSelectedData(item));
+                    },
+                    removeCachedData(item) {
+                        let index = this.cachedSelectedPrintData.indexOf(item);
+                        if (index > -1) {
+                            this.cachedSelectedPrintData.splice(index, 1);
+                        }
+                    },
+                    removeSelectedData(item) {
                         let index = this.selectedPrintData.indexOf(item);
                         if (index > -1) {
                             this.selectedPrintData.splice(index, 1);
@@ -298,9 +310,9 @@ class Customize_Product_Page {
                         return item.printing_techniques;
                     },
 
-                    isItemSelected(position_id) {
+                    isItemSelected(item) {
                         // Check if item with the same position_id already exists in selectedPrintData
-                        return this.selectedPrintData.some(selectedItem => selectedItem.position_id === position_id);
+                        return this.findSelectedData(item);
                     }
                 }));
 
@@ -494,7 +506,7 @@ class Customize_Product_Page {
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <template x-for="(item, index) in printData.printing_positions">
-                                                        <div :class="!isItemSelected(item.position_id) ? '' : 'disabled'"
+                                                        <div :class="!isItemSelected(item) ? '' : 'disabled'"
                                                             class="col-sm-3 border-right mb-3 modal-inner-single-item position-relative">
                                                             <!-- Modal Header: Position title and dimensions -->
                                                             <div class="modal-item-header">
@@ -516,29 +528,34 @@ class Customize_Product_Page {
                                                                         :data-printing-technique-id="technique.id">
                                                                         <div
                                                                             class="d-flex align-items-center justify-content-between">
-                                                                            <label class="m-0 cursor-pointer">
+                                                                            <label class="m-0 cursor-pointer"
+                                                                                :class="{'be-selected': findCachedData(item)?.maxColors == technique.max_colours}">
                                                                                 <!-- Radio input for printing technique -->
                                                                                 <input
                                                                                     @change="$el.value && addData(item, technique.max_colours)"
                                                                                     type="radio" class="m-0"
+                                                                                    :disabled="isItemSelected(item)"
                                                                                     :name="`print_data_${index}_technique`"
-                                                                                    :value="technique.id">
+                                                                                    :value="technique.id"
+                                                                                    :checked="findCachedData(item)?.maxColors == technique.max_colours">
                                                                                 <!-- Static Label for the printing technique radio input -->
                                                                                 Transfer
-                                                                                serigráfico</label>
+                                                                                serigráfico
+
+                                                                                <span class="modal-item-color-count">Colores máximos
+                                                                                    : <span class="color-count"
+                                                                                        x-text="technique.max_colours"></span></span>
+                                                                            </label>
                                                                         </div>
                                                                         <!-- Display the maximum number of colors for the technique -->
-                                                                        <span class="modal-item-color-count">Colores máximos : <span
-                                                                                class="color-count"
-                                                                                x-text="technique.max_colours"></span></span>
                                                                     </div>
                                                                 </template>
                                                             </div>
 
                                                             <!-- Clear Selection Button: -->
                                                             <div class="modal-item-clear">
-                                                                <button type="button"
-                                                                    class="modal-item-clear-button w-100"><?php esc_html_e( 'Borrar selección', 'bulk-product-import' ); ?></button>
+                                                                <button type="button" class="modal-item-clear-button w-100"
+                                                                    @click="removeData(item)"><?php esc_html_e( 'Borrar selección', 'bulk-product-import' ); ?></button>
                                                             </div>
                                                         </div>
                                                     </template>

@@ -586,3 +586,6 @@ input[disabled],
 .modal-item-radio{
   margin-bottom: -10px;
 }
+.be-selected {
+  color: #24a148 !important;
+}
