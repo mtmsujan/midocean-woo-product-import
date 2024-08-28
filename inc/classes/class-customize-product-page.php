@@ -241,14 +241,22 @@ class Customize_Product_Page {
             const printResponse = JSON.parse(data);
             document.addEventListener("alpine:init", () => {
 
+                Alpine.data("quantityChecker", () => ({
+                    quantity: null,
+                    get hasQty() {
+                        return this.quantity && this.quantity > 0;
+                    }
+                }));
+
                 Alpine.data("printData", () => ({
+                    
                     printData: printResponse,
                     cachedSelectedPrintData: [],
                     selectedPrintData: [],
 
                     // Function to add data only if it doesn't already exist in selectedPrintData
                     addData(item, maxColors) {
-                        
+
                         // Check if item with the same position_id already exists
                         let isDuplicate = this.selectedPrintData.some(selectedItem => selectedItem.position_id === item.position_id);
 
@@ -295,14 +303,6 @@ class Customize_Product_Page {
                         return this.selectedPrintData.some(selectedItem => selectedItem.position_id === position_id);
                     }
                 }));
-
-
-                /**
-                 * TODO:
-                 * Prevent duplicates item adding to selectedPrintData.
-                 * If item is already in selectedPrintData, disabled the modal single item adding .disabled class to modal-inner-single-item.
-                 * Item will be check via item.position_id. every item has unique id and this is item.position_id. item.position_id like T-SHIRT, T-SHIRT BACK, T-SHIRT TS etc etc.
-                 */
 
             });
         </script>
@@ -494,8 +494,7 @@ class Customize_Product_Page {
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <template x-for="(item, index) in printData.printing_positions">
-                                                        <div
-                                                            :class="!isItemSelected(item.position_id) ? '' : 'disabled'"
+                                                        <div :class="!isItemSelected(item.position_id) ? '' : 'disabled'"
                                                             class="col-sm-3 border-right mb-3 modal-inner-single-item position-relative">
                                                             <!-- Modal Header: Position title and dimensions -->
                                                             <div class="modal-item-header">
