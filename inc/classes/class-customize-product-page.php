@@ -245,26 +245,65 @@ class Customize_Product_Page {
                     printData: printResponse,
                     cachedSelectedPrintData: [],
                     selectedPrintData: [],
+
+                    // Function to add data only if it doesn't already exist in selectedPrintData
                     addData(item, maxColors) {
-                        this.cachedSelectedPrintData.push({
+                        
+                        // Check if item with the same position_id already exists
+                        let isDuplicate = this.selectedPrintData.some(selectedItem => selectedItem.position_id === item.position_id);
+
+                        let newItem = {
                             ...item,
                             maxColors: maxColors
-                        });
+                        };
+
+                        // Check if item already exists in cachedSelectedPrintData return
+                        if (this.cachedSelectedPrintData.indexOf(newItem) > -1) {
+                            return;
+                        }
+
+                        if (!isDuplicate) {
+                            this.cachedSelectedPrintData.push(newItem);
+                        } else {
+                            // If duplicate, display a message or perform an action (optional)
+                            console.log(`Item with position_id ${item.position_id} already added.`);
+                        }
                     },
+
                     addCachedData() {
+                        // Add unique items to selectedPrintData
                         this.selectedPrintData = [...this.cachedSelectedPrintData];
                     },
+
                     removeData(item) {
                         let index = this.selectedPrintData.indexOf(item);
-                        this.selectedPrintData.splice(index, 1);
+                        if (index > -1) {
+                            this.selectedPrintData.splice(index, 1);
+                        }
                     },
+
                     coverImage(item) {
-                        return item.images[0].print_position_image_with_area
+                        return item.images[0].print_position_image_with_area;
                     },
+
                     techniques(item) {
                         return item.printing_techniques;
                     },
+
+                    isItemSelected(position_id) {
+                        // Check if item with the same position_id already exists in selectedPrintData
+                        return this.selectedPrintData.some(selectedItem => selectedItem.position_id === position_id);
+                    }
                 }));
+
+
+                /**
+                 * TODO:
+                 * Prevent duplicates item adding to selectedPrintData.
+                 * If item is already in selectedPrintData, disabled the modal single item adding .disabled class to modal-inner-single-item.
+                 * Item will be check via item.position_id. every item has unique id and this is item.position_id. item.position_id like T-SHIRT, T-SHIRT BACK, T-SHIRT TS etc etc.
+                 */
+
             });
         </script>
         <div class="product-configurator-row pb-5">
@@ -456,13 +495,14 @@ class Customize_Product_Page {
                                                 <div class="row">
                                                     <template x-for="(item, index) in printData.printing_positions">
                                                         <div
+                                                            :class="!isItemSelected(item.position_id) ? '' : 'disabled'"
                                                             class="col-sm-3 border-right mb-3 modal-inner-single-item position-relative">
                                                             <!-- Modal Header: Position title and dimensions -->
                                                             <div class="modal-item-header">
                                                                 <span class="modal-item-title d-block" x-text="item.position_id">
                                                                 </span>
                                                                 <span class="modal-item-dimensions d-block"
-                                                                    x-text="`${item['max_print_size_height']} mm x  ${item['max_print_size_width']} mm`">
+                                                                    x-text="`${item['max_print_size_height']} ${item['print_size_unit']} x  ${item['max_print_size_width']} ${item['print_size_unit']}`">
                                                                 </span>
                                                             </div>
                                                             <!-- Modal Image: Display the print position image -->
@@ -483,7 +523,7 @@ class Customize_Product_Page {
                                                                                     @change="$el.value && addData(item, technique.max_colours)"
                                                                                     type="radio" class="m-0"
                                                                                     :name="`print_data_${index}_technique`"
-                                                                                    :value="technique.max_colours">
+                                                                                    :value="technique.id">
                                                                                 <!-- Static Label for the printing technique radio input -->
                                                                                 Transfer
                                                                                 serigráfico</label>
