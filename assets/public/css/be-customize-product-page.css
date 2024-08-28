@@ -583,9 +583,23 @@ input[disabled],
   cursor: not-allowed !important;
 }
 
-.modal-item-radio{
+.modal-item-radio {
   margin-bottom: -10px;
 }
 .be-selected {
   color: #24a148 !important;
+}
+
+.be-add-to-cart-btn {
+  color: #fff !important;
+  background-color: #24a148 !important;
+  border-color: #24a148 !important;
+}
+
+.be-add-to-cart-btn .button-text {
+  text-transform: capitalize !important;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
 }

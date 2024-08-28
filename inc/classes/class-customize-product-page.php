@@ -615,30 +615,29 @@ class Customize_Product_Page {
                                     <!-- <span>(cantidad: <span x-text="quantityFieldValue"></span> )</span> -->
                                     <span x-text="quantityFieldValue ? `(cantidad: ${quantityFieldValue})` : ''"></span>
                                 </div>
-                                <div class="value" x-text="productPrice ? `${productPrice} <?php echo $this->currency_symbol;?>` : '-'"></div>
+                                <div class="value"
+                                    x-text="productPrice ? `${productPrice} <?php echo $this->currency_symbol; ?>` : '-'"></div>
                             </div>
                             <div class="grand-totals underline">
                                 <div class="summary-row grand-total">
                                     <div><?php esc_html_e( 'Total (incl. transporte)', 'bulk-product-import' ) ?></div>
-                                    <div class="total" x-text="productPrice ? `${productPrice} <?php echo $this->currency_symbol;?>` : '-'"></div>
+                                    <div class="total"
+                                        x-text="productPrice ? `${productPrice} <?php echo $this->currency_symbol; ?>` : '-'">
+                                    </div>
                                 </div>
                                 <div class="summary-row price-per-item">
                                     <div class="price-per-item-subheading">
                                         <?php esc_html_e( 'Precio por artículo', 'bulk-product-import' ) ?>
                                     </div>
-                                    <div class="value" >-</div>
+                                    <div class="value">-</div>
                                 </div>
                             </div>
                         </div>
                         <div class="personalize-button">
-                            <div class="button-wrapper">
-                                <div>
-                                    <a href="#"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?></a>
-                                </div>
-                                <div>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </div>
-                            </div>
+                            <button class="be-add-to-cart-btn w-100 d-flex align-items-center justify-content-between p-3">
+                                <span class="button-text"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?></span>
+                                <span><i class="fa-solid fa-arrow-right"></i></span>
+                            </button>
                         </div>
                     </div>
                 </div>
