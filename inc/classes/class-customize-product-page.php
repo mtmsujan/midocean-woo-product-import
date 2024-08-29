@@ -77,7 +77,6 @@ class Customize_Product_Page {
             $country_of_origin         = get_post_meta( $product_id, '_country_of_origin', true );
             $type_of_products          = get_post_meta( $product_id, '_type_of_products', true );
             $commodity_code            = get_post_meta( $product_id, '_commodity_code', true );
-            $number_of_print_positions = get_post_meta( $product_id, '_number_of_print_positions', true );
             $brand                     = get_post_meta( $product_id, '_brand', true );
             $product_class             = get_post_meta( $product_id, '_product_class', true );
             $length                    = get_post_meta( $product_id, '_length', true );
@@ -253,7 +252,7 @@ class Customize_Product_Page {
                     get hasQty() {
                         return this.quantity && this.quantity > 0;
                     }
-                }));
+                })),
 
                 Alpine.data("printData", () => ({
 

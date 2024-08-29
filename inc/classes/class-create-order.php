@@ -59,10 +59,15 @@ class Create_Order {
                 'po_number'               => $order_id,
                 'timestamp'               => date( 'Y-m-d H:i:s' ),
                 'contact_name'            => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
-                'order_type'              => 'SAMPLE',
+                'order_type'              => 'SAMPLE', // TODO: make dynamic order type. enum: SAMPLE, PRINT
             ],
             'order_lines'  => $order_items,
         ];
+
+        /**
+         * TODO: Make dynamic order type. if simple than order with simple order payload.
+         * TODO: if order is PRINT then order with print order payload
+         */
 
         $this->put_program_logs( json_encode( $payload, JSON_PRETTY_PRINT ) );
 
@@ -94,7 +99,7 @@ class Create_Order {
         return $response;
     }
 
-    function put_program_logs( $data ) {
+    public function put_program_logs( $data ) {
 
         // Ensure directory exists to store response data
         $directory = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/program_logs/';
