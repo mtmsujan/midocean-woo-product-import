@@ -8,6 +8,7 @@ class Customize_Product_Page {
 
     use Singleton;
 
+    private $product_id;
     private $product_number;
     private $product_name;
     private $attachment_id;
@@ -41,6 +42,7 @@ class Customize_Product_Page {
 
             // get product id
             $product_id = $product->get_id();
+            $this->product_id = $product_id;
             // Get product number
             $this->product_number = $product->get_sku();
             // Get product name
@@ -332,7 +334,7 @@ class Customize_Product_Page {
 
             });
         </script>
-        <div class="product-configurator-row pb-5">
+        <div class="product-configurator-row pb-5" data-product-id="<?php echo $this->product_id;?>">
             <div class="product-configurator-heading">
                 <div class="row align-items-end justify-content-between pb-2 product-configurator-heading-portion">
                     <div class="col-sm-8">

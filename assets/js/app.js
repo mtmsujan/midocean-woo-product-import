@@ -6,6 +6,13 @@
       active: false,
     });
 
+    // Handle ajax request for add to cart
+    $(".be-add-to-cart-btn-without-configure").click(function (e) { 
+      e.preventDefault();
+      
+      // Get product id
+      let productId = $(this).data("product-id");
+    });
 
   });
 })(jQuery);
