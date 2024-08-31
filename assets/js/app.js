@@ -52,11 +52,11 @@
             checkIcon.attr("src", data.check_icon_url);
           } else {
             let errorMessage = data.message;
-            // console.log("Error: " + errorMessage);
+            console.log("Error: " + errorMessage);
           }
         },
         error: function (xhr, status, error) {
-          console.log("AJAX Error: " + error); // Log any AJAX errors
+          console.log("AJAX Error: " + error);
           button.removeClass("disabled");
           addToCartLoader.removeClass("loader");
         },

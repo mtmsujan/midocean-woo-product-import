@@ -32,11 +32,16 @@ class Create_Order {
         // get api key
         $api_key = get_option( 'be-api-key' ) ?? '';
 
-        $order_id                  = $order->get_id();
-        $order_date                = $order->get_date_created()->date( 'Y-m-d' );
-        $contact_email             = $order->get_billing_email();
-        $billing_address           = $order->get_address( 'billing' );
-        $shipping_address          = $billing_address;
+        $order_id         = $order->get_id();
+        $order_date       = $order->get_date_created()->date( 'Y-m-d' );
+        $contact_email    = $order->get_billing_email();
+        $billing_address  = $order->get_address( 'billing' );
+        $shipping_address = $billing_address;
+        $contact_name = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
+        
+        // Check if the order type is NORMAL or PRINT
+        // $order_type       = 'NORMAL';
+        $order_type       = 'PRINT';
 
         $order_items = [];
         foreach ( $order->get_items() as $item_id => $item ) {
@@ -49,7 +54,8 @@ class Create_Order {
             ];
         }
 
-        $payload = [
+        // Create normal order payload array
+        $normal_order_payload = [
             'order_header' => [
                 'preferred_shipping_date' => $order_date,
                 'check_price'             => 'false',
@@ -59,15 +65,87 @@ class Create_Order {
                 'po_number'               => $order_id,
                 'timestamp'               => date( 'Y-m-d H:i:s' ),
                 'contact_name'            => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
-                'order_type'              => 'SAMPLE', // TODO: make dynamic order type. enum: SAMPLE, PRINT
+                'order_type'              => 'NORMAL',
             ],
             'order_lines'  => $order_items,
         ];
 
-        /**
-         * TODO: Make dynamic order type. if simple than order with simple order payload.
-         * TODO: if order is PRINT then order with print order payload
-         */
+        // Create print order payload array
+        $print_order_payload = [
+            'order_header' => [
+                'preferred_shipping_date' => $order_date,
+                'currency'                => $order->get_currency(),
+                'contact_email'           => $contact_email,
+                'check_price'             => 'false',
+                'shipping_address'        => [
+                    'contact_name'  => $contact_name,
+                    'company_name'  => $billing_address['company'] ?? '',
+                    'street1'       => $billing_address['address_1'],
+                    'postal_code'   => $billing_address['postcode'],
+                    'city'          => $billing_address['city'],
+                    'region'        => $billing_address['state'],
+                    'country'       => $billing_address['country'],
+                    'email'         => $contact_email,
+                    'phone'         => $billing_address['phone'] ?? ''
+                ],
+                'po_number'     => $order_id,
+                'timestamp'     => date( 'Y-m-d\TH:i:s' ),
+                'contact_name'  => $contact_name,
+                'order_type'    => 'PRINT',
+            ],
+            'order_lines' => []
+        ];
+
+        foreach ( $order->get_items() as $item_id => $item ) {
+
+            $product   = $item->get_product();
+            $product_id = $product->get_id();
+            $master_code = get_post_meta( $product_id, '_master_code', true );
+            $color_code = get_post_meta( $product_id, '_color_code', true );
+            $order_line_id = $item_id;
+            $sku = $product->get_sku();
+            $quantity = $item->get_quantity();
+            $expected_price = $item->get_total();
+
+            // Populate printing positions and print items (this data may come from custom fields)
+            $printing_positions = [
+                [
+                    'id'                    => 'FRONT',
+                    'print_size_height'     => '190',
+                    'print_size_width'      => '120',
+                    'printing_technique_id' => 'S2',
+                    'number_of_print_colors'=> '1',
+                    'print_artwork_url'     => 'your logo URL', // Replace: with actual URL
+                    'print_mockup_url'      => 'your mockup URL', // Replace: with actual URL
+                    'print_instruction'     => 'Print instructions',
+                    'print_colors'          => [
+                        [
+                            'color' => 'Pantone 4280C'
+                        ]
+                    ]
+                ]
+            ];
+
+            $print_items = [
+                [
+                    'item_color_number' => $color_code,
+                    'quantity'          => $quantity
+                ]
+            ];
+
+            // Add item to order lines in the print order payload
+            $print_order_payload['order_lines'][] = [
+                'order_line_id'      => $order_line_id,
+                'master_code'        => $master_code,
+                'quantity'           => $quantity,
+                'expected_price'     => $expected_price,
+                'printing_positions' => $printing_positions,
+                'print_items'        => $print_items
+            ];
+        }
+
+        // Choose the appropriate payload based on the order type
+        $payload = $order_type === 'PRINT' ? $print_order_payload : $normal_order_payload;
 
         $this->put_program_logs( 'payload: ' . json_encode( $payload, JSON_PRETTY_PRINT ) );
 

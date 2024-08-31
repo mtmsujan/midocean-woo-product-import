@@ -72,6 +72,7 @@ function products_import_woocommerce() {
                 $color_group       = '';
                 $pms_color         = '';
                 $gtin              = '';
+                $color_code        = null;
 
                 $images = [];
                 // Loop through variants for extract images
@@ -85,6 +86,7 @@ function products_import_woocommerce() {
                         $color_group       = $variant['color_group'];
                         $pms_color         = $variant['pms_color'];
                         $gtin              = $variant['gtin'];
+                        $color_code        = $variant['color_code'];
 
                         // Get digital assets
                         $digital_assets = $variant['digital_assets'];
@@ -207,6 +209,7 @@ function products_import_woocommerce() {
                     update_post_meta( $product_id, '_color_group', $color_group );
                     update_post_meta( $product_id, '_pms_color', $pms_color );
                     update_post_meta( $product_id, '_ean', $gtin );
+                    update_post_meta( $product_id, '_color_code', $color_code );
 
                     // Display out of stock message if stock is 0
                     if ( $quantity <= 0 ) {

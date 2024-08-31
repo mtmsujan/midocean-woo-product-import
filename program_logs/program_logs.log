@@ -430,125 +430,117 @@ Product Print Data:
     }
 ] - 2024-08-27 05:27:05
 
-{
-    "order_header": {
-        "preferred_shipping_date": "2024-08-31",
-        "check_price": "false",
-        "currency": "EUR",
-        "contact_email": "ffshahjalal@gmail.com",
-        "shipping_address": {
-            "first_name": "",
-            "last_name": "",
-            "company": "",
-            "address_1": "",
-            "address_2": "",
-            "city": "",
-            "state": "",
-            "postcode": "",
-            "country": "",
-            "phone": "",
-            "email": "ffshahjalal@gmail.com"
-        },
-        "po_number": 16410,
-        "timestamp": "2024-08-31 08:58:56",
-        "contact_name": "Shah Jalal",
-        "order_type": "SAMPLE"
-    },
-    "order_lines": [
-        {
-            "order_line_id": 1,
-            "sku": "CX1360-05",
-            "quantity": 1,
-            "expected_price": "313"
-        }
-    ]
-} - 2024-08-31 08:58:56
-
- - 2024-08-31 08:58:56
-
 payload: {
     "order_header": {
         "preferred_shipping_date": "2024-08-31",
-        "check_price": "false",
         "currency": "EUR",
         "contact_email": "ffshahjalal@gmail.com",
-        "shipping_address": {
-            "first_name": "",
-            "last_name": "",
-            "company": "",
-            "address_1": "",
-            "address_2": "",
-            "city": "",
-            "state": "",
-            "postcode": "",
-            "country": "",
-            "phone": "",
-            "email": "ffshahjalal@gmail.com"
-        },
-        "po_number": 16411,
-        "timestamp": "2024-08-31 09:10:04",
-        "contact_name": "Shah Jalal",
-        "order_type": "SAMPLE"
-    },
-    "order_lines": [
-        {
-            "order_line_id": 2,
-            "sku": "AR1804-37",
-            "quantity": 1,
-            "expected_price": "107"
-        }
-    ]
-} - 2024-08-31 09:10:04
-
-Billing Address: {
-    "first_name": "Shah",
-    "last_name": "Jalal",
-    "company": "Imjol",
-    "address_1": "Uttara",
-    "address_2": "Dhaka",
-    "city": "Dhaka",
-    "state": "BD-13",
-    "postcode": "1230",
-    "country": "BD",
-    "email": "ffshahjalal@gmail.com",
-    "phone": "01759277132"
-} - 2024-08-31 09:10:04
-
- - 2024-08-31 09:10:04
-
-payload: {
-    "order_header": {
-        "preferred_shipping_date": "2024-08-31",
         "check_price": "false",
-        "currency": "EUR",
-        "contact_email": "ffshahjalal@gmail.com",
         "shipping_address": {
-            "first_name": "Shah",
-            "last_name": "Jalal",
-            "company": "Imjol",
-            "address_1": "Uttara",
-            "address_2": "Dhaka",
+            "contact_name": "Shah Jalal",
+            "company_name": "Imjol",
+            "street1": "Uttara",
+            "postal_code": "1230",
             "city": "Dhaka",
-            "state": "BD-13",
-            "postcode": "1230",
+            "region": "BD-13",
             "country": "BD",
             "email": "ffshahjalal@gmail.com",
             "phone": "01759277132"
         },
-        "po_number": 16412,
-        "timestamp": "2024-08-31 09:15:33",
+        "po_number": 16428,
+        "timestamp": "2024-08-31T10:22:48",
         "contact_name": "Shah Jalal",
-        "order_type": "SAMPLE"
+        "order_type": "PRINT"
     },
     "order_lines": [
         {
-            "order_line_id": 3,
-            "sku": "AR1804-37",
+            "order_line_id": 4,
+            "master_code": "CX1476",
             "quantity": 1,
-            "expected_price": "107"
+            "expected_price": "16",
+            "printing_positions": [
+                {
+                    "id": "FRONT",
+                    "print_size_height": "190",
+                    "print_size_width": "120",
+                    "printing_technique_id": "S2",
+                    "number_of_print_colors": "1",
+                    "print_artwork_url": "your logo URL",
+                    "print_mockup_url": "your mockup URL",
+                    "print_instruction": "Print instructions",
+                    "print_colors": [
+                        {
+                            "color": "Pantone 4280C"
+                        }
+                    ]
+                }
+            ],
+            "print_items": [
+                {
+                    "item_color_number": "40",
+                    "quantity": 1
+                }
+            ]
         }
     ]
-} - 2024-08-31 09:15:33
+} - 2024-08-31 10:22:48
 
- - 2024-08-31 09:15:33
+ - 2024-08-31 10:22:49
+
+payload: {
+    "order_header": {
+        "preferred_shipping_date": "2024-08-31",
+        "currency": "EUR",
+        "contact_email": "ffshahjalal@gmail.com",
+        "check_price": "false",
+        "shipping_address": {
+            "contact_name": "Shah Jalal",
+            "company_name": "Imjol",
+            "street1": "Uttara",
+            "postal_code": "1230",
+            "city": "Dhaka",
+            "region": "BD-13",
+            "country": "BD",
+            "email": "ffshahjalal@gmail.com",
+            "phone": "01759277132"
+        },
+        "po_number": 16429,
+        "timestamp": "2024-08-31T10:25:25",
+        "contact_name": "Shah Jalal",
+        "order_type": "PRINT"
+    },
+    "order_lines": [
+        {
+            "order_line_id": 5,
+            "master_code": "CX1476",
+            "quantity": 5,
+            "expected_price": "80",
+            "printing_positions": [
+                {
+                    "id": "FRONT",
+                    "print_size_height": "190",
+                    "print_size_width": "120",
+                    "printing_technique_id": "S2",
+                    "number_of_print_colors": "1",
+                    "print_artwork_url": "your logo URL",
+                    "print_mockup_url": "your mockup URL",
+                    "print_instruction": "Print instructions",
+                    "print_colors": [
+                        {
+                            "color": "Pantone 4280C"
+                        }
+                    ]
+                }
+            ],
+            "print_items": [
+                {
+                    "item_color_number": "40",
+                    "quantity": 5
+                }
+            ]
+        }
+    ]
+} - 2024-08-31 10:25:25
+
+ - 2024-08-31 10:25:25
 

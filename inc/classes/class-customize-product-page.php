@@ -763,32 +763,44 @@ class Customize_Product_Page {
     }
 
     public function custom_add_to_cart_handler() {
+        try {
+            // Get product values
+            $product_id = intval( $_POST['product_id'] ) ?? 0;
+            $quantity   = intval( $_POST['quantity'] ) ?? 0;
 
-        // Get product values
-        $product_id = intval( $_POST['product_id'] ) ?? 0;
-        $quantity   = intval( $_POST['quantity'] ) ?? 0;
+            // Validate the product exists and can be added to cart
+            $product = wc_get_product( $product_id );
+            if ( !$product ) {
+                throw new Exception( 'Invalid product ID' );
+            }
 
-        // Validate the product exists and can be added to cart
-        $product = wc_get_product( $product_id );
-        if ( !$product ) {
-            wp_send_json_error( [ 'message' => 'Invalid product ID' ] );
-            wp_die();
-        }
+            // Get product quantity
+            $product_quantity = $product->get_stock_quantity();
+            if ( $product_quantity < $quantity ) {
+                throw new Exception( 'Insufficient product quantity' );
+            }
 
-        // add to cart
-        $cart_item_key = WC()->cart->add_to_cart( $product_id, $quantity );
+            // Add to cart
+            $cart_item_key = WC()->cart->add_to_cart( $product_id, $quantity );
 
-        $success_response = [
-            'success'        => true,
-            'message'        => 'Product added to cart',
-            'cart_page_url'  => wc_get_cart_url(),
-            'check_icon_url' => BULK_PRODUCT_IMPORT_PLUGIN_URL . '/assets/images/check.png',
-        ];
+            // Prepare success response
+            $success_response = [
+                'success'        => true,
+                'message'        => 'Product added to cart',
+                'cart_page_url'  => wc_get_cart_url(),
+                'check_icon_url' => BULK_PRODUCT_IMPORT_PLUGIN_URL . '/assets/images/check.png',
+            ];
 
-        if ( $cart_item_key ) {
-            wp_send_json_success( $success_response );
-        } else {
-            wp_send_json_error( [ 'success' => false, 'message' => 'Failed to add product to cart' ] );
+            // Check if product was successfully added to cart
+            if ( $cart_item_key ) {
+                wp_send_json_success( $success_response );
+            } else {
+                throw new Exception( 'Failed to add product to cart' );
+            }
+
+        } catch (Exception $e) {
+            // Handle exceptions and send error response
+            wp_send_json_error( [ 'success' => false, 'message' => $e->getMessage() ] );
         }
 
         wp_die(); // Required for WordPress AJAX
