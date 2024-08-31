@@ -281,8 +281,6 @@ class Customize_Product_Page {
                                 ...item,
                                 maxColors: maxColors
                             });
-
-                            console.log(this.selectedPrintData);
                         },
 
                         findCachedData(item) {
