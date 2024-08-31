@@ -267,7 +267,7 @@ class Customize_Product_Page {
                         quantityFieldValue: null,
 
                         // Function to add data only if it doesn't already exist in selectedPrintData
-                        addData(item, maxColors) {
+                        addData(item, maxColors, selectedTechniqueId) {
                             // Check item already exists
                             let itemExists = this.findCachedData(item);
                             // If item exists change it's maxColors and replace it. If not, add it
@@ -279,7 +279,8 @@ class Customize_Product_Page {
                             }
                             this.cachedSelectedPrintData.push({
                                 ...item,
-                                maxColors: maxColors
+                                maxColors: maxColors,
+                                selectedTechniqueId:selectedTechniqueId
                             });
                         },
 
@@ -564,7 +565,7 @@ class Customize_Product_Page {
                                                                                 :class="{'be-selected': findCachedData(item)?.maxColors == technique.max_colours}">
                                                                                 <!-- Radio input for printing technique -->
                                                                                 <input
-                                                                                    @change="$el.value && addData(item, technique.max_colours)"
+                                                                                    @change="$el.value && addData(item, technique.max_colours, technique.id)"
                                                                                     type="radio" class="m-0"
                                                                                     :disabled="isItemSelected(item)"
                                                                                     :name="`print_data_${index}_technique`"
