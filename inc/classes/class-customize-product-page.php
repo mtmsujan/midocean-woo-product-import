@@ -281,6 +281,8 @@ class Customize_Product_Page {
                                 ...item,
                                 maxColors: maxColors
                             });
+
+                            console.log(this.selectedPrintData);
                         },
 
                         findCachedData(item) {
@@ -331,6 +333,16 @@ class Customize_Product_Page {
                             this.quantityFieldValue = quantity;
                             let calculation = (quantity * price);
                             this.productPrice = calculation;
+                        },
+                        logSelectedData() {
+                            console.log(this.selectedPrintData);
+                        },
+                        savePrintPositionsDataToCookie(positions) {
+                            // Convert the positions object/array to a JSON string
+                            const jsonData = JSON.stringify(positions);
+
+                            // Set the cookie with the key 'printing_positions' and the JSON data
+                            document.cookie = `printing_positions=${jsonData}; path=/; max-age=${60 * 60 * 24};`; // 24 hours expiration
                         }
                     }));
 
@@ -637,7 +649,8 @@ class Customize_Product_Page {
                             </div>
                         </div>
                         <div class="personalize-button">
-                            <button class="be-add-to-cart-btn w-100 d-flex align-items-center justify-content-between p-3">
+                            <button class="be-add-to-cart-btn w-100 d-flex align-items-center justify-content-between p-3"
+                                @click="savePrintPositionsDataToCookie(selectedPrintData)">
                                 <span class="button-text"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?></span>
                                 <span><i class="fa-solid fa-arrow-right"></i></span>
                             </button>
