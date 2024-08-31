@@ -334,7 +334,7 @@ class Customize_Product_Page {
 
             });
         </script>
-        <div class="product-configurator-row pb-5" data-product-id="<?php echo $this->product_id;?>">
+        <div class="product-configurator-row pb-5" >
             <div class="product-configurator-heading">
                 <div class="row align-items-end justify-content-between pb-2 product-configurator-heading-portion">
                     <div class="col-sm-8">
@@ -649,7 +649,7 @@ class Customize_Product_Page {
                                 <span class="button-text"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?></span>
                                 <span><i class="fa-solid fa-arrow-right"></i></span>
                             </button>
-                            <button :class="hasQty ? '' : 'd-none'" class="be-add-to-cart-btn-without-configure w-100 d-flex align-items-center justify-content-between mt-2 p-3">
+                            <button :class="hasQty ? '' : 'd-none'" class="be-add-to-cart-btn-without-configure w-100 d-flex align-items-center justify-content-between mt-2 p-3" data-product-id="<?php echo $this->product_id;?>">
                                 <span class="button-text"><?php esc_html_e( 'Añadir al carrito sin marcaje', 'bulk-product-import' ) ?></span>
                                 <span><i class="fa-solid fa-arrow-right"></i></span>
                             </button>
