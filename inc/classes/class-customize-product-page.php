@@ -274,6 +274,7 @@ class Customize_Product_Page {
                             if (itemExists) {
                                 let index = this.cachedSelectedPrintData.indexOf(itemExists);
                                 itemExists.maxColors = maxColors;
+                                itemExists.selectedTechniqueId = selectedTechniqueId;
                                 this.cachedSelectedPrintData.splice(index, 1, itemExists);
                                 return;
                             }
@@ -282,6 +283,9 @@ class Customize_Product_Page {
                                 maxColors: maxColors,
                                 selectedTechniqueId:selectedTechniqueId
                             });
+                        },
+                        isTechniqueSelected(item, technique){
+                            return this.findCachedData(item)?.selectedTechniqueId == technique.id;
                         },
 
                         findCachedData(item) {
@@ -562,7 +566,7 @@ class Customize_Product_Page {
                                                                         <div
                                                                             class="d-flex align-items-center justify-content-between">
                                                                             <label class="m-0 cursor-pointer"
-                                                                                :class="{'be-selected': findCachedData(item)?.maxColors == technique.max_colours}">
+                                                                                :class="{'be-selected': isTechniqueSelected(item, technique)}">
                                                                                 <!-- Radio input for printing technique -->
                                                                                 <input
                                                                                     @change="$el.value && addData(item, technique.max_colours, technique.id)"
@@ -570,7 +574,7 @@ class Customize_Product_Page {
                                                                                     :disabled="isItemSelected(item)"
                                                                                     :name="`print_data_${index}_technique`"
                                                                                     :value="technique.id"
-                                                                                    :checked="findCachedData(item)?.maxColors == technique.max_colours">
+                                                                                    :checked="isTechniqueSelected(item, technique)">
                                                                                 <!-- Static Label for the printing technique radio input -->
                                                                                 Transfer
                                                                                 serigráfico
