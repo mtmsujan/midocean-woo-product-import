@@ -596,10 +596,17 @@ input[disabled],
   border-color: #24a148 !important;
 }
 
-.be-add-to-cart-btn .button-text {
+.be-add-to-cart-btn .button-text,
+.be-add-to-cart-btn-without-configure .button-text {
   text-transform: capitalize !important;
   font-family: "Noto Sans";
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+}
+
+.be-add-to-cart-btn-without-configure {
+  color: #fff !important;
+  background-color: #393939 !important;
+  border-color: #393939 !important;
 }

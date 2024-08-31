@@ -633,8 +633,22 @@ class Customize_Product_Page {
                             </div>
                         </div>
                         <div class="personalize-button">
+
+                            <?php 
+                            /**
+                             * TODO:
+                             * Steps:
+                             * 1. When click on be-add-to-cart-btn get product quantity, calculated price (productPrice), printing options (selectedPrintData)  if exists and save to cookie for 24 hours. and add to cart with these values.
+                             * Product id stored in $this->product_number;
+                             */
+                            ?>
+
                             <button class="be-add-to-cart-btn w-100 d-flex align-items-center justify-content-between p-3">
                                 <span class="button-text"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?></span>
+                                <span><i class="fa-solid fa-arrow-right"></i></span>
+                            </button>
+                            <button class="be-add-to-cart-btn-without-configure w-100 d-flex align-items-center justify-content-between mt-2 p-3">
+                                <span class="button-text"><?php esc_html_e( 'Añadir al carrito sin marcaje', 'bulk-product-import' ) ?></span>
                                 <span><i class="fa-solid fa-arrow-right"></i></span>
                             </button>
                         </div>
