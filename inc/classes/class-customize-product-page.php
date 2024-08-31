@@ -32,6 +32,8 @@ class Customize_Product_Page {
         add_shortcode( 'display_product_sku', [ $this, 'display_product_sku_callback' ] );
         add_shortcode( 'custom_product_configurator', [ $this, 'custom_product_configurator_callback' ] );
         add_shortcode( 'custom_product_configurator_mto_link', [ $this, 'custom_product_configurator_mto_link_callback' ] );
+        add_action( 'wp_ajax_custom_add_to_cart', [ $this, 'custom_add_to_cart_handler' ] );
+        add_action( 'wp_ajax_nopriv_custom_add_to_cart', [ $this, 'custom_add_to_cart_handler' ] );
     }
 
     public function display_product_info_callback() {
@@ -41,7 +43,7 @@ class Customize_Product_Page {
         if ( $product ) {
 
             // get product id
-            $product_id = $product->get_id();
+            $product_id       = $product->get_id();
             $this->product_id = $product_id;
             // Get product number
             $this->product_number = $product->get_sku();
@@ -73,44 +75,44 @@ class Customize_Product_Page {
             // $this->put_program_logs( $product_data );
 
             // Retrieve all metadata
-            $master_code               = get_post_meta( $product_id, '_master_code', true );
-            $this->master_code         = $master_code;
-            $master_id                 = get_post_meta( $product_id, '_master_id', true );
-            $country_of_origin         = get_post_meta( $product_id, '_country_of_origin', true );
-            $type_of_products          = get_post_meta( $product_id, '_type_of_products', true );
-            $commodity_code            = get_post_meta( $product_id, '_commodity_code', true );
-            $brand                     = get_post_meta( $product_id, '_brand', true );
-            $product_class             = get_post_meta( $product_id, '_product_class', true );
-            $length                    = get_post_meta( $product_id, '_length', true );
-            $length_unit               = get_post_meta( $product_id, '_length_unit', true );
-            $width                     = get_post_meta( $product_id, '_width', true );
-            $width_unit                = get_post_meta( $product_id, '_width_unit', true );
-            $height                    = get_post_meta( $product_id, '_height', true );
-            $height_unit               = get_post_meta( $product_id, '_height_unit', true );
-            $volume                    = get_post_meta( $product_id, '_volume', true );
-            $volume_unit               = get_post_meta( $product_id, '_volume_unit', true );
-            $gross_weight              = get_post_meta( $product_id, '_gross_weight', true );
-            $gross_weight_unit         = get_post_meta( $product_id, '_gross_weight_unit', true );
-            $net_weight                = get_post_meta( $product_id, '_net_weight', true );
-            $net_weight_unit           = get_post_meta( $product_id, '_net_weight_unit', true );
-            $outer_carton_quantity     = get_post_meta( $product_id, '_outer_carton_quantity', true );
-            $carton_length             = get_post_meta( $product_id, '_carton_length', true );
-            $carton_length_unit        = get_post_meta( $product_id, '_carton_length_unit', true );
-            $carton_width              = get_post_meta( $product_id, '_carton_width', true );
-            $carton_width_unit         = get_post_meta( $product_id, '_carton_width_unit', true );
-            $carton_height             = get_post_meta( $product_id, '_carton_height', true );
-            $carton_height_unit        = get_post_meta( $product_id, '_carton_height_unit', true );
-            $carton_volume             = get_post_meta( $product_id, '_carton_volume', true );
-            $carton_gross_weight_unit  = get_post_meta( $product_id, '_carton_gross_weight_unit', true );
-            $material                  = get_post_meta( $product_id, '_material', true );
-            $category_label1           = get_post_meta( $product_id, '_category_level1', true );
-            $category_label2           = get_post_meta( $product_id, '_category_level2', true );
-            $category_label3           = get_post_meta( $product_id, '_category_level3', true );
-            $color_description         = get_post_meta( $product_id, '_color_description', true );
-            $color_group               = get_post_meta( $product_id, '_color_group', true );
-            $pcl_status_description    = get_post_meta( $product_id, '_pcl_status_description', true );
-            $pms_color                 = get_post_meta( $product_id, '_pms_color', true );
-            $ean                       = get_post_meta( $product_id, '_ean', true ) ?? '';
+            $master_code              = get_post_meta( $product_id, '_master_code', true );
+            $this->master_code        = $master_code;
+            $master_id                = get_post_meta( $product_id, '_master_id', true );
+            $country_of_origin        = get_post_meta( $product_id, '_country_of_origin', true );
+            $type_of_products         = get_post_meta( $product_id, '_type_of_products', true );
+            $commodity_code           = get_post_meta( $product_id, '_commodity_code', true );
+            $brand                    = get_post_meta( $product_id, '_brand', true );
+            $product_class            = get_post_meta( $product_id, '_product_class', true );
+            $length                   = get_post_meta( $product_id, '_length', true );
+            $length_unit              = get_post_meta( $product_id, '_length_unit', true );
+            $width                    = get_post_meta( $product_id, '_width', true );
+            $width_unit               = get_post_meta( $product_id, '_width_unit', true );
+            $height                   = get_post_meta( $product_id, '_height', true );
+            $height_unit              = get_post_meta( $product_id, '_height_unit', true );
+            $volume                   = get_post_meta( $product_id, '_volume', true );
+            $volume_unit              = get_post_meta( $product_id, '_volume_unit', true );
+            $gross_weight             = get_post_meta( $product_id, '_gross_weight', true );
+            $gross_weight_unit        = get_post_meta( $product_id, '_gross_weight_unit', true );
+            $net_weight               = get_post_meta( $product_id, '_net_weight', true );
+            $net_weight_unit          = get_post_meta( $product_id, '_net_weight_unit', true );
+            $outer_carton_quantity    = get_post_meta( $product_id, '_outer_carton_quantity', true );
+            $carton_length            = get_post_meta( $product_id, '_carton_length', true );
+            $carton_length_unit       = get_post_meta( $product_id, '_carton_length_unit', true );
+            $carton_width             = get_post_meta( $product_id, '_carton_width', true );
+            $carton_width_unit        = get_post_meta( $product_id, '_carton_width_unit', true );
+            $carton_height            = get_post_meta( $product_id, '_carton_height', true );
+            $carton_height_unit       = get_post_meta( $product_id, '_carton_height_unit', true );
+            $carton_volume            = get_post_meta( $product_id, '_carton_volume', true );
+            $carton_gross_weight_unit = get_post_meta( $product_id, '_carton_gross_weight_unit', true );
+            $material                 = get_post_meta( $product_id, '_material', true );
+            $category_label1          = get_post_meta( $product_id, '_category_level1', true );
+            $category_label2          = get_post_meta( $product_id, '_category_level2', true );
+            $category_label3          = get_post_meta( $product_id, '_category_level3', true );
+            $color_description        = get_post_meta( $product_id, '_color_description', true );
+            $color_group              = get_post_meta( $product_id, '_color_group', true );
+            $pcl_status_description   = get_post_meta( $product_id, '_pcl_status_description', true );
+            $pms_color                = get_post_meta( $product_id, '_pms_color', true );
+            $ean                      = get_post_meta( $product_id, '_ean', true ) ?? '';
 
             // Generate dimensions by width and height with unit
             $dimensions = $width . ' x ' . $height . ' ' . $height_unit;
@@ -256,85 +258,85 @@ class Customize_Product_Page {
                     }
                 })),
 
-                Alpine.data("printData", () => ({
+                    Alpine.data("printData", () => ({
 
-                    printData: printResponse,
-                    cachedSelectedPrintData: [],
-                    selectedPrintData: [],
-                    productPrice: null,
-                    quantityFieldValue: null,
+                        printData: printResponse,
+                        cachedSelectedPrintData: [],
+                        selectedPrintData: [],
+                        productPrice: null,
+                        quantityFieldValue: null,
 
-                    // Function to add data only if it doesn't already exist in selectedPrintData
-                    addData(item, maxColors) {
-                        // Check item already exists
-                        let itemExists = this.findCachedData(item);
-                        // If item exists change it's maxColors and replace it. If not, add it
-                        if (itemExists) {
-                            let index = this.cachedSelectedPrintData.indexOf(itemExists);
-                            itemExists.maxColors = maxColors;
-                            this.cachedSelectedPrintData.splice(index, 1, itemExists);
-                            return;
+                        // Function to add data only if it doesn't already exist in selectedPrintData
+                        addData(item, maxColors) {
+                            // Check item already exists
+                            let itemExists = this.findCachedData(item);
+                            // If item exists change it's maxColors and replace it. If not, add it
+                            if (itemExists) {
+                                let index = this.cachedSelectedPrintData.indexOf(itemExists);
+                                itemExists.maxColors = maxColors;
+                                this.cachedSelectedPrintData.splice(index, 1, itemExists);
+                                return;
+                            }
+                            this.cachedSelectedPrintData.push({
+                                ...item,
+                                maxColors: maxColors
+                            });
+                        },
+
+                        findCachedData(item) {
+                            // Check item already exists
+                            return this.cachedSelectedPrintData.filter(selectedItem => selectedItem.position_id === item.position_id).pop();
+                        },
+                        findSelectedData(item) {
+                            // Check item already exists
+                            return this.selectedPrintData.filter(selectedItem => selectedItem.position_id === item.position_id).pop();
+                        },
+
+                        addCachedData() {
+                            // Add unique items to selectedPrintData
+                            this.selectedPrintData = [...this.cachedSelectedPrintData];
+                        },
+
+                        removeData(item) {
+                            this.removeCachedData(this.findCachedData(item));
+                            this.removeSelectedData(this.findSelectedData(item));
+                        },
+                        removeCachedData(item) {
+                            let index = this.cachedSelectedPrintData.indexOf(item);
+                            if (index > -1) {
+                                this.cachedSelectedPrintData.splice(index, 1);
+                            }
+                        },
+                        removeSelectedData(item) {
+                            let index = this.selectedPrintData.indexOf(item);
+                            if (index > -1) {
+                                this.selectedPrintData.splice(index, 1);
+                            }
+                        },
+
+                        coverImage(item) {
+                            return item.images[0].print_position_image_with_area;
+                        },
+
+                        techniques(item) {
+                            return item.printing_techniques;
+                        },
+
+                        isItemSelected(item) {
+                            // Check if item with the same position_id already exists in selectedPrintData
+                            return this.findSelectedData(item);
+                        },
+
+                        priceCalculation(quantity, price) {
+                            this.quantityFieldValue = quantity;
+                            let calculation = (quantity * price);
+                            this.productPrice = calculation;
                         }
-                        this.cachedSelectedPrintData.push({
-                            ...item,
-                            maxColors: maxColors
-                        });
-                    },
-
-                    findCachedData(item) {
-                        // Check item already exists
-                        return this.cachedSelectedPrintData.filter(selectedItem => selectedItem.position_id === item.position_id).pop();
-                    },
-                    findSelectedData(item) {
-                        // Check item already exists
-                        return this.selectedPrintData.filter(selectedItem => selectedItem.position_id === item.position_id).pop();
-                    },
-
-                    addCachedData() {
-                        // Add unique items to selectedPrintData
-                        this.selectedPrintData = [...this.cachedSelectedPrintData];
-                    },
-
-                    removeData(item) {
-                        this.removeCachedData(this.findCachedData(item));
-                        this.removeSelectedData(this.findSelectedData(item));
-                    },
-                    removeCachedData(item) {
-                        let index = this.cachedSelectedPrintData.indexOf(item);
-                        if (index > -1) {
-                            this.cachedSelectedPrintData.splice(index, 1);
-                        }
-                    },
-                    removeSelectedData(item) {
-                        let index = this.selectedPrintData.indexOf(item);
-                        if (index > -1) {
-                            this.selectedPrintData.splice(index, 1);
-                        }
-                    },
-
-                    coverImage(item) {
-                        return item.images[0].print_position_image_with_area;
-                    },
-
-                    techniques(item) {
-                        return item.printing_techniques;
-                    },
-
-                    isItemSelected(item) {
-                        // Check if item with the same position_id already exists in selectedPrintData
-                        return this.findSelectedData(item);
-                    },
-
-                    priceCalculation(quantity, price) {
-                        this.quantityFieldValue = quantity;
-                        let calculation = (quantity * price);
-                        this.productPrice = calculation;
-                    }
-                }));
+                    }));
 
             });
         </script>
-        <div class="product-configurator-row pb-5" >
+        <div class="product-configurator-row pb-5">
             <div class="product-configurator-heading">
                 <div class="row align-items-end justify-content-between pb-2 product-configurator-heading-portion">
                     <div class="col-sm-8">
@@ -636,7 +638,7 @@ class Customize_Product_Page {
                         </div>
                         <div class="personalize-button">
 
-                            <?php 
+                            <?php
                             /**
                              * TODO:
                              * Steps:
@@ -649,8 +651,11 @@ class Customize_Product_Page {
                                 <span class="button-text"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?></span>
                                 <span><i class="fa-solid fa-arrow-right"></i></span>
                             </button>
-                            <button :class="hasQty ? '' : 'd-none'" class="be-add-to-cart-btn-without-configure w-100 d-flex align-items-center justify-content-between mt-2 p-3" data-product-id="<?php echo $this->product_id;?>">
-                                <span class="button-text"><?php esc_html_e( 'Añadir al carrito sin marcaje', 'bulk-product-import' ) ?></span>
+                            <button :class="hasQty ? '' : 'd-none'"
+                                class="be-add-to-cart-btn-without-configure w-100 d-flex align-items-center justify-content-between mt-2 p-3"
+                                data-product-id="<?php echo $this->product_id; ?>">
+                                <span
+                                    class="button-text"><?php esc_html_e( 'Añadir al carrito sin marcaje', 'bulk-product-import' ) ?></span>
                                 <span><i class="fa-solid fa-arrow-right"></i></span>
                             </button>
                         </div>
@@ -758,6 +763,31 @@ class Customize_Product_Page {
         } else {
             return "Failed to append data to file.";
         }
+    }
+
+    public function custom_add_to_cart_handler() {
+
+        // Get product values
+        $product_id = intval( $_POST['product_id'] ) ?? 0;
+        $quantity   = intval( $_POST['quantity'] ) ?? 0;
+
+        // Validate the product exists and can be added to cart
+        $product = wc_get_product( $product_id );
+        if ( !$product ) {
+            wp_send_json_error( [ 'message' => 'Invalid product ID' ] );
+            wp_die();
+        }
+
+        // add to cart
+        $cart_item_key = WC()->cart->add_to_cart( $product_id, $quantity );
+
+        if ( $cart_item_key ) {
+            wp_send_json_success( [ 'message' => 'Product added to cart' ] );
+        } else {
+            wp_send_json_error( [ 'message' => 'Failed to add product to cart' ] );
+        }
+
+        wp_die(); // Required for WordPress AJAX
     }
 
 }

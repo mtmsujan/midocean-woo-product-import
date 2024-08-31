@@ -14,7 +14,19 @@
       let productId = $(this).data("product-id");
       let quantity = $(".input-quantity").val();
 
-      
+      // ajax call
+      $.ajax({
+        url: bulkProductImport.ajax_url,
+        method: "POST",
+        data: {
+          action: "custom_add_to_cart",
+          product_id: productId,
+          quantity: quantity,
+        },
+        success: function (response) {
+          console.log(response);
+        },
+      });
     });
   });
 })(jQuery);

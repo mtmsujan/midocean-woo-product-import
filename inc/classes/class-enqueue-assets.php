@@ -48,7 +48,13 @@ class Enqueue_Assets {
         // enqueue JS
         wp_enqueue_script( "jquery-ui-core" );
         wp_enqueue_script( "jquery-ui-accordion" );
+
         wp_enqueue_script( "be-app" );
+        // send ajax url
+        wp_localize_script( "be-app", "bulkProductImport", [
+            "ajax_url" => admin_url( "admin-ajax.php" ),
+        ] );
+        
         wp_enqueue_script( "be-popperjs" );
         wp_enqueue_script( "be-bootstrap" );
         wp_enqueue_script( "be-alpine-js" );
