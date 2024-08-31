@@ -35,8 +35,8 @@ class Create_Order {
         $order_id                  = $order->get_id();
         $order_date                = $order->get_date_created()->date( 'Y-m-d' );
         $contact_email             = $order->get_billing_email();
-        $shipping_address          = $order->get_address( 'shipping' );
-        $shipping_address['email'] = $contact_email;
+        $billing_address           = $order->get_address( 'billing' );
+        $shipping_address          = $billing_address;
 
         $order_items = [];
         foreach ( $order->get_items() as $item_id => $item ) {
@@ -69,7 +69,7 @@ class Create_Order {
          * TODO: if order is PRINT then order with print order payload
          */
 
-        $this->put_program_logs( json_encode( $payload, JSON_PRETTY_PRINT ) );
+        $this->put_program_logs( 'payload: ' . json_encode( $payload, JSON_PRETTY_PRINT ) );
 
         $curl = curl_init();
 

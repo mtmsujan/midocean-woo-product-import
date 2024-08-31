@@ -140,7 +140,155 @@ Product Print Data:
   ]
 }
 
-{"master_code":"CX1335","master_id":"40002408","item_color_numbers":["05"],"print_manipulation":"C","print_template":"https:\/\/printtemplates-v2.cdn.midocean.com\/CX1335-print-template.pdf","printing_positions":[{"position_id":"FRONT","print_size_unit":"mm","max_print_size_height":70,"max_print_size_width":70,"rotation":0,"print_position_type":"Rectangle","printing_techniques":[{"default":false,"id":"DL","max_colours":"0"},{"default":true,"id":"S4","max_colours":"1"}],"points":[{"distance_from_left":166,"distance_from_top":208,"sequence_no":1},{"distance_from_left":749,"distance_from_top":791,"sequence_no":2}],"images":[{"print_position_image_blank":"https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS1-no-area.jpg","print_position_image_with_area":"https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS1.jpg","variant_color":"05"}]},{"position_id":"BELL","print_size_unit":"mm","max_print_size_height":15,"max_print_size_width":15,"rotation":0,"print_position_type":"Rectangle","printing_techniques":[{"default":true,"id":"S3","max_colours":"4"},{"default":false,"id":"T1","max_colours":"8"},{"default":false,"id":"TD1","max_colours":"0"},{"default":false,"id":"TR","max_colours":"1"}],"points":[{"distance_from_left":421,"distance_from_top":381,"sequence_no":1},{"distance_from_left":482,"distance_from_top":442,"sequence_no":2}],"images":[{"print_position_image_blank":"https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS2-no-area.jpg","print_position_image_with_area":"https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS2.jpg","variant_color":"05"}]},{"position_id":"SOCK","print_size_unit":"mm","max_print_size_height":10,"max_print_size_width":20,"rotation":31,"print_position_type":"Rectangle","printing_techniques":[{"default":true,"id":"S3","max_colours":"4"},{"default":false,"id":"T1","max_colours":"8"},{"default":false,"id":"TD1","max_colours":"0"},{"default":false,"id":"TR","max_colours":"1"}],"points":[{"distance_from_left":607,"distance_from_top":467,"sequence_no":1},{"distance_from_left":688,"distance_from_top":508,"sequence_no":2}],"images":[{"print_position_image_blank":"https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS3-no-area.jpg","print_position_image_with_area":"https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS3.jpg","variant_color":"05"}]}]} - 2024-08-27 05:25:04
+
+{
+    "master_code": "CX1335",
+    "master_id": "40002408",
+    "item_color_numbers": [
+        "05"
+    ],
+    "print_manipulation": "C",
+    "print_template": "https://printtemplates-v2.cdn.midocean.com/CX1335-print-template.pdf",
+    "printing_positions": [
+        {
+            "position_id": "FRONT",
+            "print_size_unit": "mm",
+            "max_print_size_height": 70,
+            "max_print_size_width": 70,
+            "rotation": 0,
+            "print_position_type": "Rectangle",
+            "printing_techniques": [
+                {
+                    "default": false,
+                    "id": "DL",
+                    "max_colours": "0"
+                },
+                {
+                    "default": true,
+                    "id": "S4",
+                    "max_colours": "1"
+                }
+            ],
+            "points": [
+                {
+                    "distance_from_left": 166,
+                    "distance_from_top": 208,
+                    "sequence_no": 1
+                },
+                {
+                    "distance_from_left": 749,
+                    "distance_from_top": 791,
+                    "sequence_no": 2
+                }
+            ],
+            "images": [
+                {
+                    "print_position_image_blank": "https://printposition-images-api-v2.cdn.midocean.com/CX1335-05_POS1-no-area.jpg",
+                    "print_position_image_with_area": "https://printposition-images-api-v2.cdn.midocean.com/CX1335-05_POS1.jpg",
+                    "variant_color": "05"
+                }
+            ]
+        },
+        {
+            "position_id": "BELL",
+            "print_size_unit": "mm",
+            "max_print_size_height": 15,
+            "max_print_size_width": 15,
+            "rotation": 0,
+            "print_position_type": "Rectangle",
+            "printing_techniques": [
+                {
+                    "default": true,
+                    "id": "S3",
+                    "max_colours": "4"
+                },
+                {
+                    "default": false,
+                    "id": "T1",
+                    "max_colours": "8"
+                },
+                {
+                    "default": false,
+                    "id": "TD1",
+                    "max_colours": "0"
+                },
+                {
+                    "default": false,
+                    "id": "TR",
+                    "max_colours": "1"
+                }
+            ],
+            "points": [
+                {
+                    "distance_from_left": 421,
+                    "distance_from_top": 381,
+                    "sequence_no": 1
+                },
+                {
+                    "distance_from_left": 482,
+                    "distance_from_top": 442,
+                    "sequence_no": 2
+                }
+            ],
+            "images": [
+                {
+                    "print_position_image_blank": "https://printposition-images-api-v2.cdn.midocean.com/CX1335-05_POS2-no-area.jpg",
+                    "print_position_image_with_area": "https://printposition-images-api-v2.cdn.midocean.com/CX1335-05_POS2.jpg",
+                    "variant_color": "05"
+                }
+            ]
+        },
+        {
+            "position_id": "SOCK",
+            "print_size_unit": "mm",
+            "max_print_size_height": 10,
+            "max_print_size_width": 20,
+            "rotation": 31,
+            "print_position_type": "Rectangle",
+            "printing_techniques": [
+                {
+                    "default": true,
+                    "id": "S3",
+                    "max_colours": "4"
+                },
+                {
+                    "default": false,
+                    "id": "T1",
+                    "max_colours": "8"
+                },
+                {
+                    "default": false,
+                    "id": "TD1",
+                    "max_colours": "0"
+                },
+                {
+                    "default": false,
+                    "id": "TR",
+                    "max_colours": "1"
+                }
+            ],
+            "points": [
+                {
+                    "distance_from_left": 607,
+                    "distance_from_top": 467,
+                    "sequence_no": 1
+                },
+                {
+                    "distance_from_left": 688,
+                    "distance_from_top": 508,
+                    "sequence_no": 2
+                }
+            ],
+            "images": [
+                {
+                    "print_position_image_blank": "https://printposition-images-api-v2.cdn.midocean.com/CX1335-05_POS3-no-area.jpg",
+                    "print_position_image_with_area": "https://printposition-images-api-v2.cdn.midocean.com/CX1335-05_POS3.jpg",
+                    "variant_color": "05"
+                }
+            ]
+        }
+    ]
+} - 2024-08-27 05:25:04
 
 [
     {
@@ -281,4 +429,126 @@ Product Print Data:
         ]
     }
 ] - 2024-08-27 05:27:05
+
+{
+    "order_header": {
+        "preferred_shipping_date": "2024-08-31",
+        "check_price": "false",
+        "currency": "EUR",
+        "contact_email": "ffshahjalal@gmail.com",
+        "shipping_address": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": "",
+            "email": "ffshahjalal@gmail.com"
+        },
+        "po_number": 16410,
+        "timestamp": "2024-08-31 08:58:56",
+        "contact_name": "Shah Jalal",
+        "order_type": "SAMPLE"
+    },
+    "order_lines": [
+        {
+            "order_line_id": 1,
+            "sku": "CX1360-05",
+            "quantity": 1,
+            "expected_price": "313"
+        }
+    ]
+} - 2024-08-31 08:58:56
+
+ - 2024-08-31 08:58:56
+
+payload: {
+    "order_header": {
+        "preferred_shipping_date": "2024-08-31",
+        "check_price": "false",
+        "currency": "EUR",
+        "contact_email": "ffshahjalal@gmail.com",
+        "shipping_address": {
+            "first_name": "",
+            "last_name": "",
+            "company": "",
+            "address_1": "",
+            "address_2": "",
+            "city": "",
+            "state": "",
+            "postcode": "",
+            "country": "",
+            "phone": "",
+            "email": "ffshahjalal@gmail.com"
+        },
+        "po_number": 16411,
+        "timestamp": "2024-08-31 09:10:04",
+        "contact_name": "Shah Jalal",
+        "order_type": "SAMPLE"
+    },
+    "order_lines": [
+        {
+            "order_line_id": 2,
+            "sku": "AR1804-37",
+            "quantity": 1,
+            "expected_price": "107"
+        }
+    ]
+} - 2024-08-31 09:10:04
+
+Billing Address: {
+    "first_name": "Shah",
+    "last_name": "Jalal",
+    "company": "Imjol",
+    "address_1": "Uttara",
+    "address_2": "Dhaka",
+    "city": "Dhaka",
+    "state": "BD-13",
+    "postcode": "1230",
+    "country": "BD",
+    "email": "ffshahjalal@gmail.com",
+    "phone": "01759277132"
+} - 2024-08-31 09:10:04
+
+ - 2024-08-31 09:10:04
+
+payload: {
+    "order_header": {
+        "preferred_shipping_date": "2024-08-31",
+        "check_price": "false",
+        "currency": "EUR",
+        "contact_email": "ffshahjalal@gmail.com",
+        "shipping_address": {
+            "first_name": "Shah",
+            "last_name": "Jalal",
+            "company": "Imjol",
+            "address_1": "Uttara",
+            "address_2": "Dhaka",
+            "city": "Dhaka",
+            "state": "BD-13",
+            "postcode": "1230",
+            "country": "BD",
+            "email": "ffshahjalal@gmail.com",
+            "phone": "01759277132"
+        },
+        "po_number": 16412,
+        "timestamp": "2024-08-31 09:15:33",
+        "contact_name": "Shah Jalal",
+        "order_type": "SAMPLE"
+    },
+    "order_lines": [
+        {
+            "order_line_id": 3,
+            "sku": "AR1804-37",
+            "quantity": 1,
+            "expected_price": "107"
+        }
+    ]
+} - 2024-08-31 09:15:33
+
+ - 2024-08-31 09:15:33
 
