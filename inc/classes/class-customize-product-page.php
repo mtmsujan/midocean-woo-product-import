@@ -265,6 +265,8 @@ class Customize_Product_Page {
                         selectedPrintData: [],
                         productPrice: null,
                         quantityFieldValue: null,
+                        artworkName: '',
+                        mockupName: '',
 
                         // Function to add data only if it doesn't already exist in selectedPrintData
                         addData(item, maxColors, selectedTechniqueId) {
@@ -678,11 +680,12 @@ class Customize_Product_Page {
                                                     <div class="col-sm-4">
                                                         <label class="file-upload-button">
                                                             <?php esc_html_e( 'Upload Artwork', 'bulk-product-import' ) ?>
-                                                            <input type="file" name="upload-artwork" id="upload-artwork" hidden>
+                                                            <input type="file" name="upload-artwork" id="upload-artwork"
+                                                                @change="artworkName = $event.target.files[0]?.name" hidden>
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-8">
-                                                        <span class="upload-artwork-url-preview"></span>
+                                                        <span class="upload-artwork-url-preview" x-text="artworkName"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -691,11 +694,12 @@ class Customize_Product_Page {
                                                     <div class="col-sm-4">
                                                         <label class="file-upload-button">
                                                             <?php esc_html_e( 'Upload Mockup', 'bulk-product-import' ) ?>
-                                                            <input type="file" name="upload-mockup" id="upload-mockup" hidden>
+                                                            <input type="file" name="upload-mockup" id="upload-mockup"
+                                                                @change="mockupName = $event.target.files[0]?.name" hidden>
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-8">
-                                                        <span class="upload-mockup-url-preview"></span>
+                                                        <span class="upload-mockup-url-preview" x-text="mockupName"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -708,9 +712,11 @@ class Customize_Product_Page {
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="modal-close-button"
-                                                data-dismiss="modal"><?php esc_html_e( 'Close', 'bulk-product-import' ) ?></button>
-                                            <button type="button" class="modal-save-button"
-                                                id="customize-modal-save-button"><?php esc_html_e( 'Save', 'bulk-product-import' ) ?></button>
+                                                data-dismiss="modal"><?php esc_html_e( 'Cancelar', 'bulk-product-import' ) ?></button>
+                                            <button type="button" class="modal-save-button" id="customize-modal-save-button"
+                                                @click="console.log(`${artworkName } ${mockupName }`)">
+                                                <?php esc_html_e( 'Añadir', 'bulk-product-import' ) ?>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
