@@ -42,9 +42,6 @@ class Create_Order {
         if ( isset( $_COOKIE[$cookie_key] ) ) {
             // Delete the cookie by setting its expiration to the past
             setcookie( $cookie_key, '', time() - 3600, '/' );
-
-            // Log the cookie deletion
-            $this->put_program_logs( 'Cookie ' . $cookie_key . ' deleted successfully.' );
         }
     }
 
@@ -88,8 +85,9 @@ class Create_Order {
         }
 
         if ( $printing_positions ) {
-            // Log the printing positions
-            $this->put_program_logs( 'Printing Position Cookie Data: ' . str_replace( "\\", '', $printing_positions ) );
+            // Replace \ from printing positions
+            $printing_positions = str_replace( '\\', '', $printing_positions );
+            $this->put_program_logs( $printing_positions );
         }
 
         // Determine order type based on printing positions
@@ -137,9 +135,6 @@ class Create_Order {
             'order_lines'  => [],
         ];
 
-        // Choose the appropriate payload
-        $payload = $order_type === 'PRINT' ? $print_order_payload : $normal_order_payload;
-
         // Add items to the print order payload if it's a PRINT order
         foreach ( $order->get_items() as $item_id => $item ) {
             $product        = $item->get_product();
@@ -185,6 +180,10 @@ class Create_Order {
                 'print_items'        => $print_items,
             ];
         }
+
+
+        // Choose the appropriate payload
+        $payload = $order_type === 'PRINT' ? $print_order_payload : $normal_order_payload;
 
         // Log the payload
         $this->put_program_logs( 'payload: ' . json_encode( $payload, JSON_PRETTY_PRINT ) );
