@@ -105,6 +105,7 @@ function products_import_woocommerce() {
                 // Extract prices
                 // $regular_price = 0;
                 $sale_price = $product->price;
+                $sale_price = str_replace( ',', '.', $sale_price );
 
                 // Set up the API client with WooCommerce store URL and credentials
                 $client = new Client(

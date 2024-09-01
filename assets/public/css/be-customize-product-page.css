@@ -444,14 +444,16 @@ h1.be-product-sku {
   padding: 10px;
 }
 
-.add-print-position button.modal-close-button {
+.add-print-position button.modal-close-button,
+.personalize-button button.modal-close-button {
   color: #fff;
   background: gray;
   padding: 10px 20px !important;
   border-radius: 5px;
 }
 
-.add-print-position button.modal-save-button {
+.add-print-position button.modal-save-button,
+.personalize-button button.modal-save-button {
   color: #fff !important;
   background: #24a148 !important;
   padding: 10px 20px !important;

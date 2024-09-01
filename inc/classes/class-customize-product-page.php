@@ -655,10 +655,33 @@ class Customize_Product_Page {
                         </div>
                         <div class="personalize-button">
                             <button class="be-add-to-cart-btn w-100 d-flex align-items-center justify-content-between p-3"
-                                @click="savePrintPositionsDataToCookie(selectedPrintData)">
+                                data-toggle="modal" data-target="#customMediaArtwork">
                                 <span class="button-text"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?></span>
                                 <span><i class="fa-solid fa-arrow-right"></i></span>
                             </button>
+                            <!-- Custom media, artwork and design -->
+                            <!-- Modal -->
+                            <div class="modal fade" id="customMediaArtwork" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Custom Media</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="modal-close-button" data-dismiss="modal">Close</button>
+                                            <button type="button" class="modal-save-button">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Custom media, artwork and design -->
                             <button :class="hasQty ? '' : 'd-none'" @click="savePrintPositionsDataToCookie(selectedPrintData)"
                                 class="be-add-to-cart-btn-without-configure w-100 d-flex align-items-center justify-content-between mt-2 p-3"
                                 data-product-id="<?php echo $this->product_id; ?>">
