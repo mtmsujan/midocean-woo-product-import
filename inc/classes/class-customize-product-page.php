@@ -281,10 +281,10 @@ class Customize_Product_Page {
                             this.cachedSelectedPrintData.push({
                                 ...item,
                                 maxColors: maxColors,
-                                selectedTechniqueId:selectedTechniqueId
+                                selectedTechniqueId: selectedTechniqueId
                             });
                         },
-                        isTechniqueSelected(item, technique){
+                        isTechniqueSelected(item, technique) {
                             return this.findCachedData(item)?.selectedTechniqueId == technique.id;
                         },
 
@@ -659,7 +659,7 @@ class Customize_Product_Page {
                                 <span class="button-text"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?></span>
                                 <span><i class="fa-solid fa-arrow-right"></i></span>
                             </button>
-                            <button :class="hasQty ? '' : 'd-none'"
+                            <button :class="hasQty ? '' : 'd-none'" @click="savePrintPositionsDataToCookie(selectedPrintData)"
                                 class="be-add-to-cart-btn-without-configure w-100 d-flex align-items-center justify-content-between mt-2 p-3"
                                 data-product-id="<?php echo $this->product_id; ?>">
                                 <span
