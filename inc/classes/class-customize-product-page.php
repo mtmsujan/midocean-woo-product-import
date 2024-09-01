@@ -538,7 +538,6 @@ class Customize_Product_Page {
                                                 </h5>
                                                 <button type="button" class="modal-close-icon" data-dismiss="modal"
                                                     aria-label="Close">
-                                                    <i class="fa-solid fa-xmark"></i>
                                                 </button>
                                             </div>
                                             <!-- Modal body -->
@@ -654,7 +653,8 @@ class Customize_Product_Page {
                             </div>
                         </div>
                         <div class="personalize-button">
-                            <button class="be-add-to-cart-btn w-100 d-flex align-items-center justify-content-between p-3"
+                            <button :class="hasQty ? '' : 'be-disabled'"
+                                class="be-add-to-cart-btn w-100 d-flex align-items-center justify-content-between p-3"
                                 data-toggle="modal" data-target="#customMediaArtwork">
                                 <span class="button-text"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?></span>
                                 <span><i class="fa-solid fa-arrow-right"></i></span>
@@ -666,17 +666,51 @@ class Customize_Product_Page {
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Custom Media</h5>
+                                            <h5 class="customize-modal-title" id="exampleModalLongTitle">
+                                                <?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?>
+                                            </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            ...
+                                            <div class="artwork-area mb-3">
+                                                <div class="row align-items-center">
+                                                    <div class="col-sm-4">
+                                                        <label class="file-upload-button">
+                                                            <?php esc_html_e( 'Upload Artwork', 'bulk-product-import' ) ?>
+                                                            <input type="file" name="upload-artwork" id="upload-artwork" hidden>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <span class="upload-artwork-url-preview"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mockup-area mb-3">
+                                                <div class="row align-items-center">
+                                                    <div class="col-sm-4">
+                                                        <label class="file-upload-button">
+                                                            <?php esc_html_e( 'Upload Mockup', 'bulk-product-import' ) ?>
+                                                            <input type="file" name="upload-mockup" id="upload-mockup" hidden>
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <span class="upload-mockup-url-preview"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="instructions-area">
+                                                <label
+                                                    class="instructions-form-label"><?php esc_html_e( 'Instructions', 'bulk-product-import' ) ?></label>
+                                                <textarea class="instructions-textarea" name="instructions" id="instructions"
+                                                    cols="30" rows="5"></textarea>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="modal-close-button" data-dismiss="modal">Close</button>
-                                            <button type="button" class="modal-save-button">Save changes</button>
+                                            <button type="button" class="modal-close-button"
+                                                data-dismiss="modal"><?php esc_html_e( 'Close', 'bulk-product-import' ) ?></button>
+                                            <button type="button" class="modal-save-button"
+                                                id="customize-modal-save-button"><?php esc_html_e( 'Save', 'bulk-product-import' ) ?></button>
                                         </div>
                                     </div>
                                 </div>

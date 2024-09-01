@@ -652,3 +652,56 @@ input[disabled],
 .be-add-to-cart-btn-without-configure .check-icon {
   height: 15px !important;
 }
+
+.customize-modal-title{
+  font-family: "Noto Sans";
+  font-size: 14px;
+  font-weight: 400;
+  color: #161616;
+}
+
+.file-upload-button {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  text-align: center;
+  border: 0;
+  padding: 7px 16px;
+  font-family: "Noto Sans";
+  min-height: 36px;
+  min-width: 36px;
+  color: #ffffff;
+  background: #24a148;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 0px,
+    rgba(0, 0, 0, 0.2) 0px -1px 0px 0px inset;
+}
+
+.file-upload-button:hover {
+  background: #1d813a;
+}
+
+.instructions-form-label{
+  font-family: "Noto Sans";
+  font-size: 14px;
+  font-weight: 400;
+  color: #161616;
+}
+
+.instructions-textarea{
+  border: 1px solid #24a148;
+  color: #000000;
+}
+
+.instructions-textarea:focus{
+  border: 1px solid #24a148;
+  outline: none;
+}
+
+.be-disabled{
+  pointer-events: none;
+  opacity: 0.6;
+  cursor: not-allowed !important;
+}
