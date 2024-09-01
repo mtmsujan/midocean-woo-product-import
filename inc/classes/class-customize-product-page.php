@@ -343,9 +343,11 @@ class Customize_Product_Page {
                         savePrintPositionsDataToCookie(positions) {
                             // Convert the positions object/array to a JSON string
                             const jsonData = JSON.stringify(positions);
+                            // Product id
+                            const productId = '<?= $this->product_id ?>';
 
                             // Set the cookie with the key 'printing_positions' and the JSON data
-                            document.cookie = `printing_positions=${jsonData}; path=/; max-age=${60 * 60 * 24};`; // 24 hours expiration
+                            document.cookie = `printing_positions_${productId}=${jsonData}; path=/; max-age=${60 * 60 * 24};`; // 24 hours expiration
                         }
                     }));
 
