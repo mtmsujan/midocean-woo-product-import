@@ -1,303 +1,58 @@
-
-{
-    "master_code": "AR1253",
-    "master_id": "40000012",
-    "type_of_products": "stock",
-    "commodity_code": "8470 1000",
-    "number_of_print_positions": "3",
-    "country_of_origin": "CN",
-    "brand": "midocean",
-    "product_name": "BASICS",
-    "category_code": "MOBOFF_CLCSOL",
-    "product_class": "Calculators",
-    "dimensions": "15,5X10X3 CM",
-    "length": "15.5",
-    "length_unit": "cm",
-    "width": "10",
-    "width_unit": "cm",
-    "height": "3",
-    "height_unit": "cm",
-    "volume": "0.626",
-    "volume_unit": "cdm3",
-    "gross_weight": "0.147",
-    "gross_weight_unit": "kg",
-    "net_weight": "0.109",
-    "net_weight_unit": "kg",
-    "outer_carton_quantity": "60",
-    "carton_length": "0.485",
-    "carton_length_unit": "m",
-    "carton_width": "0.221",
-    "carton_width_unit": "m",
-    "carton_height": "0.34",
-    "carton_height_unit": "m",
-    "carton_volume": "0.036",
-    "carton_volume_unit": "m3",
-    "carton_gross_weight": "8.44",
-    "carton_gross_weight_unit": "kg",
-    "timestamp": "2024-07-30T09:26:46",
-    "digital_assets": [
-        {
-            "url": "https://cdn1.midocean.com/document/declaration-of-sustainability/ar1253-green.pdf",
-            "type": "document",
-            "subtype": "declaration_of_sustainability"
-        },
-        {
-            "url": "https://cdn1.midocean.com/document/declaration-of-conformity/ar1253-doc.pdf",
-            "type": "document",
-            "subtype": "declaration_of_conformity"
-        },
-        {
-            "url": "https://cdn1.midocean.com/document/manual/ar1253-manual.pdf",
-            "type": "document",
-            "subtype": "manual"
-        },
-        {
-            "url": "https://cdn1.midocean.com/document/test-battery/ar1253-test-battery.pdf",
-            "type": "document",
-            "subtype": "test_battery"
-        }
-    ],
-    "short_description": "Basics 12-digits calculator",
-    "long_description": "12 digit solar energy calculator with plastic housing. 1 cell battery included.",
-    "material": "PS",
-    "printable": "yes",
-    "variants": [
-        {
-            "variant_id": "10134300",
-            "sku": "AR1253-16",
-            "release_date": "2015-01-01",
-            "product_proposition_category": "305",
-            "category_level1": "Office & Writing",
-            "category_level2": "Office accessories ",
-            "category_level3": "Clocks & Calculators",
-            "color_description": "Matt Silver",
-            "color_group": "Silver",
-            "plc_status": "16",
-            "plc_status_description": "COLLECTION",
-            "gtin": "8719941007888",
-            "color_code": "16",
-            "pms_color": "877C",
-            "digital_assets": [
-                {
-                    "url": "https://cdn1.midocean.com/image/700X700/ar1253-16.jpg",
-                    "url_highress": "https://cdn1.midocean.com/image/original/ar1253-16.jpg",
-                    "type": "image",
-                    "subtype": "item_picture_front"
-                },
-                {
-                    "url": "https://cdn1.midocean.com/image/700X700/ar1253-16-print.jpg",
-                    "url_highress": "https://cdn1.midocean.com/image/original/ar1253-16-print.jpg",
-                    "type": "image",
-                    "subtype": "item_picture_printed"
-                }
-            ]
-        }
-    ]
-} - 2024-08-06 09:00:52
-
-Product Print Data: 
-{
-  "master_code": "CX1349",
-  "master_id": "40002806",
-  "item_color_numbers": ["99"],
-  "print_manipulation": null,
-  "print_template": "https://printtemplates-v2.cdn.midocean.com/CX1349-print-template.pdf",
-  "printing_positions": [
-    {
-      "position_id": "FRONT",
-      "print_size_unit": "mm",
-      "max_print_size_height": 45,
-      "max_print_size_width": 80,
-      "rotation": 0,
-      "print_position_type": "Rectangle",
-      "printing_techniques": [
-        {
-          "default": true,
-          "id": "DL",
-          "max_colours": "0"
-        }
-      ],
-      "points": [
-        {
-          "distance_from_left": 554,
-          "distance_from_top": 22,
-          "sequence_no": 1
-        },
-        {
-          "distance_from_left": 935,
-          "distance_from_top": 236,
-          "sequence_no": 2
-        }
-      ],
-      "images": [
-        {
-          "print_position_image_blank": "https://printposition-images-api-v2.cdn.midocean.com/CX1349-99_POS1-no-area.jpg",
-          "print_position_image_with_area": "https://printposition-images-api-v2.cdn.midocean.com/CX1349-99_POS1.jpg",
-          "variant_color": "99"
-        }
-      ]
-    }
-  ]
-}
-
-
-{
-    "master_code": "CX1335",
-    "master_id": "40002408",
-    "item_color_numbers": [
-        "05"
-    ],
-    "print_manipulation": "C",
-    "print_template": "https://printtemplates-v2.cdn.midocean.com/CX1335-print-template.pdf",
-    "printing_positions": [
-        {
-            "position_id": "FRONT",
-            "print_size_unit": "mm",
-            "max_print_size_height": 70,
-            "max_print_size_width": 70,
-            "rotation": 0,
-            "print_position_type": "Rectangle",
-            "printing_techniques": [
-                {
-                    "default": false,
-                    "id": "DL",
-                    "max_colours": "0"
-                },
-                {
-                    "default": true,
-                    "id": "S4",
-                    "max_colours": "1"
-                }
-            ],
-            "points": [
-                {
-                    "distance_from_left": 166,
-                    "distance_from_top": 208,
-                    "sequence_no": 1
-                },
-                {
-                    "distance_from_left": 749,
-                    "distance_from_top": 791,
-                    "sequence_no": 2
-                }
-            ],
-            "images": [
-                {
-                    "print_position_image_blank": "https://printposition-images-api-v2.cdn.midocean.com/CX1335-05_POS1-no-area.jpg",
-                    "print_position_image_with_area": "https://printposition-images-api-v2.cdn.midocean.com/CX1335-05_POS1.jpg",
-                    "variant_color": "05"
-                }
-            ]
-        },
-        {
-            "position_id": "BELL",
-            "print_size_unit": "mm",
-            "max_print_size_height": 15,
-            "max_print_size_width": 15,
-            "rotation": 0,
-            "print_position_type": "Rectangle",
-            "printing_techniques": [
-                {
-                    "default": true,
-                    "id": "S3",
-                    "max_colours": "4"
-                },
-                {
-                    "default": false,
-                    "id": "T1",
-                    "max_colours": "8"
-                },
-                {
-                    "default": false,
-                    "id": "TD1",
-                    "max_colours": "0"
-                },
-                {
-                    "default": false,
-                    "id": "TR",
-                    "max_colours": "1"
-                }
-            ],
-            "points": [
-                {
-                    "distance_from_left": 421,
-                    "distance_from_top": 381,
-                    "sequence_no": 1
-                },
-                {
-                    "distance_from_left": 482,
-                    "distance_from_top": 442,
-                    "sequence_no": 2
-                }
-            ],
-            "images": [
-                {
-                    "print_position_image_blank": "https://printposition-images-api-v2.cdn.midocean.com/CX1335-05_POS2-no-area.jpg",
-                    "print_position_image_with_area": "https://printposition-images-api-v2.cdn.midocean.com/CX1335-05_POS2.jpg",
-                    "variant_color": "05"
-                }
-            ]
-        },
-        {
-            "position_id": "SOCK",
-            "print_size_unit": "mm",
-            "max_print_size_height": 10,
-            "max_print_size_width": 20,
-            "rotation": 31,
-            "print_position_type": "Rectangle",
-            "printing_techniques": [
-                {
-                    "default": true,
-                    "id": "S3",
-                    "max_colours": "4"
-                },
-                {
-                    "default": false,
-                    "id": "T1",
-                    "max_colours": "8"
-                },
-                {
-                    "default": false,
-                    "id": "TD1",
-                    "max_colours": "0"
-                },
-                {
-                    "default": false,
-                    "id": "TR",
-                    "max_colours": "1"
-                }
-            ],
-            "points": [
-                {
-                    "distance_from_left": 607,
-                    "distance_from_top": 467,
-                    "sequence_no": 1
-                },
-                {
-                    "distance_from_left": 688,
-                    "distance_from_top": 508,
-                    "sequence_no": 2
-                }
-            ],
-            "images": [
-                {
-                    "print_position_image_blank": "https://printposition-images-api-v2.cdn.midocean.com/CX1335-05_POS3-no-area.jpg",
-                    "print_position_image_with_area": "https://printposition-images-api-v2.cdn.midocean.com/CX1335-05_POS3.jpg",
-                    "variant_color": "05"
-                }
-            ]
-        }
-    ]
-} - 2024-08-27 05:25:04
-
+Printing Position Cookie Data: 
 [
     {
-        "position_id": "FRONT",
+        "position_id": "SOCK",
         "print_size_unit": "mm",
-        "max_print_size_height": 70,
-        "max_print_size_width": 70,
+        "max_print_size_height": 50,
+        "max_print_size_width": 50,
         "rotation": 0,
         "print_position_type": "Rectangle",
+        "printing_techniques": [
+            {
+                "default": false,
+                "id": "E",
+                "max_colours": "8"
+            },
+            {
+                "default": true,
+                "id": "T1",
+                "max_colours": "8"
+            },
+            {
+                "default": false,
+                "id": "TR",
+                "max_colours": "1"
+            }
+        ],
+        "points": [
+            {
+                "distance_from_left": 204,
+                "distance_from_top": 565,
+                "sequence_no": 1
+            },
+            {
+                "distance_from_left": 400,
+                "distance_from_top": 761,
+                "sequence_no": 2
+            }
+        ],
+        "images": [
+            {
+                "print_position_image_blank": "https://printposition-images-api-v2.cdn.midocean.com/CX1360-05_POS2-no-area.jpg",
+                "print_position_image_with_area": "https://printposition-images-api-v2.cdn.midocean.com/CX1360-05_POS2.jpg",
+                "variant_color": "05"
+            }
+        ],
+        "maxColors": "8",
+        "selectedTechniqueId": "T1"
+    },
+    {
+        "position_id": "LABEL",
+        "print_size_unit": "mm",
+        "max_print_size_height": 40,
+        "max_print_size_width": 40,
+        "rotation": 0,
+        "print_position_type": "Ellipse",
         "printing_techniques": [
             {
                 "default": false,
@@ -306,133 +61,37 @@ Product Print Data:
             },
             {
                 "default": true,
-                "id": "S4",
-                "max_colours": "1"
-            }
-        ],
-        "points": [
-            {
-                "distance_from_left": 166,
-                "distance_from_top": 208,
-                "sequence_no": 1
-            },
-            {
-                "distance_from_left": 749,
-                "distance_from_top": 791,
-                "sequence_no": 2
-            }
-        ],
-        "images": [
-            {
-                "print_position_image_blank": "https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS1-no-area.jpg",
-                "print_position_image_with_area": "https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS1.jpg",
-                "variant_color": "05"
-            }
-        ]
-    },
-    {
-        "position_id": "BELL",
-        "print_size_unit": "mm",
-        "max_print_size_height": 15,
-        "max_print_size_width": 15,
-        "rotation": 0,
-        "print_position_type": "Rectangle",
-        "printing_techniques": [
-            {
-                "default": true,
-                "id": "S3",
+                "id": "P3",
                 "max_colours": "4"
-            },
-            {
-                "default": false,
-                "id": "T1",
-                "max_colours": "8"
-            },
-            {
-                "default": false,
-                "id": "TD1",
-                "max_colours": "0"
-            },
-            {
-                "default": false,
-                "id": "TR",
-                "max_colours": "1"
             }
         ],
         "points": [
             {
-                "distance_from_left": 421,
-                "distance_from_top": 381,
+                "distance_from_left": 274,
+                "distance_from_top": 316,
                 "sequence_no": 1
             },
             {
-                "distance_from_left": 482,
-                "distance_from_top": 442,
+                "distance_from_left": 431,
+                "distance_from_top": 473,
                 "sequence_no": 2
             }
         ],
         "images": [
             {
-                "print_position_image_blank": "https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS2-no-area.jpg",
-                "print_position_image_with_area": "https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS2.jpg",
+                "print_position_image_blank": "https://printposition-images-api-v2.cdn.midocean.com/CX1360-05_POS1-no-area.jpg",
+                "print_position_image_with_area": "https://printposition-images-api-v2.cdn.midocean.com/CX1360-05_POS1.jpg",
                 "variant_color": "05"
             }
-        ]
-    },
-    {
-        "position_id": "SOCK",
-        "print_size_unit": "mm",
-        "max_print_size_height": 10,
-        "max_print_size_width": 20,
-        "rotation": 31,
-        "print_position_type": "Rectangle",
-        "printing_techniques": [
-            {
-                "default": true,
-                "id": "S3",
-                "max_colours": "4"
-            },
-            {
-                "default": false,
-                "id": "T1",
-                "max_colours": "8"
-            },
-            {
-                "default": false,
-                "id": "TD1",
-                "max_colours": "0"
-            },
-            {
-                "default": false,
-                "id": "TR",
-                "max_colours": "1"
-            }
         ],
-        "points": [
-            {
-                "distance_from_left": 607,
-                "distance_from_top": 467,
-                "sequence_no": 1
-            },
-            {
-                "distance_from_left": 688,
-                "distance_from_top": 508,
-                "sequence_no": 2
-            }
-        ],
-        "images": [
-            {
-                "print_position_image_blank": "https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS3-no-area.jpg",
-                "print_position_image_with_area": "https:\/\/printposition-images-api-v2.cdn.midocean.com\/CX1335-05_POS3.jpg",
-                "variant_color": "05"
-            }
-        ]
+        "maxColors": "0",
+        "selectedTechniqueId": "DL"
     }
-] - 2024-08-27 05:27:05
+] - 2024-09-01 04:52:05
 
 payload: {
     "order_header": {
-        "preferred_shipping_date": "2024-08-31",
+        "preferred_shipping_date": "2024-09-01",
         "currency": "EUR",
         "contact_email": "ffshahjalal@gmail.com",
         "check_price": "false",
@@ -447,49 +106,23 @@ payload: {
             "email": "ffshahjalal@gmail.com",
             "phone": "01759277132"
         },
-        "po_number": 16428,
-        "timestamp": "2024-08-31T10:22:48",
+        "po_number": 16434,
+        "timestamp": "2024-09-01T04:52:05",
         "contact_name": "Shah Jalal",
         "order_type": "PRINT"
     },
-    "order_lines": [
-        {
-            "order_line_id": 4,
-            "master_code": "CX1476",
-            "quantity": 1,
-            "expected_price": "16",
-            "printing_positions": [
-                {
-                    "id": "FRONT",
-                    "print_size_height": "190",
-                    "print_size_width": "120",
-                    "printing_technique_id": "S2",
-                    "number_of_print_colors": "1",
-                    "print_artwork_url": "your logo URL",
-                    "print_mockup_url": "your mockup URL",
-                    "print_instruction": "Print instructions",
-                    "print_colors": [
-                        {
-                            "color": "Pantone 4280C"
-                        }
-                    ]
-                }
-            ],
-            "print_items": [
-                {
-                    "item_color_number": "40",
-                    "quantity": 1
-                }
-            ]
-        }
-    ]
-} - 2024-08-31 10:22:48
+    "order_lines": []
+} - 2024-09-01 04:52:05
 
- - 2024-08-31 10:22:49
+ - 2024-09-01 04:52:05
+
+Cookie printing_positions_16274 deleted successfully. - 2024-09-01 04:52:05
+
+Printing Position Cookie Data: [{"position_id":"LABEL","print_size_unit":"mm","max_print_size_height":40,"max_print_size_width":40,"rotation":0,"print_position_type":"Ellipse","printing_techniques":[{"default":false,"id":"DL","max_colours":"0"},{"default":true,"id":"P3","max_colours":"4"}],"points":[{"distance_from_left":274,"distance_from_top":316,"sequence_no":1},{"distance_from_left":431,"distance_from_top":473,"sequence_no":2}],"images":[{"print_position_image_blank":"https://printposition-images-api-v2.cdn.midocean.com/CX1360-05_POS1-no-area.jpg","print_position_image_with_area":"https://printposition-images-api-v2.cdn.midocean.com/CX1360-05_POS1.jpg","variant_color":"05"}],"maxColors":"0","selectedTechniqueId":"DL"}] - 2024-09-01 04:58:46
 
 payload: {
     "order_header": {
-        "preferred_shipping_date": "2024-08-31",
+        "preferred_shipping_date": "2024-09-01",
         "currency": "EUR",
         "contact_email": "ffshahjalal@gmail.com",
         "check_price": "false",
@@ -504,43 +137,15 @@ payload: {
             "email": "ffshahjalal@gmail.com",
             "phone": "01759277132"
         },
-        "po_number": 16429,
-        "timestamp": "2024-08-31T10:25:25",
+        "po_number": 16435,
+        "timestamp": "2024-09-01T04:58:46",
         "contact_name": "Shah Jalal",
         "order_type": "PRINT"
     },
-    "order_lines": [
-        {
-            "order_line_id": 5,
-            "master_code": "CX1476",
-            "quantity": 5,
-            "expected_price": "80",
-            "printing_positions": [
-                {
-                    "id": "FRONT",
-                    "print_size_height": "190",
-                    "print_size_width": "120",
-                    "printing_technique_id": "S2",
-                    "number_of_print_colors": "1",
-                    "print_artwork_url": "your logo URL",
-                    "print_mockup_url": "your mockup URL",
-                    "print_instruction": "Print instructions",
-                    "print_colors": [
-                        {
-                            "color": "Pantone 4280C"
-                        }
-                    ]
-                }
-            ],
-            "print_items": [
-                {
-                    "item_color_number": "40",
-                    "quantity": 5
-                }
-            ]
-        }
-    ]
-} - 2024-08-31 10:25:25
+    "order_lines": []
+} - 2024-09-01 04:58:46
 
- - 2024-08-31 10:25:25
+ - 2024-09-01 04:58:46
+
+Cookie printing_positions_16274 deleted successfully. - 2024-09-01 04:58:46
 
