@@ -87,7 +87,10 @@ class Create_Order {
         if ( $printing_positions ) {
             // Replace \ from printing positions
             $printing_positions = str_replace( '\\', '', $printing_positions );
-            $this->put_program_logs( $printing_positions );
+            // Log the printing positions
+            // $this->put_program_logs( $printing_positions );
+            // decode the printing positions
+            $printing_positions = json_decode( $printing_positions, true );
         }
 
         // Determine order type based on printing positions
@@ -137,6 +140,8 @@ class Create_Order {
 
         // Add items to the print order payload if it's a PRINT order
         foreach ( $order->get_items() as $item_id => $item ) {
+
+            // Get product data
             $product        = $item->get_product();
             $product_id     = $product->get_id();
             $master_code    = get_post_meta( $product_id, '_master_code', true );
@@ -144,24 +149,30 @@ class Create_Order {
             $quantity       = $item->get_quantity();
             $expected_price = $item->get_total();
 
-            // Printing positions (example data)
-            $printing_positions = [
-                [
-                    'id'                     => 'FRONT',
-                    'print_size_height'      => '190',
-                    'print_size_width'       => '120',
-                    'printing_technique_id'  => 'S2',
-                    'number_of_print_colors' => '1',
-                    'print_artwork_url'      => 'your logo URL', // Replace with actual URL
-                    'print_mockup_url'       => 'your mockup URL', // Replace with actual URL
-                    'print_instruction'      => 'Print instructions',
-                    'print_colors'           => [
-                        [
-                            'color' => 'Pantone 4280C',
+            // Initialize an empty array for storing the dynamic positions
+            $_printing_positions = [];
+
+            // Populate printing positions
+            if ( !empty( $printing_positions ) && is_array( $printing_positions ) ) {
+                foreach ( $printing_positions as $position ) {
+                    // Populate dynamic printing position data
+                    $_printing_positions[] = [
+                        'id'                     => $position['position_id'],
+                        'print_size_height'      => $position['max_print_size_height'],
+                        'print_size_width'       => $position['max_print_size_width'],
+                        'printing_technique_id'  => $position['selectedTechniqueId'],
+                        'number_of_print_colors' => $position['maxColors'],
+                        'print_artwork_url'      => 'your logo URL',
+                        'print_mockup_url'       => 'your mockup URL', 
+                        'print_instruction'      => 'Print instructions', 
+                        'print_colors'           => [
+                            [
+                                'color' => 'Pantone 4280C',
+                            ],
                         ],
-                    ],
-                ],
-            ];
+                    ];
+                }
+            }
 
             $print_items = [
                 [
@@ -176,7 +187,7 @@ class Create_Order {
                 'master_code'        => $master_code,
                 'quantity'           => $quantity,
                 'expected_price'     => $expected_price,
-                'printing_positions' => $printing_positions,
+                'printing_positions' => $_printing_positions,
                 'print_items'        => $print_items,
             ];
         }
