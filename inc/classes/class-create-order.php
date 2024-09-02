@@ -114,6 +114,9 @@ class Create_Order {
 
             // Decode the custom print media
             $custom_print_media = json_decode( $custom_print_media, true );
+            $artwork_url        = str_replace( "\\", "", $custom_print_media['artwork_url'] );
+            $mockup_url         = str_replace( "\\", "", $custom_print_media['mockup_url'] );
+            $instructions       = $custom_print_media['instructions'];
         }
 
         // Determine order type based on printing positions
@@ -138,7 +141,7 @@ class Create_Order {
         // Build the payload for PRINT order type
         $print_order_payload = [
             'order_header' => [
-                'preferred_shipping_date' => $order_date,
+                'preferred_shipping_date' => '',
                 'currency'                => $order->get_currency(),
                 'contact_email'           => $contact_email,
                 'check_price'             => 'false',
@@ -169,6 +172,7 @@ class Create_Order {
             $product_id     = $product->get_id();
             $master_code    = get_post_meta( $product_id, '_master_code', true );
             $color_code     = get_post_meta( $product_id, '_color_code', true );
+            $pms_color      = get_post_meta( $product_id, '_pms_color', true );
             $quantity       = $item->get_quantity();
             $expected_price = $item->get_total();
 
@@ -185,12 +189,12 @@ class Create_Order {
                         'print_size_width'       => $position['max_print_size_width'],
                         'printing_technique_id'  => $position['selectedTechniqueId'],
                         'number_of_print_colors' => $position['maxColors'],
-                        'print_artwork_url'      => $custom_print_media['artwork_url'],
-                        'print_mockup_url'       => $custom_print_media['mockup_url'],
-                        'print_instruction'      => $custom_print_media['instructions'],
+                        'print_artwork_url'      => $artwork_url,
+                        'print_mockup_url'       => $mockup_url,
+                        'print_instruction'      => $instructions,
                         'print_colors'           => [
                             [
-                                'color' => 'Pantone 4280C',
+                                'color' => 'Pantone 4280C', // Replace: Pantone 4280C with the actual color code
                             ],
                         ],
                     ];

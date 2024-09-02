@@ -78,3 +78,75 @@ payload: {
 
 API Response:  - 2024-09-02 07:09:42
 
+payload: {
+    "order_header": {
+        "preferred_shipping_date": "2024-09-02",
+        "currency": "EUR",
+        "contact_email": "ffshahjalal@gmail.com",
+        "check_price": "false",
+        "shipping_address": {
+            "contact_name": "Shah Jalal",
+            "company_name": "Imjol",
+            "street1": "Uttara",
+            "postal_code": "1230",
+            "city": "Dhaka",
+            "region": "BD-13",
+            "country": "BD",
+            "email": "ffshahjalal@gmail.com",
+            "phone": "01759277132"
+        },
+        "po_number": 16592,
+        "timestamp": "2024-09-02T08:00:44",
+        "contact_name": "Shah Jalal",
+        "order_type": "PRINT"
+    },
+    "order_lines": [
+        {
+            "order_line_id": 21,
+            "master_code": "KC2656",
+            "quantity": 1,
+            "expected_price": "1.41",
+            "printing_positions": [
+                {
+                    "id": "BELOW KEYBOARD",
+                    "print_size_height": 9,
+                    "print_size_width": 35,
+                    "printing_technique_id": "P3",
+                    "number_of_print_colors": "4",
+                    "print_artwork_url": "http:\/\/midocean-2.test\/wp-content\/uploads\/2024\/09\/CX1335-05_POS3-no-area-2.jpg",
+                    "print_mockup_url": "http:\/\/midocean-2.test\/wp-content\/uploads\/2024\/09\/CX1505-05_POS1.jpg",
+                    "print_instruction": "Test order",
+                    "print_colors": [
+                        {
+                            "color": "Pantone 4280C"
+                        }
+                    ]
+                },
+                {
+                    "id": "BACK",
+                    "print_size_height": 25,
+                    "print_size_width": 40,
+                    "printing_technique_id": "P3",
+                    "number_of_print_colors": "4",
+                    "print_artwork_url": "http:\/\/midocean-2.test\/wp-content\/uploads\/2024\/09\/CX1335-05_POS3-no-area-2.jpg",
+                    "print_mockup_url": "http:\/\/midocean-2.test\/wp-content\/uploads\/2024\/09\/CX1505-05_POS1.jpg",
+                    "print_instruction": "Test order",
+                    "print_colors": [
+                        {
+                            "color": "Pantone 4280C"
+                        }
+                    ]
+                }
+            ],
+            "print_items": [
+                {
+                    "item_color_number": "23",
+                    "quantity": 1
+                }
+            ]
+        }
+    ]
+} - 2024-09-02 08:00:44
+
+API Response:  - 2024-09-02 08:00:44
+
