@@ -366,6 +366,14 @@ class Customize_Product_Page {
 
                         // File Upload Handler for artwork and mockup
                         submitForm() {
+
+                            // Get upload media loader
+                            let uploadMediaLoaderArea = document.querySelector(".upload-media-loader");
+                            // Remove d-none class from loading area
+                            uploadMediaLoaderArea.classList.remove("d-none");
+                            // Add loader class to loading area
+                            uploadMediaLoaderArea.classList.add("loader");
+
                             const artworkFile = document.getElementById('upload-artwork').files[0];
                             const mockupFile = document.getElementById('upload-mockup').files[0];
                             const maxFileSize = 15 * 1024 * 1024; // 15 MB in bytes
@@ -417,7 +425,9 @@ class Customize_Product_Page {
                                 .then(result => {
                                     if (result.success) {
                                         this.customPrintMedias = result.data;
-                                        console.log(result.data);
+                                        // Remove d-none class from loading area
+                                        uploadMediaLoaderArea.classList.remove("loader");
+                                        uploadMediaLoaderArea.innerHTML = '<i class="fa-solid fa-check"></i>';
                                     } else {
                                         console.error(result.data.message);
                                     }
@@ -797,6 +807,7 @@ class Customize_Product_Page {
                                             <button type="button" class="modal-save-button" id="customize-modal-save-button"
                                                 @click="submitForm">
                                                 <?php esc_html_e( 'Añadir', 'bulk-product-import' ) ?>
+                                                <span class="upload-media-loader d-none ms-2"></span>
                                             </button>
                                         </div>
                                     </div>
