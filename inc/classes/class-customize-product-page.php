@@ -336,7 +336,7 @@ class Customize_Product_Page {
 
                         priceCalculation(quantity, price) {
                             this.quantityFieldValue = quantity;
-                            let calculation = (quantity * price);
+                            let calculation = (quantity * price).toFixed(2);
                             this.productPrice = calculation;
                         },
                         logSelectedData() {
@@ -559,7 +559,7 @@ class Customize_Product_Page {
                                                             <!-- Modal Image: Display the print position image -->
                                                             <div class="modal-item-image">
                                                                 <img :src="coverImage(item)" alt="example product image"
-                                                                    width="120px" style="display: block; margin: 1.5rem auto;">
+                                                                    style="display: block; margin: 1.5rem auto; height: 120px !important">
                                                             </div>
                                                             <!-- Modal Radio Buttons: -->
                                                             <div class="modal-item-radios">
