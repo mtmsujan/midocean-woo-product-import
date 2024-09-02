@@ -653,7 +653,7 @@ input[disabled],
   height: 15px !important;
 }
 
-.customize-modal-title{
+.customize-modal-title {
   font-family: "Noto Sans";
   font-size: 14px;
   font-weight: 400;
@@ -683,25 +683,33 @@ input[disabled],
   background: #1d813a;
 }
 
-.instructions-form-label{
+.instructions-form-label {
   font-family: "Noto Sans";
   font-size: 14px;
   font-weight: 400;
   color: #161616;
 }
 
-.instructions-textarea{
+.instructions-textarea {
   border: 1px solid #24a148;
   color: #000000;
 }
 
-.instructions-textarea:focus{
+.instructions-textarea:focus {
   border: 1px solid #24a148;
   outline: none;
 }
 
-.be-disabled{
+.be-disabled {
   pointer-events: none;
   opacity: 0.6;
   cursor: not-allowed !important;
+}
+
+.validation-instruction {
+  font-family: "Noto Sans";
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .16px;
+  color: #525252;
 }

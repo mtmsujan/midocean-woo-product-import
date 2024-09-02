@@ -357,13 +357,49 @@ class Customize_Product_Page {
 
                         // File Upload Handler for artwork and mockup
                         submitForm() {
+                            const artworkFile = document.getElementById('upload-artwork').files[0];
+                            const mockupFile = document.getElementById('upload-mockup').files[0];
+                            const maxFileSize = 15 * 1024 * 1024; // 15 MB in bytes
+                            const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg',
+                                'application/pdf', 'image/svg+xml', 'image/x-icon',
+                                'image/bmp', 'image/tiff', 'application/postscript',
+                                'application/vnd.adobe.photoshop'];
+
+                            // Validate artwork file
+                            if (artworkFile) {
+                                if (artworkFile.size > maxFileSize) {
+                                    alert('Artwork file exceeds the maximum size of 15 MB.');
+                                    return;
+                                }
+
+                                if (!allowedFileTypes.includes(artworkFile.type)) {
+                                    alert('Artwork file type is not allowed. Please upload a .jpg, .png, .gif, .jpeg, .pdf, .svg, .eps, .ico, .bmp, .tif, .ai, or .psd file.');
+                                    return;
+                                }
+                            }
+
+                            // Validate mockup file
+                            if (mockupFile) {
+                                if (mockupFile.size > maxFileSize) {
+                                    alert('Mockup file exceeds the maximum size of 15 MB.');
+                                    return;
+                                }
+
+                                if (!allowedFileTypes.includes(mockupFile.type)) {
+                                    alert('Mockup file type is not allowed. Please upload a .jpg, .png, .gif, .jpeg, .pdf, .svg, .eps, .ico, .bmp, .tif, .ai, or .psd file.');
+                                    return;
+                                }
+                            }
+
+                            // Prepare formData if validation passes
                             const formData = new FormData();
-                            formData.append('artwork', document.getElementById('upload-artwork').files[0]);
-                            formData.append('mockup', document.getElementById('upload-mockup').files[0]);
+                            formData.append('artwork', artworkFile);
+                            formData.append('mockup', mockupFile);
                             formData.append('instructions', this.instructions);
                             formData.append('action', 'upload_files');
                             formData.append('security', '<?= wp_create_nonce( 'upload_files_nonce' ); ?>');
 
+                            // Send AJAX request via fetch
                             fetch('<?= admin_url( 'admin-ajax.php' ); ?>', {
                                 method: 'POST',
                                 body: formData,
@@ -378,6 +414,7 @@ class Customize_Product_Page {
                                 })
                                 .catch(error => console.error('Error:', error));
                         }
+
                     }));
 
             });
@@ -702,11 +739,16 @@ class Customize_Product_Page {
                                             </button>
                                         </div>
                                         <div class="modal-body">
+                                            <div class="validation-instruction-area mb-3">
+                                                <p class="mb-0 validation-instruction">
+                                                    <?php esc_html_e( 'Tamaño máximo del archivo 15 MB. Sólo archivos .jpg, .png, .gif, .jpeg, .pdf, .svg, .eps, .ico, .bmp, .tif, .ai, .psd.', 'bulk-product-import' ) ?>
+                                                </p>
+                                            </div>
                                             <div class="artwork-area mb-3">
                                                 <div class="row align-items-center">
                                                     <div class="col-sm-4">
                                                         <label class="file-upload-button">
-                                                            <?php esc_html_e( 'Upload Artwork', 'bulk-product-import' ) ?>
+                                                            <?php esc_html_e( 'Subir obra de arte', 'bulk-product-import' ) ?>
                                                             <input type="file" name="upload-artwork" id="upload-artwork"
                                                                 @change="artworkName = $event.target.files[0]?.name" hidden>
                                                         </label>
@@ -720,7 +762,7 @@ class Customize_Product_Page {
                                                 <div class="row align-items-center">
                                                     <div class="col-sm-4">
                                                         <label class="file-upload-button">
-                                                            <?php esc_html_e( 'Upload Mockup', 'bulk-product-import' ) ?>
+                                                            <?php esc_html_e( 'Subir maqueta', 'bulk-product-import' ) ?>
                                                             <input type="file" name="upload-mockup" id="upload-mockup"
                                                                 @change="mockupName = $event.target.files[0]?.name" hidden>
                                                         </label>
@@ -732,7 +774,7 @@ class Customize_Product_Page {
                                             </div>
                                             <div class="instructions-area">
                                                 <label
-                                                    class="instructions-form-label"><?php esc_html_e( 'Instructions', 'bulk-product-import' ) ?></label>
+                                                    class="instructions-form-label"><?php esc_html_e( 'Instrucciones', 'bulk-product-import' ) ?></label>
                                                 <textarea class="instructions-textarea" name="instructions" id="instructions"
                                                     cols="30" rows="5" x-model="instructions"></textarea>
                                             </div>
