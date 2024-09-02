@@ -271,6 +271,16 @@ class Customize_Product_Page {
                         mockupName: null,
                         instructions: null,
                         customPrintMedias: null,
+                        showAlertMessage: false,
+
+                        init() {
+                            // Watch selectedPrintData and toggle showAlertMessage based on its content
+                            this.$watch('selectedPrintData', (newValue) => {
+                                if (newValue.length > 0) {
+                                    this.showAlertMessage = false;
+                                }
+                            });
+                        },
 
                         // Function to add data only if it doesn't already exist in selectedPrintData
                         addData(item, maxColors, selectedTechniqueId) {
@@ -738,7 +748,8 @@ class Customize_Product_Page {
                                 </div>
                             </div>
                         </div>
-                        <div class="personalize-button">
+                        <div class="personalize-button"
+                            @click="if (!(hasQty && selectedPrintData.length > 0)) { showAlertMessage = true; }">
                             <button :class="hasQty && selectedPrintData.length > 0 ? '' : 'be-disabled'"
                                 class="be-add-to-cart-btn w-100 d-flex align-items-center justify-content-between p-3"
                                 data-toggle="modal" data-target="#customMediaArtwork">
@@ -828,7 +839,8 @@ class Customize_Product_Page {
                                     <?php esc_html_e( 'Ver carrito', 'bulk-product-import' ) ?></a>
                             </div>
                             <!-- Alert message -->
-                            <div class="alert mt-3 be-alert-message" role="alert">
+                            <div class="alert mt-3 be-alert-message" role="alert" x-show="showAlertMessage" x-transition
+                                x-cloak>
                                 <div class="row align-items-center justify-content-start">
                                     <div class="col-sm-2 pe-0">
                                         <i class="fa-solid fa-circle-minus me-2" style="color: #ff3d3d; font-size:14px;"></i>
