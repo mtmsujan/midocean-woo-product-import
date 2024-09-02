@@ -739,7 +739,7 @@ class Customize_Product_Page {
                             </div>
                         </div>
                         <div class="personalize-button">
-                            <button :class="hasQty ? '' : 'be-disabled'"
+                            <button :class="hasQty && selectedPrintData.length > 0 ? '' : 'be-disabled'"
                                 class="be-add-to-cart-btn w-100 d-flex align-items-center justify-content-between p-3"
                                 data-toggle="modal" data-target="#customMediaArtwork">
                                 <span class="button-text"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?></span>
@@ -827,6 +827,19 @@ class Customize_Product_Page {
                                 <a class="view-cart-url text-white text-capitalize" href="">
                                     <?php esc_html_e( 'Ver carrito', 'bulk-product-import' ) ?></a>
                             </div>
+                            <!-- Alert message -->
+                            <div class="alert mt-3 be-alert-message" role="alert">
+                                <div class="row align-items-center justify-content-start">
+                                    <div class="col-sm-2 pe-0">
+                                        <i class="fa-solid fa-circle-minus me-2" style="color: #ff3d3d; font-size:14px;"></i>
+                                    </div>
+                                    <div class="col-sm-10 ps-0">
+                                        <span
+                                            class="alert-message-text"><?php esc_html_e( 'Por favor, configura al menos una posición de impresión.', 'bulk-product-import' ) ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Alert message -->
                         </div>
                     </div>
                 </div>

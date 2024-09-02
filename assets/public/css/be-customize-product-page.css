@@ -713,3 +713,17 @@ input[disabled],
   letter-spacing: .16px;
   color: #525252;
 }
+
+.be-alert-message{
+  background-color: #393939;
+  padding: 0.5rem 1rem !important;
+  border-left: 3px solid red;
+}
+
+.alert-message-text{
+  color: #fff;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
