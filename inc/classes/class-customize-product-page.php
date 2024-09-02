@@ -34,6 +34,8 @@ class Customize_Product_Page {
         add_shortcode( 'custom_product_configurator_mto_link', [ $this, 'custom_product_configurator_mto_link_callback' ] );
         add_action( 'wp_ajax_custom_add_to_cart', [ $this, 'custom_add_to_cart_handler' ] );
         add_action( 'wp_ajax_nopriv_custom_add_to_cart', [ $this, 'custom_add_to_cart_handler' ] );
+        add_action( 'wp_ajax_upload_files', [ $this, 'handle_file_upload' ] );
+        add_action( 'wp_ajax_nopriv_upload_files', [ $this, 'handle_file_upload' ] );
     }
 
     public function display_product_info_callback() {
@@ -265,8 +267,9 @@ class Customize_Product_Page {
                         selectedPrintData: [],
                         productPrice: null,
                         quantityFieldValue: null,
-                        artworkName: '',
-                        mockupName: '',
+                        artworkName: null,
+                        mockupName: null,
+                        instructions: null,
 
                         // Function to add data only if it doesn't already exist in selectedPrintData
                         addData(item, maxColors, selectedTechniqueId) {
@@ -350,6 +353,30 @@ class Customize_Product_Page {
 
                             // Set the cookie with the key 'printing_positions' and the JSON data
                             document.cookie = `printing_positions_${productId}=${jsonData}; path=/; max-age=${60 * 60 * 24};`; // 24 hours expiration
+                        },
+
+                        // File Upload Handler for artwork and mockup
+                        submitForm() {
+                            const formData = new FormData();
+                            formData.append('artwork', document.getElementById('upload-artwork').files[0]);
+                            formData.append('mockup', document.getElementById('upload-mockup').files[0]);
+                            formData.append('instructions', this.instructions);
+                            formData.append('action', 'upload_files');
+                            formData.append('security', '<?= wp_create_nonce( 'upload_files_nonce' ); ?>');
+
+                            fetch('<?= admin_url( 'admin-ajax.php' ); ?>', {
+                                method: 'POST',
+                                body: formData,
+                            })
+                                .then(response => response.json())
+                                .then(result => {
+                                    if (result.success) {
+                                        console.log(result.data); // Access the returned artwork_url, mockup_url, and instructions
+                                    } else {
+                                        console.error(result.data.message);
+                                    }
+                                })
+                                .catch(error => console.error('Error:', error));
                         }
                     }));
 
@@ -707,14 +734,14 @@ class Customize_Product_Page {
                                                 <label
                                                     class="instructions-form-label"><?php esc_html_e( 'Instructions', 'bulk-product-import' ) ?></label>
                                                 <textarea class="instructions-textarea" name="instructions" id="instructions"
-                                                    cols="30" rows="5"></textarea>
+                                                    cols="30" rows="5" x-model="instructions"></textarea>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="modal-close-button"
                                                 data-dismiss="modal"><?php esc_html_e( 'Cancelar', 'bulk-product-import' ) ?></button>
                                             <button type="button" class="modal-save-button" id="customize-modal-save-button"
-                                                @click="console.log(`${artworkName } ${mockupName }`)">
+                                                @click="submitForm">
                                                 <?php esc_html_e( 'Añadir', 'bulk-product-import' ) ?>
                                             </button>
                                         </div>
@@ -818,31 +845,6 @@ class Customize_Product_Page {
         return $print_data;
     }
 
-    public function put_program_logs( $data ) {
-
-        // Ensure directory exists to store response data
-        $directory = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/program_logs/';
-        if ( !file_exists( $directory ) ) {
-            mkdir( $directory, 0777, true );
-        }
-
-        // Construct file path for response data
-        $file_name = $directory . 'program_logs.log';
-
-        // Get the current date and time
-        $current_datetime = date( 'Y-m-d H:i:s' );
-
-        // Append current date and time to the response data
-        $data = $data . ' - ' . $current_datetime;
-
-        // Append new response data to the existing file
-        if ( file_put_contents( $file_name, $data . "\n\n", FILE_APPEND | LOCK_EX ) !== false ) {
-            return "Data appended to file successfully.";
-        } else {
-            return "Failed to append data to file.";
-        }
-    }
-
     public function custom_add_to_cart_handler() {
         try {
             // Get product values
@@ -887,4 +889,71 @@ class Customize_Product_Page {
         wp_die(); // Required for WordPress AJAX
     }
 
+    public function handle_file_upload() {
+
+        // Make sure load the file required to handle file uploads
+        if ( !function_exists( 'media_handle_upload' ) ) {
+            require_once( ABSPATH . 'wp-admin/includes/file.php' );
+            require_once( ABSPATH . 'wp-admin/includes/media.php' );
+            require_once( ABSPATH . 'wp-admin/includes/image.php' );
+        }
+
+        // Check for nonce security
+        check_ajax_referer( 'upload_files_nonce', 'security' );
+
+        $response = [];
+
+        // Handle artwork file upload
+        if ( !empty( $_FILES['artwork'] ) ) {
+            $artwork_id = media_handle_upload( 'artwork', 0 );
+            if ( !is_wp_error( $artwork_id ) ) {
+                $response['artwork_url'] = wp_get_attachment_url( $artwork_id );
+            } else {
+                wp_send_json_error( [ 'message' => 'Error uploading artwork.' ] );
+            }
+        }
+
+        // Handle mockup file upload
+        if ( !empty( $_FILES['mockup'] ) ) {
+            $mockup_id = media_handle_upload( 'mockup', 0 );
+            if ( !is_wp_error( $mockup_id ) ) {
+                $response['mockup_url'] = wp_get_attachment_url( $mockup_id );
+            } else {
+                wp_send_json_error( [ 'message' => 'Error uploading mockup.' ] );
+            }
+        }
+
+        // Handle instructions
+        if ( !empty( $_POST['instructions'] ) ) {
+            $response['instructions'] = sanitize_text_field( $_POST['instructions'] );
+        }
+
+        wp_send_json_success( $response );
+    }
+
+
+    public function put_program_logs( $data ) {
+
+        // Ensure directory exists to store response data
+        $directory = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/program_logs/';
+        if ( !file_exists( $directory ) ) {
+            mkdir( $directory, 0777, true );
+        }
+
+        // Construct file path for response data
+        $file_name = $directory . 'program_logs.log';
+
+        // Get the current date and time
+        $current_datetime = date( 'Y-m-d H:i:s' );
+
+        // Append current date and time to the response data
+        $data = $data . ' - ' . $current_datetime;
+
+        // Append new response data to the existing file
+        if ( file_put_contents( $file_name, $data . "\n\n", FILE_APPEND | LOCK_EX ) !== false ) {
+            return "Data appended to file successfully.";
+        } else {
+            return "Failed to append data to file.";
+        }
+    }
 }
