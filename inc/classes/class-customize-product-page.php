@@ -270,6 +270,7 @@ class Customize_Product_Page {
                         artworkName: null,
                         mockupName: null,
                         instructions: null,
+                        customPrintMedias: null,
 
                         // Function to add data only if it doesn't already exist in selectedPrintData
                         addData(item, maxColors, selectedTechniqueId) {
@@ -345,9 +346,17 @@ class Customize_Product_Page {
                         logSelectedData() {
                             console.log(this.selectedPrintData);
                         },
-                        savePrintPositionsDataToCookie(positions) {
+                        savePrintPositionsDataToCookie(selectedPrintData) {
+
+                            // Combine selectedPrintData (array) and customPrintMedias (object)
+                            const combinedData = {
+                                selectedPrintData: selectedPrintData,
+                                customPrintMedias: this.customPrintMedias
+                            };
+
                             // Convert the positions object/array to a JSON string
-                            const jsonData = JSON.stringify(positions);
+                            const jsonData = JSON.stringify(combinedData);
+
                             // Product id
                             const productId = '<?= $this->product_id ?>';
 
@@ -407,7 +416,8 @@ class Customize_Product_Page {
                                 .then(response => response.json())
                                 .then(result => {
                                     if (result.success) {
-                                        console.log(result.data); // Access the returned artwork_url, mockup_url, and instructions
+                                        this.customPrintMedias = result.data;
+                                        console.log(result.data);
                                     } else {
                                         console.error(result.data.message);
                                     }
@@ -780,8 +790,10 @@ class Customize_Product_Page {
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="modal-close-button"
-                                                data-dismiss="modal"><?php esc_html_e( 'Cancelar', 'bulk-product-import' ) ?></button>
+                                            <button type="button" @click="console.log(customPrintMedias)"
+                                                class="modal-close-button"
+                                                data-dismiss="modal"><?php esc_html_e( 'Cancelar', 'bulk-product-import' ) ?>
+                                            </button>
                                             <button type="button" class="modal-save-button" id="customize-modal-save-button"
                                                 @click="submitForm">
                                                 <?php esc_html_e( 'Añadir', 'bulk-product-import' ) ?>
