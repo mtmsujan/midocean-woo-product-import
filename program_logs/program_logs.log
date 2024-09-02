@@ -1,0 +1,80 @@
+Cookie Key: printing_positions_16553 - 2024-09-02 07:09:42
+
+Cookie Values: {"selectedPrintData":[{"position_id":"BELOW KEYBOARD","print_size_unit":"mm","max_print_size_height":9,"max_print_size_width":35,"rotation":0,"print_position_type":"Rectangle","printing_techniques":[{"default":true,"id":"P3","max_colours":"4"}],"points":[{"distance_from_left":105,"distance_from_top":848,"sequence_no":1},{"distance_from_left":425,"distance_from_top":930,"sequence_no":2}],"images":[{"print_position_image_blank":"https://printposition-images-api-v2.cdn.midocean.com/KC2656-23_POS1-no-area.jpg","print_position_image_with_area":"https://printposition-images-api-v2.cdn.midocean.com/KC2656-23_POS1.jpg","variant_color":"23"}],"maxColors":"4","selectedTechniqueId":"P3"},{"position_id":"BACK","print_size_unit":"mm","max_print_size_height":25,"max_print_size_width":40,"rotation":0,"print_position_type":"Rectangle","printing_techniques":[{"default":true,"id":"P3","max_colours":"4"}],"points":[{"distance_from_left":91,"distance_from_top":127,"sequence_no":1},{"distance_from_left":456,"distance_from_top":355,"sequence_no":2}],"images":[{"print_position_image_blank":"https://printposition-images-api-v2.cdn.midocean.com/KC2656-23_POS2-no-area.jpg","print_position_image_with_area":"https://printposition-images-api-v2.cdn.midocean.com/KC2656-23_POS2.jpg","variant_color":"23"}],"maxColors":"4","selectedTechniqueId":"P3"}],"customPrintMedias":{"artwork_url":"http://midocean-2.test/wp-content/uploads/2024/09/01759277132_-_12_48_29_PM_Jun_13_2024.png.jpg","mockup_url":"http://midocean-2.test/wp-content/uploads/2024/09/Screenshot_1.png","instructions":"Order 4"}} - 2024-09-02 07:09:42
+
+Selected Printing Positions: [{"position_id":"BELOW KEYBOARD","print_size_unit":"mm","max_print_size_height":9,"max_print_size_width":35,"rotation":0,"print_position_type":"Rectangle","printing_techniques":[{"default":true,"id":"P3","max_colours":"4"}],"points":[{"distance_from_left":105,"distance_from_top":848,"sequence_no":1},{"distance_from_left":425,"distance_from_top":930,"sequence_no":2}],"images":[{"print_position_image_blank":"https://printposition-images-api-v2.cdn.midocean.com/KC2656-23_POS1-no-area.jpg","print_position_image_with_area":"https://printposition-images-api-v2.cdn.midocean.com/KC2656-23_POS1.jpg","variant_color":"23"}],"maxColors":"4","selectedTechniqueId":"P3"},{"position_id":"BACK","print_size_unit":"mm","max_print_size_height":25,"max_print_size_width":40,"rotation":0,"print_position_type":"Rectangle","printing_techniques":[{"default":true,"id":"P3","max_colours":"4"}],"points":[{"distance_from_left":91,"distance_from_top":127,"sequence_no":1},{"distance_from_left":456,"distance_from_top":355,"sequence_no":2}],"images":[{"print_position_image_blank":"https://printposition-images-api-v2.cdn.midocean.com/KC2656-23_POS2-no-area.jpg","print_position_image_with_area":"https://printposition-images-api-v2.cdn.midocean.com/KC2656-23_POS2.jpg","variant_color":"23"}],"maxColors":"4","selectedTechniqueId":"P3"}] - 2024-09-02 07:09:42
+
+Custom Print Media: {"artwork_url":"http:\/\/midocean-2.test\/wp-content\/uploads\/2024\/09\/01759277132_-_12_48_29_PM_Jun_13_2024.png.jpg","mockup_url":"http:\/\/midocean-2.test\/wp-content\/uploads\/2024\/09\/Screenshot_1.png","instructions":"Order 4"} - 2024-09-02 07:09:42
+
+payload: {
+    "order_header": {
+        "preferred_shipping_date": "2024-09-02",
+        "currency": "EUR",
+        "contact_email": "ffshahjalal@gmail.com",
+        "check_price": "false",
+        "shipping_address": {
+            "contact_name": "Shah Jalal",
+            "company_name": "Imjol",
+            "street1": "Uttara",
+            "postal_code": "1230",
+            "city": "Dhaka",
+            "region": "BD-13",
+            "country": "BD",
+            "email": "ffshahjalal@gmail.com",
+            "phone": "01759277132"
+        },
+        "po_number": 16583,
+        "timestamp": "2024-09-02T07:09:42",
+        "contact_name": "Shah Jalal",
+        "order_type": "PRINT"
+    },
+    "order_lines": [
+        {
+            "order_line_id": 20,
+            "master_code": "KC2656",
+            "quantity": 2,
+            "expected_price": "2.82",
+            "printing_positions": [
+                {
+                    "id": "BELOW KEYBOARD",
+                    "print_size_height": 9,
+                    "print_size_width": 35,
+                    "printing_technique_id": "P3",
+                    "number_of_print_colors": "4",
+                    "print_artwork_url": "http:\/\/midocean-2.test\/wp-content\/uploads\/2024\/09\/01759277132_-_12_48_29_PM_Jun_13_2024.png.jpg",
+                    "print_mockup_url": "http:\/\/midocean-2.test\/wp-content\/uploads\/2024\/09\/Screenshot_1.png",
+                    "print_instruction": "Order 4",
+                    "print_colors": [
+                        {
+                            "color": "Pantone 4280C"
+                        }
+                    ]
+                },
+                {
+                    "id": "BACK",
+                    "print_size_height": 25,
+                    "print_size_width": 40,
+                    "printing_technique_id": "P3",
+                    "number_of_print_colors": "4",
+                    "print_artwork_url": "http:\/\/midocean-2.test\/wp-content\/uploads\/2024\/09\/01759277132_-_12_48_29_PM_Jun_13_2024.png.jpg",
+                    "print_mockup_url": "http:\/\/midocean-2.test\/wp-content\/uploads\/2024\/09\/Screenshot_1.png",
+                    "print_instruction": "Order 4",
+                    "print_colors": [
+                        {
+                            "color": "Pantone 4280C"
+                        }
+                    ]
+                }
+            ],
+            "print_items": [
+                {
+                    "item_color_number": "23",
+                    "quantity": 2
+                }
+            ]
+        }
+    ]
+} - 2024-09-02 07:09:42
+
+API Response:  - 2024-09-02 07:09:42
+

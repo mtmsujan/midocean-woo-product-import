@@ -26,7 +26,7 @@ class Create_Order {
         $api_response = $this->call_api( $order );
 
         // Log the API response
-        $this->put_program_logs( $api_response );
+        $this->put_program_logs( 'API Response: ' . $api_response );
 
         // Handle product and printing positions
         $product_id = null;
@@ -72,25 +72,48 @@ class Create_Order {
         // Handle product and printing positions
         $product_id         = null;
         $printing_positions = null;
+        $custom_print_media = null;
         foreach ( $order->get_items() as $item ) {
             $product_id = $item->get_product()->get_id();
             break; // Just considering the first item for product id in this context
         }
 
         $cookie_key = "printing_positions_" . $product_id;
+        // Put the cookie key to log
+        // $this->put_program_logs( 'Cookie Key: ' . $cookie_key );
 
         // Check for printing positions from cookie
         if ( isset( $_COOKIE[$cookie_key] ) ) {
-            $printing_positions = $_COOKIE[$cookie_key];
+            // Get cookie values
+            $cookie_values = $_COOKIE[$cookie_key];
+            // decode $cookie_values
+            // Replace \ from cookie values
+            $cookie_values = str_replace( '\\', '', $cookie_values );
+            // Log the cookie values
+            // $this->put_program_logs( 'Cookie Values: ' . $cookie_values );
+            // Decode the cookie values
+            $cookie_values = json_decode( $cookie_values, true );
+            // Set printing positions
+            $printing_positions = json_encode( $cookie_values['selectedPrintData'] );
+            // Set custom print media
+            $custom_print_media = json_encode( $cookie_values['customPrintMedias'] );
         }
 
         if ( $printing_positions ) {
             // Replace \ from printing positions
             $printing_positions = str_replace( '\\', '', $printing_positions );
             // Log the printing positions
-            // $this->put_program_logs( $printing_positions );
+            // $this->put_program_logs( 'Selected Printing Positions: ' . $printing_positions );
             // decode the printing positions
             $printing_positions = json_decode( $printing_positions, true );
+        }
+
+        if ( $custom_print_media ) {
+            // Put to log
+            // $this->put_program_logs( 'Custom Print Media: ' . $custom_print_media );
+
+            // Decode the custom print media
+            $custom_print_media = json_decode( $custom_print_media, true );
         }
 
         // Determine order type based on printing positions
@@ -162,9 +185,9 @@ class Create_Order {
                         'print_size_width'       => $position['max_print_size_width'],
                         'printing_technique_id'  => $position['selectedTechniqueId'],
                         'number_of_print_colors' => $position['maxColors'],
-                        'print_artwork_url'      => 'your logo URL',
-                        'print_mockup_url'       => 'your mockup URL', 
-                        'print_instruction'      => 'Print instructions', 
+                        'print_artwork_url'      => $custom_print_media['artwork_url'],
+                        'print_mockup_url'       => $custom_print_media['mockup_url'],
+                        'print_instruction'      => $custom_print_media['instructions'],
                         'print_colors'           => [
                             [
                                 'color' => 'Pantone 4280C',
