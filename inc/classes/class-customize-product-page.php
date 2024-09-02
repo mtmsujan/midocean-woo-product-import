@@ -346,11 +346,11 @@ class Customize_Product_Page {
                         logSelectedData() {
                             console.log(this.selectedPrintData);
                         },
-                        savePrintPositionsDataToCookie(selectedPrintData) {
+                        savePrintPositionsDataToCookie() {
 
                             // Combine selectedPrintData (array) and customPrintMedias (object)
                             const combinedData = {
-                                selectedPrintData: selectedPrintData,
+                                selectedPrintData: this.selectedPrintData,
                                 customPrintMedias: this.customPrintMedias
                             };
 
@@ -800,8 +800,7 @@ class Customize_Product_Page {
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" @click="console.log(customPrintMedias)"
-                                                class="modal-close-button"
+                                            <button type="button" class="modal-close-button"
                                                 data-dismiss="modal"><?php esc_html_e( 'Cancelar', 'bulk-product-import' ) ?>
                                             </button>
                                             <button type="button" class="modal-save-button" id="customize-modal-save-button"
@@ -814,7 +813,7 @@ class Customize_Product_Page {
                                 </div>
                             </div>
                             <!-- /Custom media, artwork and design -->
-                            <button :class="hasQty ? '' : 'd-none'" @click="savePrintPositionsDataToCookie(selectedPrintData)"
+                            <button :class="hasQty ? '' : 'd-none'" @click="savePrintPositionsDataToCookie"
                                 class="be-add-to-cart-btn-without-configure w-100 d-flex align-items-center justify-content-between mt-2 p-3"
                                 data-product-id="<?php echo $this->product_id; ?>">
                                 <span
