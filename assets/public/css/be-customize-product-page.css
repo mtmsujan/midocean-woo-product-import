@@ -727,3 +727,5 @@ input[disabled],
   font-weight: 400;
   line-height: 20px;
 }
+
+[x-cloak] { display: none; }
