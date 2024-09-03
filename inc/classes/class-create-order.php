@@ -52,6 +52,8 @@ class Create_Order {
         // Extract order data
         $order_id         = $order->get_id();
         $order_date       = $order->get_date_created()->date( 'Y-m-d' );
+        $delivery_date    = $order->get_date_created()->format( 'Y-m-d' );
+        $timestamp        = $order->get_date_created()->format( 'Y-m-d\TH:i:s' );
         $contact_email    = $order->get_billing_email();
         $billing_address  = $order->get_address( 'billing' );
         $shipping_address = $billing_address; // Assuming billing and shipping are the same
@@ -114,9 +116,13 @@ class Create_Order {
 
             // Decode the custom print media
             $custom_print_media = json_decode( $custom_print_media, true );
-            $artwork_url        = str_replace( "\\", "", $custom_print_media['artwork_url'] );
-            $mockup_url         = str_replace( "\\", "", $custom_print_media['mockup_url'] );
-            $instructions       = $custom_print_media['instructions'];
+            $artwork_url        = $custom_print_media['artwork_url'];
+            $artwork_url        = str_replace( "\\", "", $artwork_url );
+            $this->put_program_logs( 'Artwork Url: ' . $artwork_url );
+            $mockup_url = $custom_print_media['mockup_url'];
+            $mockup_url = str_replace( "\\", "", $mockup_url );
+            $this->put_program_logs( 'Mockup Url: ' . $mockup_url );
+            $instructions = $custom_print_media['instructions'];
         }
 
         // Determine order type based on printing positions
@@ -125,13 +131,13 @@ class Create_Order {
         // Build the payload for NORMAL order type
         $normal_order_payload = [
             'order_header' => [
-                'preferred_shipping_date' => $order_date,
+                'preferred_shipping_date' => $delivery_date,
                 'check_price'             => 'false',
                 'currency'                => $order->get_currency(),
                 'contact_email'           => $contact_email,
                 'shipping_address'        => $shipping_address,
                 'po_number'               => $order_id,
-                'timestamp'               => date( 'Y-m-d H:i:s' ),
+                'timestamp'               => $timestamp,
                 'contact_name'            => $contact_name,
                 'order_type'              => 'NORMAL',
             ],
@@ -141,7 +147,7 @@ class Create_Order {
         // Build the payload for PRINT order type
         $print_order_payload = [
             'order_header' => [
-                'preferred_shipping_date' => '',
+                'preferred_shipping_date' => $delivery_date,
                 'currency'                => $order->get_currency(),
                 'contact_email'           => $contact_email,
                 'check_price'             => 'false',
@@ -157,7 +163,7 @@ class Create_Order {
                     'phone'        => $billing_address['phone'] ?? ''
                 ],
                 'po_number'               => $order_id,
-                'timestamp'               => date( 'Y-m-d\TH:i:s' ),
+                'timestamp'               => $timestamp,
                 'contact_name'            => $contact_name,
                 'order_type'              => 'PRINT',
             ],
@@ -232,7 +238,7 @@ class Create_Order {
         curl_setopt_array(
             $curl,
             array(
-                CURLOPT_URL            => 'https://api.midocean.com.bd/gateway/order/2.1/create',
+                CURLOPT_URL            => 'https://api.midocean.com/gateway/order/2.1/create',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING       => '',
                 CURLOPT_MAXREDIRS      => 10,
