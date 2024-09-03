@@ -50,14 +50,16 @@ class Create_Order {
         $api_key = get_option( 'be-api-key' ) ?? '';
 
         // Extract order data
-        $order_id         = $order->get_id();
-        $order_date       = $order->get_date_created()->date( 'Y-m-d' );
-        $delivery_date    = $order->get_date_created()->format( 'Y-m-d' );
+        $order_id   = $order->get_id();
+        $order_date = $order->get_date_created()->date( 'Y-m-d' );
+        // $delivery_date    = $order->get_date_created()->format( 'Y-m-d' );
+        $delivery_date    = ( new \DateTime() )->modify( '+7 days' )->format( 'Y-m-d' );
         $timestamp        = $order->get_date_created()->format( 'Y-m-d\TH:i:s' );
         $contact_email    = $order->get_billing_email();
         $billing_address  = $order->get_address( 'billing' );
         $shipping_address = $billing_address; // Assuming billing and shipping are the same
-        $contact_name     = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
+        // $this->put_program_logs( 'Shipping Addresses: ' . json_encode( $shipping_address ) );
+        $contact_name = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
 
         // Prepare order items
         $order_items = [];
@@ -118,11 +120,9 @@ class Create_Order {
             $custom_print_media = json_decode( $custom_print_media, true );
             $artwork_url        = $custom_print_media['artwork_url'];
             $artwork_url        = str_replace( "\\", "", $artwork_url );
-            $this->put_program_logs( 'Artwork Url: ' . $artwork_url );
-            $mockup_url = $custom_print_media['mockup_url'];
-            $mockup_url = str_replace( "\\", "", $mockup_url );
-            $this->put_program_logs( 'Mockup Url: ' . $mockup_url );
-            $instructions = $custom_print_media['instructions'];
+            $mockup_url         = $custom_print_media['mockup_url'];
+            $mockup_url         = str_replace( "\\", "", $mockup_url );
+            $instructions       = $custom_print_media['instructions'];
         }
 
         // Determine order type based on printing positions
@@ -135,7 +135,18 @@ class Create_Order {
                 'check_price'             => 'false',
                 'currency'                => $order->get_currency(),
                 'contact_email'           => $contact_email,
-                'shipping_address'        => $shipping_address,
+                'shipping_address'        => [
+                    'contact_name' => trim( $contact_name ),
+                    'company_name' => trim( $billing_address['company'] ?? '' ),
+                    'street1'      => trim( $billing_address['address_1'] ),
+                    'street2'      => trim( $billing_address['address_2'] ?? '' ),
+                    'postal_code'  => trim( $billing_address['postcode'] ),
+                    'city'         => trim( $billing_address['city'] ),
+                    'region'       => trim( $billing_address['state'] ),
+                    'country'      => trim( $billing_address['country'] ),
+                    'email'        => trim( $contact_email ),
+                    'phone'        => trim( $billing_address['phone'] ?? '' ),
+                ],
                 'po_number'               => $order_id,
                 'timestamp'               => $timestamp,
                 'contact_name'            => $contact_name,
@@ -147,25 +158,26 @@ class Create_Order {
         // Build the payload for PRINT order type
         $print_order_payload = [
             'order_header' => [
-                'preferred_shipping_date' => $delivery_date,
-                'currency'                => $order->get_currency(),
-                'contact_email'           => $contact_email,
-                'check_price'             => 'false',
-                'shipping_address'        => [
-                    'contact_name' => $contact_name,
-                    'company_name' => $billing_address['company'] ?? '',
-                    'street1'      => $billing_address['address_1'],
-                    'postal_code'  => $billing_address['postcode'],
-                    'city'         => $billing_address['city'],
-                    'region'       => $billing_address['state'],
-                    'country'      => $billing_address['country'],
-                    'email'        => $contact_email,
-                    'phone'        => $billing_address['phone'] ?? ''
+                // 'preferred_shipping_date' => '',
+                'currency'         => $order->get_currency(),
+                'contact_email'    => $contact_email,
+                'check_price'      => 'false',
+                'shipping_address' => [
+                    'contact_name' => trim( $contact_name ),
+                    'company_name' => trim( $billing_address['company'] ?? '' ),
+                    'street1'      => trim( $billing_address['address_1'] ),
+                    'street2'      => trim( $billing_address['address_2'] ?? '' ),
+                    'postal_code'  => trim( $billing_address['postcode'] ),
+                    'city'         => trim( $billing_address['city'] ),
+                    'region'       => trim( $billing_address['state'] ),
+                    'country'      => trim( $billing_address['country'] ),
+                    'email'        => trim( $contact_email ),
+                    'phone'        => trim( $billing_address['phone'] ?? '' ),
                 ],
-                'po_number'               => $order_id,
-                'timestamp'               => $timestamp,
-                'contact_name'            => $contact_name,
-                'order_type'              => 'PRINT',
+                'po_number'        => $order_id,
+                'timestamp'        => $timestamp,
+                'contact_name'     => $contact_name,
+                'order_type'       => 'PRINT',
             ],
             'order_lines'  => [],
         ];

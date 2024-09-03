@@ -748,9 +748,9 @@ class Customize_Product_Page {
                                 </div>
                             </div>
                         </div>
-                        <div class="personalize-button"
-                            @click="if (!(hasQty && selectedPrintData.length > 0)) { showAlertMessage = true; }">
-                            <button :class="hasQty && selectedPrintData.length > 0 ? '' : 'be-disabled'"
+                        <div class="personalize-button">
+                            <button @click="if (!(hasQty && selectedPrintData.length > 0)) { showAlertMessage = true; }"
+                                :class="hasQty && selectedPrintData.length > 0 ? '' : 'be-disabled'"
                                 class="be-add-to-cart-btn w-100 d-flex align-items-center justify-content-between p-3"
                                 data-toggle="modal" data-target="#customMediaArtwork">
                                 <span class="button-text"><?php esc_html_e( 'Personalizar', 'bulk-product-import' ) ?></span>

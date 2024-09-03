@@ -1,45 +1,40 @@
-Artwork Url:  - 2024-09-03 04:12:32
-
-Mockup Url:  - 2024-09-03 04:12:32
-
 payload: {
     "order_header": {
-        "preferred_shipping_date": "2024-09-03",
+        "preferred_shipping_date": "2024-09-10",
         "check_price": "false",
         "currency": "EUR",
         "contact_email": "ffshahjalal@gmail.com",
         "shipping_address": {
-            "first_name": "Shah",
-            "last_name": "Jalal",
-            "company": "Imjol",
-            "address_1": "Uttara",
-            "address_2": "Dhaka",
-            "city": "Dhaka",
-            "state": "BD-13",
-            "postcode": "1230",
-            "country": "BD",
+            "contact_name": "Shah Jalal",
+            "company_name": "Imjol",
+            "street1": "Maestro Puig Valera 88",
+            "street2": "",
+            "postal_code": "33800",
+            "city": "Cangas Del Narcea",
+            "region": "O",
+            "country": "ES",
             "email": "ffshahjalal@gmail.com",
-            "phone": "01759277132"
+            "phone": "672 224 413"
         },
-        "po_number": 16597,
-        "timestamp": "2024-09-03T04:11:49",
+        "po_number": 16605,
+        "timestamp": "2024-09-03T05:32:32",
         "contact_name": "Shah Jalal",
         "order_type": "NORMAL"
     },
     "order_lines": [
         {
-            "order_line_id": 24,
+            "order_line_id": 30,
             "sku": "KC2656-23",
             "quantity": 1,
             "expected_price": "1.41"
         }
     ]
-} - 2024-09-03 04:12:32
+} - 2024-09-03 05:33:12
 
 API Response: {
   "order_header" : {
     "status_code" : "999",
-    "status_text" : "Destination country BD is not allowed",
+    "status_text" : "Delivery date not feasible",
     "direct_confirmation" : "",
     "check_price" : "false",
     "currency" : "EUR",
@@ -54,22 +49,22 @@ API Response: {
     "print_cost" : "",
     "print_handling" : "",
     "shipping_address" : {
-      "contact_name" : "",
-      "company_name" : "",
-      "street1" : "",
+      "contact_name" : "Shah Jalal",
+      "company_name" : "Imjol",
+      "street1" : "Maestro Puig Valera 88",
       "street2" : "",
       "street3" : "",
-      "postal_code" : "",
-      "city" : "Dhaka",
-      "region" : "",
-      "country" : "BD",
+      "postal_code" : "33800",
+      "city" : "Cangas Del Narcea",
+      "region" : "O",
+      "country" : "ES",
       "email" : "ffshahjalal@gmail.com",
-      "phone" : "01759277132"
+      "phone" : "672 224 413"
     }
   },
   "order_lines" : [ {
     "status_code" : "999",
-    "status_text" : "",
+    "status_text" : "Delivery date 20240910 not feasible. First possible delivery date is 00.00.0000.",
     "po_line_id" : "",
     "sku" : "KC2656-23",
     "variant_id" : "",
@@ -78,5 +73,82 @@ API Response: {
     "master_code" : "",
     "master_id" : ""
   } ]
-} - 2024-09-03 04:12:34
+} - 2024-09-03 05:33:13
+
+payload: {
+    "order_header": {
+        "preferred_shipping_date": "2024-09-10",
+        "check_price": "false",
+        "currency": "EUR",
+        "contact_email": "ffshahjalal@gmail.com",
+        "shipping_address": {
+            "contact_name": "Shah Jalal",
+            "company_name": "Imjol",
+            "street1": "Maestro Puig Valera 88",
+            "street2": "",
+            "postal_code": "33800",
+            "city": "Cangas Del Narcea",
+            "region": "O",
+            "country": "ES",
+            "email": "ffshahjalal@gmail.com",
+            "phone": "672 224 413"
+        },
+        "po_number": 16605,
+        "timestamp": "2024-09-03T05:32:32",
+        "contact_name": "Shah Jalal",
+        "order_type": "NORMAL"
+    },
+    "order_lines": [
+        {
+            "order_line_id": 30,
+            "sku": "KC2656-23",
+            "quantity": 1,
+            "expected_price": "1.41"
+        }
+    ]
+} - 2024-09-03 06:19:36
+
+API Response: {
+  "order_header" : {
+    "status_code" : "999",
+    "status_text" : "Delivery date not feasible",
+    "direct_confirmation" : "",
+    "check_price" : "false",
+    "currency" : "EUR",
+    "po_number" : "",
+    "order_type" : "NORMAL",
+    "total_item_price" : "",
+    "total_print_costs" : "",
+    "total_net_price" : "",
+    "freight_charge" : "",
+    "tax" : "",
+    "print_setup" : "",
+    "print_cost" : "",
+    "print_handling" : "",
+    "shipping_address" : {
+      "contact_name" : "Shah Jalal",
+      "company_name" : "Imjol",
+      "street1" : "Maestro Puig Valera 88",
+      "street2" : "",
+      "street3" : "",
+      "postal_code" : "33800",
+      "city" : "Cangas Del Narcea",
+      "region" : "O",
+      "country" : "ES",
+      "email" : "ffshahjalal@gmail.com",
+      "phone" : "672 224 413"
+    }
+  },
+  "order_lines" : [ {
+    "status_code" : "999",
+    "status_text" : "Delivery date 20240910 not feasible. First possible delivery date is 00.00.0000.",
+    "po_line_id" : "",
+    "sku" : "KC2656-23",
+    "variant_id" : "",
+    "quantity" : "",
+    "expected_price" : "1.41",
+    "master_code" : "",
+    "master_id" : ""
+  } ]
+} - 2024-09-03 06:19:38
 
