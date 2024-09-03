@@ -263,3 +263,65 @@ function insert_product_print_data_db() {
 
     return '<h4>Product print data inserted successfully DB</h4>';
 }
+
+// Fetch product print price data from api
+function fetch_product_print_price_data() {
+
+    $api_key = get_option( 'be-api-key' ) ?? '';
+
+    $curl = curl_init();
+
+    curl_setopt_array( $curl, array(
+        CURLOPT_URL            => 'https://api.midocean.com/gateway/printpricelist/2.0/',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING       => '',
+        CURLOPT_MAXREDIRS      => 10,
+        CURLOPT_TIMEOUT        => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST  => 'GET',
+        CURLOPT_HTTPHEADER     => array(
+            'x-Gateway-APIKey: ' . $api_key,
+        ),
+    ) );
+
+    $response = curl_exec( $curl );
+
+    curl_close( $curl );
+    return $response;
+}
+
+// Insert product print price data to database
+function insert_product_print_price_data_db() {
+
+    // Get api response
+    $api_response        = fetch_product_print_price_data();
+    $decode_api_response = json_decode( $api_response, true );
+    $prices              = $decode_api_response['print_techniques'];
+
+    // Insert to database
+    global $wpdb;
+    $table_prefix                    = get_option( 'be-table-prefix' ) ?? '';
+    $products_print_price_data_table = $wpdb->prefix . $table_prefix . 'sync_print_price';
+    truncate_table( $products_print_price_data_table );
+
+    if ( !empty( $prices ) && is_array( $prices ) ) {
+        foreach ( $prices as $price ) {
+
+            // Extract data
+            $price_id = $price['id'];
+            $data     = json_encode( $price );
+
+            // Insert data
+            $wpdb->insert(
+                $products_print_price_data_table,
+                [
+                    'price_id'   => $price_id,
+                    'price_data' => $data,
+                ]
+            );
+        }
+    }
+
+    return '<h4>Product print price data inserted successfully DB</h4>';
+}
