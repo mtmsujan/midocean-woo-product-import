@@ -41,6 +41,12 @@ class Api_Endpoints {
             'methods'  => 'GET',
             'callback' => [ $this, 'delete_woo_cats_callback' ],
         ] );
+
+        // test wp cron jobs
+        register_rest_route( 'bulk-import/v1', '/test-job', [
+            'methods'  => 'GET',
+            'callback' => [ $this, 'test_wp_jobs' ],
+        ] );
     }
 
     public function bulk_product_import_callback() {
@@ -136,6 +142,34 @@ class Api_Endpoints {
                 'success' => false,
                 'message' => 'Error occurred. Please try again.',
             ] );
+        }
+    }
+
+    public function test_wp_jobs() {
+        // generate random uid
+        $uid = uniqid();
+        return $this->put_program_logs( $uid );
+    }
+
+    public function put_program_logs( $data ) {
+        // Ensure the directory for logs exists
+        $directory = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/program_logs/';
+        if ( !file_exists( $directory ) ) {
+            mkdir( $directory, 0777, true );
+        }
+
+        // Construct the log file path
+        $file_name = $directory . 'program_logs.log';
+
+        // Append the current datetime to the log entry
+        $current_datetime = date( 'Y-m-d H:i:s' );
+        $data             = $data . ' - ' . $current_datetime;
+
+        // Write the log entry to the file
+        if ( file_put_contents( $file_name, $data . "\n\n", FILE_APPEND | LOCK_EX ) !== false ) {
+            return "Data appended to file successfully.";
+        } else {
+            return "Failed to append data to file.";
         }
     }
 }
