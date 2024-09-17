@@ -57,10 +57,11 @@ function products_import_woocommerce() {
                 // Extract product data
                 $product_data = json_decode( $product->product_data, true );
 
-                $title       = $product_data['product_name'];
-                $short_desc  = $product_data['short_description'];
-                $description = $product_data['long_description'];
-                $quantity    = $product->stock;
+                $title           = $product_data['product_name'];
+                $short_desc      = $product_data['short_description'];
+                $description     = $product_data['long_description'];
+                $quantity        = $product->stock;
+                $carton_quantity = $product_data['outer_carton_quantity'];
 
                 // Extract variants
                 $variants = $product_data['variants'];
@@ -142,7 +143,7 @@ function products_import_woocommerce() {
                     $_product_id = get_the_ID();
 
                     // Update the simple product if it already exists
-                    $product_data = [
+                    $product_data_to_update = [
                         'name'              => $title,
                         'sku'               => $sku,
                         'type'              => 'simple',
@@ -152,7 +153,18 @@ function products_import_woocommerce() {
                     ];
 
                     // Update product
-                    $client->put( 'products/' . $_product_id, $product_data );
+                    $client->put( 'products/' . $_product_id, $product_data_to_update );
+
+                    // Update product stock
+                    update_post_meta( $_product_id, '_stock', $quantity );
+
+                    // Update product price
+                    update_post_meta( $_product_id, '_price', $sale_price );
+
+                    update_post_meta( $_product_id, '_outer_carton_quantity', $carton_quantity );
+
+                    // update product additional information
+                    // update_product_additional_information( $_product_id, $product_data );
 
                     // Update the status of the processed product in your database
                     $wpdb->update(
@@ -298,7 +310,6 @@ function update_product_additional_information( int $product_id, array $data ) {
         update_post_meta( $product_id, '_digital_assets', $digital_assets );
     }
 }
-
 
 /**
  * Set Product Images
