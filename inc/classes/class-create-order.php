@@ -64,12 +64,17 @@ class Create_Order {
         // Prepare order items
         $order_items = [];
         foreach ( $order->get_items() as $item_id => $item ) {
-            $product       = $item->get_product();
+            // Get product details
+            $product  = $item->get_product();
+            $sku      = $product->get_sku();
+            $quantity = $item->get_quantity();
+            $total    = $item->get_total();
+
             $order_items[] = [
-                'order_line_id'  => $item_id,
-                'sku'            => $product->get_sku(),
-                'quantity'       => $item->get_quantity(),
-                'expected_price' => $item->get_total(),
+                'order_line_id'  => "$item_id",
+                'sku'            => $sku,
+                'quantity'       => "$quantity",
+                'expected_price' => "$total",
             ];
         }
 
@@ -131,7 +136,7 @@ class Create_Order {
         // Build the payload for NORMAL order type
         $normal_order_payload = [
             'order_header' => [
-                'preferred_shipping_date' => $delivery_date,
+                'preferred_shipping_date' => "",
                 'check_price'             => 'false',
                 'currency'                => $order->get_currency(),
                 'contact_email'           => $contact_email,
@@ -147,7 +152,7 @@ class Create_Order {
                     'email'        => trim( $contact_email ),
                     'phone'        => trim( $billing_address['phone'] ?? '' ),
                 ],
-                'po_number'               => $order_id,
+                'po_number'               => "$order_id",
                 'timestamp'               => $timestamp,
                 'contact_name'            => $contact_name,
                 'order_type'              => 'NORMAL',

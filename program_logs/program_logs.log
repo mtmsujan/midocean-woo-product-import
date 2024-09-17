@@ -1,0 +1,79 @@
+payload: {
+    "order_header": {
+        "preferred_shipping_date": "",
+        "check_price": "false",
+        "currency": "EUR",
+        "contact_email": "ffshahjalal@gmail.com",
+        "shipping_address": {
+            "contact_name": "Shah Jalal test",
+            "company_name": "IMJOL IT",
+            "street1": "Enxertos 59",
+            "street2": "",
+            "postal_code": "37514",
+            "city": "Salamanca",
+            "region": "SA",
+            "country": "ES",
+            "email": "ffshahjalal@gmail.com",
+            "phone": "799 043 668"
+        },
+        "po_number": "16461",
+        "timestamp": "2024-09-17T09:41:25",
+        "contact_name": "Shah Jalal test",
+        "order_type": "NORMAL"
+    },
+    "order_lines": [
+        {
+            "order_line_id": "7",
+            "sku": "CX1437-99",
+            "quantity": "10",
+            "expected_price": "11"
+        }
+    ]
+} - 2024-09-17 09:41:29
+
+API Response: {
+  "order_header" : {
+    "status_code" : "0",
+    "status_text" : "Sales order successfully created",
+    "direct_confirmation" : "",
+    "check_price" : "false",
+    "currency" : "EUR",
+    "po_number" : "16461",
+    "order_type" : "NORMAL",
+    "order_number" : "3230125",
+    "total_item_price" : "11,00",
+    "total_print_costs" : "",
+    "total_net_price" : "19,00",
+    "freight_charge" : "8.000000000 ",
+    "tax" : "0,00",
+    "print_setup" : "",
+    "print_cost" : "",
+    "print_handling" : "",
+    "shipping_address" : {
+      "contact_name" : "Shah Jalal test",
+      "company_name" : "IMJOL IT",
+      "street1" : "Enxertos 59",
+      "street2" : "",
+      "street3" : "",
+      "postal_code" : "37514",
+      "city" : "Salamanca",
+      "region" : "SA",
+      "country" : "ES",
+      "email" : "ffshahjalal@gmail.com",
+      "phone" : "799 043 668"
+    }
+  },
+  "order_lines" : [ {
+    "status_code" : "0",
+    "status_text" : "",
+    "po_line_id" : "7",
+    "sku" : "CX1437-99",
+    "variant_id" : "",
+    "quantity" : "10",
+    "expected_price" : "11",
+    "master_code" : "",
+    "master_id" : "",
+    "shipping_date" : "2024-09-17"
+  } ]
+} - 2024-09-17 09:41:33
+
