@@ -77,3 +77,122 @@ API Response: {
   } ]
 } - 2024-09-17 09:41:33
 
+payload: {
+    "order_header": {
+        "currency": "EUR",
+        "contact_email": "ffshahjalal@gmail.com",
+        "check_price": "false",
+        "shipping_address": {
+            "contact_name": "Shah Jalal test",
+            "company_name": "IMJOL IT",
+            "street1": "Enxertos 59",
+            "street2": "",
+            "postal_code": "37514",
+            "city": "Salamanca",
+            "region": "SA",
+            "country": "ES",
+            "email": "ffshahjalal@gmail.com",
+            "phone": "799 043 668"
+        },
+        "po_number": "16464",
+        "timestamp": "2024-09-17T10:08:47",
+        "contact_name": "Shah Jalal test",
+        "order_type": "PRINT"
+    },
+    "order_lines": [
+        {
+            "order_line_id": "8",
+            "master_code": "CX1437",
+            "quantity": "5",
+            "expected_price": "5.5",
+            "printing_positions": [
+                {
+                    "id": "TOP BOX",
+                    "print_size_height": "15",
+                    "print_size_width": "40",
+                    "printing_technique_id": "P5",
+                    "number_of_print_colors": "1",
+                    "print_artwork_url": "http:\/\/localhost\/midocean\/wp-content\/uploads\/2024\/09\/donation-button.png",
+                    "print_mockup_url": "http:\/\/localhost\/midocean\/wp-content\/uploads\/2024\/09\/CX1335-05_POS3-2.jpg",
+                    "print_instruction": "It's will be simple. testing",
+                    "print_colors": [
+                        {
+                            "color": "Pantone 4280C"
+                        }
+                    ]
+                }
+            ],
+            "print_items": [
+                {
+                    "item_color_number": "99",
+                    "quantity": "5"
+                }
+            ]
+        }
+    ]
+} - 2024-09-17 10:08:51
+
+API Response: {
+  "order_header" : {
+    "status_code" : "0",
+    "status_text" : "Sales order successfully created",
+    "direct_confirmation" : "",
+    "check_price" : "false",
+    "currency" : "EUR",
+    "po_number" : "16464",
+    "order_type" : "PRINT",
+    "order_number" : "3230202",
+    "total_item_price" : "5,50",
+    "total_print_costs" : "34,85",
+    "total_net_price" : "48,35",
+    "freight_charge" : "8.000000000 ",
+    "tax" : "0,00",
+    "print_setup" : "30,00",
+    "print_cost" : "4,50",
+    "print_handling" : "0,35",
+    "shipping_address" : {
+      "contact_name" : "Shah Jalal test",
+      "company_name" : "IMJOL IT",
+      "street1" : "Enxertos 59",
+      "street2" : "",
+      "street3" : "",
+      "postal_code" : "37514",
+      "city" : "Salamanca",
+      "region" : "SA",
+      "country" : "ES",
+      "email" : "ffshahjalal@gmail.com",
+      "phone" : "799 043 668"
+    }
+  },
+  "order_lines" : [ {
+    "status_code" : "0",
+    "status_text" : "",
+    "po_line_id" : "8",
+    "sku" : "",
+    "variant_id" : "",
+    "quantity" : "5",
+    "expected_price" : "5.5",
+    "master_code" : "CX1437",
+    "master_id" : "40006395",
+    "shipping_date" : "2024-09-19",
+    "printing_positions" : [ {
+      "id" : "TOP BOX",
+      "print_size_height" : "15",
+      "print_size_width" : "40",
+      "printing_technique_id" : "P5",
+      "number_of_print_colors" : "1",
+      "print_colors" : [ {
+        "color" : "Pantone 4280C"
+      } ],
+      "print_artwork_url" : "http://localhost/midocean/wp-content/uploads/2024/09/donation-button.png",
+      "print_mockup_url" : "http://localhost/midocean/wp-content/uploads/2024/09/CX1335-05_POS3-2.jpg",
+      "print_instruction" : "It's will be simple. testing"
+    } ],
+    "print_items" : [ {
+      "item_color_number" : "99",
+      "item_size" : "",
+      "quantity" : "5"
+    } ]
+  } ]
+} - 2024-09-17 10:09:02
+

@@ -179,7 +179,7 @@ class Create_Order {
                     'email'        => trim( $contact_email ),
                     'phone'        => trim( $billing_address['phone'] ?? '' ),
                 ],
-                'po_number'        => $order_id,
+                'po_number'        => "$order_id",
                 'timestamp'        => $timestamp,
                 'contact_name'     => $contact_name,
                 'order_type'       => 'PRINT',
@@ -205,13 +205,21 @@ class Create_Order {
             // Populate printing positions
             if ( !empty( $printing_positions ) && is_array( $printing_positions ) ) {
                 foreach ( $printing_positions as $position ) {
+
+                    // Get printing position data
+                    $id                  = $position['position_id'];
+                    $_print_size_height  = $position['max_print_size_height'];
+                    $_print_size_width   = $position['max_print_size_width'];
+                    $_printing_technique = $position['selectedTechniqueId'];
+                    $_number_of_color    = $position['maxColors'];
+
                     // Populate dynamic printing position data
                     $_printing_positions[] = [
-                        'id'                     => $position['position_id'],
-                        'print_size_height'      => $position['max_print_size_height'],
-                        'print_size_width'       => $position['max_print_size_width'],
-                        'printing_technique_id'  => $position['selectedTechniqueId'],
-                        'number_of_print_colors' => $position['maxColors'],
+                        'id'                     => "$id",
+                        'print_size_height'      => "$_print_size_height",
+                        'print_size_width'       => "$_print_size_width",
+                        'printing_technique_id'  => "$_printing_technique",
+                        'number_of_print_colors' => "$_number_of_color",
                         'print_artwork_url'      => $artwork_url,
                         'print_mockup_url'       => $mockup_url,
                         'print_instruction'      => $instructions,
@@ -226,17 +234,17 @@ class Create_Order {
 
             $print_items = [
                 [
-                    'item_color_number' => $color_code,
-                    'quantity'          => $quantity,
+                    'item_color_number' => "$color_code",
+                    'quantity'          => "$quantity",
                 ],
             ];
 
             // Add item details to the PRINT order lines
             $print_order_payload['order_lines'][] = [
-                'order_line_id'      => $item_id,
-                'master_code'        => $master_code,
-                'quantity'           => $quantity,
-                'expected_price'     => $expected_price,
+                'order_line_id'      => "$item_id",
+                'master_code'        => "$master_code",
+                'quantity'           => "$quantity",
+                'expected_price'     => "$expected_price",
                 'printing_positions' => $_printing_positions,
                 'print_items'        => $print_items,
             ];
