@@ -568,9 +568,9 @@ class Customize_Product_Page {
                                                                         x-text="++index + '. ' + item.position_id"></span>
                                                                 </div>
                                                                 <div class="position-infos">
-                                                                    <span>Transfer serigráfico</span>
+                                                                    <span>Transfer serigráfico</span> // Replace: with dynamic labels
                                                                     <span>Colores máximos : <span class="color-count"
-                                                                            x-text="item.maxColors"></span></span>
+                                                                            x-text="item.maxColors"></span></span> // Replace: with dynamic values
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -672,13 +672,12 @@ class Customize_Product_Page {
                                                                                     :name="`print_data_${index}_technique`"
                                                                                     :value="technique.id"
                                                                                     :checked="isTechniqueSelected(item, technique)">
+                                                                                    
                                                                                 <!-- Static Label for the printing technique radio input -->
                                                                                 Transfer
                                                                                 serigráfico
 
-                                                                                <span class="modal-item-color-count">Colores máximos
-                                                                                    : <span class="color-count"
-                                                                                        x-text="technique.max_colours"></span></span>
+                                                                                <span class="modal-item-color-count" x-text="technique.max_colours == 0 ? 'A todo color' : `Colores máximos: ${technique.max_colours}`"></span>
                                                                             </label>
                                                                         </div>
                                                                         <!-- Display the maximum number of colors for the technique -->
