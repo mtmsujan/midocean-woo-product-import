@@ -36,6 +36,8 @@ class Customize_Product_Page {
         add_action( 'wp_ajax_nopriv_custom_add_to_cart', [ $this, 'custom_add_to_cart_handler' ] );
         add_action( 'wp_ajax_upload_files', [ $this, 'handle_file_upload' ] );
         add_action( 'wp_ajax_nopriv_upload_files', [ $this, 'handle_file_upload' ] );
+        add_action( 'wp_ajax_get_technique_label', [ $this, 'get_technique_label' ] );
+        add_action( 'wp_ajax_nopriv_get_technique_label', [ $this, 'get_technique_label' ] );
     }
 
     public function display_product_info_callback() {
@@ -246,7 +248,7 @@ class Customize_Product_Page {
 
         // Fetch product print data from db based on this product master code
         $api_response_for_print_data = $this->fetch_product_print_data_from_db( $this->master_code );
-        
+
         // put product print data in logs
         // $this->put_program_logs( 'Print data response: ' . $api_response_for_print_data );
 
@@ -572,9 +574,11 @@ class Customize_Product_Page {
                                                                         x-text="++index + '. ' + item.position_id"></span>
                                                                 </div>
                                                                 <div class="position-infos">
-                                                                    <span>Transfer serigráfico</span> // Replace: with dynamic labels
+                                                                    <span>Transfer serigráfico</span> // Replace: with dynamic
+                                                                    labels
                                                                     <span>Colores máximos : <span class="color-count"
-                                                                            x-text="item.maxColors"></span></span> // Replace: with dynamic values
+                                                                            x-text="item.maxColors"></span></span> // Replace: with
+                                                                    dynamic values
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -676,12 +680,17 @@ class Customize_Product_Page {
                                                                                     :name="`print_data_${index}_technique`"
                                                                                     :value="technique.id"
                                                                                     :checked="isTechniqueSelected(item, technique)">
-                                                                                    
+
                                                                                 <!-- Static Label for the printing technique radio input -->
                                                                                 Transfer
                                                                                 serigráfico
 
-                                                                                <span class="modal-item-color-count" x-text="technique.max_colours == 0 ? 'A todo color' : `Colores máximos: ${technique.max_colours}`"></span>
+                                                                                <!-- Dynamically fetched label -->
+                                                                                <!-- <span x-text="technique.label || fetchTechniqueLabel(technique.id)"></span> -->
+                                                                                 <!-- HERE: -->
+
+                                                                                <span class="modal-item-color-count"
+                                                                                    x-text="technique.max_colours == 0 ? 'A todo color' : `Colores máximos: ${technique.max_colours}`"></span>
                                                                             </label>
                                                                         </div>
                                                                         <!-- Display the maximum number of colors for the technique -->
@@ -1023,6 +1032,32 @@ class Customize_Product_Page {
         wp_send_json_success( $response );
     }
 
+    function get_technique_label() {
+        if ( isset( $_POST['technique_id'] ) ) {
+            $technique_id = intval( $_POST['technique_id'] );
+            $label        = $this->get_technique_label_from_db( $technique_id );
+            wp_send_json_success( [ 'label' => $label ] );
+        } else {
+            wp_send_json_error( 'No technique ID provided' );
+        }
+    }
+
+    private function get_technique_label_from_db( $technique_id ) {
+
+        global $wpdb;
+
+        // get table prefix
+        $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+        $table_name   = $wpdb->prefix . $table_prefix . 'sync_products_print_data_labels';
+
+        // SQL Query
+        $sql = "SELECT label_cs FROM $table_name WHERE id = '{$technique_id}'";
+        // Execute query
+        $technique_label = $wpdb->get_results( $wpdb->prepare( $sql ) );
+
+        // Return technique label
+        return $technique_label[0]->label_cs;
+    }
 
     public function put_program_logs( $data ) {
 
