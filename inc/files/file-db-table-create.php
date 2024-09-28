@@ -154,6 +154,39 @@ function remove_products_print_data() {
     $wpdb->query( $sql );
 }
 
+// Create sync_products_print_data_labels Table
+function sync_products_print_data_labels() {
+
+    global $wpdb;
+
+    $table_prefix    = get_option( 'be-table-prefix' ) ?? '';
+    $table_name      = $wpdb->prefix . $table_prefix . 'sync_products_print_data_labels';
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+        id INT AUTO_INCREMENT,
+        label_id VARCHAR(255) NOT NULL,
+        labels LONGTEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+    ) $charset_collate;";
+
+    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+    dbDelta( $sql );
+}
+
+// Remove sync_products_print_data Table when plugin deactivated
+function remove_products_print_data_labels() {
+
+    global $wpdb;
+
+    $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+    $table_name   = $wpdb->prefix . $table_prefix . 'sync_products_print_data_labels';
+    $sql          = "DROP TABLE IF EXISTS $table_name;";
+    $wpdb->query( $sql );
+}
+
 
 function create_db_tables() {
     sync_products();
@@ -161,6 +194,7 @@ function create_db_tables() {
     sync_price();
     sync_products_print_data();
     sync_print_price();
+    sync_products_print_data_labels();
 }
 
 function remove_db_tables() {
@@ -169,4 +203,5 @@ function remove_db_tables() {
     remove_sync_price();
     remove_products_print_data();
     remove_sync_print_price();
+    remove_products_print_data_labels();
 }
