@@ -40,6 +40,11 @@ function bulk_products_import() {
         'callback' => 'insert_print_price_data_db_api_callback',
     ] );
 
+    register_rest_route( 'bulk-import/v1', '/insert-print-price-data-label-db', [
+        'methods'  => 'GET',
+        'callback' => 'insert_print_price_data_label_db_api_callback',
+    ] );
+
 }
 
 function sync_products_api_callback() {
@@ -64,4 +69,8 @@ function insert_print_data_db_api_callback() {
 
 function insert_print_price_data_db_api_callback(){
     return insert_product_print_price_data_db();
+}
+
+function insert_print_price_data_label_db_api_callback(){
+    return insert_product_print_data_labels_db();
 }

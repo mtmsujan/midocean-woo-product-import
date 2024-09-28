@@ -264,6 +264,41 @@ function insert_product_print_data_db() {
     return '<h4>Product print data inserted successfully DB</h4>';
 }
 
+// Insert product print data to database
+function insert_product_print_data_labels_db() {
+
+    // Get api response
+    $api_response        = fetch_product_print_data();
+    $decode_api_response = json_decode( $api_response, true );
+    $labels              = $decode_api_response['printing_technique_descriptions'];
+
+    // Insert to database
+    global $wpdb;
+    $table_prefix            = get_option( 'be-table-prefix' ) ?? '';
+    $labels_print_data_table = $wpdb->prefix . $table_prefix . 'sync_products_print_data_labels';
+    truncate_table( $labels_print_data_table );
+
+    if ( !empty( $labels ) && is_array( $labels ) ) {
+        foreach ( $labels as $label ) {
+
+            // Extract data
+            $id     = $label['id'];
+            $labels = json_encode( $label );
+
+            // Insert data
+            $wpdb->insert(
+                $labels_print_data_table,
+                [
+                    'label_id' => $id,
+                    'labels'   => $labels,
+                ]
+            );
+        }
+    }
+
+    return '<h4>Product print data labels inserted successfully DB</h4>';
+}
+
 // Fetch product print price data from api
 function fetch_product_print_price_data() {
 
