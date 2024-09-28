@@ -166,6 +166,7 @@ function sync_products_print_data_labels() {
     $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id INT AUTO_INCREMENT,
         label_id VARCHAR(255) NOT NULL,
+        label_cs VARCHAR(255) NOT NULL,
         labels LONGTEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

@@ -282,7 +282,10 @@ function insert_product_print_data_labels_db() {
         foreach ( $labels as $label ) {
 
             // Extract data
-            $id     = $label['id'];
+            $id      = $label['id'];
+            $name_cs = $label['name'][0]['cs'];
+
+            // encode labels data
             $labels = json_encode( $label );
 
             // Insert data
@@ -290,6 +293,7 @@ function insert_product_print_data_labels_db() {
                 $labels_print_data_table,
                 [
                     'label_id' => $id,
+                    'label_cs' => $name_cs,
                     'labels'   => $labels,
                 ]
             );

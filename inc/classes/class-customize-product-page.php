@@ -246,6 +246,10 @@ class Customize_Product_Page {
 
         // Fetch product print data from db based on this product master code
         $api_response_for_print_data = $this->fetch_product_print_data_from_db( $this->master_code );
+        
+        // put product print data in logs
+        // $this->put_program_logs( 'Print data response: ' . $api_response_for_print_data );
+
         ob_start();
         ?>
         <script>
