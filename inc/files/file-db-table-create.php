@@ -195,7 +195,7 @@ function create_db_tables() {
     sync_price();
     sync_products_print_data();
     sync_print_price();
-    sync_products_print_data_labels();
+    // sync_products_print_data_labels();
 }
 
 function remove_db_tables() {
@@ -204,5 +204,5 @@ function remove_db_tables() {
     remove_sync_price();
     remove_products_print_data();
     remove_sync_print_price();
-    remove_products_print_data_labels();
+    // remove_products_print_data_labels();
 }

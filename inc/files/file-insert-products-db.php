@@ -278,6 +278,9 @@ function insert_product_print_data_labels_db() {
     $labels_print_data_table = $wpdb->prefix . $table_prefix . 'sync_products_print_data_labels';
     truncate_table( $labels_print_data_table );
 
+    // initialize labels_array
+    $labels_array = [];
+
     if ( !empty( $labels ) && is_array( $labels ) ) {
         foreach ( $labels as $label ) {
 
@@ -285,22 +288,32 @@ function insert_product_print_data_labels_db() {
             $id      = $label['id'];
             $name_cs = $label['name'][0]['cs'];
 
+            // Build the new structure where the key is the id and the value contains a 'label' field
+            $labels_array[$id] = [
+                'label' => $name_cs,
+            ];
+
             // encode labels data
-            $labels = json_encode( $label );
+            // $labels = json_encode( $label );
 
             // Insert data
-            $wpdb->insert(
+            /* $wpdb->insert(
                 $labels_print_data_table,
                 [
                     'label_id' => $id,
                     'label_cs' => $name_cs,
                     'labels'   => $labels,
                 ]
-            );
+            ); */
         }
     }
 
-    return '<h4>Product print data labels inserted successfully DB</h4>';
+    // store to file
+    $file = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/inc/files/labels.json';
+    file_put_contents( $file, json_encode( $labels_array ) );
+
+    // return '<h4>Product print data labels inserted successfully DB</h4>';
+    return '<h4>Transformed labels saved to file</h4>';
 }
 
 // Fetch product print price data from api
