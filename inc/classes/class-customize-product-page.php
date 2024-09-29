@@ -21,6 +21,7 @@ class Customize_Product_Page {
     private $color_group;
     private $product_price;
     private $currency_symbol;
+    private $technique_labels;
 
     public function __construct() {
         $this->setup_hooks();
@@ -38,6 +39,13 @@ class Customize_Product_Page {
         add_action( 'wp_ajax_nopriv_upload_files', [ $this, 'handle_file_upload' ] );
         add_action( 'wp_ajax_get_technique_label', [ $this, 'get_technique_label' ] );
         add_action( 'wp_ajax_nopriv_get_technique_label', [ $this, 'get_technique_label' ] );
+
+        // get technique labels
+        $file                   = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/inc/files/labels.json';
+        $this->technique_labels = file_get_contents( $file );
+
+        // put to log
+        // $this->put_program_logs( $this->technique_labels );
     }
 
     public function display_product_info_callback() {
@@ -257,6 +265,8 @@ class Customize_Product_Page {
         <script>
             const data = '<?= $api_response_for_print_data ?>';
             const printResponse = JSON.parse(data);
+            const labels = '<?= $this->technique_labels ?>';
+            const technique_labels = JSON.parse(labels);
             document.addEventListener("alpine:init", () => {
 
                 Alpine.data("quantityChecker", () => ({
@@ -269,6 +279,7 @@ class Customize_Product_Page {
                     Alpine.data("printData", () => ({
 
                         printData: printResponse,
+                        technique_labels: technique_labels,
                         cachedSelectedPrintData: [],
                         selectedPrintData: [],
                         productPrice: null,
@@ -286,6 +297,11 @@ class Customize_Product_Page {
                                     this.showAlertMessage = false;
                                 }
                             });
+                        },
+
+                        // return technique label by technique id
+                        getTechniqueLabel(techniqueId) {
+                            return this.technique_labels[techniqueId].label;
                         },
 
                         // Function to add data only if it doesn't already exist in selectedPrintData
@@ -574,11 +590,8 @@ class Customize_Product_Page {
                                                                         x-text="++index + '. ' + item.position_id"></span>
                                                                 </div>
                                                                 <div class="position-infos">
-                                                                    <span>Transfer serigráfico</span> // Replace: with dynamic
-                                                                    labels
-                                                                    <span>Colores máximos : <span class="color-count"
-                                                                            x-text="item.maxColors"></span></span> // Replace: with
-                                                                    dynamic values
+                                                                    <span x-text="getTechniqueLabel(item.selectedTechniqueId)"></span>
+                                                                    <span class="color-count" x-text="item.maxColors == 0 ? 'A todo color' : `Colores máximos: ${item.maxColors}`"></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -589,13 +602,13 @@ class Customize_Product_Page {
                                                                 <span class="input-title"
                                                                     x-text="`Ancho (${item.print_size_unit})`"></span>
                                                                 <input type="number" class="print-position-number" size="7" min="0"
-                                                                    :value="item.max_print_size_height">
+                                                                    :value="item.max_print_size_width">
                                                             </div>
                                                             <div class="col bg-white">
                                                                 <span class="input-title"
                                                                     x-text="`Alto (${item.print_size_unit})`"></span>
                                                                 <input type="number" class="print-position-number" size="7" min="0"
-                                                                    :value="item.max_print_size_width">
+                                                                    :value="item.max_print_size_height">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -655,7 +668,7 @@ class Customize_Product_Page {
                                                                 <span class="modal-item-title d-block" x-text="item.position_id">
                                                                 </span>
                                                                 <span class="modal-item-dimensions d-block"
-                                                                    x-text="`${item['max_print_size_height']} ${item['print_size_unit']} x  ${item['max_print_size_width']} ${item['print_size_unit']}`">
+                                                                    x-text="`${item['max_print_size_width']} ${item['print_size_unit']} x  ${item['max_print_size_height']} ${item['print_size_unit']}`">
                                                                 </span>
                                                             </div>
                                                             <!-- Modal Image: Display the print position image -->
@@ -681,13 +694,8 @@ class Customize_Product_Page {
                                                                                     :value="technique.id"
                                                                                     :checked="isTechniqueSelected(item, technique)">
 
-                                                                                <!-- Static Label for the printing technique radio input -->
-                                                                                Transfer
-                                                                                serigráfico
-
                                                                                 <!-- Dynamically fetched label -->
-                                                                                <!-- <span x-text="technique.label || fetchTechniqueLabel(technique.id)"></span> -->
-                                                                                 <!-- HERE: -->
+                                                                                <span x-text="getTechniqueLabel(technique.id)"></span>
 
                                                                                 <span class="modal-item-color-count"
                                                                                     x-text="technique.max_colours == 0 ? 'A todo color' : `Colores máximos: ${technique.max_colours}`"></span>
