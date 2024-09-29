@@ -759,22 +759,27 @@ class Customize_Product_Page {
                             </div>
 
                             <div x-show="printCostManipulation">
-                                <div class="summary-row underline printing-position-cost">
-                                    <div><?php esc_html_e( 'Posición de impresión 1:', 'bulk-product-import' ) ?>
+
+                                <template x-for="(item, index) in selectedPrintData">
+                                    <div class="summary-row underline printing-position-cost">
+                                        <div>
+                                            <span x-text="`Posición de impresión ${index + 1}:`"></span>
+                                            <span x-text="item.maxColors == 0 ? 'A todo color' : `${item.maxColors} color`"></span>
+                                        </div>
+                                        <div class="value">
+                                            <!-- printing position cost here -->
+                                            <span
+                                                x-text="printingPositionCost && productPrice > 0 ? `${printingPositionCost.toFixed(2)}` : '-'"></span>
+                                        </div>
                                     </div>
-                                    <div class="value">
-                                        <!-- printing position cost here -->
-                                        <span
-                                            x-text="printingPositionCost && productPrice > 0 ? `${printingPositionCost.toFixed(2)}` : '-'"></span>
-                                    </div>
-                                </div>
+                                </template>
+
                                 <div class="summary-row underline const-manipulation">
                                     <div><?php esc_html_e( 'Coste manipulación', 'bulk-product-import' ) ?>
                                     </div>
                                     <div class="value">
                                         <!-- cost manipulation here -->
-                                        <span
-                                            x-text="costManipulation ? `${costManipulation.toFixed(2)}` : '-'"></span>
+                                        <span x-text="costManipulation ? `${costManipulation.toFixed(2)}` : '-'"></span>
                                     </div>
                                 </div>
                             </div>
