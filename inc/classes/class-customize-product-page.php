@@ -289,6 +289,8 @@ class Customize_Product_Page {
                         instructions: null,
                         customPrintMedias: null,
                         showAlertMessage: false,
+                        shippingCost: 8, // Replace: with actual shipping cost
+                        totalWithShipping: null,
 
                         init() {
                             // Watch selectedPrintData and toggle showAlertMessage based on its content
@@ -374,6 +376,12 @@ class Customize_Product_Page {
                             this.quantityFieldValue = quantity;
                             let calculation = (quantity * price).toFixed(2);
                             this.productPrice = calculation;
+                            // calculate if productPrice value >0
+                            if (this.productPrice > 0) {
+                                this.totalWithShipping = this.shippingCost + parseFloat(this.productPrice);
+                            } else {
+                                this.totalWithShipping = null;
+                            }
                         },
                         logSelectedData() {
                             console.log(this.selectedPrintData);
@@ -590,8 +598,11 @@ class Customize_Product_Page {
                                                                         x-text="++index + '. ' + item.position_id"></span>
                                                                 </div>
                                                                 <div class="position-infos">
-                                                                    <span x-text="getTechniqueLabel(item.selectedTechniqueId)"></span>
-                                                                    <span class="color-count" x-text="item.maxColors == 0 ? 'A todo color' : `Colores máximos: ${item.maxColors}`"></span>
+                                                                    <span
+                                                                        x-text="getTechniqueLabel(item.selectedTechniqueId)"></span>
+                                                                    <br>
+                                                                    <span class="color-count"
+                                                                        x-text="item.maxColors == 0 ? 'A todo color' : `Colores máximos: ${item.maxColors}`"></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -695,7 +706,8 @@ class Customize_Product_Page {
                                                                                     :checked="isTechniqueSelected(item, technique)">
 
                                                                                 <!-- Dynamically fetched label -->
-                                                                                <span x-text="getTechniqueLabel(technique.id)"></span>
+                                                                                <span
+                                                                                    x-text="getTechniqueLabel(technique.id)"></span>
 
                                                                                 <span class="modal-item-color-count"
                                                                                     x-text="technique.max_colours == 0 ? 'A todo color' : `Colores máximos: ${technique.max_colours}`"></span>
@@ -742,7 +754,10 @@ class Customize_Product_Page {
                             </div>
                             <div class="summary-row underline shipping">
                                 <div><?php esc_html_e( 'Portes web península (oficina 20 eur)', 'bulk-product-import' ) ?></div>
-                                <div class="value"></div>
+                                <div class="value">
+                                    <!-- Shipping cost here -->
+                                    <span x-text="shippingCost && productPrice ? `${shippingCost}.00` : '-'"></span>
+                                </div>
                             </div>
                             <div class="summary-row product-price">
                                 <div class="text" data-default="Precio artículo">
@@ -751,20 +766,23 @@ class Customize_Product_Page {
                                     <span x-text="quantityFieldValue ? `(cantidad: ${quantityFieldValue})` : ''"></span>
                                 </div>
                                 <div class="value"
-                                    x-text="productPrice ? `${productPrice} <?php echo $this->currency_symbol; ?>` : '-'"></div>
+                                    x-text="productPrice ? `${productPrice} <?= $this->currency_symbol; ?>` : '-'"></div>
                             </div>
                             <div class="grand-totals underline">
                                 <div class="summary-row grand-total">
                                     <div><?php esc_html_e( 'Total (incl. transporte)', 'bulk-product-import' ) ?></div>
                                     <div class="total"
-                                        x-text="productPrice ? `${productPrice} <?php echo $this->currency_symbol; ?>` : '-'">
+                                        x-text="totalWithShipping ? `${totalWithShipping.toFixed(2)} <?= $this->currency_symbol; ?>` : '-'">
                                     </div>
                                 </div>
                                 <div class="summary-row price-per-item">
                                     <div class="price-per-item-subheading">
                                         <?php esc_html_e( 'Precio por artículo', 'bulk-product-import' ) ?>
                                     </div>
-                                    <div class="value">-</div>
+                                    <div class="value">
+                                        <span
+                                            x-text="totalWithShipping ? `${totalWithShipping.toFixed(2)} <?= $this->currency_symbol; ?>` : '-'"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
