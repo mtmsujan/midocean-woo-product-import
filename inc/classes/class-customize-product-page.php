@@ -388,6 +388,17 @@ class Customize_Product_Page {
                                 this.totalWithShipping = null;
                             }
                         },
+
+                        printingCostPrice(techniqueId, quantity) {
+                            /**
+                             * TODO: get setup cost by techniqueId
+                             * get price based on quantity
+                             * 
+                             * Data Structure
+                             * id, technique_id, setup_price, setup_repeat_price, var_cost
+                             */
+                        },
+
                         logSelectedData() {
                             console.log(this.selectedPrintData);
                         },
@@ -750,11 +761,11 @@ class Customize_Product_Page {
                     <div class="col-sm-4 product-configurator-body-right-portion">
                         <div class="pricing-summery">
                             <div class="summery-header">
-                                <img src="<?php echo $this->product_small_image; ?>"
-                                    alt="<?php echo $this->product_name; ?> product photo" height="75" width="75">
+                                <img src="<?= $this->product_small_image; ?>" alt="<?= $this->product_name; ?> product photo"
+                                    height="75" width="75">
                                 <div class="name-wrapper">
-                                    <span class="main-text"><?php echo $this->product_number; ?></span>
-                                    <span class="sub-text"><?php echo $this->product_name; ?></span>
+                                    <span class="main-text"><?= $this->product_number; ?></span>
+                                    <span class="sub-text"><?= $this->product_name; ?></span>
                                 </div>
                             </div>
 
@@ -764,12 +775,26 @@ class Customize_Product_Page {
                                     <div class="summary-row underline printing-position-cost">
                                         <div>
                                             <span x-text="`Posición de impresión ${index + 1}:`"></span>
-                                            <span x-text="item.maxColors == 0 ? 'A todo color' : `${item.maxColors} color`"></span>
+                                            <span
+                                                x-text="item.maxColors == 0 ? 'A todo color' : `${item.maxColors} color`"></span>
                                         </div>
                                         <div class="value">
                                             <!-- printing position cost here -->
+
+                                            <?php
+
+                                            /**
+                                             * TODO:
+                                             * get setup price from selectedTechniqueId
+                                             * calculation printingCostPrice(setupPrice, quantity)
+                                             * eg: getSetupPrice()
+                                             */
+
+                                            ?>
+
                                             <span
-                                                x-text="printingPositionCost && productPrice > 0 ? `${printingPositionCost.toFixed(2)}` : '-'"></span>
+                                                x-text="printingCostPrice(item.selectedTechniqueId, quantityFieldValue)"></span>
+
                                         </div>
                                     </div>
                                 </template>
