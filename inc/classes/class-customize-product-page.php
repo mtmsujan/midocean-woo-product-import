@@ -291,12 +291,15 @@ class Customize_Product_Page {
                         showAlertMessage: false,
                         shippingCost: 8, // Replace: with actual shipping cost
                         totalWithShipping: null,
+                        printCostManipulation: false,
+                        costManipulation: null,
+                        printingPositionCost: null,
 
                         init() {
-                            // Watch selectedPrintData and toggle showAlertMessage based on its content
                             this.$watch('selectedPrintData', (newValue) => {
                                 if (newValue.length > 0) {
-                                    this.showAlertMessage = false;
+                                    this.showAlertMessage = false
+                                    this.printCostManipulation = true
                                 }
                             });
                         },
@@ -374,6 +377,8 @@ class Customize_Product_Page {
 
                         priceCalculation(quantity, price) {
                             this.quantityFieldValue = quantity;
+                            const manipulationCost = 0.14;
+                            this.costManipulation = quantity * manipulationCost;
                             let calculation = (quantity * price).toFixed(2);
                             this.productPrice = calculation;
                             // calculate if productPrice value >0
@@ -752,6 +757,28 @@ class Customize_Product_Page {
                                     <span class="sub-text"><?php echo $this->product_name; ?></span>
                                 </div>
                             </div>
+
+                            <div x-show="printCostManipulation">
+                                <div class="summary-row underline printing-position-cost">
+                                    <div><?php esc_html_e( 'Posición de impresión 1:', 'bulk-product-import' ) ?>
+                                    </div>
+                                    <div class="value">
+                                        <!-- printing position cost here -->
+                                        <span
+                                            x-text="printingPositionCost && productPrice > 0 ? `${printingPositionCost.toFixed(2)}` : '-'"></span>
+                                    </div>
+                                </div>
+                                <div class="summary-row underline const-manipulation">
+                                    <div><?php esc_html_e( 'Coste manipulación', 'bulk-product-import' ) ?>
+                                    </div>
+                                    <div class="value">
+                                        <!-- cost manipulation here -->
+                                        <span
+                                            x-text="costManipulation ? `${costManipulation.toFixed(2)}` : '-'"></span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="summary-row underline shipping">
                                 <div><?php esc_html_e( 'Portes web península (oficina 20 eur)', 'bulk-product-import' ) ?></div>
                                 <div class="value">
