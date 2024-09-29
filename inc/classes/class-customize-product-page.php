@@ -756,17 +756,16 @@ class Customize_Product_Page {
                                 <div><?php esc_html_e( 'Portes web península (oficina 20 eur)', 'bulk-product-import' ) ?></div>
                                 <div class="value">
                                     <!-- Shipping cost here -->
-                                    <span x-text="shippingCost && productPrice ? `${shippingCost}.00` : '-'"></span>
+                                    <span x-text="shippingCost && productPrice > 0 ? `${shippingCost.toFixed(2)}` : '-'"></span>
                                 </div>
                             </div>
                             <div class="summary-row product-price">
                                 <div class="text" data-default="Precio artículo">
                                     <?php esc_html_e( 'Precio artículo', 'bulk-product-import' ) ?>
-                                    <!-- <span>(cantidad: <span x-text="quantityFieldValue"></span> )</span> -->
                                     <span x-text="quantityFieldValue ? `(cantidad: ${quantityFieldValue})` : ''"></span>
                                 </div>
                                 <div class="value"
-                                    x-text="productPrice ? `${productPrice} <?= $this->currency_symbol; ?>` : '-'"></div>
+                                    x-text="productPrice > 0 ? `${productPrice} <?= $this->currency_symbol; ?>` : '-'"></div>
                             </div>
                             <div class="grand-totals underline">
                                 <div class="summary-row grand-total">
