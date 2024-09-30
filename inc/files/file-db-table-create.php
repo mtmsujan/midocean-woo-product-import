@@ -92,8 +92,10 @@ function sync_print_price() {
 
     $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id INT AUTO_INCREMENT,
-        price_id VARCHAR(255) NOT NULL,
-        price_data LONGTEXT NOT NULL,
+        technique_id VARCHAR(255) NOT NULL,
+        setup_price VARCHAR(20) NULL,
+        setup_repeat_price VARCHAR(20) NULL,
+        var_cost LONGTEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         PRIMARY KEY (id)
