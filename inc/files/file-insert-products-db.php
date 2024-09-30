@@ -361,15 +361,20 @@ function insert_product_print_price_data_db() {
         foreach ( $prices as $price ) {
 
             // Extract data
-            $price_id = $price['id'];
-            $data     = json_encode( $price );
+            $technique_id = $price['id'];
+            $setup_price  = $price['setup'];
+            $setup_repeat = $price['setup_repeat'];
+            $var_costs    = $price['var_costs'];
+            $var_costs    = json_encode( $var_costs );
 
             // Insert data
             $wpdb->insert(
                 $products_print_price_data_table,
                 [
-                    'price_id'   => $price_id,
-                    'price_data' => $data,
+                    'technique_id'       => $technique_id,
+                    'setup_price'        => $setup_price,
+                    'setup_repeat_price' => $setup_repeat,
+                    'var_cost'           => $var_costs,
                 ]
             );
         }
