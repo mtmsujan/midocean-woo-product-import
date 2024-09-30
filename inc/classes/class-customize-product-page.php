@@ -273,8 +273,35 @@ class Customize_Product_Page {
             }
         }
 
-        // put product print data in logs
-        // $this->put_program_logs( 'Printing Technique IDs: ' . json_encode( $printing_technique_ids ) );
+        // Initialize the array to store print price data for each technique
+        $product_print_price_data = [];
+
+        // Loop through each printing technique id to fetch print price data
+        foreach ( $printing_technique_ids as $technique_id ) {
+
+            // Get the print price data from the database based on the technique id
+            $single_print_data = $this->get_print_price_data_from_db( $technique_id );
+
+            // Assuming $single_print_data is an array, store it in the required format
+            if ( !empty( $single_print_data ) ) {
+
+                // Extract the print price data
+                $setup_price        = $single_print_data->setup_price;
+                $setup_repeat_price = $single_print_data->setup_repeat_price;
+                $var_costs          = $single_print_data->var_cost;
+
+                // Transform to required format
+                $product_print_price_data[$technique_id] = [
+                    'technique_id'       => $technique_id,
+                    'setup_price'        => $setup_price,
+                    'setup_repeat_price' => $setup_repeat_price,
+                    'var_cost'           => $var_costs,
+                ];
+            }
+        }
+
+        // Put print price data in logs
+        // $this->put_program_logs( 'Print price Data: ' . json_encode( $product_print_price_data ) );
 
         // put product print data in logs
         // $this->put_program_logs( 'Print data response: ' . $api_response_for_print_data );
@@ -1158,6 +1185,26 @@ class Customize_Product_Page {
 
         // Return technique label
         return $technique_label[0]->label_cs;
+    }
+
+    private function get_print_price_data_from_db( $technique_id ) {
+        global $wpdb;
+
+        // get table prefix
+        $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+        $table_name   = $wpdb->prefix . $table_prefix . 'sync_print_price';
+
+        // SQL Query
+        $sql = "SELECT technique_id, setup_price, setup_repeat_price, var_cost FROM $table_name WHERE technique_id = '{$technique_id}'";
+        // Execute query
+        $result = $wpdb->get_results( $wpdb->prepare( $sql ) );
+
+        /* if ( !empty( $result ) ) {
+            $result = json_encode( $result );
+        } */
+
+        // Return technique label
+        return $result[0];
     }
 
     public function put_program_logs( $data ) {
