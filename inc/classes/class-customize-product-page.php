@@ -282,13 +282,16 @@ class Customize_Product_Page {
             // Get the print price data from the database based on the technique id
             $single_print_data = $this->get_print_price_data_from_db( $technique_id );
 
+            // Put print price data in logs
+            // $this->put_program_logs( 'Single Print Data: ' . json_encode( $single_print_data ) );
+
             // Assuming $single_print_data is an array, store it in the required format
             if ( !empty( $single_print_data ) ) {
 
                 // Extract the print price data
-                $setup_price        = $single_print_data->setup_price;
-                $setup_repeat_price = $single_print_data->setup_repeat_price;
-                $var_costs          = $single_print_data->var_cost;
+                $setup_price        = $single_print_data['setup_price'];
+                $setup_repeat_price = $single_print_data['setup_repeat_price'];
+                $var_costs          = $single_print_data['var_cost'];
 
                 // Transform to required format
                 $product_print_price_data[$technique_id] = [
@@ -300,8 +303,11 @@ class Customize_Product_Page {
             }
         }
 
+        // Encode to json
+        $product_print_price_data = json_encode( $product_print_price_data );
+
         // Put print price data in logs
-        // $this->put_program_logs( 'Print price Data: ' . json_encode( $product_print_price_data ) );
+        // $this->put_program_logs( 'Print price Data: ' . $product_print_price_data );
 
         // put product print data in logs
         // $this->put_program_logs( 'Print data response: ' . $api_response_for_print_data );
@@ -313,6 +319,7 @@ class Customize_Product_Page {
             const printResponse = JSON.parse(data);
             const labels = '<?= $this->technique_labels ?>';
             const technique_labels = JSON.parse(labels);
+            const printPriceData = '<?= $product_print_price_data ?>';
             document.addEventListener("alpine:init", () => {
 
                 Alpine.data("quantityChecker", () => ({
@@ -326,6 +333,7 @@ class Customize_Product_Page {
 
                         printData: printResponse,
                         technique_labels: technique_labels,
+                        printPriceData: JSON.parse(printPriceData),
                         cachedSelectedPrintData: [],
                         selectedPrintData: [],
                         productPrice: null,
@@ -337,15 +345,17 @@ class Customize_Product_Page {
                         showAlertMessage: false,
                         shippingCost: 8, // Replace: with actual shipping cost
                         totalWithShipping: null,
-                        printCostManipulation: false,
                         costManipulation: null,
                         printingPositionCost: null,
+                        showPrintPriceCalculation: false,
 
                         init() {
                             this.$watch('selectedPrintData', (newValue) => {
                                 if (newValue.length > 0) {
-                                    this.showAlertMessage = false
-                                    this.printCostManipulation = true
+                                    this.showAlertMessage = false;
+                                    this.showPrintPriceCalculation = true;
+                                } else {
+                                    this.showPrintPriceCalculation = false;
                                 }
                             });
                         },
@@ -353,6 +363,18 @@ class Customize_Product_Page {
                         // return technique label by technique id
                         getTechniqueLabel(techniqueId) {
                             return this.technique_labels[techniqueId].label;
+                        },
+
+                        getPrintPriceData(techniqueId) {
+                            return this.printPriceData[techniqueId];
+                        },
+
+                        getSetupCost(techniqueId) {
+                            return this.printPriceData[techniqueId].setup_price;
+                        },
+
+                        getSetupRepeatCost(techniqueId) {
+                            return this.printPriceData[techniqueId].setup_repeat_price;
                         },
 
                         // Function to add data only if it doesn't already exist in selectedPrintData
@@ -436,18 +458,40 @@ class Customize_Product_Page {
                         },
 
                         printingCostPrice(techniqueId, quantity) {
-                            /**
-                             * TODO: get setup cost by techniqueId
-                             * get price based on quantity
-                             * 
-                             * Data Structure
-                             * id, technique_id, setup_price, setup_repeat_price, var_cost
-                             */
+
+                            // Get the print price data for the given techniqueId
+                            const printPriceData = this.getPrintPriceData(techniqueId);
+                            const setupCost = parseFloat(this.getSetupCost(techniqueId).replace(",", "."));
+                            const setupRepeatCost = parseFloat(this.getSetupRepeatCost(techniqueId).replace(",", "."));
+
+                            let price = 0;
+
+                            // Loop through var_cost ranges to find the correct one
+                            for (let range of printPriceData.var_cost) {
+                                const areaFrom = parseFloat(range.area_from);
+                                const areaTo = parseFloat(range.area_to);
+
+                                // Assuming quantity falls within a certain range
+                                if (quantity >= areaFrom && quantity <= areaTo) {
+                                    // Find the correct price based on minimum_quantity
+                                    for (let scale of range.scales) {
+                                        if (quantity >= parseFloat(scale.minimum_quantity)) {
+                                            price = parseFloat(scale.price.replace(",", "."));
+                                        }
+                                    }
+                                }
+                            }
+
+                            // Final formula: setupCost + (quantity * price)
+                            const totalCost = setupCost + (quantity * price);
+
+                            // console.log('Setup Cost:', setupCost);
+                            // console.log('Variable Cost per unit:', price);
+                            // console.log('Total Print Cost:', totalCost);
+
+                            return totalCost;
                         },
 
-                        logSelectedData() {
-                            console.log(this.selectedPrintData);
-                        },
                         savePrintPositionsDataToCookie() {
 
                             // Combine selectedPrintData (array) and customPrintMedias (object)
@@ -815,7 +859,7 @@ class Customize_Product_Page {
                                 </div>
                             </div>
 
-                            <div x-show="printCostManipulation">
+                            <div x-show="showPrintPriceCalculation">
 
                                 <template x-for="(item, index) in selectedPrintData">
                                     <div class="summary-row underline printing-position-cost">
@@ -826,18 +870,6 @@ class Customize_Product_Page {
                                         </div>
                                         <div class="value">
                                             <!-- printing position cost here -->
-
-                                            <?php
-
-                                            /**
-                                             * TODO:
-                                             * get setup price from selectedTechniqueId
-                                             * calculation printingCostPrice(setupPrice, quantity)
-                                             * eg: getSetupPrice()
-                                             */
-
-                                            ?>
-
                                             <span
                                                 x-text="printingCostPrice(item.selectedTechniqueId, quantityFieldValue)"></span>
 
@@ -1199,12 +1231,24 @@ class Customize_Product_Page {
         // Execute query
         $result = $wpdb->get_results( $wpdb->prepare( $sql ) );
 
-        /* if ( !empty( $result ) ) {
-            $result = json_encode( $result );
-        } */
+        $result = $result[0];
+
+        $_technique_id      = $result->technique_id;
+        $setup_price        = $result->setup_price;
+        $setup_repeat_price = $result->setup_repeat_price;
+        $var_cost           = $result->var_cost;
+        $var_cost           = json_decode( $var_cost, true );
+
+        // initial final result
+        $final_result = [
+            'technique_id'       => $_technique_id,
+            'setup_price'        => $setup_price,
+            'setup_repeat_price' => $setup_repeat_price,
+            'var_cost'           => $var_cost,
+        ];
 
         // Return technique label
-        return $result[0];
+        return $final_result;
     }
 
     public function put_program_logs( $data ) {
