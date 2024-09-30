@@ -256,6 +256,25 @@ class Customize_Product_Page {
 
         // Fetch product print data from db based on this product master code
         $api_response_for_print_data = $this->fetch_product_print_data_from_db( $this->master_code );
+        $print_data_array            = json_decode( $api_response_for_print_data, true );
+
+        // Initialize an empty array to store the printing technique ids
+        $printing_technique_ids = array();
+
+        // Extract the printing positions
+        $printing_positions = $print_data_array['printing_positions'];
+
+        // Loop through the printing positions and extract printing technique ids
+        foreach ( $printing_positions as $position ) {
+            if ( isset( $position['printing_techniques'] ) ) {
+                foreach ( $position['printing_techniques'] as $technique ) {
+                    $printing_technique_ids[] = $technique['id'];
+                }
+            }
+        }
+
+        // put product print data in logs
+        // $this->put_program_logs( 'Printing Technique IDs: ' . json_encode( $printing_technique_ids ) );
 
         // put product print data in logs
         // $this->put_program_logs( 'Print data response: ' . $api_response_for_print_data );
