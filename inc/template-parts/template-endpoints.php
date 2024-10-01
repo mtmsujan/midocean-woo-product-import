@@ -113,4 +113,43 @@ $base_url = get_option( 'home' ) ?? '';
             </button>
         </td>
     </tr>
+    <tr>
+        <?php
+        // Define the sync products endpoint
+        $insert_print_data = esc_url( $base_url . "/wp-json/bulk-import/v1/insert-print-data-db" );
+        ?>
+        <td id="insert-print-api"><?php echo $insert_print_data; ?></td>
+        <td><?php esc_html_e( 'Insert Print Data DB', 'bulk-product-import' ); ?></td>
+        <td>
+            <button type="button" id="insert-print-data-cp" class="btn btn-primary btn-sm">
+                <?php esc_html_e( 'Copy', 'bulk-product-import' ); ?>
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <?php
+        // Define the sync products endpoint
+        $insert_print__price_data = esc_url( $base_url . "/wp-json/bulk-import/v1/insert-print-price-data-db" );
+        ?>
+        <td id="insert-print-price-api"><?php echo $insert_print__price_data; ?></td>
+        <td><?php esc_html_e( 'Insert Print Price Data DB', 'bulk-product-import' ); ?></td>
+        <td>
+            <button type="button" id="insert-print-price-data-cp" class="btn btn-primary btn-sm">
+                <?php esc_html_e( 'Copy', 'bulk-product-import' ); ?>
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <?php
+        // Define the sync products endpoint
+        $insert_print_label_data = esc_url( $base_url . "/wp-json/bulk-import/v1/insert-print-price-data-label-db" );
+        ?>
+        <td id="insert-print-price-label-api"><?php echo $insert_print_label_data; ?></td>
+        <td><?php esc_html_e( 'Insert Print Price Label Data DB', 'bulk-product-import' ); ?></td>
+        <td>
+            <button type="button" id="insert-print-price-label-data-cp" class="btn btn-primary btn-sm">
+                <?php esc_html_e( 'Copy', 'bulk-product-import' ); ?>
+            </button>
+        </td>
+    </tr>
 </table>
