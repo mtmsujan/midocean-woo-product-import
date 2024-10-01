@@ -471,7 +471,6 @@ class Customize_Product_Page {
                         printingCostPrice(techniqueId, quantity) {
 
                             const manipulationCost = this.getManipulationCost(this.printManipulationId);
-                            console.log(manipulationCost);
                             this.costManipulation = quantity * manipulationCost;
 
                             // Get the print price data for the given techniqueId
