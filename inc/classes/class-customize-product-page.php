@@ -343,11 +343,11 @@ class Customize_Product_Page {
                         instructions: null,
                         customPrintMedias: null,
                         showAlertMessage: false,
+                        showPrintPriceCalculation: false,
                         shippingCost: 8, // Replace: with actual shipping cost
                         totalWithShipping: 0,
                         costManipulation: 0,
                         printingPositionCost: 0,
-                        showPrintPriceCalculation: false,
 
                         init() {
                             this.$watch('selectedPrintData', (newValue) => {
@@ -443,9 +443,10 @@ class Customize_Product_Page {
                             return this.findSelectedData(item);
                         },
 
+                        // Product normal price calculation with shipping cost
                         priceCalculation(quantity, price) {
                             this.quantityFieldValue = quantity;
-                            const manipulationCost = 0.14;
+                            const manipulationCost = 0.14; // Replace: with actual manipulation cost
                             this.costManipulation = quantity * manipulationCost;
                             let calculation = (quantity * price).toFixed(2);
                             this.productPrice = calculation;
@@ -483,13 +484,13 @@ class Customize_Product_Page {
                             }
 
                             // Final formula: setupCost + (quantity * price)
-                            const totalCost = setupCost + (quantity * price);
+                            const totalPrintCost = setupCost + (quantity * price);
 
-                            // console.log('Setup Cost:', setupCost);
-                            // console.log('Variable Cost per unit:', price);
-                            // console.log('Total Print Cost:', totalCost);
+                            // total price with this.totalWithShipping
+                            let totalPriceWithShipping = parseFloat(totalPrintCost) + parseFloat(this.costManipulation) + parseFloat(this.totalWithShipping);
+                            this.totalWithShipping = totalPriceWithShipping;
 
-                            return totalCost;
+                            return totalPrintCost;
                         },
 
                         savePrintPositionsDataToCookie() {
