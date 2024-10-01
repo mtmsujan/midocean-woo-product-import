@@ -258,11 +258,15 @@ class Customize_Product_Page {
         $api_response_for_print_data = $this->fetch_product_print_data_from_db( $this->master_code );
         $print_data_array            = json_decode( $api_response_for_print_data, true );
 
+        $manipulation_cost_file = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/inc/files/manipulation-cost.json';
+        $manipulation_cost      = file_get_contents( $manipulation_cost_file );
+
         // Initialize an empty array to store the printing technique ids
         $printing_technique_ids = array();
 
         // Extract the printing positions
         $printing_positions = $print_data_array['printing_positions'];
+        $print_manipulation = $print_data_array['print_manipulation'];
 
         // Loop through the printing positions and extract printing technique ids
         foreach ( $printing_positions as $position ) {
@@ -320,6 +324,8 @@ class Customize_Product_Page {
             const labels = '<?= $this->technique_labels ?>';
             const technique_labels = JSON.parse(labels);
             const printPriceData = '<?= $product_print_price_data ?>';
+            const manipulationCost = '<?= $manipulation_cost ?>';
+            const printManipulationId = '<?= $print_manipulation ?>';
             document.addEventListener("alpine:init", () => {
 
                 Alpine.data("quantityChecker", () => ({
@@ -334,6 +340,8 @@ class Customize_Product_Page {
                         printData: printResponse,
                         technique_labels: technique_labels,
                         printPriceData: JSON.parse(printPriceData),
+                        manipulationCost: JSON.parse(manipulationCost),
+                        printManipulationId: printManipulationId,
                         cachedSelectedPrintData: [],
                         selectedPrintData: [],
                         productPrice: 0,
@@ -375,6 +383,10 @@ class Customize_Product_Page {
 
                         getSetupRepeatCost(techniqueId) {
                             return this.printPriceData[techniqueId].setup_repeat_price;
+                        },
+
+                        getManipulationCost(id) {
+                            return this.manipulationCost[id].price;
                         },
 
                         // Function to add data only if it doesn't already exist in selectedPrintData
@@ -446,8 +458,6 @@ class Customize_Product_Page {
                         // Product normal price calculation with shipping cost
                         priceCalculation(quantity, price) {
                             this.quantityFieldValue = quantity;
-                            const manipulationCost = 0.14; // Replace: with actual manipulation cost
-                            this.costManipulation = quantity * manipulationCost;
                             let calculation = (quantity * price).toFixed(2);
                             this.productPrice = calculation;
                             // calculate if productPrice value >0
@@ -459,6 +469,10 @@ class Customize_Product_Page {
                         },
 
                         printingCostPrice(techniqueId, quantity) {
+
+                            const manipulationCost = this.getManipulationCost(this.printManipulationId);
+                            console.log(manipulationCost);
+                            this.costManipulation = quantity * manipulationCost;
 
                             // Get the print price data for the given techniqueId
                             const printPriceData = this.getPrintPriceData(techniqueId);
