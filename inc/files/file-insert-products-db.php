@@ -350,6 +350,7 @@ function insert_product_print_price_data_db() {
     $api_response        = fetch_product_print_price_data();
     $decode_api_response = json_decode( $api_response, true );
     $prices              = $decode_api_response['print_techniques'];
+    $print_manipulations = $decode_api_response['print_manipulations'];
 
     // Insert to database
     global $wpdb;
@@ -357,6 +358,29 @@ function insert_product_print_price_data_db() {
     $products_print_price_data_table = $wpdb->prefix . $table_prefix . 'sync_print_price';
     truncate_table( $products_print_price_data_table );
 
+    // Initialize manipulation data
+    $manipulation_data = [];
+
+    // Manipulate print_manipulations
+    if ( !empty( $print_manipulations ) && is_array( $print_manipulations ) ) {
+        foreach ( $print_manipulations as $print_manipulation ) {
+
+            // extract data
+            $code  = $print_manipulation['code'];
+            $price = $print_manipulation['price'];
+            $price = str_replace( ",", ".", $price );
+
+            // manipulate data
+            $manipulation_data[$code] = [
+                "price" => $price,
+            ];
+        }
+    }
+
+    $file = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/inc/files/manipulation-cost.json';
+    file_put_contents( $file, json_encode( $manipulation_data ) );
+
+    // Insert print techniques to db
     if ( !empty( $prices ) && is_array( $prices ) ) {
         foreach ( $prices as $price ) {
 
@@ -380,5 +404,5 @@ function insert_product_print_price_data_db() {
         }
     }
 
-    return '<h4>Product print price data inserted successfully DB</h4>';
+    return '<h4>Product print price data and manipulation cost inserted successfully DB</h4>';
 }
