@@ -1015,7 +1015,7 @@ class Customize_Product_Page {
                                 class="be-add-to-cart-btn-without-configure w-100 d-flex align-items-center justify-content-between mt-2 p-3"
                                 data-product-id="<?php echo $this->product_id; ?>">
                                 <span
-                                    class="button-text"><?php esc_html_e( 'Añadir al carrito sin marcaje', 'bulk-product-import' ) ?>
+                                    class="button-text"><?php esc_html_e( 'Añadir a la cesta', 'bulk-product-import' ) ?>
                                 </span>
                                 <span class="add-to-cart-loader"></span>
                                 <span><img class="check-icon d-none" src="" alt=""></span>
