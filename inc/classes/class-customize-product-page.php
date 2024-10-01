@@ -336,17 +336,17 @@ class Customize_Product_Page {
                         printPriceData: JSON.parse(printPriceData),
                         cachedSelectedPrintData: [],
                         selectedPrintData: [],
-                        productPrice: null,
-                        quantityFieldValue: null,
+                        productPrice: 0,
+                        quantityFieldValue: 0,
                         artworkName: null,
                         mockupName: null,
                         instructions: null,
                         customPrintMedias: null,
                         showAlertMessage: false,
                         shippingCost: 8, // Replace: with actual shipping cost
-                        totalWithShipping: null,
-                        costManipulation: null,
-                        printingPositionCost: null,
+                        totalWithShipping: 0,
+                        costManipulation: 0,
+                        printingPositionCost: 0,
                         showPrintPriceCalculation: false,
 
                         init() {
