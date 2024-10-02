@@ -356,6 +356,7 @@ class Customize_Product_Page {
                         printingPositionCost: 0,
                         totalNormalPriceWithoutShipping: 0,
                         totalNormalPriceWithShipping: 0,
+                        totalPrintingPrice: 0,
                         totalPriceWithPrintingCost: 0,
 
                         init() {
@@ -407,7 +408,24 @@ class Customize_Product_Page {
                                 maxColors: maxColors,
                                 selectedTechniqueId: selectedTechniqueId
                             });
+
+                            this.addCachedData(); // Add cached data to selectedPrintData
+                            this.calculateTotalPrintingCost(); // Recalculate the total cost
                         },
+
+                        // Function to calculate total printing cost
+                        calculateTotalPrintingCost() {
+                            let totalCost = 0;
+                            // Iterate over selectedPrintData and calculate the cost for each position
+                            this.selectedPrintData.forEach(item => {
+                                const techniqueId = item.selectedTechniqueId;
+                                if (techniqueId) {
+                                    totalCost += this.priceCalculationWithPrintingCostForSingleItem(techniqueId, this.quantityFieldValue);
+                                }
+                            });
+                            this.totalPrintingPrice = totalCost.toFixed(2); // Update the state with the total cost
+                        },
+
                         isTechniqueSelected(item, technique) {
                             return this.findCachedData(item)?.selectedTechniqueId == technique.id;
                         },
@@ -429,6 +447,7 @@ class Customize_Product_Page {
                         removeData(item) {
                             this.removeCachedData(this.findCachedData(item));
                             this.removeSelectedData(this.findSelectedData(item));
+                            this.calculateTotalPrintingCost(); // Recalculate the total cost after removal
                         },
                         removeCachedData(item) {
                             let index = this.cachedSelectedPrintData.indexOf(item);
@@ -914,7 +933,6 @@ class Customize_Product_Page {
                                             <!-- printing position cost here -->
                                             <span
                                                 x-text="priceCalculationWithPrintingCostForSingleItem(item.selectedTechniqueId ? item.selectedTechniqueId : '', quantityFieldValue)"></span>
-
                                         </div>
                                     </div>
                                 </template>
