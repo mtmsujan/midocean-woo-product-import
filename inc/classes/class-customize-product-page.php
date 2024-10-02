@@ -433,6 +433,9 @@ class Customize_Product_Page {
                              * Formula = this.totalNormalPriceWithShipping + this.totalPrintingPrice + this.costManipulation
                              */
                             this.totalPriceWithPrintingCost = parseFloat(this.totalNormalPriceWithShipping) + parseFloat(this.totalPrintingPrice) + parseFloat(this.costManipulation);
+
+                            // Save to cookie this.totalNormalPriceWithShipping value for 1 hour, key is _calculated_price
+                            this.setCookie("_calculated_price", this.totalPriceWithPrintingCost.toFixed(2), 1); // 1 hour
                         },
 
                         isTechniqueSelected(item, technique) {
@@ -507,7 +510,7 @@ class Customize_Product_Page {
                             }
 
                             // Save to cookie this.totalNormalPriceWithShipping value for 1 hour, key is _calculated_price
-                            this.setCookie("_calculated_price", this.totalNormalPriceWithShipping, 1); // 1 hour
+                            this.setCookie("_calculated_price", this.totalNormalPriceWithShipping.toFixed(2), 1); // 1 hour
                         },
 
                         setCookie(name, value, hours) {
