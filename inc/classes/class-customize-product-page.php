@@ -344,7 +344,6 @@ class Customize_Product_Page {
                         printManipulationId: printManipulationId,
                         cachedSelectedPrintData: [],
                         selectedPrintData: [],
-                        productPrice: 0,
                         quantityFieldValue: 0,
                         artworkName: null,
                         mockupName: null,
@@ -353,9 +352,11 @@ class Customize_Product_Page {
                         showAlertMessage: false,
                         showPrintPriceCalculation: false,
                         shippingCost: 8, // Replace: with actual shipping cost
-                        totalWithShipping: 0,
                         costManipulation: 0,
                         printingPositionCost: 0,
+                        totalNormalPriceWithoutShipping: 0,
+                        totalNormalPriceWithShipping: 0,
+                        totalPriceWithPrintingCost: 0,
 
                         init() {
                             this.$watch('selectedPrintData', (newValue) => {
@@ -456,28 +457,56 @@ class Customize_Product_Page {
                         },
 
                         // Product normal price calculation with shipping cost
-                        priceCalculation(quantity, price) {
+                        priceCalculationWithoutPrintingCost(quantity, price) {
+
+                            // update quantity value to this.quantityFieldValue state
                             this.quantityFieldValue = quantity;
-                            let calculation = (quantity * price).toFixed(2);
-                            this.productPrice = calculation;
-                            // calculate if productPrice value >0
-                            if (this.productPrice > 0) {
-                                this.totalWithShipping = this.shippingCost + parseFloat(this.productPrice);
+
+                            /**
+                             * Simple price calculation
+                             * Formula = quantity * price
+                             * Price is product actual price
+                             */
+                            let simpleCalculation = (quantity * price).toFixed(2);
+                            // update this.totalNormalPriceWithoutShipping state
+                            this.totalNormalPriceWithoutShipping = simpleCalculation;
+
+                            // calculate if totalNormalPriceWithoutShipping value >0
+                            if (this.totalNormalPriceWithoutShipping > 0) {
+                                this.totalNormalPriceWithShipping = this.shippingCost + parseFloat(this.totalNormalPriceWithoutShipping);
                             } else {
-                                this.totalWithShipping = null;
+                                this.totalNormalPriceWithShipping = 0;
                             }
+
+                            // Save to cookie this.totalNormalPriceWithShipping value for 1 hour, key is _calculated_price
+                            this.setCookie("_calculated_price", this.totalNormalPriceWithShipping, 1); // 1 hour
                         },
 
-                        printingCostPrice(techniqueId, quantity) {
+                        setCookie(name, value, hours) {
+                            // Get the current date
+                            let date = new Date();
+                            // Set the expiration date
+                            date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+                            //calculate the expires date
+                            let expires = "expires=" + date.toUTCString();
+                            // set the cookie
+                            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+                        },
 
+                        priceCalculationWithPrintingCostForSingleItem(techniqueId, quantity) {
+
+                            // Get the manipulation cost and calculate the total print cost
                             const manipulationCost = this.getManipulationCost(this.printManipulationId);
                             this.costManipulation = quantity * manipulationCost;
 
                             // Get the print price data for the given techniqueId
                             const printPriceData = this.getPrintPriceData(techniqueId);
+                            // Get the setup cost for the given techniqueId
                             const setupCost = parseFloat(this.getSetupCost(techniqueId).replace(",", "."));
+                            // Get the setup repeat cost for the given techniqueId
                             const setupRepeatCost = parseFloat(this.getSetupRepeatCost(techniqueId).replace(",", "."));
 
+                            // Initialize the total print cost
                             let price = 0;
 
                             // Loop through var_cost ranges to find the correct one
@@ -496,14 +525,13 @@ class Customize_Product_Page {
                                 }
                             }
 
-                            // Final formula: setupCost + (quantity * price)
-                            const totalPrintCost = setupCost + (quantity * price);
+                            /**
+                             * Calculate total printing cost for single printing position
+                             * Formula = setup_cost + (quantity * price)
+                             */
+                            const printingCostForSingleItem = setupCost + (quantity * price);
 
-                            // total price with this.totalWithShipping
-                            let totalPriceWithShipping = parseFloat(totalPrintCost) + parseFloat(this.costManipulation) + parseFloat(this.totalWithShipping);
-                            this.totalWithShipping = totalPriceWithShipping;
-
-                            return totalPrintCost;
+                            return printingCostForSingleItem;
                         },
 
                         savePrintPositionsDataToCookie() {
@@ -652,7 +680,7 @@ class Customize_Product_Page {
                                             <div class="col-sm-12">
                                                 <div class="input-quantity-wrapper">
                                                     <input type="number"
-                                                        @keyup="priceCalculation($el.value, <?php echo $this->product_price; ?>)"
+                                                        @keyup="priceCalculationWithoutPrintingCost($el.value, <?php echo $this->product_price; ?>)"
                                                         placeholder="0" class="input-quantity" x-model="quantity" />
                                                 </div>
                                             </div>
@@ -885,7 +913,7 @@ class Customize_Product_Page {
                                         <div class="value">
                                             <!-- printing position cost here -->
                                             <span
-                                                x-text="printingCostPrice(item.selectedTechniqueId, quantityFieldValue)"></span>
+                                                x-text="priceCalculationWithPrintingCostForSingleItem(item.selectedTechniqueId ? item.selectedTechniqueId : '', quantityFieldValue)"></span>
 
                                         </div>
                                     </div>
@@ -905,7 +933,8 @@ class Customize_Product_Page {
                                 <div><?php esc_html_e( 'Portes web península (oficina 20 eur)', 'bulk-product-import' ) ?></div>
                                 <div class="value">
                                     <!-- Shipping cost here -->
-                                    <span x-text="shippingCost && productPrice > 0 ? `${shippingCost.toFixed(2)}` : '-'"></span>
+                                    <span
+                                        x-text="shippingCost && totalNormalPriceWithoutShipping > 0 ? `${shippingCost.toFixed(2)}` : '-'"></span>
                                 </div>
                             </div>
                             <div class="summary-row product-price">
@@ -914,13 +943,14 @@ class Customize_Product_Page {
                                     <span x-text="quantityFieldValue ? `(cantidad: ${quantityFieldValue})` : ''"></span>
                                 </div>
                                 <div class="value"
-                                    x-text="productPrice > 0 ? `${productPrice} <?= $this->currency_symbol; ?>` : '-'"></div>
+                                    x-text="totalNormalPriceWithoutShipping > 0 ? `${totalNormalPriceWithoutShipping} <?= $this->currency_symbol; ?>` : '-'">
+                                </div>
                             </div>
                             <div class="grand-totals underline">
                                 <div class="summary-row grand-total">
                                     <div><?php esc_html_e( 'Total (incl. transporte)', 'bulk-product-import' ) ?></div>
                                     <div class="total"
-                                        x-text="totalWithShipping ? `${totalWithShipping.toFixed(2)} <?= $this->currency_symbol; ?>` : '-'">
+                                        x-text="totalNormalPriceWithShipping ? `${totalNormalPriceWithShipping.toFixed(2)} <?= $this->currency_symbol; ?>` : '-'">
                                     </div>
                                 </div>
                                 <div class="summary-row price-per-item">
@@ -929,7 +959,7 @@ class Customize_Product_Page {
                                     </div>
                                     <div class="value">
                                         <span
-                                            x-text="totalWithShipping ? `${totalWithShipping.toFixed(2)} <?= $this->currency_symbol; ?>` : '-'"></span>
+                                            x-text="totalNormalPriceWithShipping ? `${totalNormalPriceWithShipping.toFixed(2)} <?= $this->currency_symbol; ?>` : '-'"></span>
                                     </div>
                                 </div>
                             </div>
@@ -1013,8 +1043,7 @@ class Customize_Product_Page {
                             <button :class="hasQty ? '' : 'd-none'" @click="savePrintPositionsDataToCookie"
                                 class="be-add-to-cart-btn-without-configure w-100 d-flex align-items-center justify-content-between mt-2 p-3"
                                 data-product-id="<?php echo $this->product_id; ?>">
-                                <span
-                                    class="button-text"><?php esc_html_e( 'Añadir a la cesta', 'bulk-product-import' ) ?>
+                                <span class="button-text"><?php esc_html_e( 'Añadir a la cesta', 'bulk-product-import' ) ?>
                                 </span>
                                 <span class="add-to-cart-loader"></span>
                                 <span><img class="check-icon d-none" src="" alt=""></span>
