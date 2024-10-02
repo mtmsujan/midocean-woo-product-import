@@ -50,7 +50,7 @@ class Create_Order {
         $api_response = $this->call_api( $order );
 
         // Log the API response
-        $this->put_program_logs( 'API Response: ' . $api_response );
+        // $this->put_program_logs( 'API Response: ' . $api_response );
 
         // Handle product and printing positions
         $product_id = null;
@@ -279,7 +279,7 @@ class Create_Order {
         $payload = $order_type === 'PRINT' ? $print_order_payload : $normal_order_payload;
 
         // Log the payload
-        $this->put_program_logs( 'payload: ' . json_encode( $payload, JSON_PRETTY_PRINT ) );
+        // $this->put_program_logs( 'payload: ' . json_encode( $payload, JSON_PRETTY_PRINT ) );
 
         // Make the API call with the prepared payload
         $curl = curl_init();

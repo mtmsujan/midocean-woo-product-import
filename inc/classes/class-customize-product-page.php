@@ -366,12 +366,6 @@ class Customize_Product_Page {
                                     this.showPrintPriceCalculation = true;
                                     this.calculateTotalPrintingCost();
                                     this.calculateTotalPriceWithPrintingCost();
-
-                                    // const button = document.getElementById('add_print_position_modal_button');
-                                    // button.style.display = 'none';
-                                    // remove class show
-                                    // button.classList.remove('show');
-
                                 } else {
                                     this.showPrintPriceCalculation = false;
                                 }
