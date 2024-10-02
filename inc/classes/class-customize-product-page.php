@@ -364,7 +364,14 @@ class Customize_Product_Page {
                                 if (newValue.length > 0) {
                                     this.showAlertMessage = false;
                                     this.showPrintPriceCalculation = true;
+                                    this.calculateTotalPrintingCost();
                                     this.calculateTotalPriceWithPrintingCost();
+
+                                    // const button = document.getElementById('add_print_position_modal_button');
+                                    // button.style.display = 'none';
+                                    // remove class show
+                                    // button.classList.remove('show');
+
                                 } else {
                                     this.showPrintPriceCalculation = false;
                                 }
@@ -410,7 +417,7 @@ class Customize_Product_Page {
                                 selectedTechniqueId: selectedTechniqueId
                             });
 
-                            this.addCachedData(); // Add cached data to selectedPrintData
+                            // this.addCachedData(); // Add cached data to selectedPrintData
                             this.calculateTotalPrintingCost(); // Recalculate the total cost
                         },
 
@@ -911,7 +918,7 @@ class Customize_Product_Page {
                                                 <button type="button" class="modal-close-button"
                                                     data-dismiss="modal"><?php esc_html_e( 'Cancelar', 'bulk-product-import' ) ?></button>
                                                 <button type="button" class="modal-save-button"
-                                                    @click="addCachedData"><?php esc_html_e( 'Añadir', 'bulk-product-import' ) ?></button>
+                                                    @click="addCachedData" data-dismiss="modal"><?php esc_html_e( 'Añadir', 'bulk-product-import' ) ?></button>
                                             </div>
                                         </div>
                                     </div>
