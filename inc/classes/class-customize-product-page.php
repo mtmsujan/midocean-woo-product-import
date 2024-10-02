@@ -163,7 +163,7 @@ class Customize_Product_Page {
             <h3><?php esc_html_e( 'Detalles del producto', 'bulk-product-import' ); ?></h3>
             <div class="additional-information-details">
                 <div class="dimensions">
-                    <h3 class="details-title"><?php esc_html_e( 'Dimensions', 'bulk-product-import' ); ?></h3>
+                    <h3 class="details-title"><?php esc_html_e( 'Medidas', 'bulk-product-import' ); ?></h3>
                     <div class="attribute-label">Dimensions: <span class="attribute-value"><?php echo $dimensions; ?></span>
                     </div>
                     <div class="attribute-label">Width: <span class="attribute-value"><?php echo $width; ?></span></div>
@@ -177,7 +177,7 @@ class Customize_Product_Page {
                     </div>
                 </div>
                 <div class="packaging">
-                    <h3 class="details-title"><?php esc_html_e( 'Packaging', 'bulk-product-import' ); ?></h3>
+                    <h3 class="details-title"><?php esc_html_e( 'Embalaje', 'bulk-product-import' ); ?></h3>
                     <div class="attribute-label">Carton Height: <span
                             class="attribute-value"><?php echo $carton_height; ?></span></div>
                     <div class="attribute-label">Carton Width: <span class="attribute-value"><?php echo $carton_width; ?></span>
@@ -648,6 +648,8 @@ class Customize_Product_Page {
                                         // Remove d-none class from loading area
                                         uploadMediaLoaderArea.classList.remove("loader");
                                         uploadMediaLoaderArea.innerHTML = '<i class="fa-solid fa-check"></i>';
+                                        const button =document.getElementById('customize-modal-close-button');
+                                        button.click();
                                     } else {
                                         console.error(result.data.message);
                                     }
@@ -1057,7 +1059,7 @@ class Customize_Product_Page {
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="modal-close-button"
+                                            <button type="button" class="modal-close-button" id="customize-modal-close-button"
                                                 data-dismiss="modal"><?php esc_html_e( 'Cancelar', 'bulk-product-import' ) ?>
                                             </button>
                                             <button type="button" class="modal-save-button" id="customize-modal-save-button"
