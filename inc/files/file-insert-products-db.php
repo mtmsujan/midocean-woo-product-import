@@ -283,10 +283,10 @@ function insert_product_print_data_labels_db() {
 
     if ( !empty( $labels ) && is_array( $labels ) ) {
         foreach ( $labels as $label ) {
-
+            
             // Extract data
             $id      = $label['id'];
-            $name_cs = $label['name'][0]['cs'];
+            $name_cs = $label['name'][4]['es'];
 
             // Build the new structure where the key is the id and the value contains a 'label' field
             $labels_array[$id] = [
