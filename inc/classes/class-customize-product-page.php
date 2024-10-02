@@ -364,6 +364,7 @@ class Customize_Product_Page {
                                 if (newValue.length > 0) {
                                     this.showAlertMessage = false;
                                     this.showPrintPriceCalculation = true;
+                                    this.calculateTotalPriceWithPrintingCost();
                                 } else {
                                     this.showPrintPriceCalculation = false;
                                 }
@@ -424,6 +425,14 @@ class Customize_Product_Page {
                                 }
                             });
                             this.totalPrintingPrice = totalCost.toFixed(2); // Update the state with the total cost
+                        },
+
+                        calculateTotalPriceWithPrintingCost() {
+                            /**
+                             * Calculate total price with printing cost
+                             * Formula = this.totalNormalPriceWithShipping + this.totalPrintingPrice + this.costManipulation
+                             */
+                            this.totalPriceWithPrintingCost = parseFloat(this.totalNormalPriceWithShipping) + parseFloat(this.totalPrintingPrice) + parseFloat(this.costManipulation);
                         },
 
                         isTechniqueSelected(item, technique) {
@@ -976,8 +985,7 @@ class Customize_Product_Page {
                                         <?php esc_html_e( 'Precio por artículo', 'bulk-product-import' ) ?>
                                     </div>
                                     <div class="value">
-                                        <span
-                                            x-text="totalNormalPriceWithShipping ? `${totalNormalPriceWithShipping.toFixed(2)} <?= $this->currency_symbol; ?>` : '-'"></span>
+                                        <span x-text="totalPrintingPrice > 0 ? `${totalPriceWithPrintingCost.toFixed(2)} <?= $this->currency_symbol; ?>` : `${totalNormalPriceWithShipping.toFixed(2)} <?= $this->currency_symbol; ?>`"></span>
                                     </div>
                                 </div>
                             </div>
