@@ -16,6 +16,30 @@ class Create_Order {
     public function setup_hooks() {
         // Add a WooCommerce action hook that triggers on the thank you page
         add_action( 'woocommerce_thankyou', [ $this, 'create_order' ] );
+        add_action( 'woocommerce_before_calculate_totals', [ $this, 'update_cart_item_price' ], 10, 1 );
+    }
+
+    function update_cart_item_price( $cart ) {
+        // Ensure that the function is not triggered multiple times
+        if ( did_action( 'woocommerce_before_calculate_totals' ) >= 2 ) {
+            return;
+        }
+
+        // Loop through all cart items
+        foreach ( $cart->get_cart() as $cart_item ) {
+            // Get the product ID and other data from the cart item
+            $product_id = $cart_item['product_id'];
+
+            // get calculated product price from cookie
+            $new_price = 0;
+
+            if ( $_COOKIE['_calculated_price'] ) {
+                $new_price = $_COOKIE['_calculated_price'];
+            }
+
+            // Update the cart item price with the new price
+            $cart_item['data']->set_price( $new_price );
+        }
     }
 
     public function create_order( $order_id ) {
