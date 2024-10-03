@@ -610,7 +610,7 @@ class Customize_Product_Page {
                                 }
 
                                 if (!allowedFileTypes.includes(artworkFile.type)) {
-                                    alert('Artwork file type is not allowed. Please upload a .jpg, .png, .gif, .jpeg, .pdf, .svg, .eps, .ico, .bmp, .tif, .ai, or .psd file.');
+                                    alert('Artwork file type is not allowed. Please upload a PNG, PDF, SVG, AI file.');
                                     return;
                                 }
                             }
@@ -623,7 +623,7 @@ class Customize_Product_Page {
                                 }
 
                                 if (!allowedFileTypes.includes(mockupFile.type)) {
-                                    alert('Mockup file type is not allowed. Please upload a .jpg, .png, .gif, .jpeg, .pdf, .svg, .eps, .ico, .bmp, .tif, .ai, or .psd file.');
+                                    alert('Mockup file type is not allowed. Please upload a PNG, PDF, SVG, AI file.');
                                     return;
                                 }
                             }
@@ -1020,7 +1020,7 @@ class Customize_Product_Page {
                                         <div class="modal-body">
                                             <div class="validation-instruction-area mb-3">
                                                 <p class="mb-0 validation-instruction">
-                                                    <?php esc_html_e( 'Tamaño máximo del archivo 15 MB. Sólo archivos .jpg, .png, .gif, .jpeg, .pdf, .svg, .eps, .ico, .bmp, .tif, .ai, .psd.', 'bulk-product-import' ) ?>
+                                                    <?php esc_html_e( 'Tamaño máximo del archivo 15 MB. Sólo archivos PNG, PDF, SVG, AI', 'bulk-product-import' ) ?>
                                                 </p>
                                             </div>
                                             <div class="artwork-area mb-3">
