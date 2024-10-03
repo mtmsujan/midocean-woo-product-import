@@ -16,6 +16,8 @@ class Create_Order {
     public function setup_hooks() {
         // Add a WooCommerce action hook that triggers on the thank you page
         add_action( 'woocommerce_thankyou', [ $this, 'create_order' ] );
+        add_action( 'woocommerce_thankyou', [ $this, 'display_printing_positions_on_thank_you_page' ], 20, 1 );
+        add_action( 'woocommerce_order_details_after_order_table', [ $this, 'display_printing_positions_on_order_page' ], 20, 1 );
         add_action( 'woocommerce_before_calculate_totals', [ $this, 'update_cart_item_price' ], 10, 1 );
     }
 
@@ -49,7 +51,37 @@ class Create_Order {
         // Call the API with the order details
         $api_response = $this->call_api( $order );
 
-        // Log the API response
+        if ( $api_response ) {
+            // Decode the API response
+            $api_response_decode = json_decode( $api_response, true );
+            // Get order type
+            $order_type  = $api_response_decode['order_header']['order_type'];
+            $order_lines = $api_response_decode['order_lines'];
+
+            // Check if order type is PRINT and get printing positions
+            if ( $order_type === 'PRINT' ) {
+                $printing_positions = $order_lines[0]['printing_positions']; // Assuming there's at least one order line
+
+                // Prepare an array to store all positions
+                $positions_data = array();
+
+                // Loop through printing positions to extract required details
+                foreach ( $printing_positions as $position ) {
+                    $positions_data[] = array(
+                        'id'           => $position['id'],
+                        'technique_id' => $position['printing_technique_id'],
+                        'artwork_url'  => $position['print_artwork_url'],
+                        'mockup_url'   => $position['print_mockup_url'],
+                        'instruction'  => $position['print_instruction'],
+                    );
+                }
+
+                // Save printing positions data in order meta
+                update_post_meta( $order_id, '_printing_positions_data', $positions_data );
+            }
+        }
+
+        // Log the API response if needed
         // $this->put_program_logs( 'API Response: ' . $api_response );
 
         // Handle product and printing positions
@@ -66,6 +98,38 @@ class Create_Order {
         if ( isset( $_COOKIE[$cookie_key] ) ) {
             // Delete the cookie by setting its expiration to the past
             setcookie( $cookie_key, '', time() - 3600, '/' );
+        }
+    }
+
+    function display_printing_positions_on_thank_you_page( $order_id ) {
+        // Retrieve printing positions data from order meta
+        $printing_positions_data = get_post_meta( $order_id, '_printing_positions_data', true );
+
+        if ( $printing_positions_data ) {
+            echo '<h2>Printing Details</h2>';
+            foreach ( $printing_positions_data as $position ) {
+                echo '<p><strong>Position:</strong> ' . esc_html( $position['id'] ) . '</p>';
+                echo '<p><strong>Technique ID:</strong> ' . esc_html( $position['technique_id'] ) . '</p>';
+                echo '<p><strong>Artwork:</strong> <a href="' . esc_url( $position['artwork_url'] ) . '" target="_blank">View Artwork</a></p>';
+                echo '<p><strong>Mockup:</strong> <a href="' . esc_url( $position['mockup_url'] ) . '" target="_blank">View Mockup</a></p>';
+                echo '<p><strong>Instructions:</strong> ' . esc_html( $position['instruction'] ) . '</p>';
+            }
+        }
+    }
+
+    function display_printing_positions_on_order_page( $order ) {
+        // Retrieve printing positions data from order meta
+        $printing_positions_data = get_post_meta( $order->get_id(), '_printing_positions_data', true );
+
+        if ( $printing_positions_data ) {
+            echo '<h2>Printing Details</h2>';
+            foreach ( $printing_positions_data as $position ) {
+                echo '<p><strong>Position:</strong> ' . esc_html( $position['id'] ) . '</p>';
+                echo '<p><strong>Technique ID:</strong> ' . esc_html( $position['technique_id'] ) . '</p>';
+                echo '<p><strong>Artwork:</strong> <a href="' . esc_url( $position['artwork_url'] ) . '" target="_blank">View Artwork</a></p>';
+                echo '<p><strong>Mockup:</strong> <a href="' . esc_url( $position['mockup_url'] ) . '" target="_blank">View Mockup</a></p>';
+                echo '<p><strong>Instructions:</strong> ' . esc_html( $position['instruction'] ) . '</p>';
+            }
         }
     }
 
