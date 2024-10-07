@@ -127,7 +127,7 @@ class Customize_Product_Page {
             $ean                      = get_post_meta( $product_id, '_ean', true ) ?? '';
 
             // Generate dimensions by width and height with unit
-            $dimensions = $width . ' x ' . $height . ' ' . $height_unit;
+            $dimensions = $length . ' x ' . $width . ' ' . $length_unit;
             // Generate diameter with width and unit
             $diameter = $width . ' ' . $width_unit;
             // Generate width with unit
@@ -167,9 +167,9 @@ class Customize_Product_Page {
                     <div class="attribute-label">Dimensions: <span class="attribute-value"><?php echo $dimensions; ?></span>
                     </div>
                     <div class="attribute-label">Width: <span class="attribute-value"><?php echo $width; ?></span></div>
-                    <div class="attribute-label">Height: <span class="attribute-value"><?php echo $height; ?></span></div>
                     <div class="attribute-label">Length: <span class="attribute-value"><?php echo $length; ?></span></div>
-                    <div class="attribute-label">Diameter: <span class="attribute-value"><?php echo $diameter; ?></span></div>
+                    <div class="attribute-label">Height: <span class="attribute-value"><?php echo $height; ?></span></div>
+                    <!-- <div class="attribute-label">Diameter: <span class="attribute-value"><?php // echo $diameter; ?></span></div> -->
                     <div class="attribute-label">Volume: <span class="attribute-value"><?php echo $volume; ?></span></div>
                     <div class="attribute-label">Gross Weight: <span class="attribute-value"><?php echo $gross_weight; ?></span>
                     </div>

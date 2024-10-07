@@ -164,6 +164,19 @@ function products_import_woocommerce() {
                     update_post_meta( $_product_id, '_outer_carton_quantity', $carton_quantity );
 
                     // update product additional information
+                    update_product_additional_information( $_product_id, $product_data );
+
+                    // update product additional information
+                    update_post_meta( $_product_id, '_category_level1', $category_label1 );
+                    update_post_meta( $_product_id, '_category_level2', $category_label2 );
+                    update_post_meta( $_product_id, '_category_level3', $category_label3 );
+                    update_post_meta( $_product_id, '_color_description', $color_description );
+                    update_post_meta( $_product_id, '_color_group', $color_group );
+                    update_post_meta( $_product_id, '_pms_color', $pms_color );
+                    update_post_meta( $_product_id, '_ean', $gtin );
+                    update_post_meta( $_product_id, '_color_code', $color_code );
+
+                    // update product additional information
                     // update_product_additional_information( $_product_id, $product_data );
 
                     // Update the status of the processed product in your database

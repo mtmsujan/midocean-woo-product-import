@@ -16,7 +16,7 @@ function fetch_products_from_api() {
     curl_setopt_array(
         $curl,
         array(
-            CURLOPT_URL            => 'https://api.midocean.com/gateway/products/2.0?language=en',
+            CURLOPT_URL            => 'https://api.midocean.com/gateway/products/2.0?language=es',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING       => '',
             CURLOPT_MAXREDIRS      => 10,
