@@ -20,6 +20,7 @@ class Admin_Menu {
         add_action( 'admin_menu', [ $this, 'register_sheet_import_menu' ] );
         add_action( 'wp_ajax_save_client_credentials', [ $this, 'save_client_credentials' ] );
         add_action( 'wp_ajax_save_table_prefix', [ $this, 'save_table_prefix' ] );
+        add_action( 'wp_ajax_save_profit_percentage', [ $this, 'save_profit_percentage_callback' ] );
     }
 
     public function register_admin_menu() {
@@ -76,7 +77,8 @@ class Admin_Menu {
                     <li class="nav-item"><a href="#endpoints"
                             class="nav-link be-nav-links"><?php esc_html_e( 'Endpoints', 'bulk-product-import' ); ?></a></li>
                     <li class="nav-item"><a href="#profit"
-                            class="nav-link be-nav-links"><?php esc_html_e( 'Profit Percentage', 'bulk-product-import' ); ?></a></li>
+                            class="nav-link be-nav-links"><?php esc_html_e( 'Profit Percentage', 'bulk-product-import' ); ?></a>
+                    </li>
                 </ul>
 
                 <div id="api">
@@ -100,6 +102,7 @@ class Admin_Menu {
                 </div>
 
                 <div id="profit">
+                    <?php $profit_percentage = get_option( 'be-profit-percentage' ); ?>
                     <div id="profit-percentage" class="common-shadow">
                         <h4>
                             <?php _e( 'Set Profit Percentage', 'bulk-product-import' ); ?>
@@ -107,7 +110,8 @@ class Admin_Menu {
 
                         <div class="profit-percentage-body d-flex align-items-center gap-2 mt-3">
                             <h6><?php _e( 'Profit Percentage (%):', 'bulk-product-import' ); ?></h6>
-                            <input type="number" name="profit-percentage-input-field" id="profit-percentage-input-field">
+                            <input type="number" name="profit-percentage-input-field" id="profit-percentage-input-field"
+                                value="<?php echo $profit_percentage; ?>">
                         </div>
 
                         <button type="button" class="btn btn-primary mt-3" id="profit-percentage-save-button">Save</button>
@@ -182,5 +186,18 @@ class Admin_Menu {
         update_option( 'be-table-prefix', $table_prefix );
 
         wp_send_json_success( __( 'Table prefix saved successfully', 'bulk-product-import' ) );
+    }
+
+    public function save_profit_percentage_callback() {
+
+        // check_ajax_referer( 'bulk_product_import_nonce', 'nonce' );
+
+        if ( !current_user_can( 'manage_options' ) ) {
+            wp_send_json_error( __( 'Unauthorized user', 'bulk-product-import' ) );
+        }
+
+        $profit_percentage = sanitize_text_field( $_POST['profit_percentage'] );
+        update_option( 'be-profit-percentage', $profit_percentage );
+        wp_send_json_success( __( 'Profit percentage saved successfully', 'bulk-product-import' ) );
     }
 }

@@ -163,5 +163,25 @@
         copyToClipboard(syncProducts);
         showNotification("Copied to clipboard!");
       });
+
+    // save profit percentage
+    $("#profit-percentage-save-button").on("click", function (e) {
+      e.preventDefault();
+      let profitPercentage = $("#profit-percentage-input-field").val();
+      $.ajax({
+        type: "POST",
+        url: bulkProductImport.ajax_url,
+        data: {
+          action: "save_profit_percentage",
+          nonce: bulkProductImport.nonce,
+          profit_percentage: profitPercentage,
+        },
+        success: function (response) {
+          let successMessage = response.data;
+          // Display an info toast with no title
+          showNotification(successMessage);
+        },
+      });
+    });
   });
 })(jQuery);
