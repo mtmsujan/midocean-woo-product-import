@@ -108,6 +108,11 @@ function products_import_woocommerce() {
                 $sale_price = $product->price;
                 $sale_price = str_replace( ',', '.', $sale_price );
 
+                // get profit percentage
+                $profit_percentage = get_option( 'be-profit-percentage' ) ?? 0;
+                // calculate sale price for increase profit
+                $sale_price = $sale_price + ( $sale_price * $profit_percentage / 100 );
+
                 // Set up the API client with WooCommerce store URL and credentials
                 $client = new Client(
                     $website_url,
