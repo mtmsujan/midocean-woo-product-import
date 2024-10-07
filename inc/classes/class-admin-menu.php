@@ -75,6 +75,8 @@ class Admin_Menu {
                             class="nav-link be-nav-links"><?php esc_html_e( 'Tables', 'bulk-product-import' ); ?></a></li>
                     <li class="nav-item"><a href="#endpoints"
                             class="nav-link be-nav-links"><?php esc_html_e( 'Endpoints', 'bulk-product-import' ); ?></a></li>
+                    <li class="nav-item"><a href="#profit"
+                            class="nav-link be-nav-links"><?php esc_html_e( 'Profit Percentage', 'bulk-product-import' ); ?></a></li>
                 </ul>
 
                 <div id="api">
@@ -94,6 +96,21 @@ class Admin_Menu {
                         <div id="api-endpoints-table">
                             <?php include BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/inc/template-parts/template-endpoints.php'; ?>
                         </div>
+                    </div>
+                </div>
+
+                <div id="profit">
+                    <div id="profit-percentage" class="common-shadow">
+                        <h4>
+                            <?php _e( 'Set Profit Percentage', 'bulk-product-import' ); ?>
+                        </h4>
+
+                        <div class="profit-percentage-body d-flex align-items-center gap-2 mt-3">
+                            <h6><?php _e( 'Profit Percentage (%):', 'bulk-product-import' ); ?></h6>
+                            <input type="number" name="profit-percentage-input-field" id="profit-percentage-input-field">
+                        </div>
+
+                        <button type="button" class="btn btn-primary mt-3" id="profit-percentage-save-button">Save</button>
                     </div>
                 </div>
 
