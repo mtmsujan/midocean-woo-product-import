@@ -983,7 +983,7 @@ class Customize_Product_Page {
                                 <div class="summary-row grand-total">
                                     <div><?php esc_html_e( 'Total (incl. transporte)', 'bulk-product-import' ) ?></div>
                                     <div class="value">
-                                        <span x-text="totalPrintingPrice > 0 ? `${totalPriceWithPrintingCost.toFixed(2)} <?= $this->currency_symbol; ?>` : `${totalNormalPriceWithShipping.toFixed(2)} <?= $this->currency_symbol; ?>`"></span>
+                                        <span x-text="totalPrintingPrice > 0 ? `${totalPriceWithPrintingCost.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} <?= $this->currency_symbol; ?>` : `${totalNormalPriceWithShipping.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} <?= $this->currency_symbol; ?>`"></span>
                                     </div>
                                 </div>
                                 <div class="summary-row price-per-item">
