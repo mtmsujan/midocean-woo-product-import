@@ -127,7 +127,7 @@ class Customize_Product_Page {
             $ean                      = get_post_meta( $product_id, '_ean', true ) ?? '';
 
             // Generate dimensions by width and height with unit
-            $dimensions = $length . ' x ' . $width . ' ' . $length_unit;
+            $dimensions = $length . 'X' . $width . ' ' . $length_unit;
             // Generate diameter with width and unit
             $diameter = $width . ' ' . $width_unit;
             // Generate width with unit
