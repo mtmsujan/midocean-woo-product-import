@@ -512,6 +512,9 @@ class Customize_Product_Page {
 
                             // Save to cookie this.totalNormalPriceWithShipping value for 1 hour, key is _calculated_price
                             this.setCookie("_calculated_price", this.totalNormalPriceWithShipping.toFixed(2), 1); // 1 hour
+
+                            this.calculateTotalPrintingCost();
+                            this.calculateTotalPriceWithPrintingCost();
                         },
 
                         setCookie(name, value, hours) {
