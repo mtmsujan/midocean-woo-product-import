@@ -509,7 +509,8 @@ class Customize_Product_Page {
                              * Formula = quantity * price
                              * Price is product actual price
                              */
-                            let simpleCalculation = (quantity * price).toFixed(2);
+                            // let simpleCalculation = (quantity * price).toFixed(2);
+                            let simpleCalculation = quantity * price;
                             // update this.totalNormalPriceWithoutShipping state
                             this.totalNormalPriceWithoutShipping = simpleCalculation;
 
