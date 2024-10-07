@@ -982,8 +982,8 @@ class Customize_Product_Page {
                             <div class="grand-totals underline">
                                 <div class="summary-row grand-total">
                                     <div><?php esc_html_e( 'Total (incl. transporte)', 'bulk-product-import' ) ?></div>
-                                    <div class="total"
-                                        x-text="totalNormalPriceWithShipping ? `${totalNormalPriceWithShipping.toFixed(2)} <?= $this->currency_symbol; ?>` : '-'">
+                                    <div class="value">
+                                        <span x-text="totalPrintingPrice > 0 ? `${totalPriceWithPrintingCost.toFixed(2)} <?= $this->currency_symbol; ?>` : `${totalNormalPriceWithShipping.toFixed(2)} <?= $this->currency_symbol; ?>`"></span>
                                     </div>
                                 </div>
                                 <div class="summary-row price-per-item">
