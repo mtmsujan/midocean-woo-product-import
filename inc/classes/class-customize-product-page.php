@@ -358,6 +358,7 @@ class Customize_Product_Page {
                         totalNormalPriceWithShipping: 0,
                         totalPrintingPrice: 0,
                         totalPriceWithPrintingCost: 0,
+                        pricePerItem: 0,
 
                         init() {
                             this.$watch('selectedPrintData', (newValue) => {
@@ -366,6 +367,7 @@ class Customize_Product_Page {
                                     this.showPrintPriceCalculation = true;
                                     this.calculateTotalPrintingCost();
                                     this.calculateTotalPriceWithPrintingCost();
+                                    this.calculatePricePerItem();
                                 } else {
                                     this.showPrintPriceCalculation = false;
                                 }
@@ -437,6 +439,14 @@ class Customize_Product_Page {
 
                             // Save to cookie this.totalNormalPriceWithShipping value for 1 hour, key is _calculated_price
                             this.setCookie("_calculated_price", this.totalPriceWithPrintingCost.toFixed(2), 1); // 1 hour
+                        },
+
+                        calculatePricePerItem() {
+                            if (this.totalPrintingPrice > 0) {
+                                this.pricePerItem = parseFloat(this.totalPriceWithPrintingCost) / parseFloat(this.quantityFieldValue);
+                            } else {
+                                this.pricePerItem = parseFloat(this.totalNormalPriceWithShipping) / parseFloat(this.quantityFieldValue);
+                            }
                         },
 
                         isTechniqueSelected(item, technique) {
@@ -515,6 +525,8 @@ class Customize_Product_Page {
 
                             this.calculateTotalPrintingCost();
                             this.calculateTotalPriceWithPrintingCost();
+
+                            this.calculatePricePerItem();
                         },
 
                         setCookie(name, value, hours) {
@@ -651,7 +663,7 @@ class Customize_Product_Page {
                                         // Remove d-none class from loading area
                                         uploadMediaLoaderArea.classList.remove("loader");
                                         uploadMediaLoaderArea.innerHTML = '<i class="fa-solid fa-check"></i>';
-                                        const button =document.getElementById('customize-modal-close-button');
+                                        const button = document.getElementById('customize-modal-close-button');
                                         button.click();
                                     } else {
                                         console.error(result.data.message);
@@ -916,8 +928,8 @@ class Customize_Product_Page {
                                             <div class="modal-footer">
                                                 <button type="button" class="modal-close-button"
                                                     data-dismiss="modal"><?php esc_html_e( 'Cancelar', 'bulk-product-import' ) ?></button>
-                                                <button type="button" class="modal-save-button"
-                                                    @click="addCachedData" data-dismiss="modal"><?php esc_html_e( 'Añadir', 'bulk-product-import' ) ?></button>
+                                                <button type="button" class="modal-save-button" @click="addCachedData"
+                                                    data-dismiss="modal"><?php esc_html_e( 'Añadir', 'bulk-product-import' ) ?></button>
                                             </div>
                                         </div>
                                     </div>
@@ -960,7 +972,8 @@ class Customize_Product_Page {
                                     </div>
                                     <div class="value">
                                         <!-- cost manipulation here -->
-                                        <span x-text="costManipulation ? `${costManipulation.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '-'"></span>
+                                        <span
+                                            x-text="costManipulation ? `${costManipulation.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '-'"></span>
                                     </div>
                                 </div>
                             </div>
@@ -986,7 +999,12 @@ class Customize_Product_Page {
                                 <div class="summary-row grand-total">
                                     <div><?php esc_html_e( 'Total (incl. transporte)', 'bulk-product-import' ) ?></div>
                                     <div class="value">
-                                        <span x-text="totalPrintingPrice > 0 ? `${totalPriceWithPrintingCost.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} <?= $this->currency_symbol; ?>` : `${totalNormalPriceWithShipping.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} <?= $this->currency_symbol; ?>`"></span>
+                                        <span x-text="totalPrintingPrice > 0 
+                                            ? `${totalPriceWithPrintingCost.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} <?= $this->currency_symbol; ?>`
+                                            : totalNormalPriceWithShipping > 0 
+                                            ? `${totalNormalPriceWithShipping.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} <?= $this->currency_symbol; ?>`
+                                            : '-'">
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="summary-row price-per-item">
@@ -994,7 +1012,8 @@ class Customize_Product_Page {
                                         <?php esc_html_e( 'Precio por artículo', 'bulk-product-import' ) ?>
                                     </div>
                                     <div class="value">
-                                        <span x-text="totalPrintingPrice > 0 ? `${totalPriceWithPrintingCost.toFixed(2)} <?= $this->currency_symbol; ?>` : `${totalNormalPriceWithShipping.toFixed(2)} <?= $this->currency_symbol; ?>`"></span>
+                                        <span
+                                            x-text="pricePerItem > 0 ? `${pricePerItem.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} <?= $this->currency_symbol; ?>` : '-'"></span>
                                     </div>
                                 </div>
                             </div>
