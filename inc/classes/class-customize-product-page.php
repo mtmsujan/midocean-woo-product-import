@@ -683,7 +683,7 @@ class Customize_Product_Page {
                     <div class="col-sm-8">
                         <div class="be-title"><?php esc_html_e( 'Configurador artículo', 'bulk-product-import' ); ?></div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4" style="display: none">
                         <a class="d-block product-configurator-download-button"
                             href="#"><?php esc_html_e( 'Descarga la hoja del producto', 'bulk-product-import' ); ?> <i
                                 class="fa-solid fa-arrow-down ms-2"></i></a>
