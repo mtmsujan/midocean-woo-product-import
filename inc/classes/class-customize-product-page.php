@@ -967,7 +967,7 @@ class Customize_Product_Page {
                                 <div class="value">
                                     <!-- Shipping cost here -->
                                     <span
-                                        x-text="shippingCost && totalNormalPriceWithoutShipping > 0 ? `${shippingCost.toFixed(2)}` : '-'"></span>
+                                        x-text="shippingCost && totalNormalPriceWithoutShipping > 0 ? `${shippingCost.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '-'"></span>
                                 </div>
                             </div>
                             <div class="summary-row product-price">
@@ -976,7 +976,7 @@ class Customize_Product_Page {
                                     <span x-text="quantityFieldValue ? `(cantidad: ${quantityFieldValue})` : ''"></span>
                                 </div>
                                 <div class="value"
-                                    x-text="totalNormalPriceWithoutShipping > 0 ? `${totalNormalPriceWithoutShipping} <?= $this->currency_symbol; ?>` : '-'">
+                                    x-text="totalNormalPriceWithoutShipping > 0 ? `${totalNormalPriceWithoutShipping.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} <?= $this->currency_symbol; ?>` : '-'">
                                 </div>
                             </div>
                             <div class="grand-totals underline">
