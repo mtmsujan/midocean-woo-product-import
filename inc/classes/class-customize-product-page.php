@@ -947,7 +947,7 @@ class Customize_Product_Page {
                                         <div class="value">
                                             <!-- printing position cost here -->
                                             <span
-                                                x-text="priceCalculationWithPrintingCostForSingleItem(item.selectedTechniqueId ? item.selectedTechniqueId : '', quantityFieldValue)"></span>
+                                                x-text="priceCalculationWithPrintingCostForSingleItem(item.selectedTechniqueId ? item.selectedTechniqueId : '', quantityFieldValue).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })"></span>
                                         </div>
                                     </div>
                                 </template>
@@ -957,7 +957,7 @@ class Customize_Product_Page {
                                     </div>
                                     <div class="value">
                                         <!-- cost manipulation here -->
-                                        <span x-text="costManipulation ? `${costManipulation.toFixed(2)}` : '-'"></span>
+                                        <span x-text="costManipulation ? `${costManipulation.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : '-'"></span>
                                     </div>
                                 </div>
                             </div>
