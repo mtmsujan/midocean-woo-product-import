@@ -368,6 +368,7 @@ class Customize_Product_Page {
                                     this.calculateTotalPrintingCost();
                                     this.calculateTotalPriceWithPrintingCost();
                                     this.calculatePricePerItem();
+                                    this.setCookie("_calculated_price", this.pricePerItem.toFixed(2), 1);
                                 } else {
                                     this.showPrintPriceCalculation = false;
                                 }
@@ -438,7 +439,8 @@ class Customize_Product_Page {
                             this.totalPriceWithPrintingCost = parseFloat(this.totalNormalPriceWithShipping) + parseFloat(this.totalPrintingPrice) + parseFloat(this.costManipulation);
 
                             // Save to cookie this.totalNormalPriceWithShipping value for 1 hour, key is _calculated_price
-                            this.setCookie("_calculated_price", this.totalPriceWithPrintingCost.toFixed(2), 1); // 1 hour
+                            // this.setCookie("_calculated_price", this.totalPriceWithPrintingCost.toFixed(2), 1);
+                            this.setCookie("_calculated_price", this.pricePerItem.toFixed(2), 1);
                         },
 
                         calculatePricePerItem() {
@@ -521,13 +523,13 @@ class Customize_Product_Page {
                                 this.totalNormalPriceWithShipping = 0;
                             }
 
-                            // Save to cookie this.totalNormalPriceWithShipping value for 1 hour, key is _calculated_price
-                            this.setCookie("_calculated_price", this.totalNormalPriceWithShipping.toFixed(2), 1); // 1 hour
-
                             this.calculateTotalPrintingCost();
                             this.calculateTotalPriceWithPrintingCost();
-
                             this.calculatePricePerItem();
+
+                            // Save to cookie this.totalNormalPriceWithShipping value for 1 hour, key is _calculated_price
+                            // this.setCookie("_calculated_price", this.totalNormalPriceWithShipping.toFixed(2), 1);
+                            this.setCookie("_calculated_price", this.pricePerItem.toFixed(2), 1);
                         },
 
                         setCookie(name, value, hours) {
