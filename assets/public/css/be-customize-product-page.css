@@ -2,10 +2,15 @@
   margin-left: 10px;
 }
 
+:root{
+  --primary-color: #b20201;
+  --secondary-color: var(--primary-color);
+}
+
 p.stock.wd-style-default.in-stock:before {
   content: "" !important;
   display: inline-block !important;
-  background-color: #24a148 !important;
+  background-color: var(--primary-color) !important;
   border-radius: 50%;
   width: 8px;
   height: 8px;
@@ -119,7 +124,7 @@ h1.be-product-sku {
   font-family: "Noto Sans";
   font-size: 14px;
   line-height: 20px;
-  color: #24a148;
+  color: var(--primary-color);
   font-weight: 400;
 }
 
@@ -215,7 +220,7 @@ h1.be-product-sku {
 }
 
 .button-wrapper {
-  background: #24a148;
+  background: var(--primary-color);
   padding: 10px 16px;
   display: flex;
   justify-content: space-between;
@@ -298,7 +303,7 @@ h1.be-product-sku {
 
 #productDetailPage .mto-link .detail-wrapper .details a {
   display: flex;
-  color: #24a148;
+  color: var(--primary-color);
   font-family: "Noto Sans";
   font-size: 14px;
   font-weight: 400;
@@ -364,7 +369,7 @@ h1.be-product-sku {
 
 .color-input-container .stock-data {
   background: #f4f4f4;
-  color: #24a148;
+  color: var(--primary-color);
   border: 1px solid #e0e0e0;
   text-align: center;
   font-family: "Noto Sans";
@@ -376,9 +381,9 @@ h1.be-product-sku {
 }
 
 #add-more-colors-button {
-  border: 1px solid #24a148;
+  border: 1px solid var(--primary-color);
   background: none;
-  color: #24a148;
+  color: var(--primary-color);
   min-height: 48px;
   font-family: "Noto Sans";
   font-size: 14px;
@@ -430,7 +435,7 @@ h1.be-product-sku {
 
 #add-print-position-button {
   background: none;
-  color: #24a148;
+  color: var(--primary-color);
   min-height: 48px;
   font-family: "Noto Sans";
   font-size: 14px;
@@ -439,7 +444,7 @@ h1.be-product-sku {
   text-transform: capitalize;
   outline: none;
   cursor: pointer;
-  border: 1px solid #24a148;
+  border: 1px solid var(--primary-color);
   margin: 14px 16px;
   padding: 10px;
 }
@@ -455,7 +460,7 @@ h1.be-product-sku {
 .add-print-position button.modal-save-button,
 .personalize-button button.modal-save-button {
   color: #fff !important;
-  background: #24a148 !important;
+  background: var(--primary-color) !important;
   padding: 10px 20px !important;
   border-radius: 5px;
 }
@@ -589,13 +594,13 @@ input[disabled],
   margin-bottom: -10px;
 }
 .be-selected {
-  color: #24a148 !important;
+  color: var(--primary-color) !important;
 }
 
 .be-add-to-cart-btn {
   color: #fff !important;
-  background-color: #24a148 !important;
-  border-color: #24a148 !important;
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
 }
 
 .be-add-to-cart-btn .button-text,
@@ -671,7 +676,7 @@ input[disabled],
   min-height: 36px;
   min-width: 36px;
   color: #ffffff;
-  background: #24a148;
+  background: var(--primary-color);
   border-radius: 4px;
   font-weight: 500;
   font-size: 14px;
@@ -691,12 +696,12 @@ input[disabled],
 }
 
 .instructions-textarea {
-  border: 1px solid #24a148;
+  border: 1px solid var(--primary-color);
   color: #000000;
 }
 
 .instructions-textarea:focus {
-  border: 1px solid #24a148;
+  border: 1px solid var(--primary-color);
   outline: none;
 }
 
