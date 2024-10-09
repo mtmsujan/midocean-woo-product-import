@@ -4,7 +4,6 @@
 
 :root{
   --primary-color: #b20201;
-  --secondary-color: var(--primary-color);
 }
 
 p.stock.wd-style-default.in-stock:before {
@@ -572,7 +571,7 @@ h1.be-product-sku {
 
 .modal-item-clear-button {
   display: block;
-  color: #198038 !important;
+  color: var(--primary-color) !important;
   background-color: transparent !important;
   font-family: "Noto Sans";
   font-weight: 400;
@@ -734,3 +733,75 @@ input[disabled],
 }
 
 [x-cloak] { display: none; }
+
+
+/* custom css for cart page, checkout page and thank you page */
+.return-to-shop .button{
+  background-color: var(--primary-color) !important;
+}
+
+.wd-coupon-form .button[name="apply_coupon"]{
+  background-color: var(--primary-color) !important;
+}
+
+.amount{
+  color: var(--primary-color) !important;
+}
+
+.cart-totals-inner .checkout-button{
+  background-color: var(--primary-color) !important;
+}
+
+.cart-totals-inner .checkout-button:hover{
+  background-color: var(--primary-color) !important;
+}
+
+#place_order{
+  background-color: var(--primary-color) !important;
+}
+
+.checkout_coupon .button{
+  background-color: var(--primary-color) !important; 
+}
+
+.checkout_coupon .button:hover{
+  background-color: var(--primary-color) !important; 
+}
+
+.website-wrapper :is(.woocommerce-form-coupon-toggle,.woocommerce-form-login-toggle)>div :is(.showlogin,.showcoupon) {
+  color: var(--primary-color) !important;
+}
+
+div.quantity input[type="button"]:hover{
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+div.quantity input[type="button"]:hover{
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.wd-checkout-steps li span:after{
+  background-color: var(--primary-color) !important;
+}
+
+.wpcf7 form.sent .wpcf7-response-output, .mc4wp-success, .woocommerce-message {
+  background-color: var(--primary-color) !important;
+}
+
+nav[class*="-pagination"] li .current {
+  background-color: var(--primary-color) !important;
+}
+
+.widget_price_filter .ui-slider .ui-slider-range{
+  background-color: var(--primary-color) !important;
+}
+
+.widget_price_filter .ui-slider .ui-slider-handle:after{
+  background-color: var(--primary-color) !important;
+}
+
+.widget_price_filter .ui-slider-horizontal:before{
+  background-color: var(--primary-color) !important;
+}
