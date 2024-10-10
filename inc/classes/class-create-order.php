@@ -52,6 +52,8 @@ class Create_Order {
         $api_response = $this->call_api( $order );
 
         if ( $api_response ) {
+            // put api response in logs
+            // $this->put_program_logs( 'API Response: ' . $api_response );
             // Decode the API response
             $api_response_decode = json_decode( $api_response, true );
             // Get order type

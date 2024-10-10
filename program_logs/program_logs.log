@@ -1,120 +1,41 @@
 payload: {
     "order_header": {
-        "preferred_shipping_date": "",
-        "check_price": "false",
-        "currency": "EUR",
-        "contact_email": "ffshahjalal@gmail.com",
-        "shipping_address": {
-            "contact_name": "Shah Jalal test",
-            "company_name": "IMJOL IT",
-            "street1": "Enxertos 59",
-            "street2": "",
-            "postal_code": "37514",
-            "city": "Salamanca",
-            "region": "SA",
-            "country": "ES",
-            "email": "ffshahjalal@gmail.com",
-            "phone": "799 043 668"
-        },
-        "po_number": "16461",
-        "timestamp": "2024-09-17T09:41:25",
-        "contact_name": "Shah Jalal test",
-        "order_type": "NORMAL"
-    },
-    "order_lines": [
-        {
-            "order_line_id": "7",
-            "sku": "CX1437-99",
-            "quantity": "10",
-            "expected_price": "11"
-        }
-    ]
-} - 2024-09-17 09:41:29
-
-API Response: {
-  "order_header" : {
-    "status_code" : "0",
-    "status_text" : "Sales order successfully created",
-    "direct_confirmation" : "",
-    "check_price" : "false",
-    "currency" : "EUR",
-    "po_number" : "16461",
-    "order_type" : "NORMAL",
-    "order_number" : "3230125",
-    "total_item_price" : "11,00",
-    "total_print_costs" : "",
-    "total_net_price" : "19,00",
-    "freight_charge" : "8.000000000 ",
-    "tax" : "0,00",
-    "print_setup" : "",
-    "print_cost" : "",
-    "print_handling" : "",
-    "shipping_address" : {
-      "contact_name" : "Shah Jalal test",
-      "company_name" : "IMJOL IT",
-      "street1" : "Enxertos 59",
-      "street2" : "",
-      "street3" : "",
-      "postal_code" : "37514",
-      "city" : "Salamanca",
-      "region" : "SA",
-      "country" : "ES",
-      "email" : "ffshahjalal@gmail.com",
-      "phone" : "799 043 668"
-    }
-  },
-  "order_lines" : [ {
-    "status_code" : "0",
-    "status_text" : "",
-    "po_line_id" : "7",
-    "sku" : "CX1437-99",
-    "variant_id" : "",
-    "quantity" : "10",
-    "expected_price" : "11",
-    "master_code" : "",
-    "master_id" : "",
-    "shipping_date" : "2024-09-17"
-  } ]
-} - 2024-09-17 09:41:33
-
-payload: {
-    "order_header": {
         "currency": "EUR",
         "contact_email": "ffshahjalal@gmail.com",
         "check_price": "false",
         "shipping_address": {
-            "contact_name": "Shah Jalal test",
-            "company_name": "IMJOL IT",
-            "street1": "Enxertos 59",
+            "contact_name": "Md Sujan test",
+            "company_name": "",
+            "street1": "Calle Proc. San Sebasti\u00e1n 31",
             "street2": "",
-            "postal_code": "37514",
-            "city": "Salamanca",
-            "region": "SA",
+            "postal_code": "12597",
+            "city": "Santa Magdalena De Pulpis",
+            "region": "CS",
             "country": "ES",
             "email": "ffshahjalal@gmail.com",
-            "phone": "799 043 668"
+            "phone": "759 980 188"
         },
-        "po_number": "16464",
-        "timestamp": "2024-09-17T10:08:47",
-        "contact_name": "Shah Jalal test",
+        "po_number": "16607",
+        "timestamp": "2024-10-10T09:16:53",
+        "contact_name": "Md Sujan test",
         "order_type": "PRINT"
     },
     "order_lines": [
         {
-            "order_line_id": "8",
-            "master_code": "CX1437",
-            "quantity": "5",
-            "expected_price": "5.5",
+            "order_line_id": "6",
+            "master_code": "CX1361",
+            "quantity": "1",
+            "expected_price": "39.42",
             "printing_positions": [
                 {
-                    "id": "TOP BOX",
+                    "id": "FRONT",
                     "print_size_height": "15",
-                    "print_size_width": "40",
-                    "printing_technique_id": "P5",
+                    "print_size_width": "35",
+                    "printing_technique_id": "P4",
                     "number_of_print_colors": "1",
-                    "print_artwork_url": "http:\/\/localhost\/midocean\/wp-content\/uploads\/2024\/09\/donation-button.png",
-                    "print_mockup_url": "http:\/\/localhost\/midocean\/wp-content\/uploads\/2024\/09\/CX1335-05_POS3-2.jpg",
-                    "print_instruction": "It's will be simple. testing",
+                    "print_artwork_url": "http:\/\/localhost\/midocean\/wp-content\/uploads\/2024\/10\/images.jpeg",
+                    "print_mockup_url": "http:\/\/localhost\/midocean\/wp-content\/uploads\/2024\/10\/1.jpg",
+                    "print_instruction": "Instructions testing",
                     "print_colors": [
                         {
                             "color": "Pantone 4280C"
@@ -124,13 +45,13 @@ payload: {
             ],
             "print_items": [
                 {
-                    "item_color_number": "99",
-                    "quantity": "5"
+                    "item_color_number": "06",
+                    "quantity": "1"
                 }
             ]
         }
     ]
-} - 2024-09-17 10:08:51
+} - 2024-10-10 09:17:01
 
 API Response: {
   "order_header" : {
@@ -139,60 +60,60 @@ API Response: {
     "direct_confirmation" : "",
     "check_price" : "false",
     "currency" : "EUR",
-    "po_number" : "16464",
+    "po_number" : "16607",
     "order_type" : "PRINT",
-    "order_number" : "3230202",
-    "total_item_price" : "5,50",
-    "total_print_costs" : "34,85",
-    "total_net_price" : "48,35",
+    "order_number" : "3251642",
+    "total_item_price" : "1,35",
+    "total_print_costs" : "30,83",
+    "total_net_price" : "40,18",
     "freight_charge" : "8.000000000 ",
     "tax" : "0,00",
     "print_setup" : "30,00",
-    "print_cost" : "4,50",
-    "print_handling" : "0,35",
+    "print_cost" : "0,76",
+    "print_handling" : "0,07",
     "shipping_address" : {
-      "contact_name" : "Shah Jalal test",
-      "company_name" : "IMJOL IT",
-      "street1" : "Enxertos 59",
+      "contact_name" : "Md Sujan test",
+      "company_name" : "",
+      "street1" : "Calle Proc. San Sebastián 31",
       "street2" : "",
       "street3" : "",
-      "postal_code" : "37514",
-      "city" : "Salamanca",
-      "region" : "SA",
+      "postal_code" : "12597",
+      "city" : "Santa Magdalena De Pulpis",
+      "region" : "CS",
       "country" : "ES",
       "email" : "ffshahjalal@gmail.com",
-      "phone" : "799 043 668"
+      "phone" : "759 980 188"
     }
   },
   "order_lines" : [ {
     "status_code" : "0",
     "status_text" : "",
-    "po_line_id" : "8",
+    "po_line_id" : "6",
     "sku" : "",
     "variant_id" : "",
-    "quantity" : "5",
-    "expected_price" : "5.5",
-    "master_code" : "CX1437",
-    "master_id" : "40006395",
-    "shipping_date" : "2024-09-19",
+    "quantity" : "1",
+    "expected_price" : "39.42",
+    "master_code" : "CX1361",
+    "master_id" : "40003165",
+    "shipping_date" : "2024-10-14",
     "printing_positions" : [ {
-      "id" : "TOP BOX",
+      "id" : "FRONT",
       "print_size_height" : "15",
-      "print_size_width" : "40",
-      "printing_technique_id" : "P5",
+      "print_size_width" : "35",
+      "printing_technique_id" : "P4",
       "number_of_print_colors" : "1",
       "print_colors" : [ {
         "color" : "Pantone 4280C"
       } ],
-      "print_artwork_url" : "http://localhost/midocean/wp-content/uploads/2024/09/donation-button.png",
-      "print_mockup_url" : "http://localhost/midocean/wp-content/uploads/2024/09/CX1335-05_POS3-2.jpg",
-      "print_instruction" : "It's will be simple. testing"
+      "print_artwork_url" : "http://localhost/midocean/wp-content/uploads/2024/10/images.jpeg",
+      "print_mockup_url" : "http://localhost/midocean/wp-content/uploads/2024/10/1.jpg",
+      "print_instruction" : "Instructions testing"
     } ],
     "print_items" : [ {
-      "item_color_number" : "99",
+      "item_color_number" : "06",
       "item_size" : "",
-      "quantity" : "5"
+      "quantity" : "1"
     } ]
   } ]
-} - 2024-09-17 10:09:02
+} - 2024-10-10 09:17:14
 
