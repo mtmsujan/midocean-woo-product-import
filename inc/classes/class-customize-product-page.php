@@ -317,6 +317,9 @@ class Customize_Product_Page {
         // put product print data in logs
         // $this->put_program_logs( 'Print data response: ' . $api_response_for_print_data );
 
+        // get product variants
+        $product_variants = $this->get_variants_from_db( $this->product_number );
+        $this->put_program_logs( 'Product Variants: ' . count( $product_variants ) );
 
 
         ob_start();
@@ -743,7 +746,7 @@ class Customize_Product_Page {
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <!-- Repeat: Single size -->
-                                                <div class="col-3">
+                                                <div class="col-3" data-product-sku="XSS">
                                                     <div class="d-flex flex-column align-content-center">
                                                         <div class="text-center size-name">XSS</div>
                                                         <div class="size-quantity-field">
@@ -1433,6 +1436,27 @@ class Customize_Product_Page {
         $result = $wpdb->get_results( $wpdb->prepare( $sql ) );
 
         return $result[0]->stock;
+    }
+
+    public function get_variants_from_db( $product_number ) {
+
+        global $wpdb;
+
+        // get table prefix
+        $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+        $table_name   = $wpdb->prefix . $table_prefix . 'sync_products';
+
+        // SQL Query
+        $sql = "SELECT product_data FROM $table_name WHERE product_number = '{$product_number}'";
+
+        // Execute query
+        $result = $wpdb->get_results( $wpdb->prepare( $sql ) );
+
+        $product_data        = $result[0]->product_data;
+        $product_data_desoce = json_decode( $product_data, true );
+        $variants            = $product_data_desoce['variants'];
+
+        return $variants;
     }
 
     public function put_program_logs( $data ) {
