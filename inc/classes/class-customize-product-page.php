@@ -317,6 +317,8 @@ class Customize_Product_Page {
         // put product print data in logs
         // $this->put_program_logs( 'Print data response: ' . $api_response_for_print_data );
 
+
+
         ob_start();
         ?>
         <script>
@@ -718,7 +720,7 @@ class Customize_Product_Page {
                             <div class="product-color-size-stock-fields">
                                 <!-- Color input row configurator. repeater -->
                                 <div class="color-input-container">
-                                    <div class="row mt-3 justify-content-between align-items-center color-input-row">
+                                    <div class="row mt-3 justify-content-start align-items-center color-input-row">
                                         <!-- Color dropdown -->
                                         <div class="col-sm-2">
                                             <div class=" color-dropdown-wrapper">
@@ -738,7 +740,7 @@ class Customize_Product_Page {
                                         </div>
                                         <!-- /Color dropdown -->
                                         <!-- Stock input field -->
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-10">
                                             <div class="row">
                                                 <!-- Repeat: Single size -->
                                                 <div class="col-3">
