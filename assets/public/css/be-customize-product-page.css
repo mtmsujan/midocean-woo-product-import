@@ -2,8 +2,12 @@
   margin-left: 10px;
 }
 
-:root{
+:root {
   --primary-color: #b20201;
+  --dark-color: #262626;
+  --white-color: #ffffff;
+  --lite-gray-color: #f4f4f4;
+  --noto-sans-font: "Noto Sans", sans-serif;
 }
 
 p.stock.wd-style-default.in-stock:before {
@@ -17,7 +21,7 @@ p.stock.wd-style-default.in-stock:before {
 }
 
 p.stock.in-stock.wd-style-default {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   color: #525252;
   line-height: 20px;
@@ -44,10 +48,10 @@ html .ui-button.ui-state-disabled:active {
   font-weight: 700;
   color: #525252;
   border-bottom: 1px solid #e0e0e0 !important;
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   line-height: 20px;
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   line-height: 20px;
 }
 
@@ -72,7 +76,7 @@ html .ui-button.ui-state-disabled:active {
 }
 
 .additional-information-details h3.details-title {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 12px;
   font-weight: 700;
   color: #525252;
@@ -81,14 +85,14 @@ html .ui-button.ui-state-disabled:active {
 
 .additional-information-details .attribute-label {
   font-size: 12px;
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   color: #161616;
   line-height: 17.14px;
   font-weight: 400;
 }
 
 .additional-information-documentation .documentation a {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   color: #161616;
   font-size: 12px;
   font-weight: 400;
@@ -101,18 +105,18 @@ h1.be-product-sku {
   font-size: 32px;
   font-weight: 400;
   line-height: 44.8px;
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
 }
 
 .product-configurator-row {
-  background-color: #f4f4f4;
+  background-color: var(--lite-gray-color);
 }
 
 .product-configurator-row .be-title {
   font-size: 30px;
   font-weight: 400;
   color: #161616;
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   line-height: 42.85px;
   margin: 37px 0px 0px;
   padding: 0px 0px 25px 16px;
@@ -120,7 +124,7 @@ h1.be-product-sku {
 
 .product-configurator-download-button,
 .product-configurator-save-button {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   line-height: 20px;
   color: var(--primary-color);
@@ -141,7 +145,7 @@ h1.be-product-sku {
 }
 
 .product-configurator-body-subheading {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   line-height: 20px;
   color: #161616;
@@ -153,7 +157,7 @@ h1.be-product-sku {
 .pricing-summery {
   font-size: 14px;
   color: #161616;
-  font-family: "Noto Sans", sans-serif;
+  font-family: var(--noto-sans-font), sans-serif;
 }
 
 .summery-header {
@@ -201,7 +205,7 @@ h1.be-product-sku {
 }
 
 .price-per-item-subheading {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 12px;
   line-height: 14px;
   font-weight: 400;
@@ -231,19 +235,19 @@ h1.be-product-sku {
 }
 
 .button-wrapper a {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   line-height: 20px;
-  color: #ffffff;
+  color: var(--white-color);
   font-weight: 400;
 }
 
 .button-wrapper a:hover {
-  color: #ffffff;
+  color: var(--white-color);
 }
 
 .button-wrapper i {
-  color: #ffffff;
+  color: var(--white-color);
 }
 
 #related-product-footer-portion .wd-carousel-container .wd-el-title {
@@ -251,7 +255,7 @@ h1.be-product-sku {
 }
 
 #productDetailPage .mto-link {
-  background-color: #f4f4f4;
+  background-color: var(--lite-gray-color);
   padding: 16px;
   margin-top: 16px;
 }
@@ -263,7 +267,7 @@ h1.be-product-sku {
 }
 
 #productDetailPage .mto-link .heading-wrapper h3 {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   color: #222222;
   font-size: 14px;
   line-height: 19.6px;
@@ -288,7 +292,7 @@ h1.be-product-sku {
 }
 
 #productDetailPage .mto-link .detail-wrapper .details .details-text {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   color: #161616;
   font-size: 14px;
   line-height: 20px;
@@ -303,7 +307,7 @@ h1.be-product-sku {
 #productDetailPage .mto-link .detail-wrapper .details a {
   display: flex;
   color: var(--primary-color);
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -327,7 +331,7 @@ h1.be-product-sku {
   width: 288px;
   height: 48px;
   font-size: 14px;
-  background: #fff;
+  background: var(--white-color);
   box-sizing: border-box;
   padding: 0 32px 0 16px;
   border: none;
@@ -336,7 +340,7 @@ h1.be-product-sku {
   font-weight: bold;
   text-align: left;
   color: #161616;
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   line-height: 20px;
   font-weight: 700;
@@ -367,11 +371,11 @@ h1.be-product-sku {
 }
 
 .color-input-container .stock-data {
-  background: #f4f4f4;
+  background: var(--lite-gray-color);
   color: var(--primary-color);
   border: 1px solid #e0e0e0;
   text-align: center;
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 12px;
   line-height: 17.14px;
   font-weight: 400;
@@ -384,7 +388,7 @@ h1.be-product-sku {
   background: none;
   color: var(--primary-color);
   min-height: 48px;
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -400,7 +404,7 @@ h1.be-product-sku {
 }
 
 .color-input-container .color-name {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -415,7 +419,7 @@ h1.be-product-sku {
 }
 
 .add-print-position-heading {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   line-height: 20px;
   font-weight: 700;
@@ -436,7 +440,7 @@ h1.be-product-sku {
   background: none;
   color: var(--primary-color);
   min-height: 48px;
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
@@ -450,7 +454,7 @@ h1.be-product-sku {
 
 .add-print-position button.modal-close-button,
 .personalize-button button.modal-close-button {
-  color: #fff;
+  color: var(--white-color);
   background: gray;
   padding: 10px 20px !important;
   border-radius: 5px;
@@ -458,7 +462,7 @@ h1.be-product-sku {
 
 .add-print-position button.modal-save-button,
 .personalize-button button.modal-save-button {
-  color: #fff !important;
+  color: var(--white-color) !important;
   background: var(--primary-color) !important;
   padding: 10px 20px !important;
   border-radius: 5px;
@@ -471,7 +475,7 @@ h1.be-product-sku {
 }
 
 .position-name {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 12px;
   line-height: 17.14px;
   font-weight: 700;
@@ -479,7 +483,7 @@ h1.be-product-sku {
 }
 
 .position-infos {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 12px;
   line-height: 17.14px;
   font-weight: 700;
@@ -487,7 +491,7 @@ h1.be-product-sku {
 }
 
 .input-title {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   color: #161616;
   font-size: 12px;
   line-height: 17.14px;
@@ -495,7 +499,7 @@ h1.be-product-sku {
 }
 
 .print-position-number {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px !important;
   color: #161616 !important;
   border: none !important;
@@ -532,7 +536,7 @@ h1.be-product-sku {
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
-  background-color: #fff;
+  background-color: var(--white-color);
   background-image: none;
 }
 
@@ -542,7 +546,7 @@ h1.be-product-sku {
 }
 
 .modal-item-title {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   font-weight: 700;
   color: #161616;
@@ -551,7 +555,7 @@ h1.be-product-sku {
 }
 
 .modal-item-dimensions {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 12px;
   color: #6f6f6f;
 }
@@ -573,7 +577,7 @@ h1.be-product-sku {
   display: block;
   color: var(--primary-color) !important;
   background-color: transparent !important;
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-weight: 400;
   text-transform: capitalize !important;
 }
@@ -597,7 +601,7 @@ input[disabled],
 }
 
 .be-add-to-cart-btn {
-  color: #fff !important;
+  color: var(--white-color) !important;
   background-color: var(--primary-color) !important;
   border-color: var(--primary-color) !important;
 }
@@ -605,14 +609,14 @@ input[disabled],
 .be-add-to-cart-btn .button-text,
 .be-add-to-cart-btn-without-configure .button-text {
   text-transform: capitalize !important;
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
 }
 
 .be-add-to-cart-btn-without-configure {
-  color: #fff !important;
+  color: var(--white-color) !important;
   background-color: #393939 !important;
   border-color: #393939 !important;
 }
@@ -620,7 +624,7 @@ input[disabled],
 .loader {
   width: 20px;
   height: 20px;
-  border: 2px solid #fff;
+  border: 2px solid var(--white-color);
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;
@@ -648,7 +652,7 @@ input[disabled],
   min-width: 60px;
   min-height: 32px;
   border: none;
-  color: #fff;
+  color: var(--white-color);
   background-color: #4f545c;
   transition: background-color 0.17s ease, color 0.17s ease;
 }
@@ -658,7 +662,7 @@ input[disabled],
 }
 
 .customize-modal-title {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   font-weight: 400;
   color: #161616;
@@ -671,10 +675,10 @@ input[disabled],
   text-align: center;
   border: 0;
   padding: 7px 16px;
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   min-height: 36px;
   min-width: 36px;
-  color: #ffffff;
+  color: var(--white-color);
   background: var(--primary-color);
   border-radius: 4px;
   font-weight: 500;
@@ -688,7 +692,7 @@ input[disabled],
 }
 
 .instructions-form-label {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   font-weight: 400;
   color: #161616;
@@ -711,82 +715,88 @@ input[disabled],
 }
 
 .validation-instruction {
-  font-family: "Noto Sans";
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   font-weight: 400;
-  letter-spacing: .16px;
+  letter-spacing: 0.16px;
   color: #525252;
 }
 
-.be-alert-message{
+.be-alert-message {
   background-color: #393939;
   padding: 0.5rem 1rem !important;
   border-left: 3px solid red;
 }
 
-.alert-message-text{
-  color: #fff;
-  font-family: "Noto Sans";
+.alert-message-text {
+  color: var(--white-color);
+  font-family: var(--noto-sans-font);
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
 }
 
-[x-cloak] { display: none; }
-
+[x-cloak] {
+  display: none;
+}
 
 /* custom css for cart page, checkout page and thank you page */
-.return-to-shop .button{
+.return-to-shop .button {
   background-color: var(--primary-color) !important;
 }
 
-.wd-coupon-form .button[name="apply_coupon"]{
+.wd-coupon-form .button[name="apply_coupon"] {
   background-color: var(--primary-color) !important;
 }
 
-.amount{
+.amount {
   color: var(--primary-color) !important;
 }
 
-.cart-totals-inner .checkout-button{
+.cart-totals-inner .checkout-button {
   background-color: var(--primary-color) !important;
 }
 
-.cart-totals-inner .checkout-button:hover{
+.cart-totals-inner .checkout-button:hover {
   background-color: var(--primary-color) !important;
 }
 
-#place_order{
+#place_order {
   background-color: var(--primary-color) !important;
 }
 
-.checkout_coupon .button{
-  background-color: var(--primary-color) !important; 
+.checkout_coupon .button {
+  background-color: var(--primary-color) !important;
 }
 
-.checkout_coupon .button:hover{
-  background-color: var(--primary-color) !important; 
+.checkout_coupon .button:hover {
+  background-color: var(--primary-color) !important;
 }
 
-.website-wrapper :is(.woocommerce-form-coupon-toggle,.woocommerce-form-login-toggle)>div :is(.showlogin,.showcoupon) {
+.website-wrapper
+  :is(.woocommerce-form-coupon-toggle, .woocommerce-form-login-toggle)
+  > div
+  :is(.showlogin, .showcoupon) {
   color: var(--primary-color) !important;
 }
 
-div.quantity input[type="button"]:hover{
+div.quantity input[type="button"]:hover {
   background-color: var(--primary-color) !important;
   border-color: var(--primary-color) !important;
 }
 
-div.quantity input[type="button"]:hover{
+div.quantity input[type="button"]:hover {
   background-color: var(--primary-color) !important;
   border-color: var(--primary-color) !important;
 }
 
-.wd-checkout-steps li span:after{
+.wd-checkout-steps li span:after {
   background-color: var(--primary-color) !important;
 }
 
-.wpcf7 form.sent .wpcf7-response-output, .mc4wp-success, .woocommerce-message {
+.wpcf7 form.sent .wpcf7-response-output,
+.mc4wp-success,
+.woocommerce-message {
   background-color: var(--primary-color) !important;
 }
 
@@ -794,14 +804,14 @@ nav[class*="-pagination"] li .current {
   background-color: var(--primary-color) !important;
 }
 
-.widget_price_filter .ui-slider .ui-slider-range{
+.widget_price_filter .ui-slider .ui-slider-range {
   background-color: var(--primary-color) !important;
 }
 
-.widget_price_filter .ui-slider .ui-slider-handle:after{
+.widget_price_filter .ui-slider .ui-slider-handle:after {
   background-color: var(--primary-color) !important;
 }
 
-.widget_price_filter .ui-slider-horizontal:before{
+.widget_price_filter .ui-slider-horizontal:before {
   background-color: var(--primary-color) !important;
 }
