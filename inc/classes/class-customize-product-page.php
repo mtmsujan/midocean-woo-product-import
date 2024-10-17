@@ -758,16 +758,6 @@ class Customize_Product_Page {
                                             </div>
                                         </div>
                                         <!-- /Stock input field -->
-                                        <!-- Remove color row button -->
-                                        <div class="col-sm-4 remove-color-row">
-                                            <div class="row justify-content-between align-items-center">
-                                                <div class="col-sm-6"></div>
-                                                <div class="col-sm-6 text-end close-button">
-                                                    <!-- <i class="fa-solid fa-xmark"></i> -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /Remove color row button -->
                                     </div>
                                 </div>
                             </div>
@@ -837,10 +827,8 @@ class Customize_Product_Page {
                             </div>
                             <!-- /Color and Quantity field -->
 
-                        <?php endif;
+                        <?php endif; ?>
 
-                        ?>
-                        <!-- Add more color button -->
                         <?php
 
                         /**
@@ -1426,6 +1414,23 @@ class Customize_Product_Page {
 
         // Return technique label
         return $final_result;
+    }
+
+    public function get_textile_product_stock_from_db( $sku ) {
+
+        global $wpdb;
+
+        // get table prefix
+        $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+        $table_name   = $wpdb->prefix . $table_prefix . 'sync_stock';
+
+        // SQL Query
+        $sql = "SELECT stock FROM $table_name WHERE product_number = '{$sku}'";
+
+        // Execute query
+        $result = $wpdb->get_results( $wpdb->prepare( $sql ) );
+
+        return $result[0]->stock;
     }
 
     public function put_program_logs( $data ) {
