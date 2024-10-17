@@ -815,3 +815,44 @@ nav[class*="-pagination"] li .current {
 .widget_price_filter .ui-slider-horizontal:before {
   background-color: var(--primary-color) !important;
 }
+
+.size-name {
+  background: var(--dark-color);
+  color: var(--lite-gray-color);
+  padding: 4px 6px;
+  height: 25px;
+  font-family: var(--noto-sans-font);
+  font-size: 12px;
+}
+
+.size-quantity-field input[type="number"] {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  box-shadow: none;
+  transition: none;
+  background: var(--white-color);
+  box-sizing: border-box;
+  height: 25px;
+  padding: 4px 6px;
+  border-bottom: 1px solid #8d8d8d;
+  outline: none;
+  font-family: var(--noto-sans-font);
+  font-size: 12px;
+  font-weight: 700;
+  color: #161616;
+  margin-top: 1px;
+}
+
+.size-stock-value {
+  background: var(--lite-gray-color);
+  color: var(--primary-color);
+  border: 1px solid #E0E0E0;
+  font-family: var(--noto-sans-font);
+  font-size: 12px;
+  line-height: 17.14px;
+  font-weight: 400;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 1px;
+}

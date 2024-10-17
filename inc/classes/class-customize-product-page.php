@@ -794,16 +794,16 @@ class Customize_Product_Page {
                                     <div class="col-sm-6">
                                         <div class="row">
                                             <!-- Repeat: Single size -->
-                                            <div class="col-2">
+                                            <div class="col-3">
                                                 <div class="d-flex flex-column align-content-center">
                                                     <div class="text-center size-name">XSS</div>
-                                                    <div class="size-quantity">
-                                                        <input type="number" name="" id="">
+                                                    <div class="size-quantity-field">
+                                                        <input class="text-center" type="number" name="" id="">
                                                     </div>
                                                     <div class="text-center size-stock-value">
-                                                        <div><span class="stock-value">
-                                                                <?= $this->product_stock; ?></span>
-                                                        </div>
+                                                        <span class="stock-value">
+                                                            120
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
