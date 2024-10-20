@@ -319,7 +319,7 @@ class Customize_Product_Page {
 
         // get product variants
         $product_variants = $this->get_variants_from_db( $this->product_number );
-        $this->put_program_logs( 'Product Variants: ' . count( $product_variants ) );
+        // $this->put_program_logs( 'Product Variants: ' . count( $product_variants ) );
 
 
         ob_start();
