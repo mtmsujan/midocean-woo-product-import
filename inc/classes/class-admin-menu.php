@@ -194,48 +194,112 @@ class Admin_Menu {
 
         global $wpdb;
 
-        // Uncomment this if you're using a nonce for security
-        // check_ajax_referer( 'bulk_product_import_nonce', 'nonce' );
-
+        // Check for the necessary permissions before proceeding.
         if ( !current_user_can( 'manage_options' ) ) {
             wp_send_json_error( __( 'Unauthorized user', 'bulk-product-import' ) );
         }
 
-        // Retrieve and sanitize the profit percentage input from the dashboard
+        // Retrieve and sanitize the profit percentage input from the dashboard.
         $profit_percentage = sanitize_text_field( $_POST['profit_percentage'] );
 
-        // Save the profit percentage to the options table for future use
+        // Ensure that the profit percentage is a valid number and greater than or equal to zero.
+        $profit_percentage = (float) $profit_percentage;
+        if ( $profit_percentage < 0 ) {
+            wp_send_json_error( __( 'Invalid profit percentage value. It must be 0 or greater.', 'bulk-product-import' ) );
+        }
+
+        // Save the profit percentage to the options table for future use.
         update_option( 'be-profit-percentage', $profit_percentage );
 
-        // Ensure profit_percentage is a valid number
-        $profit_percentage = (float) $profit_percentage;
-        $this->put_program_logs( 'Profit percentage: ' . $profit_percentage );
-        if ( $profit_percentage < 0 ) {
-            wp_send_json_error( __( 'Invalid profit percentage value', 'bulk-product-import' ) );
-        }
-
-        // Update product prices dynamically based on the profit percentage
-        // Correct table name without the extra `wp_`
+        // Define the postmeta table name.
         $table_name = $wpdb->prefix . 'postmeta';
 
-        // SQL Query: Cast meta_value to a float, apply the percentage increase
-        $sql = $wpdb->prepare(
-            "UPDATE {$table_name} 
-            SET meta_value = CAST(meta_value AS DECIMAL(10,2)) * (1 + %f / 100) 
-            WHERE meta_key = '_price' 
-            AND meta_value > 0",
-            $profit_percentage
-        );
+        // Query to get all product IDs that have a '_price' meta key with a value greater than 0.
+        $query_to_get_product_id = "SELECT DISTINCT post_id FROM {$table_name} WHERE meta_key = '_price' AND meta_value > 0";
+        $all_product_id          = $wpdb->get_results( $query_to_get_product_id );
 
-        // Execute the query
-        $result = $wpdb->query( $sql );
+        // Check if any product IDs were found.
+        if ( !empty( $all_product_id ) ) {
+            foreach ( $all_product_id as $product_id ) {
+                // Retrieve the product object using the WooCommerce function wc_get_product().
+                $product = wc_get_product( $product_id->post_id );
 
-        // Check if the query executed successfully
-        if ( false === $result ) {
-            wp_send_json_error( __( 'Failed to update product prices', 'bulk-product-import' ) );
+                // Handle the case where the product could not be found (just in case).
+                if ( !$product ) {
+                    continue;
+                }
+
+                // Get the SKU for the current product.
+                $sku = $product->get_sku();
+
+                // Retrieve the original price from your custom DB function based on SKU.
+                $product_db_price = $this->get_product_price_from_db( $sku );
+
+                // Handle any errors or missing prices.
+                if ( !is_numeric( $product_db_price ) || $product_db_price < 0 ) {
+                    continue;
+                }
+
+                // Calculate the new price based on the profit percentage.
+                $calculate_price = ( $profit_percentage / 100 ) * $product_db_price;
+                $new_price       = $product_db_price + $calculate_price;
+
+                // Update the product price in the '_price' meta field.
+                $update_price = $wpdb->update(
+                    $table_name,
+                    array( 'meta_value' => $new_price ), // New price
+                    array( 'post_id' => $product_id->post_id, 'meta_key' => '_price' ), // Conditions
+                    array( '%f' ), // Format for the new price (float)
+                    array( '%d', '%s' ) // Format for the WHERE clause (post_id as integer, meta_key as string)
+                );
+
+                // Check if the update query failed (returns false if failed).
+                if ( false === $update_price ) {
+                    // Log an error for debugging purposes (optional).
+                    error_log( "Failed to update price for product ID: {$product_id->post_id}" );
+                }
+            }
+        } else {
+            wp_send_json_error( __( 'No products found with valid prices.', 'bulk-product-import' ) );
         }
 
-        wp_send_json_success( __( 'Profit percentage saved and prices updated successfully', 'bulk-product-import' ) );
+        // Return a success message once all prices are updated.
+        wp_send_json_success( __( 'Profit percentage saved and prices updated successfully.', 'bulk-product-import' ) );
+    }
+
+    public function get_product_price_from_db( $product_number ) {
+
+        global $wpdb;
+
+        // Get the table prefix option for dynamic table names
+        $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+
+        // Define the full table name using the WordPress prefix and the dynamic table prefix
+        $table_name = $wpdb->prefix . $table_prefix . 'sync_price';
+
+        // Sanitize the product number to prevent SQL injection
+        $product_number = sanitize_text_field( $product_number );
+
+        // Prepare SQL query to retrieve the price from the sync_price table
+        $sql = $wpdb->prepare( "SELECT price FROM {$table_name} WHERE product_number = %s", $product_number );
+
+        // Execute the query
+        $result = $wpdb->get_results( $sql );
+
+        // Check if the result is not empty and contains at least one price value
+        if ( !empty( $result ) && isset( $result[0]->price ) ) {
+            // Get the price from the first row of the result
+            $price = $result[0]->price;
+
+            // Replace commas with dots to ensure price format consistency
+            $price = str_replace( ",", ".", $price );
+
+            // Return the price
+            return $price;
+        } else {
+            // Return false if no price is found for the given product number
+            return false;
+        }
     }
 
 }
