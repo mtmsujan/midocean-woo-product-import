@@ -116,7 +116,10 @@ class Admin_Menu {
                                 value="<?php echo $profit_percentage; ?>">
                         </div>
 
-                        <button type="button" class="btn btn-primary mt-3" id="profit-percentage-save-button">Save</button>
+                        <button type="button" class="btn btn-primary mt-3 d-flex align-items-center justify-content-between gap-1" id="profit-percentage-save-button">
+                            <span>Save</span>
+                            <span class="ms-1 profit-percentage-spinner"></span>
+                        </button>
                     </div>
                 </div>
 

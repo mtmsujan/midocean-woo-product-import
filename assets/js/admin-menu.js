@@ -167,7 +167,12 @@
     // save profit percentage
     $("#profit-percentage-save-button").on("click", function (e) {
       e.preventDefault();
+
       let profitPercentage = $("#profit-percentage-input-field").val();
+      
+      const spinner_element_div = $(".profit-percentage-spinner");
+      $(spinner_element_div).addClass("loader");
+
       $.ajax({
         type: "POST",
         url: bulkProductImport.ajax_url,
@@ -177,6 +182,7 @@
           profit_percentage: profitPercentage,
         },
         success: function (response) {
+          $(spinner_element_div).removeClass("loader");
           let successMessage = response.data;
           // Display an info toast with no title
           showNotification(successMessage);
