@@ -620,6 +620,15 @@ class Customize_Product_Page {
 
                             const artworkFile = document.getElementById('upload-artwork').files[0];
                             const mockupFile = document.getElementById('upload-mockup').files[0];
+                            let instructions = document.getElementById('instructions').value;
+
+                            // check if artwork, mockup file and this.instruction are not empty alert message and return
+                            if (!artworkFile || !mockupFile || !instructions) {
+                                alert('Please upload artwork, mockup file and instruction.');
+                                uploadMediaLoaderArea.classList.remove("loader");
+                                return;
+                            }
+
                             const maxFileSize = 15 * 1024 * 1024; // 15 MB in bytes
                             const allowedFileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg',
                                 'application/pdf', 'image/svg+xml', 'image/x-icon',
