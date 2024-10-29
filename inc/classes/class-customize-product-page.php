@@ -19,6 +19,7 @@ class Customize_Product_Page {
     private $product_stock;
     private $number_of_print_positions;
     private $color_group;
+    private $color_description;
     private $product_price;
     private $currency_symbol;
     private $technique_labels;
@@ -122,6 +123,7 @@ class Customize_Product_Page {
             $category_label2          = get_post_meta( $product_id, '_category_level2', true );
             $category_label3          = get_post_meta( $product_id, '_category_level3', true );
             $color_description        = get_post_meta( $product_id, '_color_description', true );
+            $this->color_description  = $color_description;
             $color_group              = get_post_meta( $product_id, '_color_group', true );
             $pcl_status_description   = get_post_meta( $product_id, '_pcl_status_description', true );
             $pms_color                = get_post_meta( $product_id, '_pms_color', true );
@@ -733,10 +735,10 @@ class Customize_Product_Page {
                                                 aria-expanded="false">
                                                 <div class="row align-items-center">
                                                     <div class="col-4 color-preview">
-                                                        <div style="height: 35px; width: 35px; background: <?php echo strtolower( $this->color_group ); ?>; border: 1px solid black;"
+                                                        <div style="height: 35px; width: 35px; background: <?= strtolower( $this->color_group ); ?>; border: 1px solid black;"
                                                             class="rounded-circle"></div>
                                                     </div>
-                                                    <div class="col-8 color-name"><?php echo ucfirst( $this->color_group ); ?> -
+                                                    <div class="col-8 color-name"><?= ucfirst( $this->color_description ); ?> -
                                                     </div>
                                                 </div>
                                             </button>
