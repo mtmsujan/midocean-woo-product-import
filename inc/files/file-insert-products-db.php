@@ -418,12 +418,18 @@ function insert_color_group_db() {
     $table_name   = $wpdb->prefix . $table_prefix . 'sync_color_group';
     truncate_table( $table_name );
 
-    /* foreach ( $color_groups as $color_group ) {
+    foreach ( $color_groups as $color_group ) {
+
+        // Insert data
         $wpdb->insert(
             $table_name,
             [
-                'name' => $color_group['name'],
+                'color_id'      => $color_group['id'],
+                'group_name_es' => $color_group['name'],
+                'hex'           => $color_group['hex'],
             ]
         );
-    } */
+    }
+
+    return '<h4>Color group inserted successfully DB</h4>';
 }
