@@ -55,6 +55,11 @@ function bulk_products_import() {
         'callback' => 'insert_color_group_db_callback',
     ] );
 
+    register_rest_route( 'bulk-import/v1', '/insert-color-hex-db', [
+        'methods'  => 'GET',
+        'callback' => 'insert_color_hex_db_callback',
+    ] );
+
 }
 
 function sync_products_api_callback() {
@@ -91,4 +96,8 @@ function transform_color_list_callback() {
 
 function insert_color_group_db_callback(){
     return insert_color_group_db();
+}
+
+function insert_color_hex_db_callback(){
+    return insert_color_hex_db();
 }

@@ -433,3 +433,31 @@ function insert_color_group_db() {
 
     return '<h4>Color group inserted successfully DB</h4>';
 }
+
+function insert_color_hex_db() {
+
+    $color_name_values_json_file_path = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/inc/files/color-name.json';
+    $color_hex_values                 = file_get_contents( $color_name_values_json_file_path );
+    $color_hex_values                 = json_decode( $color_hex_values, true );
+
+    global $wpdb;
+    $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+    $table_name   = $wpdb->prefix . $table_prefix . 'sync_color_hex';
+    truncate_table( $table_name );
+
+    foreach ( $color_hex_values as $color_hex_value ) {
+
+        // Insert data
+        $wpdb->insert(
+            $table_name,
+            [
+                'color_id'      => $color_hex_value['id'],
+                'color_name'    => $color_hex_value['name'],
+                'group_name_es' => $color_hex_value['group'],
+                'hex'           => $color_hex_value['hex'],
+            ]
+        );
+    }
+
+    return '<h4>Color hex inserted successfully DB</h4>';
+}
