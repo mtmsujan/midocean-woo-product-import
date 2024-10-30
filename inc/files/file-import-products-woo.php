@@ -73,7 +73,7 @@ function products_import_woocommerce() {
                 $color_group       = '';
                 $pms_color         = '';
                 $gtin              = '';
-                $color_code        = null;
+                $color_code        = '';
 
                 $images = [];
                 // Loop through variants for extract images

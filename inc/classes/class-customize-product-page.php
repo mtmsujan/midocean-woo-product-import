@@ -19,6 +19,7 @@ class Customize_Product_Page {
     private $product_stock;
     private $number_of_print_positions;
     private $color_group;
+    private $color_hex;
     private $color_description;
     private $product_price;
     private $currency_symbol;
@@ -128,6 +129,8 @@ class Customize_Product_Page {
             $pcl_status_description   = get_post_meta( $product_id, '_pcl_status_description', true );
             $pms_color                = get_post_meta( $product_id, '_pms_color', true );
             $ean                      = get_post_meta( $product_id, '_ean', true ) ?? '';
+            $color_code               = get_post_meta( $product_id, '_color_code', true ) ?? '';
+            $this->color_hex          = $this->get_color_hex_from_db_based_on_color_code( $color_code );
 
             // Generate dimensions by width and height with unit
             $dimensions = $length . 'X' . $width . ' ' . $length_unit;
@@ -735,7 +738,7 @@ class Customize_Product_Page {
                                                 aria-expanded="false">
                                                 <div class="row align-items-center">
                                                     <div class="col-4 color-preview">
-                                                        <div style="height: 35px; width: 35px; background: <?= strtolower( $this->color_group ); ?>; border: 1px solid black;"
+                                                        <div style="height: 35px; width: 35px; background: <?= $this->color_hex ?>; border: 1px solid black;"
                                                             class="rounded-circle"></div>
                                                     </div>
                                                     <div class="col-8 color-name"><?= ucfirst( $this->color_description ); ?> -
@@ -1407,6 +1410,23 @@ class Customize_Product_Page {
         $variants            = $product_data_desoce['variants'];
 
         return $variants;
+    }
+
+    public function get_color_hex_from_db_based_on_color_code( $color_code ) {
+
+        global $wpdb;
+
+        // get table prefix
+        $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+        $table_name   = $wpdb->prefix . $table_prefix . 'sync_color_hex';
+
+        // SQL Query
+        $sql = "SELECT hex FROM $table_name WHERE color_id = '{$color_code}'";
+
+        // Execute query
+        $result = $wpdb->get_results( $wpdb->prepare( $sql ) );
+
+        return $result[0]->hex;
     }
 
     public function put_program_logs( $data ) {
