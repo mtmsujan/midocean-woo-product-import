@@ -76,11 +76,11 @@ class Admin_Menu {
                             class="nav-link be-nav-links"><?php esc_html_e( 'API', 'bulk-product-import' ); ?></a></li>
                     <li class="nav-item"><a href="#tables"
                             class="nav-link be-nav-links"><?php esc_html_e( 'Tables', 'bulk-product-import' ); ?></a></li>
-                    <li class="nav-item"><a href="#endpoints"
-                            class="nav-link be-nav-links"><?php esc_html_e( 'Endpoints', 'bulk-product-import' ); ?></a></li>
                     <li class="nav-item"><a href="#profit"
                             class="nav-link be-nav-links"><?php esc_html_e( 'Profit Percentage', 'bulk-product-import' ); ?></a>
                     </li>
+                    <li class="nav-item"><a href="#endpoints"
+                            class="nav-link be-nav-links"><?php esc_html_e( 'Endpoints', 'bulk-product-import' ); ?></a></li>
                 </ul>
 
                 <div id="api">
@@ -116,7 +116,9 @@ class Admin_Menu {
                                 value="<?php echo $profit_percentage; ?>">
                         </div>
 
-                        <button type="button" class="btn btn-primary mt-3 d-flex align-items-center justify-content-between gap-1" id="profit-percentage-save-button">
+                        <button type="button"
+                            class="btn btn-primary mt-3 d-flex align-items-center justify-content-between gap-1"
+                            id="profit-percentage-save-button">
                             <span>Save</span>
                             <span class="ms-1 profit-percentage-spinner"></span>
                         </button>

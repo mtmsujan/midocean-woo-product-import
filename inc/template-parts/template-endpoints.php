@@ -152,4 +152,17 @@ $base_url = get_option( 'home' ) ?? '';
             </button>
         </td>
     </tr>
+    <tr>
+        <?php
+        // Define the sync products endpoint
+        $transform_color_list = esc_url( $base_url . "/wp-json/bulk-import/v1/transform-color-list" );
+        ?>
+        <td id="transform_color_list_api"><?= $transform_color_list; ?></td>
+        <td><?php esc_html_e( 'Transform Color List', 'bulk-product-import' ); ?></td>
+        <td>
+            <button type="button" id="transform_color_list_cp" class="btn btn-primary btn-sm">
+                <?php esc_html_e( 'Copy', 'bulk-product-import' ); ?>
+            </button>
+        </td>
+    </tr>
 </table>
