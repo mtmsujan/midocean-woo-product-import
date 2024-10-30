@@ -50,6 +50,11 @@ function bulk_products_import() {
         'callback' => 'transform_color_list_callback',
     ] );
 
+    register_rest_route( 'bulk-import/v1', '/insert-color-group-db', [
+        'methods'  => 'GET',
+        'callback' => 'insert_color_group_db_callback',
+    ] );
+
 }
 
 function sync_products_api_callback() {
@@ -72,14 +77,18 @@ function insert_print_data_db_api_callback() {
     return insert_product_print_data_db();
 }
 
-function insert_print_price_data_db_api_callback(){
+function insert_print_price_data_db_api_callback() {
     return insert_product_print_price_data_db();
 }
 
-function insert_print_price_data_label_db_api_callback(){
+function insert_print_price_data_label_db_api_callback() {
     return insert_product_print_data_labels_db();
 }
 
-function transform_color_list_callback(){
+function transform_color_list_callback() {
     return transform_color_list();
+}
+
+function insert_color_group_db_callback(){
+    return insert_color_group_db();
 }

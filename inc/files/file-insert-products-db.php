@@ -283,7 +283,7 @@ function insert_product_print_data_labels_db() {
 
     if ( !empty( $labels ) && is_array( $labels ) ) {
         foreach ( $labels as $label ) {
-            
+
             // Extract data
             $id      = $label['id'];
             $name_cs = $label['name'][4]['es'];
@@ -405,4 +405,25 @@ function insert_product_print_price_data_db() {
     }
 
     return '<h4>Product print price data and manipulation cost inserted successfully DB</h4>';
+}
+
+function insert_color_group_db() {
+
+    $color_group_json_file_path = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/inc/files/color-group.json';
+    $color_groups               = file_get_contents( $color_group_json_file_path );
+    $color_groups               = json_decode( $color_groups, true );
+
+    global $wpdb;
+    $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+    $table_name   = $wpdb->prefix . $table_prefix . 'sync_color_group';
+    truncate_table( $table_name );
+
+    /* foreach ( $color_groups as $color_group ) {
+        $wpdb->insert(
+            $table_name,
+            [
+                'name' => $color_group['name'],
+            ]
+        );
+    } */
 }

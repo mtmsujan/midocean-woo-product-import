@@ -190,6 +190,73 @@ function remove_products_print_data_labels() {
     $wpdb->query( $sql );
 }
 
+function sync_color_group() {
+
+    global $wpdb;
+
+    $table_prefix    = get_option( 'be-table-prefix' ) ?? '';
+    $table_name      = $wpdb->prefix . $table_prefix . 'sync_color_group';
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+        id INT AUTO_INCREMENT,
+        color_id VARCHAR(255) NOT NULL,
+        group_name_es VARCHAR(255) NULL,
+        hex VARCHAR(255) NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+    ) $charset_collate;";
+
+    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+    dbDelta( $sql );
+}
+
+// Remove sync_products_print_data Table when plugin deactivated
+function remove_color_group() {
+
+    global $wpdb;
+
+    $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+    $table_name   = $wpdb->prefix . $table_prefix . 'sync_color_group';
+    $sql          = "DROP TABLE IF EXISTS $table_name;";
+    $wpdb->query( $sql );
+}
+
+function sync_color_hex_list() {
+
+    global $wpdb;
+
+    $table_prefix    = get_option( 'be-table-prefix' ) ?? '';
+    $table_name      = $wpdb->prefix . $table_prefix . 'sync_color_hex';
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+        id INT AUTO_INCREMENT,
+        color_id VARCHAR(255) NOT NULL,
+        color_name VARCHAR(255) NULL,
+        group_name_es VARCHAR(255) NULL,
+        hex VARCHAR(255) NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+    ) $charset_collate;";
+
+    require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+    dbDelta( $sql );
+}
+
+// Remove sync_products_print_data Table when plugin deactivated
+function remove_color_hex_list() {
+
+    global $wpdb;
+
+    $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+    $table_name   = $wpdb->prefix . $table_prefix . 'sync_color_hex';
+    $sql          = "DROP TABLE IF EXISTS $table_name;";
+    $wpdb->query( $sql );
+}
+
 
 function create_db_tables() {
     sync_products();
@@ -198,6 +265,8 @@ function create_db_tables() {
     sync_products_print_data();
     sync_print_price();
     // sync_products_print_data_labels();
+    sync_color_group();
+    sync_color_hex_list();
 }
 
 function remove_db_tables() {
@@ -207,4 +276,6 @@ function remove_db_tables() {
     remove_products_print_data();
     remove_sync_print_price();
     // remove_products_print_data_labels();
+    remove_color_group();
+    remove_color_hex_list();
 }
