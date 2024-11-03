@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Plugin Name: WooCommerce Bulk Product Import
- * Plugin URI:  https://imjol.com/products/bulk-product-import
+ * Plugin Name: Midocean API Integration, Bulk Product Import & Sync Orders
+ * Plugin URI:  https://github.com/shahjalal132/midocean-api-integration-and-product-configurator
  * Author:      Shah jalal
  * Author URI:  https://github.com/shahjalal132
- * Description: WooCommerce Bulk Product Import from external api source. Auto import products from external api source.
- * Version:     0.1.0
+ * Description: Integrate  Midocean apt and WooCommerce Bulk Product Import from external api source. Auto import products from external api source.
+ * Version:     1.0.0
  * Domain Path: /languages
  * text-domain: bulk-product-import
  */
