@@ -25,6 +25,7 @@ class Customize_Product_Page {
     private $currency_symbol;
     private $technique_labels;
     private $type_of_product;
+    private $all_color_hex;
 
     public function __construct() {
         $this->setup_hooks();
@@ -49,6 +50,10 @@ class Customize_Product_Page {
 
         // put to log
         // $this->put_program_logs( $this->technique_labels );
+
+        // get all color hex from db
+        $this->all_color_hex = $this->get_all_color_hex_from_db();
+        // put_program_logs( json_encode( $all_color_hex ) );
     }
 
     public function display_product_info_callback() {
@@ -878,6 +883,7 @@ class Customize_Product_Page {
                                     </div>
                                 </div>
                                 <!-- /Add print position button -->
+
                                 <!-- Modal -->
                                 <div class="modal fade" id="add_print_position_modal_button" tabindex="-1" role="dialog"
                                     aria-labelledby="add_print_position_modal_buttonTitle" aria-hidden="true">
@@ -1066,6 +1072,20 @@ class Customize_Product_Page {
                                             </button>
                                         </div>
                                         <div class="modal-body">
+
+                                            <div class="all-pantone-colors">
+                                                <div class="row">
+                                                    <div class="col-sm-3"></div>
+                                                    <?php
+
+                                                    // foreach ( $this->all_color_hex as $value ) {
+                                                    //     echo '<div class="color-box rounded-circle" style="background-color: ' . $value->hex . '; width: 35px; height: 35px;"></div>';
+                                                    // }
+
+                                                    ?>
+                                                </div>
+                                            </div>
+
                                             <div class="validation-instruction-area mb-3">
                                                 <p class="mb-0 validation-instruction">
                                                     <?php esc_html_e( 'Tamaño máximo del archivo 15 MB. Sólo archivos PNG, PDF, SVG, AI', 'bulk-product-import' ) ?>
@@ -1427,6 +1447,23 @@ class Customize_Product_Page {
         $result = $wpdb->get_results( $wpdb->prepare( $sql ) );
 
         return $result[0]->hex;
+    }
+
+    public function get_all_color_hex_from_db() {
+
+        global $wpdb;
+
+        // get table prefix
+        $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+        $table_name   = $wpdb->prefix . $table_prefix . 'sync_color_hex';
+
+        // SQL Query
+        $sql = "SELECT hex FROM $table_name";
+
+        // Execute query
+        $result = $wpdb->get_results( $wpdb->prepare( $sql ) );
+
+        return $result;
     }
 
     public function put_program_logs( $data ) {
