@@ -52,7 +52,8 @@ class Customize_Product_Page {
         // $this->put_program_logs( $this->technique_labels );
 
         // get all color hex from db
-        $this->all_color_hex = $this->get_all_color_hex_from_db();
+        $all_color_hex       = $this->get_all_color_hex_from_db();
+        $this->all_color_hex = json_encode( $all_color_hex );
         // put_program_logs( json_encode( $all_color_hex ) );
     }
 
@@ -342,6 +343,7 @@ class Customize_Product_Page {
             const printPriceData = '<?= $product_print_price_data ?>';
             const manipulationCost = '<?= $manipulation_cost ?>';
             const printManipulationId = '<?= $print_manipulation ?>';
+            const allColorHexValues = '<?= $this->all_color_hex ?>';
             document.addEventListener("alpine:init", () => {
 
                 Alpine.data("quantityChecker", () => ({
@@ -357,6 +359,7 @@ class Customize_Product_Page {
                         technique_labels: technique_labels,
                         printPriceData: JSON.parse(printPriceData),
                         manipulationCost: JSON.parse(manipulationCost),
+                        allColorHex: JSON.parse(allColorHexValues),
                         printManipulationId: printManipulationId,
                         cachedSelectedPrintData: [],
                         selectedPrintData: [],
@@ -809,10 +812,10 @@ class Customize_Product_Page {
                                 </div>
                                 <div class="add-print-position-body">
                                     <!-- print positions -->
-                                    <div class="print-positions mt-2">
+                                    <div class="row print-positions mt-2">
                                         <!-- print position REPEAT:-->
                                         <template x-for="(item, index) in selectedPrintData">
-                                            <div class="print-position pb-2 ms-3" data-name="FRONT">
+                                            <div class="col-sm-12 print-position pb-2 ms-3">
                                                 <div class="technique-wrapper row align-items-center justify-content-evenly"
                                                     data-technique-code="T1">
                                                     <div class="thumb-wrapper col-sm-4 border-right me-2">
@@ -1075,35 +1078,33 @@ class Customize_Product_Page {
 
                                             <!-- HERE -->
                                             <div class="selected-printing-options mb-3">
-                                                <p><?php esc_html_e( 'Posiciones impresión', 'bulk-product-import' ) ?></p>
+                                                <p class="mb-0"><?php esc_html_e( 'Posiciones impresión', 'bulk-product-import' ) ?></p>
                                                 <div class="row">
                                                     <div class="col-sm-4">
-                                                        <select name="selected-printing-option" id="selected-printing-option-ids">
+                                                        <select name="selected-printing-option"
+                                                            id="selected-printing-option-ids">
                                                             <template x-for="item in selectedPrintData">
-                                                                <option :value="item.position_id" x-text="item.position_id"></option>
+                                                                <option :value="item.position_id" x-text="item.position_id">
+                                                                </option>
                                                             </template>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <!-- <div class="all-pantone-colors">
-                                                <p><?php // esc_html_e( 'Colores Pantone', 'bulk-product-import' ) ?></p>
+                                            <div class="all-pantone-colors mb-3">
+                                                <p class="mb-0"><?php esc_html_e( 'Colores Pantone', 'bulk-product-import' ) ?></p>
                                                 <div class="row">
                                                     <div class="col-sm-4">
-                                                        <select name="color_select_multiple[]" class="pantone-colors" multiple>
-                                                            <?php
-
-                                                            /* foreach ( $this->all_color_hex as $value ) {
-                                                                echo <<<EOD
-                                                            <option value="{$value->hex}" style="background-color: {$value->hex};">{$value->hex}</option>
-                                                            EOD;
-                                                            }*/ 
-                                                            ?>
+                                                        <select name="color_select_multiple[]" class="pantone-colors">
+                                                            <template x-for="item in allColorHex">
+                                                                <option :value="item.hex" :style="`background-color: ${item.hex}`">
+                                                                </option>
+                                                            </template>
                                                         </select>
                                                     </div>
                                                 </div>
-                                            </div> -->
+                                            </div>
 
                                             <div class="validation-instruction-area mb-3">
                                                 <p class="mb-0 validation-instruction">
