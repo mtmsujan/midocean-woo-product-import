@@ -52,8 +52,8 @@ class Customize_Product_Page {
         // $this->put_program_logs( $this->technique_labels );
 
         // get all color hex from db
-        $all_color_hex       = $this->get_all_color_hex_from_db();
-        $this->all_color_hex = json_encode( $all_color_hex );
+        // $all_color_hex       = $this->get_all_color_hex_from_db();
+        // $this->all_color_hex = json_encode( $all_color_hex );
         // put_program_logs( json_encode( $all_color_hex ) );
     }
 
@@ -359,7 +359,7 @@ class Customize_Product_Page {
                         technique_labels: technique_labels,
                         printPriceData: JSON.parse(printPriceData),
                         manipulationCost: JSON.parse(manipulationCost),
-                        allColorHex: JSON.parse(allColorHexValues),
+                        // allColorHex: JSON.parse(allColorHexValues),
                         printManipulationId: printManipulationId,
                         cachedSelectedPrintData: [],
                         selectedPrintData: [],
@@ -704,7 +704,6 @@ class Customize_Product_Page {
                         }
 
                     }));
-
             });
         </script>
         <div class="product-configurator-row pb-5">
@@ -1078,7 +1077,9 @@ class Customize_Product_Page {
 
                                             <!-- HERE -->
                                             <div class="selected-printing-options mb-3">
-                                                <p class="mb-0"><?php esc_html_e( 'Posiciones impresión', 'bulk-product-import' ) ?></p>
+                                                <p class="mb-0">
+                                                    <?php esc_html_e( 'Posiciones impresión', 'bulk-product-import' ) ?>
+                                                </p>
                                                 <div class="row">
                                                     <div class="col-sm-4">
                                                         <select name="selected-printing-option"
@@ -1093,15 +1094,22 @@ class Customize_Product_Page {
                                             </div>
 
                                             <div class="all-pantone-colors mb-3">
-                                                <p class="mb-0"><?php esc_html_e( 'Colores Pantone', 'bulk-product-import' ) ?></p>
+                                                <p class="mb-0"><?php esc_html_e( 'Colores Pantone', 'bulk-product-import' ) ?>
+                                                </p>
                                                 <div class="row">
                                                     <div class="col-sm-4">
-                                                        <select name="color_select_multiple[]" class="pantone-colors">
+                                                        <!-- <select name="color_select_multiple[]" class="select2 pantone-colors" multiple>
                                                             <template x-for="item in allColorHex">
                                                                 <option :value="item.hex" :style="`background-color: ${item.hex}`">
                                                                 </option>
                                                             </template>
-                                                        </select>
+                                                        </select> -->
+
+                                                        <input name='tags' class='some_class_name' placeholder='Seleccionar color pantone'
+                                                            value=''>
+                                                    </div>
+                                                    <div class="col-sm-4 selected-color-output">
+
                                                     </div>
                                                 </div>
                                             </div>

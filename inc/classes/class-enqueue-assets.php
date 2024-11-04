@@ -10,6 +10,8 @@ class Enqueue_Assets {
 
     use Singleton;
 
+    private $all_color_hex;
+
     public function __construct() {
         $this->setup_hooks();
     }
@@ -19,6 +21,12 @@ class Enqueue_Assets {
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_js' ] );
         add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_style' ] );
         add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_script' ] );
+
+        // get all color hex from db
+        $all_color_hex = $this->get_all_color_hex_from_db();
+        // transform to a array containing all hex
+        $all_color_hex       = array_map( 'strtolower', array_column( $all_color_hex, 'hex' ) );
+        $this->all_color_hex = json_encode( $all_color_hex );
     }
 
     public function enqueue_css() {
@@ -31,6 +39,7 @@ class Enqueue_Assets {
         // enqueue font awesome
         wp_enqueue_style( "font-awesome-css", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css", [], false, "all" );
         wp_enqueue_style( "jquery-ui-accordion-css", "https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css", [], false, "all" );
+        wp_enqueue_style( "be-tagify", "https://unpkg.com/@yaireo/tagify/dist/tagify.css", [], false, "all" );
 
         // enqueue CSS
         wp_enqueue_style( "be-style" );
@@ -45,23 +54,25 @@ class Enqueue_Assets {
         wp_register_script( "be-app", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/js/app.js", [ 'jquery' ], false, true );
         wp_register_script( "be-popperjs", "https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js", [], false, true );
         wp_register_script( "be-bootstrap", "https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js", [ 'be-popperjs' ], false, true );
+        wp_register_script( "be-tagify", "https://cdn.jsdelivr.net/npm/@yaireo/tagify", [], false, true );
         wp_register_script( "be-alpine-js", "//unpkg.com/alpinejs", [], false, true );
-        wp_register_script( "be-select2", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/js/select2.full.min.js", ['jquery'], false, true );
+        wp_register_script( "be-select2", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/js/select2.full.min.js", [ 'jquery' ], false, true );
 
         // enqueue JS
         wp_enqueue_script( "jquery-ui-core" );
         wp_enqueue_script( "jquery-ui-accordion" );
-
-        wp_enqueue_script( "be-app" );
         // send ajax url
         wp_localize_script( "be-app", "bulkProductImport", [
-            "ajax_url" => admin_url( "admin-ajax.php" ),
+            "ajax_url"      => admin_url( "admin-ajax.php" ),
+            "all_color_hex" => $this->all_color_hex,
         ] );
-        
+
         wp_enqueue_script( "be-popperjs" );
         wp_enqueue_script( "be-bootstrap" );
         wp_enqueue_script( "be-alpine-js" );
         wp_enqueue_script( "be-select2" );
+        wp_enqueue_script( "be-tagify" );
+        wp_enqueue_script( "be-app" );
     }
 
     public function admin_enqueue_style() {
@@ -92,5 +103,22 @@ class Enqueue_Assets {
         wp_enqueue_script( "be-confetti" );
         wp_enqueue_script( "be-admin-menu" );
         wp_enqueue_script( "toastify" );
+    }
+
+    public function get_all_color_hex_from_db() {
+
+        global $wpdb;
+
+        // get table prefix
+        $table_prefix = get_option( 'be-table-prefix' ) ?? '';
+        $table_name   = $wpdb->prefix . $table_prefix . 'sync_color_hex';
+
+        // SQL Query
+        $sql = "SELECT hex FROM $table_name";
+
+        // Execute query
+        $result = $wpdb->get_results( $wpdb->prepare( $sql ) );
+
+        return $result;
     }
 }
