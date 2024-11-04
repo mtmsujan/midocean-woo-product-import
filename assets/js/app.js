@@ -62,25 +62,63 @@
         },
       });
     });
-    
-    
   });
 })(jQuery);
 
-const all_color_hex = bulkProductImport.all_color_hex;
-// console.log(all_color_hex);
+const all_color_hex = JSON.parse(bulkProductImport.all_color_hex);
 
-const whitelist = ["A# .NET", "A# (Axiom)", "A-0 System", "A+", "A++", "ABAP", "ABC", "ABC ALGOL", "ABSET", "ABSYS", "ACC", "Accent", "Ace DASL", "ACL2", "Avicsoft", "ACT-III", "Action!", "ActionScript", "Ada", "Adenine", "Agda", "Agilent VEE", "Agora", "AIMMS", "Alef", "ALF", "ALGOL 58", "ALGOL 60", "ALGOL 68", "ALGOL W", "Alice", "Alma-0", "AmbientTalk", "Amiga E", "AMOS", "AMPL", "Apex (Salesforce.com)", "APL", "AppleScript", "Arc", "ARexx", "Argus", "AspectJ", "Assembly language", "ATS", "Ateji PX", "AutoHotkey", "Autocoder", "AutoIt", "AutoLISP / Visual LISP", "Averest", "AWK", "Axum", "Active Server Pages", "ASP.NET", "B", "Babbage", "Bash", "BASIC", "bc", "BCPL", "BeanShell", "Batch (Windows/Dos)", "Bertrand", "BETA", "Bigwig", "Bistro", "BitC", "BLISS", "Blockly", "BlooP", "Blue", "Boo", "Boomerang", "Bourne shell (including bash and ksh)", "BREW", "BPEL", "B", "C--", "C++ – ISO/IEC 14882", "C# – ISO/IEC 23270", "C/AL", "Caché ObjectScript", "C Shell", "Caml", "Cayenne", "CDuce", "Cecil", "Cesil", "Céu", "Ceylon", "CFEngine", "CFML", "Cg", "Ch", "Chapel", "Charity", "Charm", "Chef", "CHILL", "CHIP-8", "chomski", "ChucK", "CICS", "Cilk", "Citrine (programming language)", "CL (IBM)", "Claire", "Clarion", "Clean", "Clipper", "CLIPS", "CLIST", "Clojure", "CLU", "CMS-2", "COBOL – ISO/IEC 1989", "CobolScript – COBOL Scripting language", "Cobra", "CODE", "CoffeeScript", "ColdFusion", "COMAL", "Combined Programming Language (CPL)", "COMIT", "Common Intermediate Language (CIL)", "Common Lisp (also known as CL)", "COMPASS", "Component Pascal", "Constraint Handling Rules (CHR)", "COMTRAN", "Converge", "Cool", "Coq", "Coral 66", "Corn", "CorVision", "COWSEL", "CPL", "CPL", "Cryptol", "csh", "Csound", "CSP", "CUDA", "Curl", "Curry", "Cybil", "Cyclone", "Cython", "Java", "Javascript", "M2001", "M4", "M#", "Machine code", "MAD (Michigan Algorithm Decoder)", "MAD/I", "Magik", "Magma", "make", "Maple", "MAPPER now part of BIS", "MARK-IV now VISION:BUILDER", "Mary", "MASM Microsoft Assembly x86", "MATH-MATIC", "Mathematica", "MATLAB", "Maxima (see also Macsyma)", "Max (Max Msp – Graphical Programming Environment)", "Maya (MEL)", "MDL", "Mercury", "Mesa", "Metafont", "Microcode", "MicroScript", "MIIS", "Milk (programming language)", "MIMIC", "Mirah", "Miranda", "MIVA Script", "ML", "Model 204", "Modelica", "Modula", "Modula-2", "Modula-3", "Mohol", "MOO", "Mortran", "Mouse", "MPD", "Mathcad", "MSIL – deprecated name for CIL", "MSL", "MUMPS", "Mystic Programming L"];
+// Tagify configuration
+const input = document.querySelector('input[name="tags"]');
+const tagify = new Tagify(input, {
+  delimiters: null,
+  templates: {
+    tag: function (tagData) {
+      try {
+        // _ESCAPE_START_
+        return `<tag title='${
+          tagData.value
+        }' contenteditable='false' spellcheck="false"
+                    class='tagify__tag ${
+                      tagData.class ? tagData.class : ""
+                    }' ${this.getAttributes(tagData)}>
+                        <x title='remove tag' class='tagify__tag__removeBtn'></x>
+                        <div class="d-flex align-items-center">
+                            <span style="width:1rem;height:1rem;background:${
+                              tagData.value
+                            };border:0.5px solid black;" class="rounded-circle me-2"></span>
+                            <span class='tagify__tag-text'>${
+                              tagData.value
+                            }</span>
+                        </div>
+                    </tag>`;
+        // _ESCAPE_END_
+      } catch (err) {}
+    },
 
- // Tagify configuration
- const input = document.querySelector('input[name="tags"]');
- const tagify = new Tagify(input, {
-     whitelist: whitelist,
-     maxTags: 10,
-     dropdown: {
-         maxItems: 20,
-         classname: "tags-look",
-         enabled: 0,
-         closeOnSelect: false
-     }
- });
+    dropdownItem: function (tagData) {
+      try {
+        // _ESCAPE_START_
+        return `<div ${this.getAttributes(
+          tagData
+        )} class='tagify__dropdown__item ${tagData.class ? tagData.class : ""}'>
+                            <span style="padding:0.2rem 0.45rem!important;background:${
+                              tagData.value
+                            };border:0.5px solid black;" class="rounded-circle me-2"></span>
+                            <span>${tagData.value}</span>
+                        </div>`;
+        // _ESCAPE_END_
+      } catch (err) {}
+    },
+  },
+  enforceWhitelist: true,
+  whitelist: all_color_hex,
+  maxTags: 20,
+  focusable: false,
+  dropdown: {
+    position: "input",
+    maxItems: 500,
+    highlightFirst: true,
+    classname: "tags-look",
+    enabled: 0,
+  },
+});

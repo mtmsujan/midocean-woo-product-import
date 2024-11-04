@@ -25,7 +25,6 @@ class Customize_Product_Page {
     private $currency_symbol;
     private $technique_labels;
     private $type_of_product;
-    private $all_color_hex;
 
     public function __construct() {
         $this->setup_hooks();
@@ -50,11 +49,6 @@ class Customize_Product_Page {
 
         // put to log
         // $this->put_program_logs( $this->technique_labels );
-
-        // get all color hex from db
-        // $all_color_hex       = $this->get_all_color_hex_from_db();
-        // $this->all_color_hex = json_encode( $all_color_hex );
-        // put_program_logs( json_encode( $all_color_hex ) );
     }
 
     public function display_product_info_callback() {
@@ -336,6 +330,7 @@ class Customize_Product_Page {
         ob_start();
         ?>
         <script>
+            
             const data = '<?= $api_response_for_print_data ?>';
             const printResponse = JSON.parse(data);
             const labels = '<?= $this->technique_labels ?>';
@@ -343,7 +338,7 @@ class Customize_Product_Page {
             const printPriceData = '<?= $product_print_price_data ?>';
             const manipulationCost = '<?= $manipulation_cost ?>';
             const printManipulationId = '<?= $print_manipulation ?>';
-            const allColorHexValues = '<?= $this->all_color_hex ?>';
+
             document.addEventListener("alpine:init", () => {
 
                 Alpine.data("quantityChecker", () => ({
@@ -359,7 +354,6 @@ class Customize_Product_Page {
                         technique_labels: technique_labels,
                         printPriceData: JSON.parse(printPriceData),
                         manipulationCost: JSON.parse(manipulationCost),
-                        // allColorHex: JSON.parse(allColorHexValues),
                         printManipulationId: printManipulationId,
                         cachedSelectedPrintData: [],
                         selectedPrintData: [],
@@ -1098,15 +1092,8 @@ class Customize_Product_Page {
                                                 </p>
                                                 <div class="row">
                                                     <div class="col-sm-4">
-                                                        <!-- <select name="color_select_multiple[]" class="select2 pantone-colors" multiple>
-                                                            <template x-for="item in allColorHex">
-                                                                <option :value="item.hex" :style="`background-color: ${item.hex}`">
-                                                                </option>
-                                                            </template>
-                                                        </select> -->
-
-                                                        <input name='tags' class='some_class_name' placeholder='Seleccionar color pantone'
-                                                            value=''>
+                                                        <input name='tags' class='some_class_name'
+                                                            placeholder='Seleccionar color pantone' value=''>
                                                     </div>
                                                     <div class="col-sm-4 selected-color-output">
 
