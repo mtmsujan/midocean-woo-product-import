@@ -1073,18 +1073,37 @@ class Customize_Product_Page {
                                         </div>
                                         <div class="modal-body">
 
-                                            <div class="all-pantone-colors">
+                                            <!-- HERE -->
+                                            <div class="selected-printing-options mb-3">
+                                                <p><?php esc_html_e( 'Posiciones impresión', 'bulk-product-import' ) ?></p>
                                                 <div class="row">
-                                                    <div class="col-sm-3"></div>
-                                                    <?php
-
-                                                    // foreach ( $this->all_color_hex as $value ) {
-                                                    //     echo '<div class="color-box rounded-circle" style="background-color: ' . $value->hex . '; width: 35px; height: 35px;"></div>';
-                                                    // }
-
-                                                    ?>
+                                                    <div class="col-sm-4">
+                                                        <select name="selected-printing-option" id="selected-printing-option-ids">
+                                                            <template x-for="item in selectedPrintData">
+                                                                <option :value="item.position_id" x-text="item.position_id"></option>
+                                                            </template>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
+
+                                            <!-- <div class="all-pantone-colors">
+                                                <p><?php // esc_html_e( 'Colores Pantone', 'bulk-product-import' ) ?></p>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <select name="color_select_multiple[]" class="pantone-colors" multiple>
+                                                            <?php
+
+                                                            /* foreach ( $this->all_color_hex as $value ) {
+                                                                echo <<<EOD
+                                                            <option value="{$value->hex}" style="background-color: {$value->hex};">{$value->hex}</option>
+                                                            EOD;
+                                                            }*/ 
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div> -->
 
                                             <div class="validation-instruction-area mb-3">
                                                 <p class="mb-0 validation-instruction">
