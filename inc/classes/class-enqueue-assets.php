@@ -51,7 +51,7 @@ class Enqueue_Assets {
     public function enqueue_js() {
 
         // Register JS
-        wp_register_script( "be-app", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/js/app.js", [ 'jquery' ], time(), true );
+        wp_register_script( "be-app", BULK_PRODUCT_IMPORT_ASSETS_PATH . "/js/app.js", [ 'jquery' ], false, true );
         wp_register_script( "be-popperjs", "https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js", [], false, true );
         wp_register_script( "be-bootstrap", "https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js", [ 'be-popperjs' ], false, true );
         wp_register_script( "be-tagify", "https://cdn.jsdelivr.net/npm/@yaireo/tagify", [], false, true );

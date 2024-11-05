@@ -59,7 +59,16 @@
     let selectedPantoneColors = {};
     let currentPositionId = $("#selected-printing-option-ids").val();
     let maxColors = 0;
+
+    // Parse all color hex string to JSON
     const all_color_hex = JSON.parse(bulkProductImport.all_color_hex);
+
+    // Filter the array to keep only four or seven character hex codes
+    let filtered_color_hex = all_color_hex.filter((hex) => {
+      // Check for 4 or 7 character lengths (including the '#')
+      return /^#[a-f0-9]{3}$|^#[a-f0-9]{6}$/.test(hex.toLowerCase());
+    });
+
     const input = document.querySelector('input[name="tags"]');
     let tagify;
 
@@ -124,7 +133,7 @@
           },
         },
         enforceWhitelist: true,
-        whitelist: all_color_hex,
+        whitelist: filtered_color_hex,
         maxTags: maxColors, // Updated dynamically
         focusable: false,
         dropdown: {
