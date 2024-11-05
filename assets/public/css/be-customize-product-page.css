@@ -668,7 +668,7 @@ input[disabled],
   color: #161616;
 }
 
-.file-upload-button {
+.file-upload-button, .common-button-style {
   display: inline-block;
   outline: 0;
   cursor: pointer;
@@ -687,7 +687,7 @@ input[disabled],
     rgba(0, 0, 0, 0.2) 0px -1px 0px 0px inset;
 }
 
-.file-upload-button:hover {
+.file-upload-button:hover, .common-button-style:hover {
   background: #1d813a;
 }
 

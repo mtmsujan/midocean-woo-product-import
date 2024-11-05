@@ -330,7 +330,7 @@ class Customize_Product_Page {
         ob_start();
         ?>
         <script>
-            
+
             const data = '<?= $api_response_for_print_data ?>';
             const printResponse = JSON.parse(data);
             const labels = '<?= $this->technique_labels ?>';
@@ -382,6 +382,7 @@ class Customize_Product_Page {
                                     this.calculateTotalPriceWithPrintingCost();
                                     this.calculatePricePerItem();
                                     this.setCookie("_calculated_price", this.pricePerItem.toFixed(2), 1);
+                                    this.setCookie("_selectedPrintData", JSON.stringify(this.selectedPrintData), 1);
                                 } else {
                                     this.showPrintPriceCalculation = false;
                                 }
@@ -426,6 +427,9 @@ class Customize_Product_Page {
                                 maxColors: maxColors,
                                 selectedTechniqueId: selectedTechniqueId
                             });
+
+                            // save max color to cookie
+                            this.setCookie(`_max_colors_${selectedTechniqueId}`, maxColors, 1);
 
                             // this.addCachedData(); // Add cached data to selectedPrintData
                             this.calculateTotalPrintingCost(); // Recalculate the total cost
@@ -1075,7 +1079,7 @@ class Customize_Product_Page {
                                                     <?php esc_html_e( 'Posiciones impresión', 'bulk-product-import' ) ?>
                                                 </p>
                                                 <div class="row">
-                                                    <div class="col-sm-4">
+                                                    <div class="col-sm-6">
                                                         <select name="selected-printing-option"
                                                             id="selected-printing-option-ids">
                                                             <template x-for="item in selectedPrintData">
@@ -1083,6 +1087,7 @@ class Customize_Product_Page {
                                                                 </option>
                                                             </template>
                                                         </select>
+                                                        <p class="pantone-color-selection-info"></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1091,12 +1096,8 @@ class Customize_Product_Page {
                                                 <p class="mb-0"><?php esc_html_e( 'Colores Pantone', 'bulk-product-import' ) ?>
                                                 </p>
                                                 <div class="row">
-                                                    <div class="col-sm-4">
-                                                        <input name='tags' class='some_class_name'
-                                                            placeholder='Seleccionar color pantone' value=''>
-                                                    </div>
-                                                    <div class="col-sm-4 selected-color-output">
-
+                                                    <div class="col-sm-6">
+                                                        <input name='tags' class='some_class_name' placeholder='Seleccionar color pantone'>
                                                     </div>
                                                 </div>
                                             </div>
