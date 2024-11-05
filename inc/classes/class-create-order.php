@@ -84,7 +84,7 @@ class Create_Order {
         }
 
         // Log the API response if needed
-        // $this->put_program_logs( 'API Response: ' . $api_response );
+        $this->put_program_logs( 'API Response: ' . $api_response );
 
         // Handle product and printing positions
         $product_id = null;
@@ -94,12 +94,27 @@ class Create_Order {
         }
 
         // Cookie key for printing positions
-        $cookie_key = "printing_positions_" . $product_id;
+        $cookie_key               = "printing_positions_" . $product_id;
+        $pantone_color_cookie_key = "_selectedPantoneColors";
+        $selectedPrintData        = "_selectedPrintData";
+        $calculatedPrice          = "_calculated_price";
 
         // Check and delete the printing positions cookie after the order is complete
         if ( isset( $_COOKIE[$cookie_key] ) ) {
             // Delete the cookie by setting its expiration to the past
             setcookie( $cookie_key, '', time() - 3600, '/' );
+        }
+        if ( isset( $_COOKIE[$pantone_color_cookie_key] ) ) {
+            // Delete the cookie by setting its expiration to the past
+            setcookie( $pantone_color_cookie_key, '', time() - 3600, '/' );
+        }
+        if ( isset( $_COOKIE[$selectedPrintData] ) ) {
+            // Delete the cookie by setting its expiration to the past
+            setcookie( $selectedPrintData, '', time() - 3600, '/' );
+        }
+        if ( isset( $_COOKIE[$calculatedPrice] ) ) {
+            // Delete the cookie by setting its expiration to the past
+            setcookie( $calculatedPrice, '', time() - 3600, '/' );
         }
     }
 
@@ -220,6 +235,26 @@ class Create_Order {
             $instructions       = $custom_print_media['instructions'];
         }
 
+        $pantone_color_cookie_key = "_selectedPantoneColors";
+        $pantone_colors_cookies   = null;
+
+        if ( isset( $_COOKIE[$pantone_color_cookie_key] ) ) {
+            // Get and decode cookie value
+            // $pantone_colors_cookies = urldecode( $_COOKIE[$pantone_color_cookie_key] );
+            $pantone_colors_cookies = $_COOKIE[$pantone_color_cookie_key];
+
+            // Replace \ from cookie value
+            $pantone_colors_cookies = str_replace( '\\', '', $pantone_colors_cookies );
+
+            // Decode JSON after URL decoding
+            $pantone_colors_cookies = json_decode( $pantone_colors_cookies, true );
+
+        }
+
+        // Log the final value outside the block
+        // $this->put_program_logs( 'Final Pantone Colors: ' . json_encode( $pantone_colors_cookies ) );
+
+
         // Determine order type based on printing positions
         $order_type = !empty( $printing_positions ) ? 'PRINT' : 'NORMAL';
 
@@ -297,11 +332,30 @@ class Create_Order {
                 foreach ( $printing_positions as $position ) {
 
                     // Get printing position data
-                    $id                  = $position['position_id'];
-                    $_print_size_height  = $position['max_print_size_height'];
-                    $_print_size_width   = $position['max_print_size_width'];
-                    $_printing_technique = $position['selectedTechniqueId'];
-                    $_number_of_color    = $position['maxColors'];
+                    $id                     = $position['position_id'];
+                    $_transform_position_id = str_replace( ' ', '_', $id );
+                    $_print_size_height     = $position['max_print_size_height'];
+                    $_print_size_width      = $position['max_print_size_width'];
+                    $_printing_technique    = $position['selectedTechniqueId'];
+                    $_number_of_color       = $position['maxColors'];
+
+                    // get pantone colors
+                    $_pantone_colors = $pantone_colors_cookies[$_transform_position_id]['selectedColors'];
+
+                    $ultimate_pantone_colors = [];
+                    if ( !empty( $_pantone_colors ) && is_array( $_pantone_colors ) ) {
+                        foreach ( $_pantone_colors as $key => $value ) {
+                            // remove # from the beginning
+                            $value = ltrim( $value, '#' );
+
+                            // Add to ultimate pantone colors array
+                            $ultimate_pantone_colors[] = [
+                                "color" => "Pantone $value",
+                            ];
+                        }
+                    }
+
+                    // $this->put_program_logs( 'ultimate_pantone_colors: ' . json_encode( $ultimate_pantone_colors ) );
 
                     // Populate dynamic printing position data
                     $_printing_positions[] = [
@@ -313,11 +367,7 @@ class Create_Order {
                         'print_artwork_url'      => $artwork_url,
                         'print_mockup_url'       => $mockup_url,
                         'print_instruction'      => $instructions,
-                        'print_colors'           => [
-                            [
-                                'color' => 'Pantone 4280C', // Replace: Pantone 4280C with the actual color code
-                            ],
-                        ],
+                        'print_colors'           => $ultimate_pantone_colors,
                     ];
                 }
             }
@@ -345,7 +395,7 @@ class Create_Order {
         $payload = $order_type === 'PRINT' ? $print_order_payload : $normal_order_payload;
 
         // Log the payload
-        // $this->put_program_logs( 'payload: ' . json_encode( $payload, JSON_PRETTY_PRINT ) );
+        $this->put_program_logs( 'payload: ' . json_encode( $payload, JSON_PRETTY_PRINT ) );
 
         // Make the API call with the prepared payload
         $curl = curl_init();
@@ -353,7 +403,7 @@ class Create_Order {
         curl_setopt_array(
             $curl,
             array(
-                CURLOPT_URL            => 'https://api.midocean.com/gateway/order/2.1/create',
+                CURLOPT_URL            => 'https://api.midocean.com.bd/gateway/order/2.1/create',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING       => '',
                 CURLOPT_MAXREDIRS      => 10,

@@ -429,7 +429,7 @@ class Customize_Product_Page {
                             });
 
                             // save max color to cookie
-                            this.setCookie(`_max_colors_${selectedTechniqueId}`, maxColors, 1);
+                            // this.setCookie(`_max_colors_${selectedTechniqueId}`, maxColors, 1);
 
                             // this.addCachedData(); // Add cached data to selectedPrintData
                             this.calculateTotalPrintingCost(); // Recalculate the total cost

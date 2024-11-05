@@ -150,7 +150,7 @@
       tagify.on("remove", updateSelectedColors);
     }
 
-    // Initial call to setup Tagify
+    // Initialize Tagify
     initializeTagify();
 
     // Handle changes in the position selection dropdown
@@ -165,7 +165,7 @@
         if (sanitizeCurrentPositionId === sanitizedPositionId) {
           maxColors = item.maxColors;
           updateColorSelectionMessage();
-          initializeTagify(); // Reinitialize Tagify with updated maxColors
+          initializeTagify();
         }
       });
 
@@ -175,9 +175,9 @@
     // Helper function to set a JSON cookie
     function setJSONCookie(name, json, hours) {
       const d = new Date();
-      d.setTime(d.getTime() + hours * 60 * 60 * 1000); // Convert hours to milliseconds
+      d.setTime(d.getTime() + hours * 60 * 60 * 1000);
       const expires = "expires=" + d.toUTCString();
-      const value = encodeURIComponent(JSON.stringify(json)); // Encode JSON for cookie storage
+      const value = JSON.stringify(json);
       document.cookie = name + "=" + value + ";" + expires + ";path=/";
     }
 
