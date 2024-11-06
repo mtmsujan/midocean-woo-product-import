@@ -98,6 +98,7 @@ class Create_Order {
         $pantone_color_cookie_key = "_selectedPantoneColors";
         $selectedPrintData        = "_selectedPrintData";
         $calculatedPrice          = "_calculated_price";
+        $max_colors               = "_max_colors";
 
         // Check and delete the printing positions cookie after the order is complete
         if ( isset( $_COOKIE[$cookie_key] ) ) {
@@ -115,6 +116,10 @@ class Create_Order {
         if ( isset( $_COOKIE[$calculatedPrice] ) ) {
             // Delete the cookie by setting its expiration to the past
             setcookie( $calculatedPrice, '', time() - 3600, '/' );
+        }
+        if ( isset( $_COOKIE[$max_colors] ) ) {
+            // Delete the cookie by setting its expiration to the past
+            setcookie( $max_colors, '', time() - 3600, '/' );
         }
     }
 
@@ -403,7 +408,7 @@ class Create_Order {
         curl_setopt_array(
             $curl,
             array(
-                CURLOPT_URL            => 'https://api.midocean.com.bd/gateway/order/2.1/create',
+                CURLOPT_URL            => 'https://api.midocean.com/gateway/order/2.1/create',
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING       => '',
                 CURLOPT_MAXREDIRS      => 10,

@@ -428,8 +428,8 @@ class Customize_Product_Page {
                                 selectedTechniqueId: selectedTechniqueId
                             });
 
-                            // save max color to cookie
-                            // this.setCookie(`_max_colors_${selectedTechniqueId}`, maxColors, 1);
+                            
+                            this.setCookie(`_max_colors`, maxColors, 1);
 
                             // this.addCachedData(); // Add cached data to selectedPrintData
                             this.calculateTotalPrintingCost(); // Recalculate the total cost
@@ -1097,7 +1097,8 @@ class Customize_Product_Page {
                                                 </p>
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <input name='tags' class='some_class_name' placeholder='Seleccionar color pantone'>
+                                                        <input name='tags' class='some_class_name'
+                                                            placeholder='Seleccionar color pantone'>
                                                     </div>
                                                 </div>
                                             </div>

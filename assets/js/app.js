@@ -183,6 +183,7 @@
 
     // Update colors when Tagify adds or removes tags
     function updateSelectedColors() {
+      console.log(currentPositionId);
       if (currentPositionId) {
         const sanitizedPositionId = currentPositionId.replace(/\s/g, "_");
         const selectedColors = tagify.value.map((tag) => tag.value);
@@ -192,7 +193,34 @@
 
         // Save selectedPantoneColors to cookie with a 1-hour expiration
         setJSONCookie("_selectedPantoneColors", selectedPantoneColors, 1);
+      }else{
+        console.log("currentPositionId not found");
       }
     }
+
+    function getCookie(name) {
+      const nameEQ = name + "=";
+      const cookies = document.cookie.split(";");
+
+      for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+
+        if (cookie.indexOf(nameEQ) === 0) {
+          return cookie.substring(nameEQ.length, cookie.length);
+        }
+      }
+
+      return null; // Return null if the cookie is not found
+    }
+
+    $(".personalize-button button").click(function () {
+      currentPositionId = $("#selected-printing-option-ids").val()
+      // get maxColor cookie value key is _max_colors
+      const maxColorsCookie = getCookie("_max_colors");
+      maxColors = parseInt(maxColorsCookie, 10);
+      updateColorSelectionMessage();
+      initializeTagify();
+      updateSelectedColors();
+    });
   });
 })(jQuery);

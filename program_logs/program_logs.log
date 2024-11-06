@@ -121,7 +121,7 @@ payload: {
     "order_header": {
         "currency": "EUR",
         "contact_email": "sujan@gmail.com",
-        "check_price": "false",
+        "check_price": "true",
         "shipping_address": {
             "contact_name": "Sujan test",
             "company_name": "imjol",
@@ -134,60 +134,45 @@ payload: {
             "email": "sujan@gmail.com",
             "phone": "764649665"
         },
-        "po_number": "19492",
-        "timestamp": "2024-11-05T12:05:11",
+        "po_number": "19503",
+        "timestamp": "2024-11-06T06:30:46",
         "contact_name": "Sujan test",
         "order_type": "PRINT"
     },
     "order_lines": [
         {
-            "order_line_id": "28",
+            "order_line_id": "31",
             "master_code": "CX1013",
-            "quantity": "10",
-            "expected_price": "82.7",
+            "quantity": "1",
+            "expected_price": "40.79",
             "printing_positions": [
-                {
-                    "id": "FRONT RED PART",
-                    "print_size_height": "100",
-                    "print_size_width": "100",
-                    "printing_technique_id": "TR",
-                    "number_of_print_colors": "1",
-                    "print_artwork_url": "http:\/\/midocean-live-backup.test\/wp-content\/uploads\/2024\/11\/png-01-16.png",
-                    "print_mockup_url": "http:\/\/midocean-live-backup.test\/wp-content\/uploads\/2024\/11\/qr-code-14.png",
-                    "print_instruction": "test",
-                    "print_colors": [
-                        {
-                            "color": "Pantone 000"
-                        }
-                    ]
-                },
                 {
                     "id": "BACK RED PART",
                     "print_size_height": "100",
                     "print_size_width": "100",
                     "printing_technique_id": "T1",
                     "number_of_print_colors": "8",
-                    "print_artwork_url": "http:\/\/midocean-live-backup.test\/wp-content\/uploads\/2024\/11\/png-01-16.png",
-                    "print_mockup_url": "http:\/\/midocean-live-backup.test\/wp-content\/uploads\/2024\/11\/qr-code-14.png",
-                    "print_instruction": "test",
+                    "print_artwork_url": "http:\/\/midocean-live-backup.test\/wp-content\/uploads\/2024\/11\/png-01-20.png",
+                    "print_mockup_url": "http:\/\/midocean-live-backup.test\/wp-content\/uploads\/2024\/11\/qr-code-17.png",
+                    "print_instruction": "test order",
                     "print_colors": [
                         {
-                            "color": "Pantone 000"
+                            "color": "Pantone 87201a"
                         },
                         {
                             "color": "Pantone 0000ff"
                         },
                         {
-                            "color": "Pantone dfe0e1"
+                            "color": "Pantone 43b13c"
                         },
                         {
-                            "color": "Pantone 00bdda"
+                            "color": "Pantone ee9a05"
+                        },
+                        {
+                            "color": "Pantone 55aaff"
                         },
                         {
                             "color": "Pantone 969799"
-                        },
-                        {
-                            "color": "Pantone 43b13c"
                         },
                         {
                             "color": "Pantone cc7ab0"
@@ -201,12 +186,205 @@ payload: {
             "print_items": [
                 {
                     "item_color_number": "05",
-                    "quantity": "10"
+                    "quantity": "1"
                 }
             ]
         }
     ]
-} - 2024-11-05 12:05:14
+} - 2024-11-06 06:30:49
 
-API Response:  - 2024-11-05 12:05:14
+API Response: {
+  "order_header" : {
+    "status_code" : "999",
+    "status_text" : "Pricecheck mismatch",
+    "direct_confirmation" : "",
+    "check_price" : "true",
+    "currency" : "EUR",
+    "po_number" : "19503",
+    "order_type" : "PRINT",
+    "total_item_price" : "",
+    "total_print_costs" : "",
+    "total_net_price" : "",
+    "freight_charge" : "",
+    "tax" : "",
+    "print_setup" : "",
+    "print_cost" : "",
+    "print_handling" : "",
+    "shipping_address" : {
+      "contact_name" : "Sujan test",
+      "company_name" : "imjol",
+      "street1" : "Avendaño 90",
+      "street2" : "",
+      "street3" : "",
+      "postal_code" : "04520",
+      "city" : "Abrucena",
+      "region" : "AL",
+      "country" : "ES",
+      "email" : "sujan@gmail.com",
+      "phone" : "764649665"
+    }
+  },
+  "order_lines" : [ {
+    "status_code" : "999",
+    "status_text" : "Expected price 40,79 doesn't match actual price 0,35",
+    "po_line_id" : "31",
+    "sku" : "",
+    "variant_id" : "",
+    "quantity" : "1",
+    "expected_price" : "40.79",
+    "master_code" : "CX1013",
+    "master_id" : "40000203",
+    "printing_positions" : [ {
+      "id" : "BACK RED PART",
+      "print_size_height" : "100",
+      "print_size_width" : "100",
+      "printing_technique_id" : "T1",
+      "number_of_print_colors" : "8",
+      "print_colors" : [ {
+        "color" : "Pantone 87201a"
+      }, {
+        "color" : "Pantone 0000ff"
+      }, {
+        "color" : "Pantone 43b13c"
+      }, {
+        "color" : "Pantone ee9a05"
+      }, {
+        "color" : "Pantone 55aaff"
+      }, {
+        "color" : "Pantone 969799"
+      }, {
+        "color" : "Pantone cc7ab0"
+      }, {
+        "color" : "Pantone f8e603"
+      } ],
+      "print_artwork_url" : "http://midocean-live-backup.test/wp-content/uploads/2024/11/png-01-20.png",
+      "print_mockup_url" : "http://midocean-live-backup.test/wp-content/uploads/2024/11/qr-code-17.png",
+      "print_instruction" : "test order"
+    } ],
+    "print_items" : [ {
+      "item_color_number" : "05",
+      "item_size" : "",
+      "quantity" : "1"
+    } ]
+  } ]
+} - 2024-11-06 06:30:53
+
+payload: {
+    "order_header": {
+        "currency": "EUR",
+        "contact_email": "sujan@gmail.com",
+        "check_price": "false",
+        "shipping_address": {
+            "contact_name": "Sujan test",
+            "company_name": "imjol",
+            "street1": "Avenda\u00f1o 90",
+            "street2": "",
+            "postal_code": "04520",
+            "city": "Abrucena",
+            "region": "AL",
+            "country": "ES",
+            "email": "sujan@gmail.com",
+            "phone": "764649665"
+        },
+        "po_number": "19510",
+        "timestamp": "2024-11-06T06:39:45",
+        "contact_name": "Sujan test",
+        "order_type": "PRINT"
+    },
+    "order_lines": [
+        {
+            "order_line_id": "32",
+            "master_code": "CX1013",
+            "quantity": "1",
+            "expected_price": "39.26",
+            "printing_positions": [
+                {
+                    "id": "FRONT RED PART",
+                    "print_size_height": "100",
+                    "print_size_width": "100",
+                    "printing_technique_id": "TR",
+                    "number_of_print_colors": "1",
+                    "print_artwork_url": "http:\/\/midocean-live-backup.test\/wp-content\/uploads\/2024\/11\/png-01-23.png",
+                    "print_mockup_url": "http:\/\/midocean-live-backup.test\/wp-content\/uploads\/2024\/11\/qr-code-20.png",
+                    "print_instruction": "test order",
+                    "print_colors": [
+                        {
+                            "color": "Pantone 0000ff"
+                        }
+                    ]
+                }
+            ],
+            "print_items": [
+                {
+                    "item_color_number": "05",
+                    "quantity": "1"
+                }
+            ]
+        }
+    ]
+} - 2024-11-06 06:39:48
+
+API Response: {
+  "order_header" : {
+    "status_code" : "0",
+    "status_text" : "Sales order successfully created",
+    "direct_confirmation" : "",
+    "check_price" : "false",
+    "currency" : "EUR",
+    "po_number" : "19510",
+    "order_type" : "PRINT",
+    "order_number" : "3277773",
+    "total_item_price" : "0,35",
+    "total_print_costs" : "32,49",
+    "total_net_price" : "40,84",
+    "freight_charge" : "8.000000000 ",
+    "tax" : "0,00",
+    "print_setup" : "30,00",
+    "print_cost" : "2,47",
+    "print_handling" : "0,02",
+    "shipping_address" : {
+      "contact_name" : "Sujan test",
+      "company_name" : "imjol",
+      "street1" : "Avendaño 90",
+      "street2" : "",
+      "street3" : "",
+      "postal_code" : "04520",
+      "city" : "Abrucena",
+      "region" : "AL",
+      "country" : "ES",
+      "email" : "sujan@gmail.com",
+      "phone" : "764649665"
+    }
+  },
+  "order_lines" : [ {
+    "status_code" : "0",
+    "status_text" : "",
+    "po_line_id" : "32",
+    "sku" : "",
+    "variant_id" : "",
+    "quantity" : "1",
+    "expected_price" : "39.26",
+    "master_code" : "CX1013",
+    "master_id" : "40000203",
+    "shipping_date" : "2024-11-13",
+    "printing_positions" : [ {
+      "id" : "FRONT RED PART",
+      "print_size_height" : "100",
+      "print_size_width" : "100",
+      "printing_technique_id" : "TR",
+      "number_of_print_colors" : "1",
+      "print_colors" : [ {
+        "color" : "Pantone 0000ff"
+      } ],
+      "print_artwork_url" : "http://midocean-live-backup.test/wp-content/uploads/2024/11/png-01-23.png",
+      "print_mockup_url" : "http://midocean-live-backup.test/wp-content/uploads/2024/11/qr-code-20.png",
+      "print_instruction" : "test order"
+    } ],
+    "print_items" : [ {
+      "item_color_number" : "05",
+      "item_size" : "",
+      "quantity" : "1"
+    } ]
+  } ]
+} - 2024-11-06 06:39:54
 
