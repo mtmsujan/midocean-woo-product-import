@@ -266,13 +266,17 @@ class Customize_Product_Page {
 
         $manipulation_cost_file = BULK_PRODUCT_IMPORT_PLUGIN_PATH . '/inc/files/manipulation-cost.json';
         $manipulation_cost      = file_get_contents( $manipulation_cost_file );
+        // $this->put_program_logs( 'Manipulation Costs: ' . $manipulation_cost );
 
         // Initialize an empty array to store the printing technique ids
         $printing_technique_ids = array();
 
         // Extract the printing positions
         $printing_positions = $print_data_array['printing_positions'];
+        // $this->put_program_logs( 'Printing Positions: ' . json_encode( $printing_positions ) );
+
         $print_manipulation = $print_data_array['print_manipulation'];
+        // $this->put_program_logs( 'Print Manipulation Id: ' . json_encode( $print_manipulation ) );
 
         // Loop through the printing positions and extract printing technique ids
         foreach ( $printing_positions as $position ) {
@@ -315,8 +319,6 @@ class Customize_Product_Page {
 
         // Encode to json
         $product_print_price_data = json_encode( $product_print_price_data );
-
-        // Put print price data in logs
         // $this->put_program_logs( 'Print price Data: ' . $product_print_price_data );
 
         // put product print data in logs
@@ -335,9 +337,9 @@ class Customize_Product_Page {
             const printResponse = JSON.parse(data);
             const labels = '<?= $this->technique_labels ?>';
             const technique_labels = JSON.parse(labels);
-            const printPriceData = '<?= $product_print_price_data ?>';
-            const manipulationCost = '<?= $manipulation_cost ?>';
-            const printManipulationId = '<?= $print_manipulation ?>';
+            let printPriceData = '<?= $product_print_price_data ?>';
+            let manipulationCost = '<?= $manipulation_cost ?>';
+            let printManipulationId = '<?= $print_manipulation ?>';
 
             document.addEventListener("alpine:init", () => {
 
@@ -399,15 +401,15 @@ class Customize_Product_Page {
                         },
 
                         getSetupCost(techniqueId) {
-                            return this.printPriceData[techniqueId].setup_price;
+                            return this.printPriceData[techniqueId]?.setup_price || 0;
                         },
 
                         getSetupRepeatCost(techniqueId) {
-                            return this.printPriceData[techniqueId].setup_repeat_price;
+                            return this.printPriceData[techniqueId]?.setup_repeat_price || 0;
                         },
 
                         getManipulationCost(id) {
-                            return this.manipulationCost[id].price;
+                            return this.manipulationCost[id]?.price || 0;
                         },
 
                         // Function to add data only if it doesn't already exist in selectedPrintData
@@ -428,7 +430,7 @@ class Customize_Product_Page {
                                 selectedTechniqueId: selectedTechniqueId
                             });
 
-                            
+
                             this.setCookie(`_max_colors`, maxColors, 1);
 
                             // this.addCachedData(); // Add cached data to selectedPrintData
@@ -563,40 +565,50 @@ class Customize_Product_Page {
                         priceCalculationWithPrintingCostForSingleItem(techniqueId, quantity) {
 
                             // Get the manipulation cost and calculate the total print cost
-                            const manipulationCost = this.getManipulationCost(this.printManipulationId);
-                            this.costManipulation = quantity * manipulationCost;
+                            let manipulationCost = this.getManipulationCost(this.printManipulationId);
+                            this.costManipulation = quantity * parseFloat(manipulationCost);
 
                             // Get the print price data for the given techniqueId
-                            const printPriceData = this.getPrintPriceData(techniqueId);
-                            // Get the setup cost for the given techniqueId
-                            const setupCost = parseFloat(this.getSetupCost(techniqueId).replace(",", "."));
-                            // Get the setup repeat cost for the given techniqueId
-                            const setupRepeatCost = parseFloat(this.getSetupRepeatCost(techniqueId).replace(",", "."));
+                            let actualPrintPriceData = this.getPrintPriceData(techniqueId);
 
-                            // Initialize the total print cost
+                            // Get the setup cost for the given techniqueId
+                            let setupCost = parseFloat(this.getSetupCost(techniqueId).replace(",", "."));
+                            // Get the setup repeat cost for the given techniqueId
+                            let setupRepeatCost = parseFloat(this.getSetupRepeatCost(techniqueId).replace(",", "."));
+
                             let price = 0;
 
-                            // Loop through var_cost ranges to find the correct one
-                            for (let range of printPriceData.var_cost) {
-                                const areaFrom = parseFloat(range.area_from);
-                                const areaTo = parseFloat(range.area_to);
+                            // Check if all ranges have area_from and area_to as 0, which means no specific range
+                            let hasUniformRange = actualPrintPriceData.var_cost.every(range => parseFloat(range.area_from) === 0 && parseFloat(range.area_to) === 0);
 
-                                // Assuming quantity falls within a certain range
-                                if (quantity >= areaFrom && quantity <= areaTo) {
-                                    // Find the correct price based on minimum_quantity
-                                    for (let scale of range.scales) {
-                                        if (quantity >= parseFloat(scale.minimum_quantity)) {
-                                            price = parseFloat(scale.price.replace(",", "."));
+                            if (hasUniformRange) {
+                                // If uniform range, apply the price based on quantity
+                                for (let scale of actualPrintPriceData.var_cost[0].scales) {
+
+                                    if (quantity >= parseFloat(scale.minimum_quantity)) {
+                                        price = parseFloat(scale?.price.replace(",", "."));
+                                    }
+                                }
+                            } else {
+
+                                // Otherwise, find the correct price based on ranges
+                                for (let range of actualPrintPriceData.var_cost) {
+                                    const areaFrom = parseFloat(range.area_from);
+                                    const areaTo = parseFloat(range.area_to);
+
+                                    if (quantity >= areaFrom && quantity <= areaTo) {
+                                        for (let scale of range.scales) {
+                                            if (quantity >= parseFloat(scale.minimum_quantity)) {
+                                                price = parseFloat(scale?.price.replace(",", "."));
+                                            }
                                         }
+                                        break; // Stop after finding the applicable range
                                     }
                                 }
                             }
 
-                            /**
-                             * Calculate total printing cost for single printing position
-                             * Formula = setup_cost + (quantity * price)
-                             */
-                            const printingCostForSingleItem = setupCost + (quantity * price);
+                            // Calculate total printing cost for single printing position
+                            let printingCostForSingleItem = setupCost + (quantity * price);
 
                             return printingCostForSingleItem;
                         },
@@ -771,7 +783,7 @@ class Customize_Product_Page {
                                                                     <?php echo $this->product_stock; ?></span> En Stock</div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-8"></div>
+                                                    <!-- <div class="col-8"></div> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -811,10 +823,11 @@ class Customize_Product_Page {
                                     <!-- print positions -->
                                     <div class="row print-positions mt-2">
                                         <!-- print position REPEAT:-->
+                                        <!-- HERE -->
                                         <template x-for="(item, index) in selectedPrintData">
                                             <div class="col-sm-12 print-position pb-2 ms-3">
                                                 <div class="technique-wrapper row align-items-center justify-content-evenly"
-                                                    data-technique-code="T1">
+                                                    :data-technique-id="item.selectedTechniqueId">
                                                     <div class="thumb-wrapper col-sm-4 border-right me-2">
                                                         <div class="row align-items-center">
                                                             <div class="thumb-image col-4">
@@ -1073,7 +1086,6 @@ class Customize_Product_Page {
                                         </div>
                                         <div class="modal-body">
 
-                                            <!-- HERE -->
                                             <div class="selected-printing-options mb-3">
                                                 <p class="mb-0">
                                                     <?php esc_html_e( 'Posiciones impresión', 'bulk-product-import' ) ?>

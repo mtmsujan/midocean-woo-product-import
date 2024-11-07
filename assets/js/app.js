@@ -183,7 +183,6 @@
 
     // Update colors when Tagify adds or removes tags
     function updateSelectedColors() {
-      console.log(currentPositionId);
       if (currentPositionId) {
         const sanitizedPositionId = currentPositionId.replace(/\s/g, "_");
         const selectedColors = tagify.value.map((tag) => tag.value);
@@ -194,7 +193,7 @@
         // Save selectedPantoneColors to cookie with a 1-hour expiration
         setJSONCookie("_selectedPantoneColors", selectedPantoneColors, 1);
       }else{
-        console.log("currentPositionId not found");
+        // console.log("currentPositionId not found");
       }
     }
 
